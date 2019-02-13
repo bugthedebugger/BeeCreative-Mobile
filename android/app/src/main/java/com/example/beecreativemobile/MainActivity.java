@@ -1,4 +1,4 @@
-package com.example.beecreativemobile;
+package asia.karkhana.beecreativemobile;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

@@ -18,5 +18,8 @@ Google Drive:
 
 HTTP:
 - https://pub.dartlang.org/packages/http
-- 
+
+Shared Preference:
+- https://pub.dartlang.org/packages/shared_preferences
+
 
