@@ -12,7 +12,6 @@ class CardClipper extends CustomClipper<Path>{
 
     final Path _path = Path();
     final _height = size.height - ScreenUtil().setHeight(80);
-    print("Clipper height: $_height");
     final _width = size.width;
     final _radius = ScreenUtil().setHeight(5);
     final int _barWidth = _width ~/ 14;

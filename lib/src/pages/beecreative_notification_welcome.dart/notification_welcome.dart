@@ -1,6 +1,8 @@
 import 'package:BeeCreative/src/assets_repo/appcolors.dart';
 import 'package:BeeCreative/src/assets_repo/appphotos.dart';
 import 'package:BeeCreative/src/assets_repo/screen_size.dart';
+import 'package:BeeCreative/src/pages/after_login_welcome_page/welcome.dart';
+import 'package:BeeCreative/src/widgets/avatar_circle/avatar_circle.dart';
 import 'package:BeeCreative/src/widgets/melting_card/melting_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,18 +39,8 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Container(
-                        width: ScreenUtil().setWidth(80),
-                        height: ScreenUtil().setWidth(80),
-                        padding: EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle
-                        ),
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          backgroundImage: AssetImage(AppPhotos.staticAvatar),
-                        ),
+                      AvatarCircle(
+                        AppPhotos.staticAvatar
                       ),
                       SizedBox(height: 5,),
                       StreamBuilder(
@@ -172,13 +164,20 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
                         ),
                       ),
                     ),
-                    Center(
-                      child: Text(
-                        "SKIP",
-                        style: TextStyle(
-                          color: Color(AppColors.meltingCardColor),
-                          fontSize: 12
-                        )
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.pushReplacement(context, MaterialPageRoute(
+                          builder: (context) => LoggedInWelcome()
+                        ));
+                      },
+                      child: Center(
+                        child: Text(
+                          "SKIP",
+                          style: TextStyle(
+                            color: Color(AppColors.meltingCardColor),
+                            fontSize: 15
+                          )
+                        ),
                       ),
                     )
                   ],

@@ -5,8 +5,12 @@ class AppFontStyles {
 
   static double _gettingStartedBody = 18.0;
   static double _gettingStartedHeader = 28.0;
-  static double _gettingStartedEndHeader = 24;
+  static double _gettingStartedEndHeader = 24.0;
   static double _loginInfoText = 16.0;
+  static double _loginWelcomeText = 21.0;
+  static double _drawerHeaderTextSize = 21.0;
+  static double _drawerSubTextSize = 16.0;
+  static double _drawerListTextSize = 18.0;
 
   static TextStyle _welcAttendanceHeader = TextStyle(
       fontSize: _gettingStartedHeader,
@@ -61,6 +65,27 @@ class AppFontStyles {
     color: Color(AppColors.loginButton)
   );
 
+  static TextStyle _loginWelcomeLabel = TextStyle(
+    color: Colors.white,
+    fontSize: _loginWelcomeText,
+    // fontWeight: FontWeight.bold
+  );
+
+  static TextStyle _drawerHeaderStyle = TextStyle(
+    color: Colors.white,
+    fontSize: _drawerHeaderTextSize,
+  );
+
+  static TextStyle _drawerSubTextStyle = TextStyle(
+    color: Colors.white,
+    fontSize: _drawerSubTextSize
+  );
+
+  static TextStyle _drawerListTextStyle = TextStyle(
+    color: Colors.white,
+    fontSize: _drawerListTextSize
+  );
+
   TextStyle get gettingStartedBodyStyle => _gettingStBody;
   TextStyle get gettingStartedAttendanceHeadStyle => _welcAttendanceHeader;
   TextStyle get gettingStartedPhotosHeadStyle => _welcPhotosHeader;
@@ -71,5 +96,10 @@ class AppFontStyles {
   TextStyle get loginButtonStyle => _loginButtonSt;
   TextStyle get loginHintStyle => _loginHintSt;
   TextStyle get loginLabelSteyle => _loginLabel;
+  TextStyle get loginWelcomeStyle => _loginWelcomeLabel;
+  TextStyle get drawerHeaderStyle => _drawerHeaderStyle;
+  TextStyle get drawerSubTextStyle => _drawerSubTextStyle;
+  TextStyle get drawerListTextStyle => _drawerListTextStyle;
+
 
 }

@@ -1,3 +1,4 @@
+import 'package:BeeCreative/src/api_calls/api_call.dart';
 import 'package:BeeCreative/src/assets_repo/appcolors.dart';
 import 'package:BeeCreative/src/assets_repo/appphotos.dart';
 import 'package:BeeCreative/src/assets_repo/fontstyles.dart';
@@ -5,8 +6,21 @@ import 'package:BeeCreative/src/pages/beecreative_login/email_login.dart';
 import 'package:BeeCreative/src/pages/beecreative_notification_welcome.dart/notification_welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginCard extends StatelessWidget {
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    hostedDomain: "karkhana.asia",
+    scopes: [
+      'email',
+      'profile',
+      'openid'
+    ]
+  );
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 360, height: 640, allowFontScaling: true)..init(context);
@@ -64,7 +78,30 @@ class LoginCard extends StatelessWidget {
           ),
           SizedBox(height: ScreenUtil().setHeight(10)),
           RaisedButton(
-            onPressed: (){
+            onPressed: () async {
+              /*
+              var user = await _googleSignIn.signIn();
+              await user.authentication.then((auth) async{
+                // SharedPreferences prefs = await SharedPreferences.getInstance();
+                // await prefs.setString("idtoken", auth.idToken);
+                var httpResponse = await http.post(
+                  ApiCalls.login,
+                  body: {
+                    "token": auth.idToken
+                  }
+                );
+                
+                Map userData = jsonDecode(httpResponse.body);
+                var _token = "Bearer "+userData['data']['token'];
+
+                http.get(ApiCalls.schedules, headers: {
+                  "Authorization": _token
+                }).then((data){
+                  var schedulesData = jsonDecode(data.body);
+                  print(schedulesData['attendee']);
+                });
+                
+              }); */
               Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationWelcome()));
             },
             elevation: 0,
