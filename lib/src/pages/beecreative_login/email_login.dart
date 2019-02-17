@@ -1,5 +1,4 @@
-import 'package:BeeCreative/src/assets_repo/appcolors.dart';
-import 'package:BeeCreative/src/assets_repo/appphotos.dart';
+import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/pages/beecreative_login/email_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

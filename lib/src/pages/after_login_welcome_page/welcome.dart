@@ -1,7 +1,4 @@
-import 'package:BeeCreative/src/assets_repo/appcolors.dart';
-import 'package:BeeCreative/src/assets_repo/appphotos.dart';
-import 'package:BeeCreative/src/assets_repo/fontstyles.dart';
-import 'package:BeeCreative/src/assets_repo/screen_size.dart';
+import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/pages/schedules/all_schedule.dart';
 import 'package:BeeCreative/src/widgets/avatar_circle/avatar_circle.dart';
 import 'package:BeeCreative/src/widgets/melting_card/melting_card.dart';

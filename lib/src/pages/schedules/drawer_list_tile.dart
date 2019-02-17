@@ -1,4 +1,4 @@
-import 'package:BeeCreative/src/assets_repo/fontstyles.dart';
+import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

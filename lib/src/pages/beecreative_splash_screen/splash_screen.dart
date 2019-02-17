@@ -1,4 +1,4 @@
-import 'package:BeeCreative/src/assets_repo/appphotos.dart';
+import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/pages/beecreative_tutorial/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';

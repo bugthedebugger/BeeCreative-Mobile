@@ -1,6 +1,4 @@
-import 'package:BeeCreative/src/assets_repo/appcolors.dart';
-import 'package:BeeCreative/src/assets_repo/appphotos.dart';
-import 'package:BeeCreative/src/assets_repo/fontstyles.dart';
+import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/pages/schedules/drawer_list_tile.dart';
 import 'package:BeeCreative/src/widgets/avatar_circle/avatar_circle.dart';
 import 'package:flutter/material.dart';

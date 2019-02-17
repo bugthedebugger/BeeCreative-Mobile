@@ -1,13 +1,20 @@
-import 'package:BeeCreative/src/assets_repo/screen_size.dart';
+import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AvatarCircle extends StatelessWidget {
+class AvatarCircle extends StatefulWidget {
 
-  String avatarImage;
+  String _avatarImage;
 
-  AvatarCircle(this.avatarImage);
+  AvatarCircle(this._avatarImage);
 
+  @override
+  AvatarCircleState createState() {
+    return new AvatarCircleState();
+  }
+}
+
+class AvatarCircleState extends State<AvatarCircle> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: ScreenSize.screenWidth, height: ScreenSize.screenHeight)..init(context);
@@ -22,7 +29,7 @@ class AvatarCircle extends StatelessWidget {
       ),
       child: CircleAvatar(
         backgroundColor: Colors.white,
-        backgroundImage: AssetImage(avatarImage),
+        backgroundImage: AssetImage(widget._avatarImage),
       ),
     );
   }
