@@ -9,8 +9,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "BeeCreative Mobile",
-      // home: SplashScreen(),
-      home: SchedulesPage(),
+      home: SplashScreen(),
+      // home: SchedulesPage(),
       theme: ThemeData(fontFamily: "Poppins"),
       debugShowCheckedModeBanner: false,
     );
