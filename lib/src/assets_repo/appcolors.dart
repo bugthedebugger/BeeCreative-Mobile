@@ -1,4 +1,4 @@
-class AppColors{
+class AppColors {
   static var welcAttendanceColor = 0xff78b04d;
   static var welcTakePhotosColor = 0xff3b2c85;
   static var welcBodyColor = 0xff444444;
@@ -12,4 +12,10 @@ class AppColors{
   static var emailHint = 0xff408950;
   static var meltingCardColor = 0xff3B2C85;
   static var drawerColor = 0xff34B2CC;
+  static var morningScheduleCard = 0xff41A7B3;
+  static var morningScheduleCardDark = 0xff368F9A;
+  static var afternoonScheduleCard = 0xffD3560E;
+  static var afternoonScheduleCardDark = 0xffB2490C;
+  static var eveningScheduleCard = 0xff521168;
+  static var eveningScheduleCardDark = 0xff3F0D50;
 }

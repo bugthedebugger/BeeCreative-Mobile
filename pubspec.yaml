@@ -79,6 +79,22 @@ flutter:
    - assets/images/drawer/schedule.png
    - assets/images/drawer/settings.png
    - assets/images/drawer/close.png
+  # schedules assets
+   - assets/images/schedules/morningSun.png
+   - assets/images/schedules/morningCloud.png
+   - assets/images/schedules/morningHouse.png
+   - assets/images/schedules/morningFemale.png
+   - assets/images/schedules/morningMale.png
+   - assets/images/schedules/afternoonSun.png
+   - assets/images/schedules/afternoonCloud.png
+   - assets/images/schedules/afternoonHouse.png
+   - assets/images/schedules/afternoonFemale.png
+   - assets/images/schedules/afternoonMale.png
+   - assets/images/schedules/eveningSun.png
+   - assets/images/schedules/eveningCloud.png
+   - assets/images/schedules/eveningHouse.png
+   - assets/images/schedules/eveningFemale.png
+   - assets/images/schedules/eveningMale.png
 
   fonts:
     - family: Poppins

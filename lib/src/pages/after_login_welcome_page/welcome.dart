@@ -11,8 +11,8 @@ class LoggedInWelcome extends StatelessWidget {
     String userName = "Dweeb Dahal";
 
     ScreenUtil.instance = ScreenUtil(
-      width: ScreenSize.screenWidth,
-      height: ScreenSize.screenHeight)..init(context);
+        width: ScreenSize.screenWidth, height: ScreenSize.screenHeight)
+      ..init(context);
     return Scaffold(
       body: MeltingCard(
         color: Color(AppColors.meltingCardColor),
@@ -22,20 +22,21 @@ class LoggedInWelcome extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               AvatarCircle(AppPhotos.staticAvatar),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Text(
                 "Welcome $userName",
                 style: AppFontStyles().loginWelcomeStyle,
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               RaisedButton(
                 elevation: 0,
-                onPressed: (){
-                  Navigator.push(context, 
-                    MaterialPageRoute(
-                      builder: (context) => SchedulesPage()
-                    )
-                  );
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SchedulesPage()));
                 },
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
@@ -44,18 +45,17 @@ class LoggedInWelcome extends StatelessWidget {
                 child: Container(
                   width: ScreenUtil().setWidth(120),
                   height: ScreenUtil().setHeight(30),
-                  color: Colors.white,
                   child: Center(
                     child: Text(
                       "Go to Schedules",
-                      style: TextStyle(
-                        fontSize: 15
-                      ),
+                      style: TextStyle(fontSize: 15),
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 100,)
+              SizedBox(
+                height: 100,
+              )
             ],
           ),
         ),
