@@ -54,19 +54,26 @@ class ScheduleCardState extends State<ScheduleCard>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 300),
     );
 
-    _animation =
-        Tween(begin: _minimizedCard, end: _expandedCard).animate(_controller)
-          ..addListener(() {
-            setState(() {});
-          });
+    _animation = Tween(
+      begin: _minimizedCard,
+      end: _expandedCard,
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeOut,
+      reverseCurve: Curves.easeIn,
+    ))
+      ..addListener(() {
+        setState(() {});
+      });
   }
 
   @override
   void dispose() {
     super.dispose();
+    _controller.dispose();
   }
 
   @override

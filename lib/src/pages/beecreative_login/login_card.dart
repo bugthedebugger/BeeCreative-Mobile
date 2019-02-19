@@ -1,5 +1,5 @@
-import 'package:BeeCreative/src/api_calls/api_call.dart';
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
+import 'package:BeeCreative/src/data/network/api_call.dart';
 import 'package:BeeCreative/src/pages/beecreative_login/email_login.dart';
 import 'package:BeeCreative/src/pages/beecreative_notification_welcome.dart/notification_welcome.dart';
 import 'package:flutter/material.dart';
@@ -86,26 +86,29 @@ class LoginCard extends StatelessWidget {
                   ),
                   context: context,
                 );
-                await user.authentication.then((auth) async {
-                  // SharedPreferences prefs = await SharedPreferences.getInstance();
-                  // await prefs.setString("idtoken", auth.idToken);
-                  var httpResponse = await http
-                      .post(ApiCalls.login, body: {"token": auth.idToken});
+                await user.authentication.then(
+                  (auth) async {
+                    // SharedPreferences prefs = await SharedPreferences.getInstance();
+                    // await prefs.setString("idtoken", auth.idToken);
+                    var httpResponse = await http
+                        .post(ApiURL.login, body: {"token": auth.idToken});
 
-                  Map userData = jsonDecode(httpResponse.body);
-                  var _token = "Bearer " + userData['data']['token'];
-                  print("Body: $userData");
+                    Map userData = jsonDecode(httpResponse.body);
+                    var _token = "Bearer " + userData['data']['token'];
+                    print("Body: $userData");
 
-                  http.get(ApiCalls.schedules,
-                      headers: {"Authorization": _token}).then((data) {
-                    var schedulesData = jsonDecode(data.body);
-                    print(schedulesData['attendee']);
-                  });
-                });
+                    http.get(ApiURL.schedules,
+                        headers: {"Authorization": _token}).then((data) {
+                      var schedulesData = jsonDecode(data.body);
+                      print(schedulesData['attendee']);
+                    });
+                  },
+                );
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => NotificationWelcome()),
+                    builder: (context) => NotificationWelcome(),
+                  ),
                 );
               },
               elevation: 0,
