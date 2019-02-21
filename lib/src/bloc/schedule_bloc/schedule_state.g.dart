@@ -13,11 +13,14 @@ class _$ScheduleState extends ScheduleState {
   final ScheduleResponse scheduleResponse;
   @override
   final String error;
+  @override
+  final bool isReloading;
 
   factory _$ScheduleState([void updates(ScheduleStateBuilder b)]) =>
       (new ScheduleStateBuilder()..update(updates)).build();
 
-  _$ScheduleState._({this.isLoading, this.scheduleResponse, this.error})
+  _$ScheduleState._(
+      {this.isLoading, this.scheduleResponse, this.error, this.isReloading})
       : super._() {
     if (isLoading == null) {
       throw new BuiltValueNullFieldError('ScheduleState', 'isLoading');
@@ -27,6 +30,9 @@ class _$ScheduleState extends ScheduleState {
     }
     if (error == null) {
       throw new BuiltValueNullFieldError('ScheduleState', 'error');
+    }
+    if (isReloading == null) {
+      throw new BuiltValueNullFieldError('ScheduleState', 'isReloading');
     }
   }
 
@@ -43,13 +49,16 @@ class _$ScheduleState extends ScheduleState {
     return other is ScheduleState &&
         isLoading == other.isLoading &&
         scheduleResponse == other.scheduleResponse &&
-        error == other.error;
+        error == other.error &&
+        isReloading == other.isReloading;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, isLoading.hashCode), scheduleResponse.hashCode),
-        error.hashCode));
+    return $jf($jc(
+        $jc($jc($jc(0, isLoading.hashCode), scheduleResponse.hashCode),
+            error.hashCode),
+        isReloading.hashCode));
   }
 
   @override
@@ -57,7 +66,8 @@ class _$ScheduleState extends ScheduleState {
     return (newBuiltValueToStringHelper('ScheduleState')
           ..add('isLoading', isLoading)
           ..add('scheduleResponse', scheduleResponse)
-          ..add('error', error))
+          ..add('error', error)
+          ..add('isReloading', isReloading))
         .toString();
   }
 }
@@ -80,6 +90,10 @@ class ScheduleStateBuilder
   String get error => _$this._error;
   set error(String error) => _$this._error = error;
 
+  bool _isReloading;
+  bool get isReloading => _$this._isReloading;
+  set isReloading(bool isReloading) => _$this._isReloading = isReloading;
+
   ScheduleStateBuilder();
 
   ScheduleStateBuilder get _$this {
@@ -87,6 +101,7 @@ class ScheduleStateBuilder
       _isLoading = _$v.isLoading;
       _scheduleResponse = _$v.scheduleResponse?.toBuilder();
       _error = _$v.error;
+      _isReloading = _$v.isReloading;
       _$v = null;
     }
     return this;
@@ -113,7 +128,8 @@ class ScheduleStateBuilder
           new _$ScheduleState._(
               isLoading: isLoading,
               scheduleResponse: scheduleResponse.build(),
-              error: error);
+              error: error,
+              isReloading: isReloading);
     } catch (_) {
       String _$failedField;
       try {

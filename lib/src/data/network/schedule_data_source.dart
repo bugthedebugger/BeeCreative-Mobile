@@ -12,7 +12,7 @@ class ScheduleDataSource {
   Future<ScheduleResponse> requestSchedule({@required String token}) async {
     final url = ApiURL.schedules;
     final encodedUrl = Uri.encodeFull(url);
-    final _token = "Bearers $token";
+    final _token = "Bearer $token";
     final response = await client.get(encodedUrl, headers: {
       'Authorization': _token,
     });

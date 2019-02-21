@@ -13,11 +13,17 @@ class _$UserState extends UserState {
   final User user;
   @override
   final String error;
+  @override
+  final String idToken;
+  @override
+  final bool dataStored;
 
   factory _$UserState([void updates(UserStateBuilder b)]) =>
       (new UserStateBuilder()..update(updates)).build();
 
-  _$UserState._({this.isLoading, this.user, this.error}) : super._() {
+  _$UserState._(
+      {this.isLoading, this.user, this.error, this.idToken, this.dataStored})
+      : super._() {
     if (isLoading == null) {
       throw new BuiltValueNullFieldError('UserState', 'isLoading');
     }
@@ -26,6 +32,12 @@ class _$UserState extends UserState {
     }
     if (error == null) {
       throw new BuiltValueNullFieldError('UserState', 'error');
+    }
+    if (idToken == null) {
+      throw new BuiltValueNullFieldError('UserState', 'idToken');
+    }
+    if (dataStored == null) {
+      throw new BuiltValueNullFieldError('UserState', 'dataStored');
     }
   }
 
@@ -42,13 +54,17 @@ class _$UserState extends UserState {
     return other is UserState &&
         isLoading == other.isLoading &&
         user == other.user &&
-        error == other.error;
+        error == other.error &&
+        idToken == other.idToken &&
+        dataStored == other.dataStored;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, isLoading.hashCode), user.hashCode), error.hashCode));
+    return $jf($jc(
+        $jc($jc($jc($jc(0, isLoading.hashCode), user.hashCode), error.hashCode),
+            idToken.hashCode),
+        dataStored.hashCode));
   }
 
   @override
@@ -56,7 +72,9 @@ class _$UserState extends UserState {
     return (newBuiltValueToStringHelper('UserState')
           ..add('isLoading', isLoading)
           ..add('user', user)
-          ..add('error', error))
+          ..add('error', error)
+          ..add('idToken', idToken)
+          ..add('dataStored', dataStored))
         .toString();
   }
 }
@@ -76,6 +94,14 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
   String get error => _$this._error;
   set error(String error) => _$this._error = error;
 
+  String _idToken;
+  String get idToken => _$this._idToken;
+  set idToken(String idToken) => _$this._idToken = idToken;
+
+  bool _dataStored;
+  bool get dataStored => _$this._dataStored;
+  set dataStored(bool dataStored) => _$this._dataStored = dataStored;
+
   UserStateBuilder();
 
   UserStateBuilder get _$this {
@@ -83,6 +109,8 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
       _isLoading = _$v.isLoading;
       _user = _$v.user?.toBuilder();
       _error = _$v.error;
+      _idToken = _$v.idToken;
+      _dataStored = _$v.dataStored;
       _$v = null;
     }
     return this;
@@ -107,7 +135,11 @@ class UserStateBuilder implements Builder<UserState, UserStateBuilder> {
     try {
       _$result = _$v ??
           new _$UserState._(
-              isLoading: isLoading, user: user.build(), error: error);
+              isLoading: isLoading,
+              user: user.build(),
+              error: error,
+              idToken: idToken,
+              dataStored: dataStored);
     } catch (_) {
       String _$failedField;
       try {

@@ -246,4 +246,86 @@ class ScheduleExpiredBuilder
   }
 }
 
+class _$ReloadSchedulesFromNetwork extends ReloadSchedulesFromNetwork {
+  @override
+  final String token;
+
+  factory _$ReloadSchedulesFromNetwork(
+          [void updates(ReloadSchedulesFromNetworkBuilder b)]) =>
+      (new ReloadSchedulesFromNetworkBuilder()..update(updates)).build();
+
+  _$ReloadSchedulesFromNetwork._({this.token}) : super._() {
+    if (token == null) {
+      throw new BuiltValueNullFieldError('ReloadSchedulesFromNetwork', 'token');
+    }
+  }
+
+  @override
+  ReloadSchedulesFromNetwork rebuild(
+          void updates(ReloadSchedulesFromNetworkBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ReloadSchedulesFromNetworkBuilder toBuilder() =>
+      new ReloadSchedulesFromNetworkBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ReloadSchedulesFromNetwork && token == other.token;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, token.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ReloadSchedulesFromNetwork')
+          ..add('token', token))
+        .toString();
+  }
+}
+
+class ReloadSchedulesFromNetworkBuilder
+    implements
+        Builder<ReloadSchedulesFromNetwork, ReloadSchedulesFromNetworkBuilder> {
+  _$ReloadSchedulesFromNetwork _$v;
+
+  String _token;
+  String get token => _$this._token;
+  set token(String token) => _$this._token = token;
+
+  ReloadSchedulesFromNetworkBuilder();
+
+  ReloadSchedulesFromNetworkBuilder get _$this {
+    if (_$v != null) {
+      _token = _$v.token;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ReloadSchedulesFromNetwork other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$ReloadSchedulesFromNetwork;
+  }
+
+  @override
+  void update(void updates(ReloadSchedulesFromNetworkBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ReloadSchedulesFromNetwork build() {
+    final _$result = _$v ?? new _$ReloadSchedulesFromNetwork._(token: token);
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

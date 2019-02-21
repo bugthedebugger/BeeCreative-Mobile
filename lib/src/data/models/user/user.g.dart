@@ -17,13 +17,19 @@ class _$UserSerializer implements StructuredSerializer<User> {
   @override
   Iterable serialize(Serializers serializers, User object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'data',
-      serializers.serialize(object.data,
-          specifiedType: const FullType(UserData)),
-      'code',
-      serializers.serialize(object.code, specifiedType: const FullType(int)),
-    ];
+    final result = <Object>[];
+    if (object.data != null) {
+      result
+        ..add('data')
+        ..add(serializers.serialize(object.data,
+            specifiedType: const FullType(UserData)));
+    }
+    if (object.code != null) {
+      result
+        ..add('code')
+        ..add(serializers.serialize(object.code,
+            specifiedType: const FullType(int)));
+    }
 
     return result;
   }
@@ -63,14 +69,7 @@ class _$User extends User {
   factory _$User([void updates(UserBuilder b)]) =>
       (new UserBuilder()..update(updates)).build();
 
-  _$User._({this.data, this.code}) : super._() {
-    if (data == null) {
-      throw new BuiltValueNullFieldError('User', 'data');
-    }
-    if (code == null) {
-      throw new BuiltValueNullFieldError('User', 'code');
-    }
-  }
+  _$User._({this.data, this.code}) : super._();
 
   @override
   User rebuild(void updates(UserBuilder b)) =>
@@ -138,12 +137,12 @@ class UserBuilder implements Builder<User, UserBuilder> {
   _$User build() {
     _$User _$result;
     try {
-      _$result = _$v ?? new _$User._(data: data.build(), code: code);
+      _$result = _$v ?? new _$User._(data: _data?.build(), code: code);
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'data';
-        data.build();
+        _data?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'User', _$failedField, e.toString());

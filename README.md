@@ -25,3 +25,6 @@ Shared Preference:
 Issue with installing shared preferences: 
 - https://stackoverflow.com/questions/50454656/flutter-android-app-crashes-upon-startup-if-i-include-a-certain-package?rq=1&newreg=f1ced66d415742079e7f3af6814f11f0
 
+Dependency Injection:
+- https://pub.dartlang.org/packages/kiwi
+

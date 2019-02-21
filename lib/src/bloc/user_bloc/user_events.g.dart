@@ -85,4 +85,187 @@ class UserLoginRequestedBuilder
   }
 }
 
+class _$GoogleUserLoginRequest extends GoogleUserLoginRequest {
+  factory _$GoogleUserLoginRequest(
+          [void updates(GoogleUserLoginRequestBuilder b)]) =>
+      (new GoogleUserLoginRequestBuilder()..update(updates)).build();
+
+  _$GoogleUserLoginRequest._() : super._();
+
+  @override
+  GoogleUserLoginRequest rebuild(
+          void updates(GoogleUserLoginRequestBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  GoogleUserLoginRequestBuilder toBuilder() =>
+      new GoogleUserLoginRequestBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is GoogleUserLoginRequest;
+  }
+
+  @override
+  int get hashCode {
+    return 431344760;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('GoogleUserLoginRequest').toString();
+  }
+}
+
+class GoogleUserLoginRequestBuilder
+    implements Builder<GoogleUserLoginRequest, GoogleUserLoginRequestBuilder> {
+  _$GoogleUserLoginRequest _$v;
+
+  GoogleUserLoginRequestBuilder();
+
+  @override
+  void replace(GoogleUserLoginRequest other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$GoogleUserLoginRequest;
+  }
+
+  @override
+  void update(void updates(GoogleUserLoginRequestBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$GoogleUserLoginRequest build() {
+    final _$result = _$v ?? new _$GoogleUserLoginRequest._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$StoreUserToSharedPreferences extends StoreUserToSharedPreferences {
+  factory _$StoreUserToSharedPreferences(
+          [void updates(StoreUserToSharedPreferencesBuilder b)]) =>
+      (new StoreUserToSharedPreferencesBuilder()..update(updates)).build();
+
+  _$StoreUserToSharedPreferences._() : super._();
+
+  @override
+  StoreUserToSharedPreferences rebuild(
+          void updates(StoreUserToSharedPreferencesBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  StoreUserToSharedPreferencesBuilder toBuilder() =>
+      new StoreUserToSharedPreferencesBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is StoreUserToSharedPreferences;
+  }
+
+  @override
+  int get hashCode {
+    return 768213533;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('StoreUserToSharedPreferences')
+        .toString();
+  }
+}
+
+class StoreUserToSharedPreferencesBuilder
+    implements
+        Builder<StoreUserToSharedPreferences,
+            StoreUserToSharedPreferencesBuilder> {
+  _$StoreUserToSharedPreferences _$v;
+
+  StoreUserToSharedPreferencesBuilder();
+
+  @override
+  void replace(StoreUserToSharedPreferences other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$StoreUserToSharedPreferences;
+  }
+
+  @override
+  void update(void updates(StoreUserToSharedPreferencesBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$StoreUserToSharedPreferences build() {
+    final _$result = _$v ?? new _$StoreUserToSharedPreferences._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$UserStoredSuccessfully extends UserStoredSuccessfully {
+  factory _$UserStoredSuccessfully(
+          [void updates(UserStoredSuccessfullyBuilder b)]) =>
+      (new UserStoredSuccessfullyBuilder()..update(updates)).build();
+
+  _$UserStoredSuccessfully._() : super._();
+
+  @override
+  UserStoredSuccessfully rebuild(
+          void updates(UserStoredSuccessfullyBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  UserStoredSuccessfullyBuilder toBuilder() =>
+      new UserStoredSuccessfullyBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is UserStoredSuccessfully;
+  }
+
+  @override
+  int get hashCode {
+    return 1063521229;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('UserStoredSuccessfully').toString();
+  }
+}
+
+class UserStoredSuccessfullyBuilder
+    implements Builder<UserStoredSuccessfully, UserStoredSuccessfullyBuilder> {
+  _$UserStoredSuccessfully _$v;
+
+  UserStoredSuccessfullyBuilder();
+
+  @override
+  void replace(UserStoredSuccessfully other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$UserStoredSuccessfully;
+  }
+
+  @override
+  void update(void updates(UserStoredSuccessfullyBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$UserStoredSuccessfully build() {
+    final _$result = _$v ?? new _$UserStoredSuccessfully._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

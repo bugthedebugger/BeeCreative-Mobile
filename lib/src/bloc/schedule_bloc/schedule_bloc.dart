@@ -6,10 +6,14 @@ import 'package:BeeCreative/src/data/models/user/user_error.dart';
 class ScheduleBloc extends Bloc<ScheduleEvents, ScheduleState> {
   final ScheduleRepository _schedulesRepository;
 
-  ScheduleBloc(this._schedulesRepository) : super();
+  ScheduleBloc(this._schedulesRepository);
 
   void scheduleRequestInitiated(String token) {
     dispatch(GetScheduleFromNetwork((b) => b..token = token));
+  }
+
+  void reloadSchedule(String token) {
+    dispatch(ReloadSchedulesFromNetwork((b) => b..token = token));
   }
 
   @override
@@ -20,6 +24,22 @@ class ScheduleBloc extends Bloc<ScheduleEvents, ScheduleState> {
       ScheduleState currentState, ScheduleEvents event) async* {
     if (event is GetScheduleFromNetwork) {
       yield* mapScheduleRequestInitiated(event);
+    } else if (event is ReloadSchedulesFromNetwork) {
+      yield* mapScheduleReload(currentState, event);
+    }
+  }
+
+  Stream<ScheduleState> mapScheduleReload(
+      ScheduleState currentState, ReloadSchedulesFromNetwork event) async* {
+    try {
+      yield ScheduleState.reload(currentState.scheduleResponse);
+      final reloadedSchedule =
+          await _schedulesRepository.getSchedulesFromNetwork(event.token);
+      yield ScheduleState.success(reloadedSchedule);
+    } on NoSchedulesError catch (e) {
+      yield ScheduleState.failure(e.message);
+    } on Unauthenticated catch (e) {
+      yield ScheduleState.failure(e.message);
     }
   }
 
@@ -28,7 +48,6 @@ class ScheduleBloc extends Bloc<ScheduleEvents, ScheduleState> {
     if (event.token.isEmpty) {
       yield ScheduleState.initial();
     } else {
-      yield ScheduleState.loading();
       try {
         yield ScheduleState.loading();
         final schedules =

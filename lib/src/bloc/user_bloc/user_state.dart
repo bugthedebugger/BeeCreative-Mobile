@@ -9,6 +9,8 @@ abstract class UserState implements Built<UserState, UserStateBuilder> {
   bool get isLoading;
   User get user;
   String get error;
+  String get idToken;
+  bool get dataStored;
 
   bool get isInitial => !isLoading && user == null && error == '';
   bool get isSuccessful => !isLoading && user != null && error == '';
@@ -20,28 +22,54 @@ abstract class UserState implements Built<UserState, UserStateBuilder> {
   factory UserState.initial() {
     return UserState((b) => b
       ..isLoading = false
-      ..user.replace(null)
-      ..error = '');
+      ..dataStored = false
+      ..user.replace(User())
+      ..error = ''
+      ..idToken = '');
   }
 
   factory UserState.loading() {
     return UserState((b) => b
       ..isLoading = true
-      ..user.replace(null)
-      ..error = '');
+      ..dataStored = false
+      ..user.replace(User())
+      ..error = ''
+      ..idToken = '');
   }
 
   factory UserState.failure(String error) {
     return UserState((b) => b
       ..isLoading = false
-      ..user.replace(null)
-      ..error = error);
+      ..dataStored = false
+      ..user.replace(User())
+      ..error = error
+      ..idToken = '');
   }
 
   factory UserState.success(User user) {
     return UserState((b) => b
       ..isLoading = false
+      ..dataStored = false
       ..user.replace(user)
-      ..error = '');
+      ..error = ''
+      ..idToken = '');
+  }
+
+  factory UserState.googlLogin(String idToken) {
+    return UserState((b) => b
+      ..isLoading = false
+      ..dataStored = false
+      ..user.replace(User())
+      ..error = ''
+      ..idToken = idToken);
+  }
+
+  factory UserState.dataStore(User user, String idToken) {
+    return UserState((b) => b
+      ..isLoading = false
+      ..dataStored = true
+      ..user.replace(user)
+      ..error = ''
+      ..idToken = idToken);
   }
 }

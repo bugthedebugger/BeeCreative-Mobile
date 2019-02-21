@@ -1,10 +1,6 @@
 library schedule_events;
 
-import 'dart:convert';
-
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
 
 part 'schedule_events.g.dart';
 
@@ -38,4 +34,16 @@ abstract class ScheduleExpired
 
   factory ScheduleExpired([updates(ScheduleExpiredBuilder b)]) =
       _$ScheduleExpired;
+}
+
+abstract class ReloadSchedulesFromNetwork extends ScheduleEvents
+    implements
+        Built<ReloadSchedulesFromNetwork, ReloadSchedulesFromNetworkBuilder> {
+  String get token;
+
+  ReloadSchedulesFromNetwork._();
+
+  factory ReloadSchedulesFromNetwork(
+          [updates(ReloadSchedulesFromNetworkBuilder b)]) =
+      _$ReloadSchedulesFromNetwork;
 }

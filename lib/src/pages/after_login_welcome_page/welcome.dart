@@ -1,15 +1,37 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
-import 'package:BeeCreative/src/pages/schedules/all_schedule.dart';
+import 'package:BeeCreative/src/data/models/shared_preferences/user_shared_preferences.dart';
 import 'package:BeeCreative/src/widgets/avatar_circle/avatar_circle.dart';
 import 'package:BeeCreative/src/widgets/melting_card/melting_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoggedInWelcome extends StatelessWidget {
+class LoggedInWelcome extends StatefulWidget {
+  @override
+  LoggedInWelcomeState createState() {
+    return new LoggedInWelcomeState();
+  }
+}
+
+class LoggedInWelcomeState extends State<LoggedInWelcome> {
+  String userName = "User Name";
+  String avatar;
+
+  _read() async {
+    final userSharedPreferences = UserSharedPreferences();
+    await userSharedPreferences.initPreferences();
+    userName = userSharedPreferences.userName;
+    avatar = userSharedPreferences.avatar;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _read();
+  }
+
   @override
   Widget build(BuildContext context) {
-    String userName = "Dweeb Dahal";
-
     ScreenUtil.instance = ScreenUtil(
         width: ScreenSize.screenWidth, height: ScreenSize.screenHeight)
       ..init(context);
@@ -21,7 +43,7 @@ class LoggedInWelcome extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              AvatarCircle(AppPhotos.staticAvatar),
+              AvatarCircle(AppPhotos.staticAvatar, avatar),
               SizedBox(
                 height: 20,
               ),
@@ -35,8 +57,10 @@ class LoggedInWelcome extends StatelessWidget {
               RaisedButton(
                 elevation: 0,
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SchedulesPage()));
+                  Navigator.pushReplacementNamed(
+                    context,
+                    '/app/schedules',
+                  );
                 },
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
