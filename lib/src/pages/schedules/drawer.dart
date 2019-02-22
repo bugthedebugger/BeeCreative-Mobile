@@ -101,10 +101,11 @@ class _AppDrawerState extends State<AppDrawer> {
                 Container(
                   height: ScreenUtil().setHeight(400),
                   child: Stack(
+                    overflow: Overflow.visible,
                     children: <Widget>[
                       Positioned(
-                        top: ScreenUtil().setHeight(10),
-                        right: ScreenUtil().setWidth(82),
+                        top: ScreenUtil().setHeight(-30),
+                        right: ScreenUtil().setWidth(20),
                         child: Image.asset(
                           AppPhotos.loginScreenCloud2,
                           height: ScreenUtil().setHeight(26),

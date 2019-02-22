@@ -63,15 +63,19 @@ class LoginCardState extends State<LoginCard> {
             width: ScreenUtil().setWidth(51),
             height: ScreenUtil().setHeight(56),
             decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(AppPhotos.loginScreenLogo))),
+              image: DecorationImage(
+                image: AssetImage(AppPhotos.loginScreenLogo),
+              ),
+            ),
           ),
           Container(
             width: ScreenUtil().setWidth(133),
             height: ScreenUtil().setHeight(56),
             decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(AppPhotos.loginScreenBeecreative))),
+              image: DecorationImage(
+                image: AssetImage(AppPhotos.loginScreenBeecreative),
+              ),
+            ),
           ),
           SizedBox(height: ScreenUtil().setHeight(10)),
           Text(

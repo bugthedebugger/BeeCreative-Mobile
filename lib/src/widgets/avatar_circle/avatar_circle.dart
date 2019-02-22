@@ -21,17 +21,31 @@ class AvatarCircleState extends State<AvatarCircle> {
         width: ScreenSize.screenWidth, height: ScreenSize.screenHeight)
       ..init(context);
 
-    return Container(
-      width: ScreenUtil().setWidth(80),
-      height: ScreenUtil().setWidth(80),
-      padding: EdgeInsets.all(2),
-      decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-      child: CircleAvatar(
-        backgroundColor: Colors.white,
-        backgroundImage: (widget._avatarImage == null)
-            ? AssetImage(widget._staticAvatarImage)
-            : NetworkImage(widget._avatarImage),
-      ),
+    return Stack(
+      overflow: Overflow.visible,
+      children: <Widget>[
+        Container(
+          width: ScreenUtil().setWidth(80),
+          height: ScreenUtil().setWidth(80),
+          padding: EdgeInsets.all(2),
+          decoration:
+              BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+          child: CircleAvatar(
+            backgroundColor: Colors.white,
+            backgroundImage: (widget._avatarImage == null)
+                ? AssetImage(widget._staticAvatarImage)
+                : NetworkImage(widget._avatarImage),
+          ),
+        ),
+        Positioned(
+          top: ScreenUtil().setHeight(40),
+          left: -30,
+          child: Image.asset(
+            AppPhotos.loginScreenCloud2,
+            width: ScreenUtil().setWidth(50),
+          ),
+        ),
+      ],
     );
   }
 }

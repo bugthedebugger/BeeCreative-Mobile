@@ -87,12 +87,23 @@ class ScheduleCardState extends State<ScheduleCard>
             children: <Widget>[
               Expanded(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text("${widget.startTime}"),
                     SizedBox(
-                      height: 10,
+                      height: ScreenUtil().setHeight(10),
                     ),
-                    Text("${widget.endTime}"),
+                    Text(
+                      "${widget.startTime}",
+                      style: AppFontStyles().textStyle12BlackBold,
+                    ),
+                    SizedBox(
+                      height: ScreenUtil().setHeight(10),
+                    ),
+                    Text(
+                      "${widget.endTime}",
+                      style: AppFontStyles().textStyle12BlackBold,
+                    ),
                   ],
                 ),
               ),
@@ -114,9 +125,16 @@ class ScheduleCardState extends State<ScheduleCard>
                   width: ScreenUtil().setWidth(289),
                   height: ScreenUtil().setHeight(_animation.value.toInt()),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Color(widget.scheduleThemeData.cardColor),
-                  ),
+                      borderRadius: BorderRadius.circular(15),
+                      color: Color(widget.scheduleThemeData.cardColor),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 3,
+                          offset: Offset(0, 1),
+                          spreadRadius: 1,
+                          color: Color(0x33000000),
+                        ),
+                      ]),
                   child: Stack(
                     overflow: Overflow.clip,
                     children: <Widget>[
@@ -203,7 +221,7 @@ class ScheduleCardState extends State<ScheduleCard>
                       // Sun
                       Positioned(
                         bottom: ScreenUtil().setHeight(48),
-                        right: ScreenUtil().setWidth(42),
+                        right: ScreenUtil().setWidth(47),
                         child: Image.asset(
                           widget.scheduleThemeData.sun,
                           width: ScreenUtil().setWidth(10),
@@ -212,7 +230,7 @@ class ScheduleCardState extends State<ScheduleCard>
                       // Right Cloud
                       Positioned(
                         bottom: ScreenUtil().setHeight(48),
-                        right: ScreenUtil().setWidth(2),
+                        right: ScreenUtil().setWidth(10),
                         child: Image.asset(
                           widget.scheduleThemeData.cloud,
                           width: ScreenUtil().setWidth(15),
@@ -221,7 +239,7 @@ class ScheduleCardState extends State<ScheduleCard>
                       // Left Cloud
                       Positioned(
                         bottom: ScreenUtil().setHeight(35),
-                        right: ScreenUtil().setWidth(63),
+                        right: ScreenUtil().setWidth(68),
                         child: Image.asset(
                           widget.scheduleThemeData.cloud,
                           width: ScreenUtil().setWidth(23),
@@ -229,7 +247,7 @@ class ScheduleCardState extends State<ScheduleCard>
                       ),
                       Positioned(
                         bottom: 0,
-                        right: ScreenUtil().setWidth(11),
+                        right: ScreenUtil().setWidth(16),
                         child: Image.asset(
                           widget.scheduleThemeData.house,
                           width: ScreenUtil().setWidth(47),
@@ -276,7 +294,6 @@ class GenderCountCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: ScreenUtil().setWidth(9),
-        vertical: ScreenUtil().setHeight(4),
       ),
       width: ScreenUtil().setWidth(122),
       height: ScreenUtil().setHeight(32),
@@ -287,23 +304,32 @@ class GenderCountCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
-          Text(
-            "$genderCount",
-            style: AppFontStyles().textStyle20White,
+          Container(
+            width: ScreenUtil().setWidth(15),
+            padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(3)),
+            child: Text(
+              "$genderCount",
+              style: AppFontStyles().textStyle20White,
+            ),
           ),
           SizedBox(width: 5),
-          Text(
-            "$gender",
-            style: AppFontStyles().textStyle15White,
+          Container(
+            width: ScreenUtil().setWidth(35),
+            padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(6)),
+            child: Text(
+              "$gender",
+              style: AppFontStyles().textStyle15White,
+            ),
           ),
           SizedBox(
-            width: ScreenUtil().setWidth(37),
+            width: ScreenUtil().setWidth(38),
           ),
           Image.asset(
             genderIcon,
-            height: ScreenUtil().setHeight(18),
-            width: ScreenUtil().setWidth(8),
+            height: ScreenUtil().setHeight(27),
+            // width: ScreenUtil().setWidth(8),
           ),
         ],
       ),

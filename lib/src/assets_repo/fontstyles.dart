@@ -96,6 +96,12 @@ class AppFontStyles {
     fontSize: _20TextSize,
   );
 
+  static TextStyle _12TextBlackBold = TextStyle(
+    color: Color(0xff444444),
+    fontSize: _12TextSize,
+    fontWeight: FontWeight.bold,
+  );
+
   TextStyle get gettingStartedBodyStyle => _gettingStBody;
   TextStyle get gettingStartedAttendanceHeadStyle => _welcAttendanceHeader;
   TextStyle get gettingStartedPhotosHeadStyle => _welcPhotosHeader;
@@ -115,4 +121,5 @@ class AppFontStyles {
   TextStyle get textStyle15White => _15TextStyleWhite;
   TextStyle get textStyle12White => _12TextStyleWhite;
   TextStyle get textStyle20White => _20TextStyleWhite;
+  TextStyle get textStyle12BlackBold => _12TextBlackBold;
 }
