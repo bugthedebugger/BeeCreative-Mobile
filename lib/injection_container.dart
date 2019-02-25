@@ -8,7 +8,7 @@ import 'package:kiwi/kiwi.dart';
 import 'package:http/http.dart' as http;
 
 void initKiwi() {
-  Container().registerFactory((c) => http.Client());
+  Container().registerInstance(http.Client());
   Container().registerFactory((c) => UserDataSource(c.resolve()));
   Container().registerFactory((c) => UserRepository(c.resolve()));
   Container().registerFactory((c) => UserBloc(c.resolve()));

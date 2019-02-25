@@ -18,4 +18,6 @@ class AppColors {
   static var afternoonScheduleCardDark = 0xffB2490C;
   static var eveningScheduleCard = 0xff521168;
   static var eveningScheduleCardDark = 0xff3F0D50;
+  static var deliveryRatingColor = 0xffF8B500;
+  static var classCancelledColor = 0xffBE3737;
 }

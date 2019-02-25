@@ -46,12 +46,22 @@ class _$ScheduleSerializer implements StructuredSerializer<Schedule> {
           specifiedType: const FullType(int)),
       'class_id',
       serializers.serialize(object.classId, specifiedType: const FullType(int)),
+      'hoursTaught',
+      serializers.serialize(object.hoursTaught,
+          specifiedType: const FullType(double)),
     ];
     if (object.content != null) {
       result
         ..add('content')
         ..add(serializers.serialize(object.content,
             specifiedType: const FullType(String)));
+    }
+    if (object.comment != null) {
+      result
+        ..add('comment')
+        ..add(serializers.serialize(object.comment,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(String)])));
     }
 
     return result;
@@ -112,6 +122,16 @@ class _$ScheduleSerializer implements StructuredSerializer<Schedule> {
           result.classId = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
+        case 'comment':
+          result.comment.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(String)]))
+              as BuiltList);
+          break;
+        case 'hoursTaught':
+          result.hoursTaught = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
       }
     }
 
@@ -142,6 +162,10 @@ class _$Schedule extends Schedule {
   final int schoolId;
   @override
   final int classId;
+  @override
+  final BuiltList<String> comment;
+  @override
+  final double hoursTaught;
 
   factory _$Schedule([void updates(ScheduleBuilder b)]) =>
       (new ScheduleBuilder()..update(updates)).build();
@@ -157,7 +181,9 @@ class _$Schedule extends Schedule {
       this.grade,
       this.section,
       this.schoolId,
-      this.classId})
+      this.classId,
+      this.comment,
+      this.hoursTaught})
       : super._() {
     if (scheduleId == null) {
       throw new BuiltValueNullFieldError('Schedule', 'scheduleId');
@@ -189,6 +215,9 @@ class _$Schedule extends Schedule {
     if (classId == null) {
       throw new BuiltValueNullFieldError('Schedule', 'classId');
     }
+    if (hoursTaught == null) {
+      throw new BuiltValueNullFieldError('Schedule', 'hoursTaught');
+    }
   }
 
   @override
@@ -212,7 +241,9 @@ class _$Schedule extends Schedule {
         grade == other.grade &&
         section == other.section &&
         schoolId == other.schoolId &&
-        classId == other.classId;
+        classId == other.classId &&
+        comment == other.comment &&
+        hoursTaught == other.hoursTaught;
   }
 
   @override
@@ -226,17 +257,21 @@ class _$Schedule extends Schedule {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, scheduleId.hashCode),
-                                            startTime.hashCode),
-                                        endTime.hashCode),
-                                    deliveryDate.hashCode),
-                                day.hashCode),
-                            schoolName.hashCode),
-                        content.hashCode),
-                    grade.hashCode),
-                section.hashCode),
-            schoolId.hashCode),
-        classId.hashCode));
+                                        $jc(
+                                            $jc(
+                                                $jc($jc(0, scheduleId.hashCode),
+                                                    startTime.hashCode),
+                                                endTime.hashCode),
+                                            deliveryDate.hashCode),
+                                        day.hashCode),
+                                    schoolName.hashCode),
+                                content.hashCode),
+                            grade.hashCode),
+                        section.hashCode),
+                    schoolId.hashCode),
+                classId.hashCode),
+            comment.hashCode),
+        hoursTaught.hashCode));
   }
 
   @override
@@ -252,7 +287,9 @@ class _$Schedule extends Schedule {
           ..add('grade', grade)
           ..add('section', section)
           ..add('schoolId', schoolId)
-          ..add('classId', classId))
+          ..add('classId', classId)
+          ..add('comment', comment)
+          ..add('hoursTaught', hoursTaught))
         .toString();
   }
 }
@@ -304,6 +341,15 @@ class ScheduleBuilder implements Builder<Schedule, ScheduleBuilder> {
   int get classId => _$this._classId;
   set classId(int classId) => _$this._classId = classId;
 
+  ListBuilder<String> _comment;
+  ListBuilder<String> get comment =>
+      _$this._comment ??= new ListBuilder<String>();
+  set comment(ListBuilder<String> comment) => _$this._comment = comment;
+
+  double _hoursTaught;
+  double get hoursTaught => _$this._hoursTaught;
+  set hoursTaught(double hoursTaught) => _$this._hoursTaught = hoursTaught;
+
   ScheduleBuilder();
 
   ScheduleBuilder get _$this {
@@ -319,6 +365,8 @@ class ScheduleBuilder implements Builder<Schedule, ScheduleBuilder> {
       _section = _$v.section;
       _schoolId = _$v.schoolId;
       _classId = _$v.classId;
+      _comment = _$v.comment?.toBuilder();
+      _hoursTaught = _$v.hoursTaught;
       _$v = null;
     }
     return this;
@@ -339,19 +387,34 @@ class ScheduleBuilder implements Builder<Schedule, ScheduleBuilder> {
 
   @override
   _$Schedule build() {
-    final _$result = _$v ??
-        new _$Schedule._(
-            scheduleId: scheduleId,
-            startTime: startTime,
-            endTime: endTime,
-            deliveryDate: deliveryDate,
-            day: day,
-            schoolName: schoolName,
-            content: content,
-            grade: grade,
-            section: section,
-            schoolId: schoolId,
-            classId: classId);
+    _$Schedule _$result;
+    try {
+      _$result = _$v ??
+          new _$Schedule._(
+              scheduleId: scheduleId,
+              startTime: startTime,
+              endTime: endTime,
+              deliveryDate: deliveryDate,
+              day: day,
+              schoolName: schoolName,
+              content: content,
+              grade: grade,
+              section: section,
+              schoolId: schoolId,
+              classId: classId,
+              comment: _comment?.build(),
+              hoursTaught: hoursTaught);
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'comment';
+        _comment?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'Schedule', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

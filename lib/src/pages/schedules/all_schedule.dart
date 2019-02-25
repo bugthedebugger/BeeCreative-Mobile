@@ -16,9 +16,11 @@ class SchedulesPage extends StatefulWidget {
 
 class _SchedulesPageState extends State<SchedulesPage> {
   GlobalKey<ScaffoldState> _schedulesScaffoldKey = GlobalKey();
-  final _scheduleBloc = ScheduleBloc(
-    kiwi.Container().resolve<ScheduleRepository>(),
-  );
+  // final _scheduleBloc = ScheduleBloc(
+  //   kiwi.Container().resolve<ScheduleRepository>(),
+  // );
+
+  final _scheduleBloc = kiwi.Container().resolve<ScheduleBloc>();
   String _token;
 
   _read() async {
@@ -45,6 +47,13 @@ class _SchedulesPageState extends State<SchedulesPage> {
     ScreenUtil.instance = ScreenUtil(
         width: ScreenSize.screenWidth, height: ScreenSize.screenHeight)
       ..init(context);
+    return BlocProvider(
+      bloc: _scheduleBloc,
+      child: buildScaffold(),
+    );
+  }
+
+  Scaffold buildScaffold() {
     return Scaffold(
       key: _schedulesScaffoldKey,
       appBar: AppBar(
@@ -92,6 +101,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                   return await _stopRefreshCondition();
                 },
                 child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
                   addAutomaticKeepAlives: true,
                   itemCount: _schedulesCount(groupedSchedule),
                   itemBuilder: (context, index) {

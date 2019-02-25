@@ -1,10 +1,12 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
+import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:BeeCreative/src/widgets/schedule_card/schedule_them_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/animation.dart';
 
 class ScheduleCard extends StatefulWidget {
+  final Schedule schedule;
   final String school;
   final String content;
   final String grade;
@@ -31,6 +33,7 @@ class ScheduleCard extends StatefulWidget {
     this.comment1 = "",
     this.comment2 = "",
     this.comment3 = "",
+    this.schedule,
   }) : super(key: key) {
     this.scheduleThemeData = ScheduleThemeData(timeOfDay: this.timeOfDay);
   }
@@ -94,20 +97,30 @@ class ScheduleCardState extends State<ScheduleCard>
                       height: ScreenUtil().setHeight(10),
                     ),
                     Text(
-                      "${widget.startTime}",
+                      "${widget.schedule.startTime}",
                       style: AppFontStyles().textStyle12BlackBold,
                     ),
                     SizedBox(
                       height: ScreenUtil().setHeight(10),
                     ),
                     Text(
-                      "${widget.endTime}",
+                      "${widget.schedule.endTime}",
                       style: AppFontStyles().textStyle12BlackBold,
                     ),
                   ],
                 ),
               ),
               GestureDetector(
+                onVerticalDragEnd: (DragEndDetails detail) {
+                  double velocity = detail.velocity.pixelsPerSecond.dy;
+                  if (!_expanded && velocity > 0) {
+                    _controller.forward();
+                    _expanded = true;
+                  } else if (_expanded && velocity < 0) {
+                    _controller.reverse();
+                    _expanded = false;
+                  }
+                },
                 onTap: () {
                   if (!_expanded) {
                     _controller.forward();
@@ -145,15 +158,15 @@ class ScheduleCardState extends State<ScheduleCard>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              "${widget.school}",
+                              "${widget.schedule.schoolName}",
                               style: AppFontStyles().textStyle15White,
                             ),
                             Text(
-                              "${widget.content}",
+                              "${widget.schedule.content}",
                               style: AppFontStyles().textStyle12White,
                             ),
                             Text(
-                              "${widget.grade}",
+                              "${widget.schedule.grade}",
                               style: AppFontStyles().textStyle12White,
                             ),
                           ],
@@ -211,6 +224,25 @@ class ScheduleCardState extends State<ScheduleCard>
                                 style: AppFontStyles().textStyle15White,
                               ),
                             ],
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: ScreenUtil().setHeight(205),
+                        left: ScreenUtil().setWidth(85),
+                        child: RaisedButton(
+                          elevation: 0,
+                          onPressed: () {},
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Text(
+                            "Go to Class",
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Color(widget.scheduleThemeData.cardColor),
+                            ),
                           ),
                         ),
                       ),

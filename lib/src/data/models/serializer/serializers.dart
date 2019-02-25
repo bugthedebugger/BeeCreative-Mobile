@@ -17,6 +17,7 @@ part 'serializers.g.dart';
   AttendeeData,
   Student,
   ScheduleResponse,
+  BuiltList,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
