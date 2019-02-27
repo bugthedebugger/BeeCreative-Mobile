@@ -1,5 +1,6 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
+import 'package:BeeCreative/src/widgets/delivery_report_card/delivery_report_card.dart';
 import 'package:BeeCreative/src/widgets/schedule_card/schedule_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +12,7 @@ class SchedulesTile extends StatefulWidget {
   DateTime _scheduleDate;
   String _date;
   String _rawFormat = "yyyy-MM-dd";
-  bool _today = false;
+  bool today = false;
 
   SchedulesTile({
     Key key,
@@ -23,7 +24,7 @@ class SchedulesTile extends StatefulWidget {
     String todayDate =
         DateFormat(this._rawFormat).parse(DateTime.now().toString()).toString();
     if (this._scheduleDate.toString() == todayDate) {
-      _today = true;
+      today = true;
       this._date =
           "Today, " + DateFormat.yMMMMEEEEd().format(this._scheduleDate);
     } else {
@@ -79,86 +80,103 @@ class SchedulesTileState extends State<SchedulesTile>
 
   List<Widget> getList() {
     List<Widget> scheduleCardList = [];
-    widget._schedules.forEach((schedule) {
-      int hour = int.parse(schedule.startTime.substring(0, 2));
-      String timeOfDay;
+    widget._schedules.forEach(
+      (schedule) {
+        int hour = int.parse(schedule.startTime.substring(0, 2));
+        String timeOfDay;
 
-      if (hour < 11)
-        timeOfDay = 'morning';
-      else if (hour >= 11 && hour < 14)
-        timeOfDay = 'afternoon';
-      else
-        timeOfDay = 'evening';
+        if (hour < 11)
+          timeOfDay = 'morning';
+        else if (hour >= 11 && hour < 14)
+          timeOfDay = 'afternoon';
+        else
+          timeOfDay = 'evening';
 
-      scheduleCardList.add(
-        Slidable(
-          delegate: SlidableDrawerDelegate(),
-          actionExtentRatio: 0.10,
-          child: ScheduleCard(
-            schedule: schedule,
-            school: Uri.decodeFull(schedule.schoolName),
-            content: (schedule.content == null)
-                ? "No content was set"
-                : schedule.content,
-            grade: schedule.grade + " " + schedule.section,
-            maleCount: 0,
-            femaleCount: 0,
-            timeOfDay: timeOfDay,
-            startTime: schedule.startTime,
-            endTime: schedule.endTime,
-            // comment1: "This section is coming soon please be patient :)",
-            comment1: (schedule.comment != null) ? schedule.comment[0] : "",
+        scheduleCardList.add(
+          Slidable(
+            delegate: SlidableDrawerDelegate(),
+            actionExtentRatio: 0.10,
+            child: ScheduleCard(
+              schedule: schedule,
+              school: Uri.decodeFull(schedule.schoolName),
+              content: (schedule.content == null)
+                  ? "No content was set"
+                  : schedule.content,
+              grade: schedule.grade + " " + schedule.section,
+              maleCount: 0,
+              femaleCount: 0,
+              timeOfDay: timeOfDay,
+              startTime: schedule.startTime,
+              endTime: schedule.endTime,
+              // comment1: "This section is coming soon please be patient :)",
+              comment1: (schedule.comment != null) ? schedule.comment[0] : "",
+            ),
+            secondaryActions: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: SlideAction(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Theme(
+                          data: ThemeData(
+                            dialogBackgroundColor: Colors.transparent,
+                          ),
+                          child: Dialog(
+                            shape: RoundedRectangleBorder(),
+                            child: DeliveryReportCard(schedule),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 3,
+                        color: Color(0x33000000),
+                        offset: Offset(0, 1),
+                      )
+                    ],
+                    shape: BoxShape.circle,
+                    color: Color(
+                      AppColors.deliveryRatingColor,
+                    ),
+                  ),
+                  child: Icon(
+                    Icons.star,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: SlideAction(
+                  onTap: () {},
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 3,
+                        color: Color(0x33000000),
+                        offset: Offset(0, 1),
+                      )
+                    ],
+                    shape: BoxShape.circle,
+                    color: Color(AppColors.classCancelledColor),
+                  ),
+                  child: Icon(
+                    FontAwesomeIcons.times,
+                    color: Colors.white,
+                    size: 18,
+                  ),
+                ),
+              ),
+            ],
           ),
-          secondaryActions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: SlideAction(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 3,
-                      color: Color(0xaa000000),
-                      offset: Offset(0, 1),
-                    )
-                  ],
-                  shape: BoxShape.circle,
-                  color: Color(
-                    AppColors.deliveryRatingColor,
-                  ),
-                ),
-                child: Icon(
-                  Icons.star,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: SlideAction(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 3,
-                      color: Color(0xaa000000),
-                      offset: Offset(0, 1),
-                    )
-                  ],
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                ),
-                child: Icon(
-                  Icons.cancel,
-                  color: Color(
-                    AppColors.classCancelledColor,
-                  ),
-                  size: 39,
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-    });
+        );
+      },
+    );
 
     return scheduleCardList;
   }

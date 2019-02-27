@@ -49,6 +49,12 @@ class _$ScheduleSerializer implements StructuredSerializer<Schedule> {
       'hoursTaught',
       serializers.serialize(object.hoursTaught,
           specifiedType: const FullType(double)),
+      'number_of_male',
+      serializers.serialize(object.maleCount,
+          specifiedType: const FullType(int)),
+      'number_of_female',
+      serializers.serialize(object.femaleCount,
+          specifiedType: const FullType(int)),
     ];
     if (object.content != null) {
       result
@@ -62,6 +68,12 @@ class _$ScheduleSerializer implements StructuredSerializer<Schedule> {
         ..add(serializers.serialize(object.comment,
             specifiedType:
                 const FullType(BuiltList, const [const FullType(String)])));
+    }
+    if (object.delivered != null) {
+      result
+        ..add('delivered')
+        ..add(serializers.serialize(object.delivered,
+            specifiedType: const FullType(int)));
     }
 
     return result;
@@ -132,6 +144,18 @@ class _$ScheduleSerializer implements StructuredSerializer<Schedule> {
           result.hoursTaught = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double;
           break;
+        case 'number_of_male':
+          result.maleCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'number_of_female':
+          result.femaleCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'delivered':
+          result.delivered = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
       }
     }
 
@@ -166,6 +190,12 @@ class _$Schedule extends Schedule {
   final BuiltList<String> comment;
   @override
   final double hoursTaught;
+  @override
+  final int maleCount;
+  @override
+  final int femaleCount;
+  @override
+  final int delivered;
 
   factory _$Schedule([void updates(ScheduleBuilder b)]) =>
       (new ScheduleBuilder()..update(updates)).build();
@@ -183,7 +213,10 @@ class _$Schedule extends Schedule {
       this.schoolId,
       this.classId,
       this.comment,
-      this.hoursTaught})
+      this.hoursTaught,
+      this.maleCount,
+      this.femaleCount,
+      this.delivered})
       : super._() {
     if (scheduleId == null) {
       throw new BuiltValueNullFieldError('Schedule', 'scheduleId');
@@ -218,6 +251,12 @@ class _$Schedule extends Schedule {
     if (hoursTaught == null) {
       throw new BuiltValueNullFieldError('Schedule', 'hoursTaught');
     }
+    if (maleCount == null) {
+      throw new BuiltValueNullFieldError('Schedule', 'maleCount');
+    }
+    if (femaleCount == null) {
+      throw new BuiltValueNullFieldError('Schedule', 'femaleCount');
+    }
   }
 
   @override
@@ -243,7 +282,10 @@ class _$Schedule extends Schedule {
         schoolId == other.schoolId &&
         classId == other.classId &&
         comment == other.comment &&
-        hoursTaught == other.hoursTaught;
+        hoursTaught == other.hoursTaught &&
+        maleCount == other.maleCount &&
+        femaleCount == other.femaleCount &&
+        delivered == other.delivered;
   }
 
   @override
@@ -259,19 +301,30 @@ class _$Schedule extends Schedule {
                                     $jc(
                                         $jc(
                                             $jc(
-                                                $jc($jc(0, scheduleId.hashCode),
-                                                    startTime.hashCode),
-                                                endTime.hashCode),
-                                            deliveryDate.hashCode),
-                                        day.hashCode),
-                                    schoolName.hashCode),
-                                content.hashCode),
-                            grade.hashCode),
-                        section.hashCode),
-                    schoolId.hashCode),
-                classId.hashCode),
-            comment.hashCode),
-        hoursTaught.hashCode));
+                                                $jc(
+                                                    $jc(
+                                                        $jc(
+                                                            $jc(
+                                                                $jc(
+                                                                    0,
+                                                                    scheduleId
+                                                                        .hashCode),
+                                                                startTime
+                                                                    .hashCode),
+                                                            endTime.hashCode),
+                                                        deliveryDate.hashCode),
+                                                    day.hashCode),
+                                                schoolName.hashCode),
+                                            content.hashCode),
+                                        grade.hashCode),
+                                    section.hashCode),
+                                schoolId.hashCode),
+                            classId.hashCode),
+                        comment.hashCode),
+                    hoursTaught.hashCode),
+                maleCount.hashCode),
+            femaleCount.hashCode),
+        delivered.hashCode));
   }
 
   @override
@@ -289,7 +342,10 @@ class _$Schedule extends Schedule {
           ..add('schoolId', schoolId)
           ..add('classId', classId)
           ..add('comment', comment)
-          ..add('hoursTaught', hoursTaught))
+          ..add('hoursTaught', hoursTaught)
+          ..add('maleCount', maleCount)
+          ..add('femaleCount', femaleCount)
+          ..add('delivered', delivered))
         .toString();
   }
 }
@@ -350,6 +406,18 @@ class ScheduleBuilder implements Builder<Schedule, ScheduleBuilder> {
   double get hoursTaught => _$this._hoursTaught;
   set hoursTaught(double hoursTaught) => _$this._hoursTaught = hoursTaught;
 
+  int _maleCount;
+  int get maleCount => _$this._maleCount;
+  set maleCount(int maleCount) => _$this._maleCount = maleCount;
+
+  int _femaleCount;
+  int get femaleCount => _$this._femaleCount;
+  set femaleCount(int femaleCount) => _$this._femaleCount = femaleCount;
+
+  int _delivered;
+  int get delivered => _$this._delivered;
+  set delivered(int delivered) => _$this._delivered = delivered;
+
   ScheduleBuilder();
 
   ScheduleBuilder get _$this {
@@ -367,6 +435,9 @@ class ScheduleBuilder implements Builder<Schedule, ScheduleBuilder> {
       _classId = _$v.classId;
       _comment = _$v.comment?.toBuilder();
       _hoursTaught = _$v.hoursTaught;
+      _maleCount = _$v.maleCount;
+      _femaleCount = _$v.femaleCount;
+      _delivered = _$v.delivered;
       _$v = null;
     }
     return this;
@@ -403,7 +474,10 @@ class ScheduleBuilder implements Builder<Schedule, ScheduleBuilder> {
               schoolId: schoolId,
               classId: classId,
               comment: _comment?.build(),
-              hoursTaught: hoursTaught);
+              hoursTaught: hoursTaught,
+              maleCount: maleCount,
+              femaleCount: femaleCount,
+              delivered: delivered);
     } catch (_) {
       String _$failedField;
       try {

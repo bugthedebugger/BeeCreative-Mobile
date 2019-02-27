@@ -1,5 +1,7 @@
+import 'package:BeeCreative/src/bloc/delivery_report_bloc/delivery_report_bloc_export.dart';
 import 'package:BeeCreative/src/bloc/schedule_bloc/schedule_bloc_export.dart';
 import 'package:BeeCreative/src/bloc/user_bloc/user_bloc_export.dart';
+import 'package:BeeCreative/src/data/network/delivery_report_source.dart';
 import 'package:BeeCreative/src/data/network/schedule_data_source.dart';
 import 'package:BeeCreative/src/data/network/user_data_source.dart';
 import 'package:BeeCreative/src/data/repository/schedule_respository.dart';
@@ -15,4 +17,6 @@ void initKiwi() {
   Container().registerFactory((c) => ScheduleDataSource(c.resolve()));
   Container().registerFactory((c) => ScheduleRepository(c.resolve()));
   Container().registerFactory((c) => ScheduleBloc(c.resolve()));
+  Container().registerFactory((c) => DeliveryReportDataSource(c.resolve()));
+  Container().registerFactory((c) => DeliveryReportBloc(c.resolve()));
 }

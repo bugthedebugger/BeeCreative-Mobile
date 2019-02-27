@@ -34,6 +34,12 @@ abstract class Schedule implements Built<Schedule, ScheduleBuilder> {
   @nullable
   BuiltList<String> get comment;
   double get hoursTaught;
+  @BuiltValueField(wireName: 'number_of_male')
+  int get maleCount;
+  @BuiltValueField(wireName: 'number_of_female')
+  int get femaleCount;
+  @nullable
+  int get delivered;
 
   Schedule._();
 
