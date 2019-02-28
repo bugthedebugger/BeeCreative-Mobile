@@ -24,4 +24,7 @@ class AppColors {
   static var unfilledStarColor = 0xff2f0938;
   static var deliveryReportSaveButton = 0xff00B894;
   static var shadowColor = 0x33000000;
+  static var classCancelledCard = 0xffffffff;
+  static var classCancelledTextColor = 0xffD3560E;
+  static var partialBlack = 0xff444444;
 }

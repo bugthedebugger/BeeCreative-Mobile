@@ -11,8 +11,13 @@ class DeliveryReportDataSource {
 
   DeliveryReportDataSource(this.client);
 
-  Future<DeliveryReportResponse> sendDeliveryReport(Schedule schedule,
-      {String comment, int rating, @required bool delivered}) async {
+  Future<DeliveryReportResponse> sendDeliveryReport({
+    @required Schedule schedule,
+    @required String token,
+    String comment,
+    int rating,
+    @required bool delivered,
+  }) async {
     final url = ApiURL.deliveryReport;
     final encodedUrl = Uri.encodeFull(url);
 
@@ -20,6 +25,7 @@ class DeliveryReportDataSource {
       encodedUrl,
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token,
       },
       body: json.encode([
         {
@@ -30,8 +36,6 @@ class DeliveryReportDataSource {
         }
       ]),
     );
-
-    print(response.body);
 
     return DeliveryReportResponse.fromJson(response.body);
   }

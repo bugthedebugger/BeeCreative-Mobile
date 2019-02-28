@@ -9,8 +9,8 @@ import 'package:BeeCreative/src/pages/beecreative_tutorial/welcome.dart';
 import 'package:BeeCreative/src/pages/schedules/all_schedule.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  initKiwi();
+Future main() async {
+  await initKiwi();
   runApp(MyApp());
 }
 
@@ -30,7 +30,10 @@ class MyApp extends StatelessWidget {
         Routes.WELCOME_BACK: (BuildContext context) => LoggedInWelcome(),
         Routes.SCHEDULES: (BuildContext context) => SchedulesPage(),
       },
-      theme: ThemeData(fontFamily: "Poppins"),
+      theme: ThemeData(
+        fontFamily: "Poppins",
+        cursorColor: Color(0xff444444),
+      ),
       debugShowCheckedModeBanner: false,
     );
   }

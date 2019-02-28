@@ -1,5 +1,6 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
+import 'package:BeeCreative/src/widgets/delivery_report_card/class_cancelled_card.dart';
 import 'package:BeeCreative/src/widgets/delivery_report_card/delivery_report_card.dart';
 import 'package:BeeCreative/src/widgets/schedule_card/schedule_card.dart';
 import 'package:flutter/material.dart';
@@ -153,7 +154,22 @@ class SchedulesTileState extends State<SchedulesTile>
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: SlideAction(
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Theme(
+                          data: ThemeData(
+                            dialogBackgroundColor: Colors.transparent,
+                          ),
+                          child: Dialog(
+                            shape: RoundedRectangleBorder(),
+                            child: ClassCancelledCard(schedule),
+                          ),
+                        );
+                      },
+                    );
+                  },
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(

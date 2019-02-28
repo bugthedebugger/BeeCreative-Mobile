@@ -1,11 +1,10 @@
 import 'package:BeeCreative/src/bloc/delivery_report_bloc/delivery_report_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
-import 'package:BeeCreative/src/data/network/delivery_report_source.dart';
+import 'package:BeeCreative/src/pages/schedules/scaffold_key.dart';
 import 'package:flutter/material.dart';
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:http/http.dart' as http;
+import 'dart:async';
 import 'package:kiwi/kiwi.dart' as kiwi;
 
 class DeliveryReportCard extends StatefulWidget {
@@ -21,14 +20,66 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
   int _rating = 0;
   final DeliveryReportBloc _deliveryReportBloc =
       kiwi.Container().resolve<DeliveryReportBloc>();
+  StreamSubscription _streamSubscription;
 
   void initState() {
     super.initState();
+    _streamSubscription = _deliveryReportBloc.deliveryReportEvent.listen(
+      (DeliveryReportEvent event) {
+        if (event is SubmittingReport) {
+          showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (context) {
+              return Dialog(
+                child: Container(
+                  padding: EdgeInsets.all(8.0),
+                  color: Colors.white,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      CircularProgressIndicator(),
+                      SizedBox(width: 5),
+                      Text("Submitting please wait ..."),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        } else if (event is DeliveryReportSubmitted) {
+          Navigator.of(context).pop();
+          Navigator.of(context).pop();
+          schedulesScaffoldKey.currentState.showSnackBar(
+            SnackBar(
+              content: Text("Delivery report submitted successfully."),
+              action: SnackBarAction(
+                label: "Ok",
+                onPressed: () {},
+              ),
+            ),
+          );
+        } else if (event is DeliveryReportError) {
+          Navigator.of(context).pop();
+          Scaffold.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Error submitting report: ${event.message}"),
+              action: SnackBarAction(
+                label: "Ok",
+                onPressed: () {},
+              ),
+            ),
+          );
+          Navigator.of(context).pop();
+        }
+      },
+    );
   }
 
   @override
   void dispose() {
     super.dispose();
+    _streamSubscription.cancel();
     _deliveryReportBloc.dispose();
   }
 
@@ -39,7 +90,7 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
       ..init(context);
 
     return Container(
-      height: ScreenUtil().setHeight(212),
+      height: ScreenUtil().setHeight(215),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Color(AppColors.deliveryReportCard),
@@ -63,7 +114,6 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
                   child: Icon(
                     FontAwesomeIcons.times,
                     color: Colors.white,
-                    size: 15,
                   ),
                 ),
               ),
@@ -113,12 +163,14 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
               child: RaisedButton(
                 color: Color(AppColors.deliveryReportSaveButton),
                 elevation: 0,
-                onPressed: () async {
-                  _deliveryReportBloc.classDelivered(
-                    widget._schedule,
-                    true,
-                    _rating,
-                  );
+                onPressed: () {
+                  if (_rating != 0) {
+                    _deliveryReportBloc.initiateDeliveryReport(
+                      schedule: widget._schedule,
+                      delivered: true,
+                      rating: _rating,
+                    );
+                  }
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),

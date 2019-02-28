@@ -27,7 +27,8 @@ dependencies:
   http: ^0.12.0+1
   built_value: ^6.3.0 
   built_collection: ^4.1.0
-  flutter_bloc: ^0.6.0
+  bloc: ^0.9.3
+  flutter_bloc: ^0.7.0
   kiwi: ^0.1.0
   intl: ^0.15.7
   flutter_slidable: "^0.4.9"
@@ -108,5 +109,3 @@ flutter:
           weight: 700
         - asset: assets/fonts/poppins/Poppins-Italic.ttf
           style: italic
-        - asset: assets/fonts/poppins/Poppins-Medium.ttf
-          weight: 500

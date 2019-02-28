@@ -220,7 +220,7 @@ class ScheduleCardState extends State<ScheduleCard>
                             children: <Widget>[
                               Text(
                                 _comments,
-                                style: AppFontStyles().textStyle15White,
+                                style: AppFontStyles().textStyle12White,
                               ),
                             ],
                           ),
