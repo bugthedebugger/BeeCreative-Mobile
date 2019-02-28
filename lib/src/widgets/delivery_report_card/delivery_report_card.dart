@@ -38,117 +38,112 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
         width: ScreenSize.screenWidth, height: ScreenSize.screenHeight)
       ..init(context);
 
-    return BlocBuilder(
-      bloc: _deliveryReportBloc,
-      builder: (context, DeliveryReportState state) {
-        return Container(
-          height: ScreenUtil().setHeight(212),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: Color(AppColors.deliveryReportCard),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      height: ScreenUtil().setHeight(212),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Color(AppColors.deliveryReportCard),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+              Padding(
+                padding: EdgeInsets.only(
+                  top: ScreenUtil().setWidth(10),
+                  right: ScreenUtil().setWidth(10),
+                ),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Icon(
+                    FontAwesomeIcons.times,
+                    color: Colors.white,
+                    size: 15,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Center(
+            child: Text(
+              "Delivery Report",
+              style: AppFontStyles().textStyle20WhiteMedium,
+            ),
+          ),
+          SizedBox(height: ScreenUtil().setHeight(20)),
+          Center(
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: ScreenUtil().setWidth(10),
-                      right: ScreenUtil().setWidth(10),
-                    ),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Icon(
-                        FontAwesomeIcons.times,
+                  Text(
+                    "How did the class go?",
+                    style: AppFontStyles().textStyle15White,
+                  ),
+                  SizedBox(height: ScreenUtil().setHeight(5)),
+                  Container(
+                    alignment: Alignment.center,
+                    width: ScreenUtil().setWidth(210),
+                    height: ScreenUtil().setHeight(55),
+                    decoration: BoxDecoration(
+                      border: Border.all(
                         color: Colors.white,
-                        size: 15,
                       ),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: ratingStars(),
                     ),
                   ),
                 ],
               ),
-              Center(
-                child: Text(
-                  "Delivery Report",
-                  style: AppFontStyles().textStyle20WhiteMedium,
-                ),
-              ),
-              SizedBox(height: ScreenUtil().setHeight(20)),
-              Center(
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        "How did the class go?",
-                        style: AppFontStyles().textStyle15White,
-                      ),
-                      SizedBox(height: ScreenUtil().setHeight(5)),
-                      Container(
-                        alignment: Alignment.center,
-                        width: ScreenUtil().setWidth(210),
-                        height: ScreenUtil().setHeight(55),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.white,
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: ratingStars(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: ScreenUtil().setHeight(20)),
-              Center(
-                child: Container(
-                  width: ScreenUtil().setWidth(129),
-                  child: RaisedButton(
-                    color: Color(AppColors.deliveryReportSaveButton),
-                    elevation: 0,
-                    onPressed: () async {
-                      _deliveryReportBloc.classDelivered(
-                        widget._schedule,
-                        true,
-                        _rating,
-                      );
-                    },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.save,
-                          color: Colors.white,
-                        ),
-                        SizedBox(width: 5),
-                        Text(
-                          "Save",
-                          style: AppFontStyles().textStyle15White,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: ScreenUtil().setHeight(10)),
-            ],
+            ),
           ),
-        );
-      },
+          SizedBox(height: ScreenUtil().setHeight(20)),
+          Center(
+            child: Container(
+              width: ScreenUtil().setWidth(129),
+              child: RaisedButton(
+                color: Color(AppColors.deliveryReportSaveButton),
+                elevation: 0,
+                onPressed: () async {
+                  _deliveryReportBloc.classDelivered(
+                    widget._schedule,
+                    true,
+                    _rating,
+                  );
+                },
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.save,
+                      color: Colors.white,
+                    ),
+                    SizedBox(width: 5),
+                    Text(
+                      "Save",
+                      style: AppFontStyles().textStyle15White,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: ScreenUtil().setHeight(10)),
+        ],
+      ),
     );
   }
 
