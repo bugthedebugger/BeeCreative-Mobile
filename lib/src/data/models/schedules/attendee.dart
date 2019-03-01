@@ -13,7 +13,7 @@ part 'attendee.g.dart';
 abstract class Attendee implements Built<Attendee, AttendeeBuilder> {
   BuiltList<AttendeeData> get data;
   @BuiltValueField(wireName: 'is_attendee')
-  int get isAttendee;
+  bool get isAttendee;
 
   Attendee._();
 
