@@ -40,6 +40,12 @@ class _$ScheduleResponseSerializer
         ..add(serializers.serialize(object.attendee,
             specifiedType: const FullType(Attendee)));
     }
+    if (object.pagination != null) {
+      result
+        ..add('pagination')
+        ..add(serializers.serialize(object.pagination,
+            specifiedType: const FullType(SchedulesPagination)));
+    }
 
     return result;
   }
@@ -70,6 +76,11 @@ class _$ScheduleResponseSerializer
           result.attendee.replace(serializers.deserialize(value,
               specifiedType: const FullType(Attendee)) as Attendee);
           break;
+        case 'pagination':
+          result.pagination.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(SchedulesPagination))
+              as SchedulesPagination);
+          break;
       }
     }
 
@@ -84,11 +95,15 @@ class _$ScheduleResponse extends ScheduleResponse {
   final BuiltList<Schedule> schedule;
   @override
   final Attendee attendee;
+  @override
+  final SchedulesPagination pagination;
 
   factory _$ScheduleResponse([void updates(ScheduleResponseBuilder b)]) =>
       (new ScheduleResponseBuilder()..update(updates)).build();
 
-  _$ScheduleResponse._({this.data, this.schedule, this.attendee}) : super._();
+  _$ScheduleResponse._(
+      {this.data, this.schedule, this.attendee, this.pagination})
+      : super._();
 
   @override
   ScheduleResponse rebuild(void updates(ScheduleResponseBuilder b)) =>
@@ -104,13 +119,15 @@ class _$ScheduleResponse extends ScheduleResponse {
     return other is ScheduleResponse &&
         data == other.data &&
         schedule == other.schedule &&
-        attendee == other.attendee;
+        attendee == other.attendee &&
+        pagination == other.pagination;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, data.hashCode), schedule.hashCode), attendee.hashCode));
+    return $jf($jc(
+        $jc($jc($jc(0, data.hashCode), schedule.hashCode), attendee.hashCode),
+        pagination.hashCode));
   }
 
   @override
@@ -118,7 +135,8 @@ class _$ScheduleResponse extends ScheduleResponse {
     return (newBuiltValueToStringHelper('ScheduleResponse')
           ..add('data', data)
           ..add('schedule', schedule)
-          ..add('attendee', attendee))
+          ..add('attendee', attendee)
+          ..add('pagination', pagination))
         .toString();
   }
 }
@@ -141,6 +159,12 @@ class ScheduleResponseBuilder
   AttendeeBuilder get attendee => _$this._attendee ??= new AttendeeBuilder();
   set attendee(AttendeeBuilder attendee) => _$this._attendee = attendee;
 
+  SchedulesPaginationBuilder _pagination;
+  SchedulesPaginationBuilder get pagination =>
+      _$this._pagination ??= new SchedulesPaginationBuilder();
+  set pagination(SchedulesPaginationBuilder pagination) =>
+      _$this._pagination = pagination;
+
   ScheduleResponseBuilder();
 
   ScheduleResponseBuilder get _$this {
@@ -148,6 +172,7 @@ class ScheduleResponseBuilder
       _data = _$v.data?.toBuilder();
       _schedule = _$v.schedule?.toBuilder();
       _attendee = _$v.attendee?.toBuilder();
+      _pagination = _$v.pagination?.toBuilder();
       _$v = null;
     }
     return this;
@@ -174,7 +199,8 @@ class ScheduleResponseBuilder
           new _$ScheduleResponse._(
               data: _data?.build(),
               schedule: _schedule?.build(),
-              attendee: _attendee?.build());
+              attendee: _attendee?.build(),
+              pagination: _pagination?.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -184,6 +210,8 @@ class ScheduleResponseBuilder
         _schedule?.build();
         _$failedField = 'attendee';
         _attendee?.build();
+        _$failedField = 'pagination';
+        _pagination?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'ScheduleResponse', _$failedField, e.toString());

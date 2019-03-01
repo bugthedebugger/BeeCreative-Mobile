@@ -9,8 +9,13 @@ import 'package:kiwi/kiwi.dart' as kiwi;
 
 class DeliveryReportCard extends StatefulWidget {
   Schedule _schedule;
+  int rating;
   DeliveryReportCard(Schedule schedule, {Key key}) : super(key: key) {
     this._schedule = schedule;
+    if (schedule.deliveryReport.rating != null)
+      rating = schedule.deliveryReport.rating;
+    else
+      rating = 0;
   }
 
   _DeliveryReportCardState createState() => _DeliveryReportCardState();
@@ -85,6 +90,8 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
 
   @override
   Widget build(BuildContext context) {
+    _rating = widget.rating;
+
     ScreenUtil.instance = ScreenUtil(
         width: ScreenSize.screenWidth, height: ScreenSize.screenHeight)
       ..init(context);

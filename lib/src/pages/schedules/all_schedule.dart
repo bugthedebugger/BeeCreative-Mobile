@@ -1,13 +1,16 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/bloc/schedule_bloc/schedule_bloc_export.dart';
+import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:BeeCreative/src/data/models/shared_preferences/user_shared_preferences.dart';
 import 'package:BeeCreative/src/pages/schedules/drawer.dart';
+import 'package:BeeCreative/src/pages/schedules/scaffold.dart';
 import 'package:BeeCreative/src/pages/schedules/scaffold_key.dart';
 import 'package:BeeCreative/src/pages/schedules/schedules_tile.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
 
 class SchedulesPage extends StatefulWidget {
@@ -39,84 +42,65 @@ class _SchedulesPageState extends State<SchedulesPage> {
 
   @override
   Widget build(BuildContext context) {
+    String formattedtoday = DateFormat("yyyy-MM-dd").format(DateTime.now());
     ScreenUtil.instance = ScreenUtil(
         width: ScreenSize.screenWidth, height: ScreenSize.screenHeight)
       ..init(context);
     return BlocProvider(
       bloc: _scheduleBloc,
-      child: buildScaffold(),
-    );
-  }
-
-  Scaffold buildScaffold() {
-    return Scaffold(
-      key: schedulesScaffoldKey,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(
-            Icons.menu,
-            size: 30,
-            color: Color(AppColors.meltingCardColor),
-          ),
-          onPressed: () {
-            schedulesScaffoldKey.currentState.openDrawer();
-          },
-          tooltip: "Drawer Menu",
-        ),
-        title: Text(
-          "Schedules",
-          style: TextStyle(
-            color: Color(AppColors.meltingCardColor),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      drawer: AppDrawer(),
-      body: BlocBuilder(
-        bloc: _scheduleBloc,
-        builder: (context, ScheduleState state) {
-          if (state.isLoading == true) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            if (state.scheduleResponse.schedule != null) {
-              var groupedSchedule = groupBy(
-                  state.scheduleResponse.schedule, (obj) => obj.deliveryDate);
-              return RefreshIndicator(
-                onRefresh: () async {
-                  _scheduleBloc.reloadSchedule(_token);
-
-                  // return await Future.doWhile(() async {
-                  //   if (!_stop) return !_stop;
-                  // });
-                  return await _stopRefreshCondition();
-                },
-                child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  addAutomaticKeepAlives: true,
-                  itemCount: _schedulesCount(groupedSchedule),
-                  itemBuilder: (context, index) {
-                    var key = groupedSchedule.keys.toList()[index];
-                    // print(groupedSchedule[key]);
-                    String scheduleDate = key.toString();
-                    return SchedulesTile(
-                      schedules: groupedSchedule[key],
-                      scheduleDate: scheduleDate,
-                    );
-                  },
-                ),
+      child: buildScaffold(
+        key: schedulesScaffoldKey,
+        body: BlocBuilder(
+          bloc: _scheduleBloc,
+          builder: (context, ScheduleState state) {
+            if (state.isLoading == true) {
+              return Center(
+                child: CircularProgressIndicator(),
               );
             } else {
-              return Center(child: CircularProgressIndicator());
+              if (state.scheduleResponse.schedule != null) {
+                var groupedSchedule = groupBy(
+                    state.scheduleResponse.schedule, (obj) => obj.deliveryDate);
+                if (groupedSchedule.keys.contains(formattedtoday)) {
+                  Map<dynamic, List<Schedule>> tempSchedule = {
+                    formattedtoday: groupedSchedule[formattedtoday]
+                  };
+                  tempSchedule.addAll(groupedSchedule);
+                  groupedSchedule = tempSchedule;
+                }
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    _scheduleBloc.reloadSchedule(_token);
+
+                    // return await Future.doWhile(() async {
+                    //   if (!_stop) return !_stop;
+                    // });
+                    return await _stopRefreshCondition();
+                  },
+                  child: Container(
+                    child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      addAutomaticKeepAlives: true,
+                      itemCount: _schedulesCount(groupedSchedule),
+                      itemBuilder: (context, index) {
+                        var key = groupedSchedule.keys.toList()[index];
+                        // print(groupedSchedule[key]);
+                        String scheduleDate = key.toString();
+                        return SchedulesTile(
+                          schedules: groupedSchedule[key],
+                          scheduleDate: scheduleDate,
+                        );
+                      },
+                    ),
+                  ),
+                );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
             }
-          }
-        },
+          },
+        ),
       ),
-      backgroundColor: Colors.white,
     );
   }
 

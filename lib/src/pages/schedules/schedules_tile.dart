@@ -93,6 +93,30 @@ class SchedulesTileState extends State<SchedulesTile>
         else
           timeOfDay = 'evening';
 
+        List<Widget> secondaryActionList = [
+          ClassDeliveredButton(
+            context: context,
+            schedule: schedule,
+          ),
+        ];
+        if (schedule.deliveryReport.delivered != null) {
+          if (!schedule.deliveryReport.delivered) {
+            secondaryActionList.add(
+              ClassCancelledButton(
+                context: context,
+                schedule: schedule,
+              ),
+            );
+          }
+        } else {
+          secondaryActionList.add(
+            ClassCancelledButton(
+              context: context,
+              schedule: schedule,
+            ),
+          );
+        }
+
         scheduleCardList.add(
           Slidable(
             delegate: SlidableDrawerDelegate(),
@@ -112,83 +136,7 @@ class SchedulesTileState extends State<SchedulesTile>
               // comment1: "This section is coming soon please be patient :)",
               comment1: (schedule.comment != null) ? schedule.comment[0] : "",
             ),
-            secondaryActions: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: SlideAction(
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Theme(
-                          data: ThemeData(
-                            dialogBackgroundColor: Colors.transparent,
-                          ),
-                          child: Dialog(
-                            shape: RoundedRectangleBorder(),
-                            child: DeliveryReportCard(schedule),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 3,
-                        color: Color(0x33000000),
-                        offset: Offset(0, 1),
-                      )
-                    ],
-                    shape: BoxShape.circle,
-                    color: Color(
-                      AppColors.deliveryRatingColor,
-                    ),
-                  ),
-                  child: Icon(
-                    Icons.star,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: SlideAction(
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Theme(
-                          data: ThemeData(
-                            dialogBackgroundColor: Colors.transparent,
-                          ),
-                          child: Dialog(
-                            shape: RoundedRectangleBorder(),
-                            child: ClassCancelledCard(schedule),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 3,
-                        color: Color(0x33000000),
-                        offset: Offset(0, 1),
-                      )
-                    ],
-                    shape: BoxShape.circle,
-                    color: Color(AppColors.classCancelledColor),
-                  ),
-                  child: Icon(
-                    FontAwesomeIcons.times,
-                    color: Colors.white,
-                    size: 18,
-                  ),
-                ),
-              ),
-            ],
+            secondaryActions: secondaryActionList,
           ),
         );
       },
@@ -199,4 +147,113 @@ class SchedulesTileState extends State<SchedulesTile>
 
   @override
   bool get wantKeepAlive => true;
+}
+
+class ClassDeliveredButton extends StatelessWidget {
+  Schedule schedule;
+  ClassDeliveredButton({
+    Key key,
+    @required this.context,
+    @required Schedule schedule,
+  }) : super(key: key) {
+    this.schedule = schedule;
+  }
+
+  final BuildContext context;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: SlideAction(
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return Theme(
+                data: ThemeData(
+                  dialogBackgroundColor: Colors.transparent,
+                ),
+                child: Dialog(
+                  shape: RoundedRectangleBorder(),
+                  child: DeliveryReportCard(schedule),
+                ),
+              );
+            },
+          );
+        },
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 3,
+              color: Color(0x33000000),
+              offset: Offset(0, 1),
+            )
+          ],
+          shape: BoxShape.circle,
+          color: Color(
+            AppColors.deliveryRatingColor,
+          ),
+        ),
+        child: Icon(
+          Icons.star,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+}
+
+class ClassCancelledButton extends StatelessWidget {
+  Schedule schedule;
+  ClassCancelledButton({
+    Key key,
+    @required this.context,
+    @required Schedule schedule,
+  }) : super(key: key) {
+    this.schedule = schedule;
+  }
+
+  final BuildContext context;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: SlideAction(
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return Theme(
+                data: ThemeData(
+                  dialogBackgroundColor: Colors.transparent,
+                ),
+                child: Dialog(
+                  shape: RoundedRectangleBorder(),
+                  child: ClassCancelledCard(schedule),
+                ),
+              );
+            },
+          );
+        },
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 3,
+              color: Color(0x33000000),
+              offset: Offset(0, 1),
+            )
+          ],
+          shape: BoxShape.circle,
+          color: Color(AppColors.classCancelledColor),
+        ),
+        child: Icon(
+          FontAwesomeIcons.times,
+          color: Colors.white,
+          size: 18,
+        ),
+      ),
+    );
+  }
 }

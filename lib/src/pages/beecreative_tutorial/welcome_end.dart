@@ -1,7 +1,11 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Widget welcomeEnd(context) {
+  ScreenUtil.instance = ScreenUtil(width: ScreenSize.screenWidth)
+    ..init(context);
+
   return new Scaffold(
     backgroundColor: Color(AppColors.welcEnd),
     body: new Container(
@@ -40,17 +44,27 @@ Widget welcomeEnd(context) {
             ),
           ),
           Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text("<",
-                    style: AppFontStyles().gettingStartedWelcEndHeadStyle),
-                GestureDetector(
-                  child: Icon(Icons.check),
-                  onTap: () {
-                    Navigator.pushReplacementNamed(context, '/login/google');
-                  },
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              RaisedButton(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
                 ),
-              ]),
+                color: Color(AppColors.welcEnd),
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/login/google');
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Finish",
+                    style: AppFontStyles().textStyle16White,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     ),

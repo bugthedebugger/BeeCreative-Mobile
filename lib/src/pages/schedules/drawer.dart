@@ -66,37 +66,42 @@ class _AppDrawerState extends State<AppDrawer> {
                 physics: BouncingScrollPhysics(),
                 children: <Widget>[
                   DrawerListTile(
-                    icon: AppPhotos.drawerSchedule,
+                    image: AppPhotos.drawerSchedule,
                     title: "SCHEDULES",
                     function: () {},
                   ),
                   DrawerListTile(
-                    icon: AppPhotos.drawerClasses,
+                    image: AppPhotos.drawerClasses,
                     title: "CLASSES",
                     function: () {},
                   ),
                   DrawerListTile(
-                    icon: AppPhotos.drawerContents,
+                    image: AppPhotos.drawerContents,
                     title: "CONTENTS",
                     function: () {},
                   ),
                   DrawerListTile(
-                    icon: AppPhotos.drawerQuotes,
+                    image: AppPhotos.drawerQuotes,
                     title: "QUOTES",
                     function: () {},
                   ),
                   DrawerListTile(
-                    icon: AppPhotos.drawerSettings,
+                    image: AppPhotos.drawerSettings,
                     title: "SETTINGS",
                     function: () {},
                   ),
                   DrawerListTile(
-                    icon: AppPhotos.drawerHelp,
+                    icon: FontAwesomeIcons.signOutAlt,
+                    title: "LOGOUT",
+                    function: () {},
+                  ),
+                  DrawerListTile(
+                    image: AppPhotos.drawerHelp,
                     title: "HELP",
                     function: () {},
                   ),
                   DrawerListTile(
-                    icon: AppPhotos.drawerAbout,
+                    image: AppPhotos.drawerAbout,
                     title: "ABOUT",
                     function: () {},
                   ),

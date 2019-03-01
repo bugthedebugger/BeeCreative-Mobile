@@ -56,4 +56,10 @@ class AppPhotos {
   static String eveningScheduleFemale =
       "assets/images/schedules/eveningFemale.png";
   static String eveningScheduleMale = "assets/images/schedules/eveningMale.png";
+  static String avatarCloud = "assets/images/drawer/avatar-cloud.png";
+  static String noInternet = "assets/images/errors/no_internet.png";
+  static String noSchedules = "assets/images/errors/no_schedules.png";
+  static String underConstruction =
+      "assets/images/errors/under_construction.png";
+  static String animesh = "assets/images/team/animesh.jpg";
 }

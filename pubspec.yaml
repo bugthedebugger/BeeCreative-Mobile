@@ -84,6 +84,8 @@ flutter:
    - assets/images/drawer/schedule.png
    - assets/images/drawer/settings.png
    - assets/images/drawer/close.png
+   - assets/images/drawer/avatar-cloud.png
+   - assets/images/drawer/avatar-cloud.png
   # schedules assets
    - assets/images/schedules/morningSun.png
    - assets/images/schedules/morningCloud.png
@@ -100,6 +102,12 @@ flutter:
    - assets/images/schedules/eveningHouse.png
    - assets/images/schedules/eveningFemale.png
    - assets/images/schedules/eveningMale.png
+  # error assets
+   - assets/images/errors/no_internet.png
+   - assets/images/errors/no_schedules.png
+   - assets/images/errors/under_construction.png
+  # team assets
+   - assets/images/team/animesh.jpg
 
   fonts:
     - family: Poppins
@@ -109,3 +117,6 @@ flutter:
           weight: 700
         - asset: assets/fonts/poppins/Poppins-Italic.ttf
           style: italic
+        - asset: assets/fonts/poppins/Poppins-Medium.ttf
+          weight: 500
+        

@@ -117,19 +117,6 @@ class ScheduleCardState extends State<ScheduleCard>
                 ),
               ),
               GestureDetector(
-                /*
-                // THIS IS FOR FUTURE UPDATE!
-                onVerticalDragEnd: (DragEndDetails detail) {
-                  double velocity = detail.velocity.pixelsPerSecond.dy;
-                  if (!_expanded && velocity > 0) {
-                    _controller.forward();
-                    _expanded = true;
-                  } else if (_expanded && velocity < 0) {
-                    _controller.reverse();
-                    _expanded = false;
-                  }
-                },
-                */
                 onTap: () {
                   if (!_expanded) {
                     _controller.forward();
@@ -231,7 +218,10 @@ class ScheduleCardState extends State<ScheduleCard>
                         left: ScreenUtil().setWidth(85),
                         child: RaisedButton(
                           elevation: 0,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushNamed(Routes.UNDER_CONSTRUCTION);
+                          },
                           color: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
