@@ -8,10 +8,7 @@ class ScheduleRepository {
 
   Future<ScheduleResponse> getSchedulesFromNetwork(String token) async {
     final response = await _scheduleDataSource.requestSchedule(token: token);
-    print("before");
     if (response == null) throw NoSchedulesError();
-    print("here");
-    print(response);
     return response;
   }
 }
