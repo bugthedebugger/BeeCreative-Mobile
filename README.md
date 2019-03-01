@@ -16,7 +16,7 @@ Google Drive:
 - https://pub.dartlang.org/packages/googleapis
 - https://developers.google.com/drive/api/v3/reference/
 
-HTTP:
+HTTP: 
 - https://pub.dartlang.org/packages/http
 
 Shared Preference:
@@ -27,4 +27,11 @@ Issue with installing shared preferences:
 
 Dependency Injection:
 - https://pub.dartlang.org/packages/kiwi
+
+Icon Pack:
+- https://pub.dartlang.org/packages/font_awesome_flutter
+
+Serialization:
+- https://pub.dartlang.org/packages/built_value
+- https://pub.dartlang.org/packages/built_collection
 
