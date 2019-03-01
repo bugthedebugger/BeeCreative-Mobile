@@ -24,7 +24,7 @@ class _$AttendeeSerializer implements StructuredSerializer<Attendee> {
               const FullType(BuiltList, const [const FullType(AttendeeData)])),
       'is_attendee',
       serializers.serialize(object.isAttendee,
-          specifiedType: const FullType(int)),
+          specifiedType: const FullType(bool)),
     ];
 
     return result;
@@ -49,7 +49,7 @@ class _$AttendeeSerializer implements StructuredSerializer<Attendee> {
           break;
         case 'is_attendee':
           result.isAttendee = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(bool)) as bool;
           break;
       }
     }
@@ -62,7 +62,7 @@ class _$Attendee extends Attendee {
   @override
   final BuiltList<AttendeeData> data;
   @override
-  final int isAttendee;
+  final bool isAttendee;
 
   factory _$Attendee([void updates(AttendeeBuilder b)]) =>
       (new AttendeeBuilder()..update(updates)).build();
@@ -113,9 +113,9 @@ class AttendeeBuilder implements Builder<Attendee, AttendeeBuilder> {
       _$this._data ??= new ListBuilder<AttendeeData>();
   set data(ListBuilder<AttendeeData> data) => _$this._data = data;
 
-  int _isAttendee;
-  int get isAttendee => _$this._isAttendee;
-  set isAttendee(int isAttendee) => _$this._isAttendee = isAttendee;
+  bool _isAttendee;
+  bool get isAttendee => _$this._isAttendee;
+  set isAttendee(bool isAttendee) => _$this._isAttendee = isAttendee;
 
   AttendeeBuilder();
 
