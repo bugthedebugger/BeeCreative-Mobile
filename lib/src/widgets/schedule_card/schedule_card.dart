@@ -1,6 +1,6 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
-import 'package:BeeCreative/src/widgets/schedule_card/schedule_them_data.dart';
+import 'package:BeeCreative/src/widgets/schedule_card/schedule_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/animation.dart';
@@ -81,6 +81,12 @@ class ScheduleCardState extends State<ScheduleCard>
 
   @override
   Widget build(BuildContext context) {
+    String _comments = "";
+    if (widget.schedule.comment != null) {
+      widget.schedule.comment
+          .forEach((comment) => _comments = _comments + " " + comment);
+    }
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -111,6 +117,8 @@ class ScheduleCardState extends State<ScheduleCard>
                 ),
               ),
               GestureDetector(
+                /*
+                // THIS IS FOR FUTURE UPDATE!
                 onVerticalDragEnd: (DragEndDetails detail) {
                   double velocity = detail.velocity.pixelsPerSecond.dy;
                   if (!_expanded && velocity > 0) {
@@ -121,6 +129,7 @@ class ScheduleCardState extends State<ScheduleCard>
                     _expanded = false;
                   }
                 },
+                */
                 onTap: () {
                   if (!_expanded) {
                     _controller.forward();
@@ -162,11 +171,11 @@ class ScheduleCardState extends State<ScheduleCard>
                               style: AppFontStyles().textStyle15White,
                             ),
                             Text(
-                              "${widget.schedule.content}",
+                              "${(widget.schedule.content == null) ? 'No content was assigned!' : widget.schedule.content}",
                               style: AppFontStyles().textStyle12White,
                             ),
                             Text(
-                              "${widget.schedule.grade}",
+                              "${widget.schedule.grade} ${widget.schedule.section}",
                               style: AppFontStyles().textStyle12White,
                             ),
                           ],
@@ -179,14 +188,14 @@ class ScheduleCardState extends State<ScheduleCard>
                           children: <Widget>[
                             GenderCountCard(
                               gender: "boys",
-                              genderCount: widget.maleCount,
+                              genderCount: widget.schedule.maleCount,
                               genderIcon: widget.scheduleThemeData.maleIcon,
                               timeOfDay: widget.timeOfDay,
                             ),
                             SizedBox(width: ScreenUtil().setWidth(19)),
                             GenderCountCard(
                               gender: "girls",
-                              genderCount: widget.femaleCount,
+                              genderCount: widget.schedule.femaleCount,
                               genderIcon: widget.scheduleThemeData.femaleIcon,
                               timeOfDay: widget.timeOfDay,
                             ),
@@ -210,18 +219,8 @@ class ScheduleCardState extends State<ScheduleCard>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                widget.comment1,
-                                style: AppFontStyles().textStyle15White,
-                              ),
-                              SizedBox(height: 5),
-                              Text(
-                                widget.comment2,
-                                style: AppFontStyles().textStyle15White,
-                              ),
-                              SizedBox(height: 5),
-                              Text(
-                                widget.comment3,
-                                style: AppFontStyles().textStyle15White,
+                                _comments,
+                                style: AppFontStyles().textStyle12White,
                               ),
                             ],
                           ),
@@ -339,7 +338,8 @@ class GenderCountCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           Container(
-            width: ScreenUtil().setWidth(15),
+            alignment: Alignment.bottomCenter,
+            width: ScreenUtil().setWidth(25),
             padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(3)),
             child: Text(
               "$genderCount",
@@ -348,6 +348,7 @@ class GenderCountCard extends StatelessWidget {
           ),
           SizedBox(width: 5),
           Container(
+            alignment: Alignment.bottomCenter,
             width: ScreenUtil().setWidth(35),
             padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(6)),
             child: Text(
@@ -356,7 +357,7 @@ class GenderCountCard extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: ScreenUtil().setWidth(38),
+            width: ScreenUtil().setWidth(28),
           ),
           Image.asset(
             genderIcon,

@@ -1,102 +1,101 @@
+import 'package:BeeCreative/src/bloc/bloc_provider.dart';
 import 'package:BeeCreative/src/bloc/user_bloc/user_bloc_export.dart';
+import 'dart:async';
+
+import 'package:BeeCreative/src/data/models/user/user_model.dart';
 import 'package:BeeCreative/src/data/repository/user_repository.dart';
-import 'package:bloc/bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:BeeCreative/src/data/models/user/user_error.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class UserBloc extends Bloc<UserEvent, UserState> {
-  final UserRepository _userRepository;
+class UserBloc implements BlocBase {
+  UserRepository _repository;
+  User registeredUser;
+  String token;
   String _idToken;
+  SharedPreferences _sharedPreferences;
 
-  UserBloc(this._userRepository) : super();
-
-  void _onLoginRequestInitiated() {
-    dispatch(UserLoginRequested((b) => b..token = _idToken));
+  UserBloc(this._repository, this._sharedPreferences) {
+    userEventStreamController.stream.listen((UserEvent event) {
+      _mapEventsToState(event);
+    });
   }
 
-  void googleLoginRequest() {
-    dispatch(GoogleUserLoginRequest());
+  /// Stream controller for user events
+  StreamController<UserEvent> userEventStreamController =
+      StreamController<UserEvent>.broadcast();
+  Stream<UserEvent> get userEvent => userEventStreamController.stream;
+  Sink<UserEvent> get _inUserEvent => userEventStreamController.sink;
+
+  /// Stream controller for user
+  StreamController<User> userStreamController =
+      StreamController<User>.broadcast();
+  Stream<User> get user => userStreamController.stream;
+  Sink<User> get _registerUser => userStreamController.sink;
+
+  void _mapEventsToState(UserEvent event) async {
+    if (event is GoogleUserLoginRequest) {
+      _mapGoogleUserLoginRequest(event);
+    } else if (event is UserLoginRequested) {
+      _mapUserLoginRequest(event);
+    } else if (event is UserStoredSuccessfully) {}
   }
 
-  void _storeUserToLocal() {
-    dispatch(StoreUserToSharedPreferences());
-  }
-
-  void _userStoredSuccessfully() {
-    dispatch(UserStoredSuccessfully());
-  }
-
-  @override
-  UserState get initialState => UserState.initial();
-
-  @override
-  Stream<UserState> mapEventToState(
-      UserState currentState, UserEvent event) async* {
-    if (event is UserLoginRequested) {
-      yield* mapLoginRequestInitiated(event);
-    } else if (event is GoogleUserLoginRequest) {
-      yield* mapGoogleLoginRequestInitiated(event);
-    } else if (event is StoreUserToSharedPreferences) {
-      yield* mapStoreUserToSharedPreferences(currentState, event);
-    } else if (event is UserStoredSuccessfully) {
-      yield* mapUserStoredSucceessfully(currentState);
-    }
-  }
-
-  Stream<UserState> mapLoginRequestInitiated(UserLoginRequested event) async* {
-    if (event.token.isEmpty) {
-      yield UserState.initial();
-    } else {
-      yield UserState.loading();
-      try {
-        final userResult = await _userRepository.requestLogin(event.token);
-        yield UserState.success(userResult);
-        _storeUserToLocal();
-      } on NoUserException catch (e) {
-        yield UserState.failure(e.message);
-      } on UserError catch (e) {
-        yield UserState.failure(e.message);
-      }
-    }
-  }
-
-  Stream<UserState> mapGoogleLoginRequestInitiated(
-      GoogleUserLoginRequest event) async* {
+  void _mapGoogleUserLoginRequest(GoogleUserLoginRequest event) async {
     GoogleSignIn _googleSignIn = GoogleSignIn(
       hostedDomain: "karkhana.asia",
       scopes: ['email', 'profile', 'openid'],
     );
     try {
-      yield UserState.loading();
       var googleUser = await _googleSignIn.signIn();
-      var auth = await googleUser.authentication;
-      _idToken = auth.idToken;
-      yield UserState.googlLogin(_idToken);
-      _onLoginRequestInitiated();
-    } catch (e) {
-      yield UserState.failure("Google Sign in failed!");
+      var authUser = await googleUser.authentication;
+      _idToken = authUser.idToken;
+      _initiateServerLogin();
+    } catch (error, stackTrace) {
+      print("Error: $error, Stack: $stackTrace");
     }
   }
 
-  Stream<UserState> mapStoreUserToSharedPreferences(
-      UserState state, StoreUserToSharedPreferences event) async* {
-    if (state.user.data != null) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      try {
-        prefs.setString("token", state.user.data.token);
-        prefs.setString("userName", state.user.data.userName);
-        prefs.setString("avatar", state.user.data.photo);
-        prefs.setString("email", state.user.data.email);
-        _userStoredSuccessfully();
-        yield UserState.dataStore(state.user, _idToken);
-      } catch (_) {
-        prefs.clear();
-      }
+  void _mapUserLoginRequest(UserLoginRequested event) async {
+    try {
+      var response = await this._repository.requestLogin(_idToken);
+      registeredUser = response;
+      token = registeredUser.data.token;
+      _sharedPreferences.setString('token', registeredUser.data.token);
+      _sharedPreferences.setString('userName', registeredUser.data.userName);
+      _sharedPreferences.setString('avatar', registeredUser.data.photo);
+      _sharedPreferences.setString('email', registeredUser.data.email);
+      registerUser(registeredUser);
+      _userLoggedIn();
+    } catch (error, stackTrace) {
+      print("Error: $error, StackTrace: $stackTrace");
     }
   }
 
-  Stream<UserState> mapUserStoredSucceessfully(UserState state) async* {
-    yield UserState.dataStore(state.user, _idToken);
+  void _mapUserStoredSuccessfully(UserStoredSuccessfully event) async {}
+
+  void initiateGoogleLogin() {
+    dispatch(GoogleUserLoginRequest());
+  }
+
+  void _initiateServerLogin() {
+    dispatch(UserLoginRequested((b) => b..token = _idToken));
+  }
+
+  void _userLoggedIn() {
+    dispatch(UserStoredSuccessfully());
+  }
+
+  void dispatch(UserEvent event) {
+    _inUserEvent.add(event);
+  }
+
+  void registerUser(User user) {
+    _registerUser.add(user);
+  }
+
+  @override
+  void dispose() {
+    userEventStreamController.close();
+    userStreamController.close();
   }
 }

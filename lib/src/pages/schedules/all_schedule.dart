@@ -1,8 +1,8 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/bloc/schedule_bloc/schedule_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/shared_preferences/user_shared_preferences.dart';
-import 'package:BeeCreative/src/data/repository/schedule_respository.dart';
 import 'package:BeeCreative/src/pages/schedules/drawer.dart';
+import 'package:BeeCreative/src/pages/schedules/scaffold_key.dart';
 import 'package:BeeCreative/src/pages/schedules/schedules_tile.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +15,6 @@ class SchedulesPage extends StatefulWidget {
 }
 
 class _SchedulesPageState extends State<SchedulesPage> {
-  GlobalKey<ScaffoldState> _schedulesScaffoldKey = GlobalKey();
-  // final _scheduleBloc = ScheduleBloc(
-  //   kiwi.Container().resolve<ScheduleRepository>(),
-  // );
-
   final _scheduleBloc = kiwi.Container().resolve<ScheduleBloc>();
   String _token;
 
@@ -55,7 +50,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
 
   Scaffold buildScaffold() {
     return Scaffold(
-      key: _schedulesScaffoldKey,
+      key: schedulesScaffoldKey,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -67,7 +62,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
             color: Color(AppColors.meltingCardColor),
           ),
           onPressed: () {
-            _schedulesScaffoldKey.currentState.openDrawer();
+            schedulesScaffoldKey.currentState.openDrawer();
           },
           tooltip: "Drawer Menu",
         ),

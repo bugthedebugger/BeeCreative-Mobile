@@ -9,6 +9,7 @@ part of serializers;
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Attendee.serializer)
       ..add(AttendeeData.serializer)
+      ..add(DeliveryReportResponse.serializer)
       ..add(Schedule.serializer)
       ..add(ScheduleResponse.serializer)
       ..add(ScheduleResponseData.serializer)

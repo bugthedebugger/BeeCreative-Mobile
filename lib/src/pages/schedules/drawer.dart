@@ -173,11 +173,11 @@ class _AppDrawerState extends State<AppDrawer> {
                           ),
                         ),
                         Positioned(
-                          bottom: ScreenUtil().setHeight(0),
+                          top: ScreenUtil().setHeight(374),
                           left: 0,
                           child: Container(
                             color: Color(AppColors.loginGrass),
-                            height: ScreenUtil().setHeight(26),
+                            height: ScreenUtil().setHeight(76),
                             width: ScreenUtil().setWidth(340),
                           ),
                         ),

@@ -1,5 +1,6 @@
 library serializers;
 
+import 'package:BeeCreative/src/data/models/delivery_report/delivery_response_model.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:BeeCreative/src/data/models/user/user_model.dart';
 import 'package:built_collection/built_collection.dart';
@@ -18,6 +19,7 @@ part 'serializers.g.dart';
   Student,
   ScheduleResponse,
   BuiltList,
+  DeliveryReportResponse,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
