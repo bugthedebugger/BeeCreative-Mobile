@@ -27,7 +27,7 @@ class UnderConstruction extends StatelessWidget {
             },
             child: Image.asset(
               AppPhotos.underConstruction,
-              width: ScreenUtil().setWidth(143),
+              width: ScreenUtil().setWidth(202),
               height: ScreenUtil().setHeight(225),
             ),
           ),

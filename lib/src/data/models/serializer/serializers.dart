@@ -20,6 +20,8 @@ part 'serializers.g.dart';
   ScheduleResponse,
   BuiltList,
   DeliveryReportResponse,
+  DeliveryReport,
+  SchedulesPagination,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

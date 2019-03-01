@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:BeeCreative/src/data/models/schedules/attendee.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule.dart';
+import 'package:BeeCreative/src/data/models/schedules/schedule_pagination.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_response_data.dart';
 import 'package:BeeCreative/src/data/models/serializer/serializers.dart';
 import 'package:built_collection/built_collection.dart';
@@ -20,6 +21,8 @@ abstract class ScheduleResponse
   BuiltList<Schedule> get schedule;
   @nullable
   Attendee get attendee;
+  @nullable
+  SchedulesPagination get pagination;
 
   ScheduleResponse._();
 

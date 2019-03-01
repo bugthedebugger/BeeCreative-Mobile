@@ -69,11 +69,11 @@ class _$ScheduleSerializer implements StructuredSerializer<Schedule> {
             specifiedType:
                 const FullType(BuiltList, const [const FullType(String)])));
     }
-    if (object.delivered != null) {
+    if (object.deliveryReport != null) {
       result
-        ..add('delivered')
-        ..add(serializers.serialize(object.delivered,
-            specifiedType: const FullType(int)));
+        ..add('delivery_report')
+        ..add(serializers.serialize(object.deliveryReport,
+            specifiedType: const FullType(DeliveryReport)));
     }
 
     return result;
@@ -152,9 +152,9 @@ class _$ScheduleSerializer implements StructuredSerializer<Schedule> {
           result.femaleCount = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
-        case 'delivered':
-          result.delivered = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+        case 'delivery_report':
+          result.deliveryReport.replace(serializers.deserialize(value,
+              specifiedType: const FullType(DeliveryReport)) as DeliveryReport);
           break;
       }
     }
@@ -195,7 +195,7 @@ class _$Schedule extends Schedule {
   @override
   final int femaleCount;
   @override
-  final int delivered;
+  final DeliveryReport deliveryReport;
 
   factory _$Schedule([void updates(ScheduleBuilder b)]) =>
       (new ScheduleBuilder()..update(updates)).build();
@@ -216,7 +216,7 @@ class _$Schedule extends Schedule {
       this.hoursTaught,
       this.maleCount,
       this.femaleCount,
-      this.delivered})
+      this.deliveryReport})
       : super._() {
     if (scheduleId == null) {
       throw new BuiltValueNullFieldError('Schedule', 'scheduleId');
@@ -285,7 +285,7 @@ class _$Schedule extends Schedule {
         hoursTaught == other.hoursTaught &&
         maleCount == other.maleCount &&
         femaleCount == other.femaleCount &&
-        delivered == other.delivered;
+        deliveryReport == other.deliveryReport;
   }
 
   @override
@@ -324,7 +324,7 @@ class _$Schedule extends Schedule {
                     hoursTaught.hashCode),
                 maleCount.hashCode),
             femaleCount.hashCode),
-        delivered.hashCode));
+        deliveryReport.hashCode));
   }
 
   @override
@@ -345,7 +345,7 @@ class _$Schedule extends Schedule {
           ..add('hoursTaught', hoursTaught)
           ..add('maleCount', maleCount)
           ..add('femaleCount', femaleCount)
-          ..add('delivered', delivered))
+          ..add('deliveryReport', deliveryReport))
         .toString();
   }
 }
@@ -414,9 +414,11 @@ class ScheduleBuilder implements Builder<Schedule, ScheduleBuilder> {
   int get femaleCount => _$this._femaleCount;
   set femaleCount(int femaleCount) => _$this._femaleCount = femaleCount;
 
-  int _delivered;
-  int get delivered => _$this._delivered;
-  set delivered(int delivered) => _$this._delivered = delivered;
+  DeliveryReportBuilder _deliveryReport;
+  DeliveryReportBuilder get deliveryReport =>
+      _$this._deliveryReport ??= new DeliveryReportBuilder();
+  set deliveryReport(DeliveryReportBuilder deliveryReport) =>
+      _$this._deliveryReport = deliveryReport;
 
   ScheduleBuilder();
 
@@ -437,7 +439,7 @@ class ScheduleBuilder implements Builder<Schedule, ScheduleBuilder> {
       _hoursTaught = _$v.hoursTaught;
       _maleCount = _$v.maleCount;
       _femaleCount = _$v.femaleCount;
-      _delivered = _$v.delivered;
+      _deliveryReport = _$v.deliveryReport?.toBuilder();
       _$v = null;
     }
     return this;
@@ -477,12 +479,15 @@ class ScheduleBuilder implements Builder<Schedule, ScheduleBuilder> {
               hoursTaught: hoursTaught,
               maleCount: maleCount,
               femaleCount: femaleCount,
-              delivered: delivered);
+              deliveryReport: _deliveryReport?.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'comment';
         _comment?.build();
+
+        _$failedField = 'deliveryReport';
+        _deliveryReport?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'Schedule', _$failedField, e.toString());

@@ -2,6 +2,7 @@ library schedule;
 
 import 'dart:convert';
 
+import 'package:BeeCreative/src/data/models/schedules/delivery_report.dart';
 import 'package:BeeCreative/src/data/models/serializer/serializers.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
@@ -39,7 +40,8 @@ abstract class Schedule implements Built<Schedule, ScheduleBuilder> {
   @BuiltValueField(wireName: 'number_of_female')
   int get femaleCount;
   @nullable
-  int get delivered;
+  @BuiltValueField(wireName: 'delivery_report')
+  DeliveryReport get deliveryReport;
 
   Schedule._();
 
