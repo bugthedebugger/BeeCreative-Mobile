@@ -41,7 +41,7 @@ class AvatarCircleState extends State<AvatarCircle> {
           top: ScreenUtil().setHeight(40),
           left: -30,
           child: Image.asset(
-            AppPhotos.loginScreenCloud2,
+            AppPhotos.avatarCloud,
             width: ScreenUtil().setWidth(50),
           ),
         ),

@@ -130,6 +130,18 @@ class AppFontStyles {
     fontSize: _12TextSize,
   );
 
+  static TextStyle _15TextBlackMedium = TextStyle(
+    color: Color(AppColors.partialBlack),
+    fontSize: _15TextSize,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle _12TextBlackItalic = TextStyle(
+    color: Color(AppColors.partialBlack),
+    fontSize: _12TextSize,
+    fontStyle: FontStyle.italic,
+  );
+
   TextStyle get gettingStartedBodyStyle => _gettingStBody;
   TextStyle get gettingStartedAttendanceHeadStyle => _welcAttendanceHeader;
   TextStyle get gettingStartedPhotosHeadStyle => _welcPhotosHeader;
@@ -155,4 +167,6 @@ class AppFontStyles {
   TextStyle get classCancelledTextStyle => _classCancelledFont;
   TextStyle get textStyle15Black => _15TextBlack;
   TextStyle get textStyle12Black => _12TextBlack;
+  TextStyle get textStyle15BlackMedium => _15TextBlackMedium;
+  TextStyle get textStyle12BlackItalic => _12TextBlackItalic;
 }

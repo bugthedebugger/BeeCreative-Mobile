@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DrawerListTile extends StatefulWidget {
-  String _leadingIcon;
+  var _leadingIcon;
   String _title;
   var _function;
+  var _image;
 
-  DrawerListTile({@required icon, @required title, @required function}){
+  DrawerListTile({icon, @required title, @required function, image}) {
     this._leadingIcon = icon;
     this._title = title;
     this._function = function;
+    this._image = image;
   }
 
   _DrawerListTileState createState() => _DrawerListTileState();
@@ -21,11 +23,17 @@ class _DrawerListTileState extends State<DrawerListTile> {
   Widget build(BuildContext context) {
     return ListTile(
       dense: true,
-      leading: Image.asset(
-        widget._leadingIcon, 
-        height: ScreenUtil().setHeight(15),
-        width: ScreenUtil().setWidth(15),
-      ),
+      leading: (widget._image != null)
+          ? Image.asset(
+              widget._image,
+              height: ScreenUtil().setHeight(15),
+              width: ScreenUtil().setWidth(15),
+            )
+          : Icon(
+              widget._leadingIcon,
+              color: Colors.white,
+              size: ScreenUtil().setWidth(16),
+            ),
       title: Text(
         widget._title,
         style: AppFontStyles().drawerListTextStyle,

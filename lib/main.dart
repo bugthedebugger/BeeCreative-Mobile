@@ -7,6 +7,7 @@ import 'package:BeeCreative/src/pages/beecreative_notification_welcome.dart/noti
 import 'package:BeeCreative/src/pages/beecreative_splash_screen/splash_screen.dart';
 import 'package:BeeCreative/src/pages/beecreative_tutorial/welcome.dart';
 import 'package:BeeCreative/src/pages/schedules/all_schedule.dart';
+import 'package:BeeCreative/src/pages/under_construction_page/under_construction.dart';
 import 'package:flutter/material.dart';
 
 Future main() async {
@@ -29,6 +30,8 @@ class MyApp extends StatelessWidget {
             NotificationWelcome(),
         Routes.WELCOME_BACK: (BuildContext context) => LoggedInWelcome(),
         Routes.SCHEDULES: (BuildContext context) => SchedulesPage(),
+        Routes.UNDER_CONSTRUCTION: (BuildContext context) =>
+            UnderConstruction(),
       },
       theme: ThemeData(
         fontFamily: "Poppins",

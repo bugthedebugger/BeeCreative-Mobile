@@ -6,4 +6,5 @@ class Routes {
   static const NOTIFICATION_SETUP = '/app/notification/setup';
   static const WELCOME_BACK = '/app/welcome-back';
   static const SCHEDULES = '/app/schedules';
+  static const UNDER_CONSTRUCTION = '/app/under-construction';
 }
