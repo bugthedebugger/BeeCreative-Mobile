@@ -9,6 +9,7 @@ import 'package:BeeCreative/src/pages/beecreative_tutorial/welcome.dart';
 import 'package:BeeCreative/src/pages/schedules/all_schedule.dart';
 import 'package:BeeCreative/src/pages/under_construction_page/under_construction.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 Future main() async {
   await initKiwi();

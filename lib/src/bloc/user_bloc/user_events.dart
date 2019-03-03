@@ -35,6 +35,14 @@ abstract class StoreUserToSharedPreferences extends UserEvent
       _$StoreUserToSharedPreferences;
 }
 
+abstract class UserLogoutRequested extends UserEvent
+    implements Built<UserLogoutRequested, UserLogoutRequestedBuilder> {
+  UserLogoutRequested._();
+
+  factory UserLogoutRequested([updates(UserLogoutRequestedBuilder b)]) =
+      _$UserLogoutRequested;
+}
+
 abstract class UserStoredSuccessfully extends UserEvent
     implements Built<UserStoredSuccessfully, UserStoredSuccessfullyBuilder> {
   // fields go here

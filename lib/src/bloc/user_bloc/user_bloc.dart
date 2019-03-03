@@ -13,8 +13,9 @@ class UserBloc implements BlocBase {
   String token;
   String _idToken;
   SharedPreferences _sharedPreferences;
+  GoogleSignIn _googleSignIn;
 
-  UserBloc(this._repository, this._sharedPreferences) {
+  UserBloc(this._repository, this._sharedPreferences, this._googleSignIn) {
     userEventStreamController.stream.listen((UserEvent event) {
       _mapEventsToState(event);
     });
@@ -37,14 +38,13 @@ class UserBloc implements BlocBase {
       _mapGoogleUserLoginRequest(event);
     } else if (event is UserLoginRequested) {
       _mapUserLoginRequest(event);
-    } else if (event is UserStoredSuccessfully) {}
+    } else if (event is UserStoredSuccessfully) {
+    } else if (event is UserLogoutRequested) {
+      _mapUserLogoutRequest(event);
+    }
   }
 
   void _mapGoogleUserLoginRequest(GoogleUserLoginRequest event) async {
-    GoogleSignIn _googleSignIn = GoogleSignIn(
-      hostedDomain: "karkhana.asia",
-      scopes: ['email', 'profile', 'openid'],
-    );
     try {
       var googleUser = await _googleSignIn.signIn();
       var authUser = await googleUser.authentication;
@@ -53,6 +53,13 @@ class UserBloc implements BlocBase {
     } catch (error, stackTrace) {
       print("Error: $error, Stack: $stackTrace");
     }
+  }
+
+  void _mapUserLogoutRequest(UserLogoutRequested event) {
+    try {
+      _sharedPreferences.clear();
+      _googleSignIn.signOut();
+    } catch (_) {}
   }
 
   void _mapUserLoginRequest(UserLoginRequested event) async {
@@ -71,7 +78,9 @@ class UserBloc implements BlocBase {
     }
   }
 
-  void _mapUserStoredSuccessfully(UserStoredSuccessfully event) async {}
+  void logout() {
+    dispatch(UserLogoutRequested());
+  }
 
   void initiateGoogleLogin() {
     dispatch(GoogleUserLoginRequest());

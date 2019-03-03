@@ -10,7 +10,7 @@ class NotificationWelcome extends StatefulWidget {
 }
 
 class _NotificationWelcomeState extends State<NotificationWelcome> {
-  int _notificationGroupValue = -1;
+  int _notificationGroupValue = 0;
   String userName = 'User Name';
   String avatar;
 
@@ -145,7 +145,12 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
                             EdgeInsets.symmetric(vertical: 4, horizontal: 10),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30)),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            Routes.WELCOME_BACK,
+                          );
+                        },
                         color: Color(AppColors.meltingCardColor),
                         child: Container(
                           width: ScreenUtil().setWidth(138),
@@ -163,14 +168,16 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
                         onTap: () {
                           Navigator.pushReplacementNamed(
                             context,
-                            '/app/welcome-back',
+                            Routes.WELCOME_BACK,
                           );
                         },
                         child: Center(
-                          child: Text("SKIP",
-                              style: TextStyle(
-                                  color: Color(AppColors.meltingCardColor),
-                                  fontSize: 15)),
+                          child: Text(
+                            "SKIP",
+                            style: TextStyle(
+                                color: Color(AppColors.meltingCardColor),
+                                fontSize: 15),
+                          ),
                         ),
                       )
                     ],

@@ -1,9 +1,11 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
+import 'package:BeeCreative/src/bloc/user_bloc/user_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/shared_preferences/user_shared_preferences.dart';
 import 'package:BeeCreative/src/pages/schedules/drawer_list_tile.dart';
 import 'package:BeeCreative/src/widgets/avatar_circle/avatar_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kiwi/kiwi.dart' as kiwi;
 
 class AppDrawer extends StatefulWidget {
   _AppDrawerState createState() => _AppDrawerState();
@@ -12,6 +14,7 @@ class AppDrawer extends StatefulWidget {
 class _AppDrawerState extends State<AppDrawer> {
   String _userName = "User Name";
   String _avatar;
+  final _userBloc = kiwi.Container().resolve<UserBloc>();
 
   _read() async {
     final _userSharedPreferences = UserSharedPreferences();
@@ -25,6 +28,12 @@ class _AppDrawerState extends State<AppDrawer> {
   void initState() {
     super.initState();
     _read();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _userBloc.dispose();
   }
 
   @override
@@ -68,8 +77,14 @@ class _AppDrawerState extends State<AppDrawer> {
                   DrawerListTile(
                     image: AppPhotos.drawerSchedule,
                     title: "SCHEDULES",
-                    function: () {},
+                    function: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        Routes.SCHEDULES,
+                        (route) => false,
+                      );
+                    },
                   ),
+                  /*
                   DrawerListTile(
                     image: AppPhotos.drawerClasses,
                     title: "CLASSES",
@@ -90,11 +105,19 @@ class _AppDrawerState extends State<AppDrawer> {
                     title: "SETTINGS",
                     function: () {},
                   ),
+                  */
                   DrawerListTile(
                     icon: FontAwesomeIcons.signOutAlt,
                     title: "LOGOUT",
-                    function: () {},
+                    function: () {
+                      _userBloc.logout();
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        Routes.GOOGLE_LOGIN,
+                        (route) => false,
+                      );
+                    },
                   ),
+                  /*
                   DrawerListTile(
                     image: AppPhotos.drawerHelp,
                     title: "HELP",
@@ -105,6 +128,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     title: "ABOUT",
                     function: () {},
                   ),
+                  */
                   Container(
                     height: ScreenUtil().setHeight(400),
                     child: Stack(
@@ -182,7 +206,7 @@ class _AppDrawerState extends State<AppDrawer> {
                           left: 0,
                           child: Container(
                             color: Color(AppColors.loginGrass),
-                            height: ScreenUtil().setHeight(76),
+                            height: ScreenUtil().setHeight(300),
                             width: ScreenUtil().setWidth(340),
                           ),
                         ),

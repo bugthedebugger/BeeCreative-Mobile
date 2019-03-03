@@ -33,7 +33,9 @@ class LoggedInWelcomeState extends State<LoggedInWelcome> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(
-        width: ScreenSize.screenWidth, height: ScreenSize.screenHeight)
+        width: ScreenSize.screenWidth,
+        height: ScreenSize.screenHeight,
+        allowFontScaling: true)
       ..init(context);
     return Scaffold(
       body: MeltingCard(
@@ -55,19 +57,23 @@ class LoggedInWelcomeState extends State<LoggedInWelcome> {
                 height: 20,
               ),
               RaisedButton(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ScreenUtil().setWidth(37),
+                  vertical: ScreenUtil().setHeight(8),
+                ),
                 elevation: 0,
                 onPressed: () {
                   Navigator.pushReplacementNamed(
                     context,
-                    '/app/schedules',
+                    Routes.SCHEDULES,
                   );
                 },
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
-                child: Container(
-                  width: ScreenUtil().setWidth(120),
+                /*child: Container(
+                  width: ScreenUtil().setWidth(150),
                   height: ScreenUtil().setHeight(30),
                   child: Center(
                     child: Text(
@@ -75,6 +81,10 @@ class LoggedInWelcomeState extends State<LoggedInWelcome> {
                       style: TextStyle(fontSize: 15),
                     ),
                   ),
+                ),*/
+                child: Text(
+                  "Go to Schedules",
+                  style: TextStyle(fontSize: 15),
                 ),
               ),
               SizedBox(
