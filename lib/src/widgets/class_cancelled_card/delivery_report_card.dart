@@ -1,4 +1,6 @@
+import 'package:BeeCreative/src/bloc/bloc_provider.dart';
 import 'package:BeeCreative/src/bloc/delivery_report_bloc/delivery_report_bloc_export.dart';
+import 'package:BeeCreative/src/bloc/schedule_bloc/schedule_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:BeeCreative/src/pages/schedules/scaffold_key.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +24,14 @@ class DeliveryReportCard extends StatefulWidget {
 }
 
 class _DeliveryReportCardState extends State<DeliveryReportCard> {
-  int _rating = 0;
+  int _rating;
   final DeliveryReportBloc _deliveryReportBloc =
       kiwi.Container().resolve<DeliveryReportBloc>();
   StreamSubscription _streamSubscription;
+  ScheduleBloc _scheduleBloc = kiwi.Container().resolve<ScheduleBloc>();
 
   void initState() {
+    _rating = widget.rating;
     super.initState();
     _streamSubscription = _deliveryReportBloc.deliveryReportEvent.listen(
       (DeliveryReportEvent event) {
@@ -53,6 +57,7 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
             },
           );
         } else if (event is DeliveryReportSubmitted) {
+          _scheduleBloc.reloadSchedules();
           Navigator.of(context).pop();
           Navigator.of(context).pop();
           schedulesScaffoldKey.currentState.showSnackBar(
@@ -86,12 +91,11 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
     super.dispose();
     _streamSubscription.cancel();
     _deliveryReportBloc.dispose();
+    _scheduleBloc.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    _rating = widget.rating;
-
     ScreenUtil.instance = ScreenUtil(
         width: ScreenSize.screenWidth, height: ScreenSize.screenHeight)
       ..init(context);
@@ -212,18 +216,18 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
     for (int i = 1; i <= 5; i++) {
       stars.add(
         GestureDetector(
-          onTap: () => ratingController(i),
+          onTap: () {
+            _rating = i;
+            setState(() {});
+          },
           child: Icon(
             Icons.star,
             size: 30,
-            color: Color(
-              colorController(i),
-            ),
+            color: Color(colorController(i, _rating)),
           ),
         ),
       );
     }
-
     return stars;
   }
 
@@ -232,10 +236,11 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
     setState(() {});
   }
 
-  colorController(int condition) {
-    if (_rating >= condition)
+  colorController(int condition, int rating) {
+    if (rating >= condition) {
       return AppColors.deliveryRatingColor;
-    else
+    } else {
       return AppColors.unfilledStarColor;
+    }
   }
 }

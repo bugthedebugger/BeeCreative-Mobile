@@ -1,7 +1,7 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
+import 'package:BeeCreative/src/widgets/class_cancelled_card/delivery_report_card.dart';
 import 'package:BeeCreative/src/widgets/delivery_report_card/class_cancelled_card.dart';
-import 'package:BeeCreative/src/widgets/delivery_report_card/delivery_report_card.dart';
 import 'package:BeeCreative/src/widgets/schedule_card/schedule_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class SchedulesTile extends StatefulWidget {
-  List<Schedule> _schedules;
+  List _schedules;
   DateTime _scheduleDate;
   String _date;
   String _rawFormat = "yyyy-MM-dd";
@@ -17,7 +17,7 @@ class SchedulesTile extends StatefulWidget {
 
   SchedulesTile({
     Key key,
-    List<Schedule> schedules,
+    List schedules,
     String scheduleDate,
   }) : super(key: key) {
     this._schedules = schedules;
@@ -46,18 +46,6 @@ class SchedulesTileState extends State<SchedulesTile>
     ScreenUtil.instance = ScreenUtil(
         width: ScreenSize.screenWidth, height: ScreenSize.screenHeight)
       ..init(context);
-    // return ExpansionTile(
-    //   // initiallyExpanded: (widget._today) ? true : false,
-    //   initiallyExpanded: true,
-    //   title: Text(
-    //     "${widget._date}",
-    //     style: TextStyle(
-    //       color: Color(AppColors.meltingCardColor),
-    //     ),
-    //   ),
-    //   trailing: null,
-    //   children: getList(),
-    // );
     List<Widget> _tileData = [
       Padding(
         padding: const EdgeInsets.only(left: 25.0, top: 10.0),

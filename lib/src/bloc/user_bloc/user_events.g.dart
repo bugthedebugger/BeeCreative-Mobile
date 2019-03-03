@@ -208,6 +208,64 @@ class StoreUserToSharedPreferencesBuilder
   }
 }
 
+class _$UserLogoutRequested extends UserLogoutRequested {
+  factory _$UserLogoutRequested([void updates(UserLogoutRequestedBuilder b)]) =>
+      (new UserLogoutRequestedBuilder()..update(updates)).build();
+
+  _$UserLogoutRequested._() : super._();
+
+  @override
+  UserLogoutRequested rebuild(void updates(UserLogoutRequestedBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  UserLogoutRequestedBuilder toBuilder() =>
+      new UserLogoutRequestedBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is UserLogoutRequested;
+  }
+
+  @override
+  int get hashCode {
+    return 50014898;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('UserLogoutRequested').toString();
+  }
+}
+
+class UserLogoutRequestedBuilder
+    implements Builder<UserLogoutRequested, UserLogoutRequestedBuilder> {
+  _$UserLogoutRequested _$v;
+
+  UserLogoutRequestedBuilder();
+
+  @override
+  void replace(UserLogoutRequested other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$UserLogoutRequested;
+  }
+
+  @override
+  void update(void updates(UserLogoutRequestedBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$UserLogoutRequested build() {
+    final _$result = _$v ?? new _$UserLogoutRequested._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$UserStoredSuccessfully extends UserStoredSuccessfully {
   factory _$UserStoredSuccessfully(
           [void updates(UserStoredSuccessfullyBuilder b)]) =>

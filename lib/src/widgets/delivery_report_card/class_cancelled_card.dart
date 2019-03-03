@@ -1,5 +1,7 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
+import 'package:BeeCreative/src/bloc/bloc_provider.dart';
 import 'package:BeeCreative/src/bloc/delivery_report_bloc/delivery_report_bloc_export.dart';
+import 'package:BeeCreative/src/bloc/schedule_bloc/schedule_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:BeeCreative/src/pages/schedules/scaffold_key.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +93,7 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
       ..init(context);
 
     return Container(
-      height: ScreenUtil().setHeight(336),
+      height: ScreenUtil().setHeight(342),
       width: ScreenUtil().setWidth(334),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
@@ -211,7 +213,6 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                         return 'Please enter a reason.';
                       } else {
                         _submitData = value;
-                        print(_submitData);
                       }
                     },
                     decoration: InputDecoration(
@@ -252,6 +253,8 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                             delivered: false,
                             comment: _submitData,
                           );
+                          BlocProvider.of<ScheduleBloc>(context)
+                              .reloadSchedules();
                         },
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
