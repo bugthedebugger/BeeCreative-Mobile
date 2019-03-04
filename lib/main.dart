@@ -8,8 +8,11 @@ import 'package:BeeCreative/src/pages/beecreative_splash_screen/splash_screen.da
 import 'package:BeeCreative/src/pages/beecreative_tutorial/welcome.dart';
 import 'package:BeeCreative/src/pages/schedules/all_schedule.dart';
 import 'package:BeeCreative/src/pages/under_construction_page/under_construction.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:kiwi/kiwi.dart' as kiwi;
 
 Future main() async {
   await initKiwi();
@@ -17,10 +20,15 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
+  FirebaseAnalytics analytics = kiwi.Container().resolve<FirebaseAnalytics>();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "BeeCreative Mobile",
+      navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: analytics),
+      ],
       initialRoute: '/',
       routes: {
         Routes.SPLASH_SCREEN: (BuildContext context) => SplashScreen(),
