@@ -1,8 +1,8 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/bloc/user_bloc/user_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/shared_preferences/user_shared_preferences.dart';
-import 'package:BeeCreative/src/pages/schedules/drawer_list_tile.dart';
 import 'package:BeeCreative/src/widgets/avatar_circle/avatar_circle.dart';
+import 'package:BeeCreative/src/widgets/drawer/drawer_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;

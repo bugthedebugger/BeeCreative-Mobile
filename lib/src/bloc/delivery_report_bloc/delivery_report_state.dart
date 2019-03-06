@@ -1,11 +1,7 @@
 library delivery_report_state;
 
-import 'dart:convert';
-
 import 'package:BeeCreative/src/data/models/delivery_report/delivery_response_model.dart';
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
 
 part 'delivery_report_state.g.dart';
 

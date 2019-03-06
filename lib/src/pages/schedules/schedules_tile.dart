@@ -1,14 +1,17 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
+import 'package:BeeCreative/src/pages/class_details/class_details.dart';
 import 'package:BeeCreative/src/widgets/class_cancelled_card/delivery_report_card.dart';
 import 'package:BeeCreative/src/widgets/delivery_report_card/class_cancelled_card.dart';
 import 'package:BeeCreative/src/widgets/schedule_card/schedule_card.dart';
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class SchedulesTile extends StatefulWidget {
+  BuiltList<ScheduleResponseData> _scheduleResponseList;
   List _schedules;
   DateTime _scheduleDate;
   String _date;
@@ -19,7 +22,9 @@ class SchedulesTile extends StatefulWidget {
     Key key,
     List schedules,
     String scheduleDate,
+    BuiltList<ScheduleResponseData> scheduleResponseList,
   }) : super(key: key) {
+    this._scheduleResponseList = scheduleResponseList;
     this._schedules = schedules;
     this._scheduleDate = DateFormat(this._rawFormat).parse(scheduleDate);
     String todayDate =
@@ -91,7 +96,6 @@ class SchedulesTileState extends State<SchedulesTile>
           if (!schedule.deliveryReport.delivered) {
             secondaryActionList.add(
               ClassCancelledButton(
-                context: context,
                 schedule: schedule,
               ),
             );
@@ -99,8 +103,28 @@ class SchedulesTileState extends State<SchedulesTile>
         } else {
           secondaryActionList.add(
             ClassCancelledButton(
-              context: context,
               schedule: schedule,
+            ),
+          );
+        }
+
+        handleButton() {
+          ScheduleResponseData response =
+              widget._scheduleResponseList.firstWhere(
+            (data) {
+              if (data.classId == schedule.classId)
+                return true;
+              else
+                return false;
+            },
+          );
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ClassDetails(
+                    schedule: schedule,
+                    timeOfDay: timeOfDay,
+                    scheduleResponseData: response,
+                  ),
             ),
           );
         }
@@ -111,18 +135,9 @@ class SchedulesTileState extends State<SchedulesTile>
             actionExtentRatio: 0.10,
             child: ScheduleCard(
               schedule: schedule,
-              school: Uri.decodeFull(schedule.schoolName),
-              content: (schedule.content == null)
-                  ? "No content was set"
-                  : schedule.content,
-              grade: schedule.grade + " " + schedule.section,
-              maleCount: 0,
-              femaleCount: 0,
               timeOfDay: timeOfDay,
-              startTime: schedule.startTime,
-              endTime: schedule.endTime,
-              // comment1: "This section is coming soon please be patient :)",
-              comment1: (schedule.comment != null) ? schedule.comment[0] : "",
+              buttonLabel: "Go to Class",
+              function: handleButton,
             ),
             secondaryActions: secondaryActionList,
           ),
@@ -138,14 +153,12 @@ class SchedulesTileState extends State<SchedulesTile>
 }
 
 class ClassDeliveredButton extends StatelessWidget {
-  Schedule schedule;
+  final Schedule schedule;
   ClassDeliveredButton({
     Key key,
     @required this.context,
-    @required Schedule schedule,
-  }) : super(key: key) {
-    this.schedule = schedule;
-  }
+    @required this.schedule,
+  }) : super(key: key);
 
   final BuildContext context;
 
@@ -193,16 +206,11 @@ class ClassDeliveredButton extends StatelessWidget {
 }
 
 class ClassCancelledButton extends StatelessWidget {
-  Schedule schedule;
+  final Schedule schedule;
   ClassCancelledButton({
     Key key,
-    @required this.context,
-    @required Schedule schedule,
-  }) : super(key: key) {
-    this.schedule = schedule;
-  }
-
-  final BuildContext context;
+    @required this.schedule,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

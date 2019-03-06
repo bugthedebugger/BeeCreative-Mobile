@@ -3,6 +3,7 @@ import 'package:BeeCreative/src/data/exceptions/no_schedules_exception.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:BeeCreative/src/data/network/schedule_data_source.dart';
 import 'package:BeeCreative/src/data/repository/connection_check.dart';
+import 'dart:async';
 
 class ScheduleRepository {
   ScheduleDataSource _scheduleDataSource;

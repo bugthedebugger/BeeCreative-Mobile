@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AvatarCircle extends StatefulWidget {
-  String _staticAvatarImage;
-  String _avatarImage;
+  final String _staticAvatarImage;
+  final String _avatarImage;
 
   AvatarCircle(this._staticAvatarImage, this._avatarImage);
 

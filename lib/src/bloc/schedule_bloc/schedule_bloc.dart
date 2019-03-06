@@ -7,7 +7,7 @@ import 'package:BeeCreative/src/data/repository/schedule_respository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:BeeCreative/src/data/exceptions/custom_exceptions.dart';
 
-class ScheduleBloc implements BlocBase {
+class ScheduleBloc implements Bloc {
   ScheduleRepository _repository;
   SharedPreferences _preferences;
   String _token;

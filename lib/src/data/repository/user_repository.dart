@@ -3,6 +3,7 @@ import 'package:BeeCreative/src/data/models/user/user_error.dart';
 import 'package:BeeCreative/src/data/models/user/user_model.dart';
 import 'package:BeeCreative/src/data/network/user_data_source.dart';
 import 'package:BeeCreative/src/data/repository/connection_check.dart';
+import 'dart:async';
 
 class UserRepository {
   UserDataSource _userDataSource;

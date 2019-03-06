@@ -7,7 +7,7 @@ import 'package:BeeCreative/src/data/repository/user_repository.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class UserBloc implements BlocBase {
+class UserBloc implements Bloc {
   UserRepository _repository;
   User registeredUser;
   String token;

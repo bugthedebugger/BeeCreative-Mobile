@@ -1,10 +1,9 @@
-import 'dart:convert';
-
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:BeeCreative/src/data/models/user/user_error.dart';
 import 'package:BeeCreative/src/data/network/api_call.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
+import 'dart:async';
 
 class ScheduleDataSource {
   http.Client client;

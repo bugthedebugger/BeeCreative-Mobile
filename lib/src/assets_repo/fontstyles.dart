@@ -147,6 +147,22 @@ class AppFontStyles {
     fontSize: _15TextSize,
   );
 
+  static TextStyle _15TextGrey = TextStyle(
+    color: Color(AppColors.grey),
+    fontSize: _15TextSize,
+  );
+
+  static TextStyle _15TextGreyMedium = TextStyle(
+    color: Color(AppColors.grey),
+    fontSize: _15TextSize,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle _12TextGrey = TextStyle(
+    color: Color(AppColors.grey),
+    fontSize: _15TextSize,
+  );
+
   TextStyle get gettingStartedBodyStyle => _gettingStBody;
   TextStyle get gettingStartedAttendanceHeadStyle => _welcAttendanceHeader;
   TextStyle get gettingStartedPhotosHeadStyle => _welcPhotosHeader;
@@ -175,4 +191,7 @@ class AppFontStyles {
   TextStyle get textStyle12Black => _12TextBlack;
   TextStyle get textStyle15BlackMedium => _15TextBlackMedium;
   TextStyle get textStyle12BlackItalic => _12TextBlackItalic;
+  TextStyle get textStyle15Grey => _15TextGrey;
+  TextStyle get textStyle15GreyMedium => _15TextGreyMedium;
+  TextStyle get textStyle12Grey => _12TextGrey;
 }

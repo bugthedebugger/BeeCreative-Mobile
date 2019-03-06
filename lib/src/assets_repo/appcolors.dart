@@ -27,4 +27,7 @@ class AppColors {
   static var classCancelledCard = 0xffffffff;
   static var classCancelledTextColor = 0xffD3560E;
   static var partialBlack = 0xff444444;
+  static var grey = 0xffACACAC;
+  static var studentPresent = 0xff00B894;
+  static var studentAbsent = 0xffEB4D4B;
 }

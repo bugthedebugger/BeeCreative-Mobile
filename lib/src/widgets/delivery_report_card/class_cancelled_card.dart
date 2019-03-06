@@ -1,16 +1,14 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
-import 'package:BeeCreative/src/bloc/bloc_provider.dart';
 import 'package:BeeCreative/src/bloc/delivery_report_bloc/delivery_report_bloc_export.dart';
-import 'package:BeeCreative/src/bloc/schedule_bloc/schedule_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
-import 'package:BeeCreative/src/pages/schedules/scaffold_key.dart';
+import 'package:BeeCreative/src/widgets/schedule_scaffold/scaffold_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
 import 'dart:async';
 
 class ClassCancelledCard extends StatefulWidget {
-  Schedule _schedule;
+  final Schedule _schedule;
 
   ClassCancelledCard(this._schedule, {Key key}) : super(key: key);
 
@@ -53,7 +51,7 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
         } else if (event is DeliveryReportSubmitted) {
           Navigator.of(context).pop();
           Navigator.of(context).pop();
-          schedulesScaffoldKey.currentState.showSnackBar(
+          scheduleHomeScaffoldKey.currentState.showSnackBar(
             SnackBar(
               content: Text("Delivery report submitted successfully."),
               action: SnackBarAction(
@@ -203,6 +201,7 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                     ],
                   ),
                   SizedBox(height: ScreenUtil().setHeight(5)),
+                  /*
                   TextFormField(
                     enabled: (_classCancelledReason == radioValues[2])
                         ? true
@@ -238,7 +237,7 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                       labelStyle: AppFontStyles().textStyle15Black,
                       counterStyle: AppFontStyles().textStyle15Black,
                     ),
-                  ),
+                  ),*/
                   SizedBox(height: ScreenUtil().setHeight(20)),
                   Center(
                     child: Container(
@@ -253,8 +252,6 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                             delivered: false,
                             comment: _submitData,
                           );
-                          BlocProvider.of<ScheduleBloc>(context)
-                              .reloadSchedules();
                         },
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
