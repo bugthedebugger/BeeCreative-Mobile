@@ -39,7 +39,7 @@ Widget welcomeEnd(context) {
                   ),
                   welcomeEndPhotos(AppPhotos.welcAttendance)
                 ]),
-                welcomeEndTextList()
+                welcomeEndTextList(context)
               ],
             ),
           ),
@@ -59,7 +59,7 @@ Widget welcomeEnd(context) {
                   alignment: Alignment.center,
                   child: Text(
                     "Finish",
-                    style: AppFontStyles().textStyle16White,
+                    style: AppFontStyles(context).textStyle16White,
                   ),
                 ),
               ),
@@ -71,7 +71,7 @@ Widget welcomeEnd(context) {
   );
 }
 
-Widget welcomeEndTextList() {
+Widget welcomeEndTextList(context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
@@ -82,17 +82,17 @@ Widget welcomeEndTextList() {
             welcomeEndText(
               AppColors.welcEnd,
               "Take Photos",
-              AppFontStyles().gettingStartedWelcEndHeadStyle,
+              AppFontStyles(context).gettingStartedWelcEndHeadStyle,
             ),
             welcomeEndText(
               AppColors.welcEnd,
               "Student Randomizer",
-              AppFontStyles().gettingStartedWelcEndHeadStyle,
+              AppFontStyles(context).gettingStartedWelcEndHeadStyle,
             ),
             welcomeEndText(
               AppColors.welcEnd,
               "Take Attendance",
-              AppFontStyles().gettingStartedWelcEndHeadStyle,
+              AppFontStyles(context).gettingStartedWelcEndHeadStyle,
             )
           ])
     ],

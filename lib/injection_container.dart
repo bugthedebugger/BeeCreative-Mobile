@@ -7,6 +7,7 @@ import 'package:BeeCreative/src/data/network/user_data_source.dart';
 import 'package:BeeCreative/src/data/repository/delivery_report_repository.dart';
 import 'package:BeeCreative/src/data/repository/schedule_respository.dart';
 import 'package:BeeCreative/src/data/repository/user_repository.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:http/http.dart' as http;
@@ -35,4 +36,5 @@ Future initKiwi() async {
   Container().registerFactory((c) => DeliveryReportRepository(c.resolve()));
   Container().registerFactory(
       (c) => DeliveryReportBloc(c.resolve(), c.resolve<SharedPreferences>()));
+  Container().registerFactory((c) => FirebaseAnalytics());
 }

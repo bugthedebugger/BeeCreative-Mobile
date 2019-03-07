@@ -51,7 +51,7 @@ class LoggedInWelcomeState extends State<LoggedInWelcome> {
               ),
               Text(
                 "Welcome $userName",
-                style: AppFontStyles().loginWelcomeStyle,
+                style: AppFontStyles(context).loginWelcomeStyle,
               ),
               SizedBox(
                 height: 20,

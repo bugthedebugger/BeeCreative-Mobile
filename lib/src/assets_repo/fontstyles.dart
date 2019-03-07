@@ -1,7 +1,10 @@
+import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'appcolors.dart';
 
 class AppFontStyles {
+  /*
   static double _gettingStartedBody = 18.0;
   static double _gettingStartedHeader = 28.0;
   static double _gettingStartedEndHeader = 24.0;
@@ -10,141 +13,175 @@ class AppFontStyles {
   static double _drawerHeaderTextSize = 21.0;
   static double _drawerSubTextSize = 16.0;
   static double _drawerListTextSize = 18.0;
-  static double _18TextSize = 18.0;
-  static double _16TextSize = 16.0;
-  static double _15TextSize = 15.0;
-  static double _12TextSize = 12.0;
-  static double _20TextSize = 20.0;
+  */
+  static int _18TextSize = 18;
+  static int _16TextSize = 16;
+  static int _15TextSize = 15;
+  static int _12TextSize = 12;
+  static int _20TextSize = 20;
+  static double _18TextSizeScaled;
+  static double _16TextSizeScaled;
+  static double _15TextSizeScaled;
+  static double _12TextSizeScaled;
+  static double _20TextSizeScaled;
+  var context;
+
+  AppFontStyles(this.context) {
+    ScreenUtil.instance = ScreenUtil(
+      width: ScreenSize.screenWidth,
+      height: ScreenSize.screenHeight,
+      allowFontScaling: true,
+    )..init(context);
+    _12TextSizeScaled = ScreenUtil().setSp(_12TextSize);
+    _15TextSizeScaled = ScreenUtil().setSp(_15TextSize);
+    _16TextSizeScaled = ScreenUtil().setSp(_16TextSize);
+    _18TextSizeScaled = ScreenUtil().setSp(_18TextSize);
+    _20TextSizeScaled = ScreenUtil().setSp(_20TextSize);
+  }
 
   static TextStyle _welcAttendanceHeader = TextStyle(
-      fontSize: _gettingStartedHeader,
-      color: Color(AppColors.welcAttendanceColor));
+      fontSize: _20TextSizeScaled, color: Color(AppColors.welcAttendanceColor));
 
   static TextStyle _welcPhotosHeader = TextStyle(
-      fontSize: _gettingStartedHeader,
-      color: Color(AppColors.welcTakePhotosColor));
+      fontSize: _20TextSizeScaled, color: Color(AppColors.welcTakePhotosColor));
 
   static TextStyle _welcRandomizerHeader = TextStyle(
-      fontSize: _gettingStartedHeader,
-      color: Color(AppColors.welcRandomizerColor));
+      fontSize: _20TextSizeScaled, color: Color(AppColors.welcRandomizerColor));
 
   static TextStyle _gettingStBody = TextStyle(
-      fontSize: _gettingStartedBody, color: Color(AppColors.welcBodyColor));
+      fontSize: _15TextSizeScaled, color: Color(AppColors.welcBodyColor));
 
-  static TextStyle _welcEnd = TextStyle(
-      fontSize: _gettingStartedHeader, color: Color(AppColors.welcEnd));
+  static TextStyle _welcEnd =
+      TextStyle(fontSize: _20TextSizeScaled, color: Color(AppColors.welcEnd));
 
-  static TextStyle _welcendHeader = TextStyle(
-      fontSize: _gettingStartedEndHeader, color: Color(AppColors.welcEnd));
+  static TextStyle _welcendHeader =
+      TextStyle(fontSize: _20TextSizeScaled, color: Color(AppColors.welcEnd));
 
   static TextStyle _loginInfoTextSt = TextStyle(
-      fontSize: _loginInfoText, color: Color(AppColors.loginInfoText));
+      fontSize: _12TextSizeScaled, color: Color(AppColors.loginInfoText));
 
   static TextStyle _loginWithEmailSt = TextStyle(
-      fontSize: _loginInfoText, color: Color(AppColors.loginWithEmailText));
+      fontSize: _12TextSizeScaled, color: Color(AppColors.loginWithEmailText));
 
   static TextStyle _loginButtonSt =
-      TextStyle(fontSize: _loginInfoText, color: Colors.white);
+      TextStyle(fontSize: _12TextSizeScaled, color: Colors.white);
 
-  static TextStyle _loginHintSt = TextStyle(color: Color(AppColors.emailHint));
+  static TextStyle _loginHintSt =
+      TextStyle(color: Color(AppColors.emailHint), fontSize: _12TextSizeScaled);
 
   static TextStyle _loginLabel = TextStyle(color: Color(AppColors.loginButton));
 
   static TextStyle _loginWelcomeLabel = TextStyle(
     color: Colors.white,
-    fontSize: _loginWelcomeText,
+    fontSize: _20TextSizeScaled,
     // fontWeight: FontWeight.bold
   );
 
   static TextStyle _drawerHeaderStyle = TextStyle(
     color: Colors.white,
-    fontSize: _drawerHeaderTextSize,
+    fontSize: _16TextSizeScaled,
   );
 
   static TextStyle _drawerSubTextStyle = TextStyle(
     color: Colors.white,
-    fontSize: _drawerSubTextSize,
+    fontSize: _16TextSizeScaled,
   );
 
   static TextStyle _drawerListTextStyle = TextStyle(
     color: Colors.white,
-    fontSize: _drawerListTextSize,
+    fontSize: _15TextSizeScaled,
   );
 
   static TextStyle _18TextStyleWhite = TextStyle(
     color: Colors.white,
-    fontSize: _18TextSize,
+    fontSize: _18TextSizeScaled,
   );
 
   static TextStyle _16TextStyleWhite = TextStyle(
     color: Colors.white,
-    fontSize: _16TextSize,
+    fontSize: _18TextSizeScaled,
   );
 
   static TextStyle _15TextStyleWhite = TextStyle(
     color: Colors.white,
-    fontSize: _15TextSize,
+    fontSize: _15TextSizeScaled,
   );
 
   static TextStyle _12TextStyleWhite = TextStyle(
     color: Colors.white,
-    fontSize: _12TextSize,
+    fontSize: _12TextSizeScaled,
   );
 
   static TextStyle _20TextStyleWhite = TextStyle(
     color: Colors.white,
-    fontSize: _20TextSize,
+    fontSize: _20TextSizeScaled,
   );
 
   static TextStyle _12TextBlackBold = TextStyle(
     color: Color(0xff444444),
-    fontSize: _12TextSize,
+    fontSize: _12TextSizeScaled,
     fontWeight: FontWeight.bold,
   );
 
   static TextStyle _20TextWhiteBold = TextStyle(
     color: Colors.white,
-    fontSize: _20TextSize,
+    fontSize: _20TextSizeScaled,
     fontWeight: FontWeight.bold,
   );
 
   static TextStyle _20TextWhiteMedium = TextStyle(
     color: Colors.white,
-    fontSize: _20TextSize,
+    fontSize: _20TextSizeScaled,
     fontWeight: FontWeight.w500,
   );
 
   static TextStyle _classCancelledFont = TextStyle(
     color: Color(AppColors.classCancelledTextColor),
-    fontSize: _20TextSize,
+    fontSize: _20TextSizeScaled,
     fontWeight: FontWeight.w500,
   );
 
   static TextStyle _15TextBlack = TextStyle(
     color: Color(AppColors.partialBlack),
-    fontSize: _15TextSize,
+    fontSize: _15TextSizeScaled,
   );
 
   static TextStyle _12TextBlack = TextStyle(
     color: Color(AppColors.partialBlack),
-    fontSize: _12TextSize,
+    fontSize: _12TextSizeScaled,
   );
 
   static TextStyle _15TextBlackMedium = TextStyle(
     color: Color(AppColors.partialBlack),
-    fontSize: _15TextSize,
+    fontSize: _15TextSizeScaled,
     fontWeight: FontWeight.w500,
   );
 
   static TextStyle _12TextBlackItalic = TextStyle(
     color: Color(AppColors.partialBlack),
-    fontSize: _12TextSize,
+    fontSize: _12TextSizeScaled,
     fontStyle: FontStyle.italic,
   );
 
   static TextStyle _15TextWhiteMedium = TextStyle(
     color: Colors.white,
-    fontSize: _15TextSize,
+    fontSize: _15TextSizeScaled,
+  );
+
+  static TextStyle _15TextGrey = TextStyle(
+    color: Color(AppColors.grey),
+    fontSize: _15TextSizeScaled,
+  );
+
+  static TextStyle _15TextGreyMedium = TextStyle(
+    color: Color(AppColors.grey),
+    fontSize: _15TextSizeScaled,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle _12TextGrey = TextStyle(
+    color: Color(AppColors.grey),
+    fontSize: _15TextSizeScaled,
   );
 
   TextStyle get gettingStartedBodyStyle => _gettingStBody;
@@ -175,4 +212,7 @@ class AppFontStyles {
   TextStyle get textStyle12Black => _12TextBlack;
   TextStyle get textStyle15BlackMedium => _15TextBlackMedium;
   TextStyle get textStyle12BlackItalic => _12TextBlackItalic;
+  TextStyle get textStyle15Grey => _15TextGrey;
+  TextStyle get textStyle15GreyMedium => _15TextGreyMedium;
+  TextStyle get textStyle12Grey => _12TextGrey;
 }

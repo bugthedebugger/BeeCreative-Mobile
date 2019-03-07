@@ -7,4 +7,5 @@ class Routes {
   static const WELCOME_BACK = '/app/welcome-back';
   static const SCHEDULES = '/app/schedules';
   static const UNDER_CONSTRUCTION = '/app/under-construction';
+  static const CLASS_DETAILS = 'app/schedules/class-details';
 }

@@ -7,33 +7,19 @@ import 'package:flutter/animation.dart';
 
 class ScheduleCard extends StatefulWidget {
   final Schedule schedule;
-  final String school;
-  final String content;
-  final String grade;
-  final int maleCount;
-  final int femaleCount;
-  final String startTime;
-  final String endTime;
   final String timeOfDay;
-  final String comment1;
-  final String comment2;
-  final String comment3;
+  final Function function;
+  final String buttonLabel;
+  bool openCard;
   ScheduleThemeData scheduleThemeData;
 
   ScheduleCard({
     Key key,
-    this.school,
-    this.grade,
-    this.content,
-    this.maleCount,
-    this.femaleCount,
-    this.timeOfDay,
-    this.startTime,
-    this.endTime,
-    this.comment1 = "",
-    this.comment2 = "",
-    this.comment3 = "",
-    this.schedule,
+    @required this.schedule,
+    @required this.timeOfDay,
+    @required this.function,
+    @required this.buttonLabel,
+    this.openCard = false,
   }) : super(key: key) {
     this.scheduleThemeData = ScheduleThemeData(timeOfDay: this.timeOfDay);
   }
@@ -68,9 +54,15 @@ class ScheduleCardState extends State<ScheduleCard>
       curve: Curves.easeOut,
       reverseCurve: Curves.easeIn,
     ))
-      ..addListener(() {
-        setState(() {});
-      });
+      ..addListener(
+        () {
+          setState(() {});
+        },
+      );
+
+    if (widget.openCard) {
+      _controller.forward();
+    }
   }
 
   @override
@@ -81,6 +73,9 @@ class ScheduleCardState extends State<ScheduleCard>
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(
+        width: ScreenSize.screenWidth, height: ScreenSize.screenHeight)
+      ..init(context);
     String _comments = "";
     if (widget.schedule.comment != null) {
       widget.schedule.comment
@@ -104,14 +99,14 @@ class ScheduleCardState extends State<ScheduleCard>
                     ),
                     Text(
                       "${widget.schedule.startTime}",
-                      style: AppFontStyles().textStyle12BlackBold,
+                      style: AppFontStyles(context).textStyle12BlackBold,
                     ),
                     SizedBox(
                       height: ScreenUtil().setHeight(10),
                     ),
                     Text(
                       "${widget.schedule.endTime}",
-                      style: AppFontStyles().textStyle12BlackBold,
+                      style: AppFontStyles(context).textStyle12BlackBold,
                     ),
                   ],
                 ),
@@ -134,16 +129,17 @@ class ScheduleCardState extends State<ScheduleCard>
                   width: ScreenUtil().setWidth(289),
                   height: ScreenUtil().setHeight(_animation.value.toInt()),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(widget.scheduleThemeData.cardColor),
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 3,
-                          offset: Offset(0, 1),
-                          spreadRadius: 1,
-                          color: Color(0x33000000),
-                        ),
-                      ]),
+                    borderRadius: BorderRadius.circular(15),
+                    color: Color(widget.scheduleThemeData.cardColor),
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 3,
+                        offset: Offset(0, 1),
+                        spreadRadius: 1,
+                        color: Color(AppColors.shadowColor),
+                      ),
+                    ],
+                  ),
                   child: Stack(
                     overflow: Overflow.clip,
                     children: <Widget>[
@@ -155,15 +151,15 @@ class ScheduleCardState extends State<ScheduleCard>
                           children: <Widget>[
                             Text(
                               "${widget.schedule.schoolName}",
-                              style: AppFontStyles().textStyle15White,
+                              style: AppFontStyles(context).textStyle15White,
                             ),
                             Text(
                               "${(widget.schedule.content == null) ? 'No content was assigned!' : widget.schedule.content}",
-                              style: AppFontStyles().textStyle12White,
+                              style: AppFontStyles(context).textStyle12White,
                             ),
                             Text(
                               "${widget.schedule.grade} ${widget.schedule.section}",
-                              style: AppFontStyles().textStyle12White,
+                              style: AppFontStyles(context).textStyle12White,
                             ),
                           ],
                         ),
@@ -207,7 +203,7 @@ class ScheduleCardState extends State<ScheduleCard>
                             children: <Widget>[
                               Text(
                                 _comments,
-                                style: AppFontStyles().textStyle12White,
+                                style: AppFontStyles(context).textStyle12White,
                               ),
                             ],
                           ),
@@ -218,18 +214,15 @@ class ScheduleCardState extends State<ScheduleCard>
                         left: ScreenUtil().setWidth(85),
                         child: RaisedButton(
                           elevation: 0,
-                          onPressed: () {
-                            Navigator.of(context)
-                                .pushNamed(Routes.UNDER_CONSTRUCTION);
-                          },
+                          onPressed: widget.function,
                           color: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Text(
-                            "Go to Class",
+                            widget.buttonLabel,
                             style: TextStyle(
-                              fontSize: 15,
+                              fontSize: ScreenUtil().setSp(15),
                               color: Color(widget.scheduleThemeData.cardColor),
                             ),
                           ),
@@ -333,21 +326,21 @@ class GenderCountCard extends StatelessWidget {
             padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(3)),
             child: Text(
               "$genderCount",
-              style: AppFontStyles().textStyle20White,
+              style: AppFontStyles(context).textStyle20White,
             ),
           ),
           SizedBox(width: 5),
           Container(
             alignment: Alignment.bottomCenter,
-            width: ScreenUtil().setWidth(35),
+            width: ScreenUtil().setWidth(40),
             padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(6)),
             child: Text(
               "$gender",
-              style: AppFontStyles().textStyle15White,
+              style: AppFontStyles(context).textStyle15White,
             ),
           ),
           SizedBox(
-            width: ScreenUtil().setWidth(28),
+            width: ScreenUtil().setWidth(23),
           ),
           Image.asset(
             genderIcon,

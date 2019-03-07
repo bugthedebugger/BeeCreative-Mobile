@@ -1,8 +1,6 @@
-import 'package:BeeCreative/src/bloc/bloc_provider.dart';
 import 'package:BeeCreative/src/bloc/delivery_report_bloc/delivery_report_bloc_export.dart';
-import 'package:BeeCreative/src/bloc/schedule_bloc/schedule_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
-import 'package:BeeCreative/src/pages/schedules/scaffold_key.dart';
+import 'package:BeeCreative/src/widgets/schedule_scaffold/scaffold_key.dart';
 import 'package:flutter/material.dart';
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,12 +8,11 @@ import 'dart:async';
 import 'package:kiwi/kiwi.dart' as kiwi;
 
 class DeliveryReportCard extends StatefulWidget {
-  Schedule _schedule;
+  final Schedule _schedule;
   int rating;
-  DeliveryReportCard(Schedule schedule, {Key key}) : super(key: key) {
-    this._schedule = schedule;
-    if (schedule.deliveryReport.rating != null)
-      rating = schedule.deliveryReport.rating;
+  DeliveryReportCard(this._schedule, {Key key}) : super(key: key) {
+    if (_schedule.deliveryReport.rating != null)
+      rating = _schedule.deliveryReport.rating;
     else
       rating = 0;
   }
@@ -28,7 +25,6 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
   final DeliveryReportBloc _deliveryReportBloc =
       kiwi.Container().resolve<DeliveryReportBloc>();
   StreamSubscription _streamSubscription;
-  ScheduleBloc _scheduleBloc = kiwi.Container().resolve<ScheduleBloc>();
 
   void initState() {
     _rating = widget.rating;
@@ -57,10 +53,9 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
             },
           );
         } else if (event is DeliveryReportSubmitted) {
-          _scheduleBloc.reloadSchedules();
           Navigator.of(context).pop();
           Navigator.of(context).pop();
-          schedulesScaffoldKey.currentState.showSnackBar(
+          scheduleHomeScaffoldKey.currentState.showSnackBar(
             SnackBar(
               content: Text("Delivery report submitted successfully."),
               action: SnackBarAction(
@@ -91,7 +86,6 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
     super.dispose();
     _streamSubscription.cancel();
     _deliveryReportBloc.dispose();
-    _scheduleBloc.dispose();
   }
 
   @override
@@ -133,7 +127,7 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
           Center(
             child: Text(
               "Delivery Report",
-              style: AppFontStyles().textStyle20WhiteMedium,
+              style: AppFontStyles(context).textStyle20WhiteMedium,
             ),
           ),
           SizedBox(height: ScreenUtil().setHeight(20)),
@@ -144,7 +138,7 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
                 children: <Widget>[
                   Text(
                     "How did the class go?",
-                    style: AppFontStyles().textStyle15White,
+                    style: AppFontStyles(context).textStyle15White,
                   ),
                   SizedBox(height: ScreenUtil().setHeight(5)),
                   Container(
@@ -197,7 +191,7 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
                     SizedBox(width: 5),
                     Text(
                       "Save",
-                      style: AppFontStyles().textStyle15White,
+                      style: AppFontStyles(context).textStyle15White,
                     ),
                   ],
                 ),

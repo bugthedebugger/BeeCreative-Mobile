@@ -8,7 +8,7 @@ import 'package:BeeCreative/src/data/repository/delivery_report_repository.dart'
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class DeliveryReportBloc implements BlocBase {
+class DeliveryReportBloc implements Bloc {
   DeliveryReportRepository _reportRepository;
   SharedPreferences _preferences;
   String _token;
