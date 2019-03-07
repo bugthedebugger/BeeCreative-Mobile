@@ -84,7 +84,7 @@ class AppFontStyles {
 
   static TextStyle _drawerSubTextStyle = TextStyle(
     color: Colors.white,
-    fontSize: _16TextSizeScaled,
+    fontSize: _12TextSizeScaled,
   );
 
   static TextStyle _drawerListTextStyle = TextStyle(
