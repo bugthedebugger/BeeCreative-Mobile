@@ -63,7 +63,7 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
                     ),
                     Text(
                       "$userName",
-                      style: AppFontStyles().textStyle20White,
+                      style: AppFontStyles(context).textStyle20White,
                     ),
                   ],
                 )),

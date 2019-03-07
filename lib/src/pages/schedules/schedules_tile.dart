@@ -118,15 +118,16 @@ class SchedulesTileState extends State<SchedulesTile>
                 return false;
             },
           );
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => ClassDetails(
-                    schedule: schedule,
-                    timeOfDay: timeOfDay,
-                    scheduleResponseData: response,
-                  ),
-            ),
-          );
+          // Navigator.of(context).push(
+          //   MaterialPageRoute(
+          //     builder: (context) => ClassDetails(
+          //           schedule: schedule,
+          //           timeOfDay: timeOfDay,
+          //           scheduleResponseData: response,
+          //         ),
+          //   ),
+          // );
+          Navigator.of(context).pushNamed(Routes.UNDER_CONSTRUCTION);
         }
 
         scheduleCardList.add(

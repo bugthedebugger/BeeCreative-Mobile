@@ -41,7 +41,7 @@ class UnderConstruction extends StatelessWidget {
                 Center(
                   child: Text(
                     "This page needs more code",
-                    style: AppFontStyles().textStyle15BlackMedium,
+                    style: AppFontStyles(context).textStyle15BlackMedium,
                   ),
                 ),
                 SizedBox(
@@ -50,7 +50,7 @@ class UnderConstruction extends StatelessWidget {
                 Center(
                   child: Text(
                     "Please come back later",
-                    style: AppFontStyles().textStyle12BlackItalic,
+                    style: AppFontStyles(context).textStyle12BlackItalic,
                   ),
                 ),
                 SizedBox(
@@ -70,7 +70,7 @@ class UnderConstruction extends StatelessWidget {
                   ),
                   child: Text(
                     "Go Back",
-                    style: AppFontStyles().textStyle15White,
+                    style: AppFontStyles(context).textStyle15White,
                   ),
                 ),
               ],

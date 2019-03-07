@@ -73,7 +73,7 @@ class LoginCardState extends State<LoginCard> {
         children: <Widget>[
           Container(
             width: ScreenUtil().setWidth(51),
-            height: ScreenUtil().setHeight(56),
+            height: ScreenUtil().setHeight(45),
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(AppPhotos.loginScreenLogo),
@@ -89,13 +89,12 @@ class LoginCardState extends State<LoginCard> {
               ),
             ),
           ),
-          SizedBox(height: ScreenUtil().setHeight(10)),
           Text(
             "By logging in to BeeCreative Mobile, you agree to these Terms and Conditions and Privacy Policy",
-            style: AppFontStyles().loginInfoTextStyle,
+            style: AppFontStyles(context).loginInfoTextStyle,
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: ScreenUtil().setHeight(10)),
+          SizedBox(height: ScreenUtil().setHeight(5)),
           RaisedButton(
             onPressed: () async {
               showDialog(
@@ -143,13 +142,13 @@ class LoginCardState extends State<LoginCard> {
                   SizedBox(width: ScreenUtil().setWidth(10)),
                   Text(
                     "Sign in with Karkhana",
-                    style: AppFontStyles().loginButtonStyle,
+                    style: AppFontStyles(context).loginButtonStyle,
                   ),
                 ],
               ),
             ),
           ),
-          SizedBox(height: ScreenUtil().setHeight(10)),
+          SizedBox(height: ScreenUtil().setHeight(5)),
           GestureDetector(
             onTap: () {
               Navigator.pushReplacementNamed(
@@ -159,7 +158,7 @@ class LoginCardState extends State<LoginCard> {
             },
             child: Text(
               "Sign in with Email",
-              style: AppFontStyles().loginWithEmailStyle,
+              style: AppFontStyles(context).loginWithEmailStyle,
             ),
           )
         ],

@@ -127,7 +127,7 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
           Center(
             child: Text(
               "Delivery Report",
-              style: AppFontStyles().textStyle20WhiteMedium,
+              style: AppFontStyles(context).textStyle20WhiteMedium,
             ),
           ),
           SizedBox(height: ScreenUtil().setHeight(20)),
@@ -138,7 +138,7 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
                 children: <Widget>[
                   Text(
                     "How did the class go?",
-                    style: AppFontStyles().textStyle15White,
+                    style: AppFontStyles(context).textStyle15White,
                   ),
                   SizedBox(height: ScreenUtil().setHeight(5)),
                   Container(
@@ -191,7 +191,7 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
                     SizedBox(width: 5),
                     Text(
                       "Save",
-                      style: AppFontStyles().textStyle15White,
+                      style: AppFontStyles(context).textStyle15White,
                     ),
                   ],
                 ),

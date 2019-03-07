@@ -49,11 +49,11 @@ class ClassDetailsNotificationCard extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Is the class going well?",
-                        style: AppFontStyles().textStyle15White,
+                        style: AppFontStyles(context).textStyle15White,
                       ),
                       Text(
                         "Don't forget to take pictures!",
-                        style: AppFontStyles().textStyle15White,
+                        style: AppFontStyles(context).textStyle15White,
                       ),
                     ],
                   ),

@@ -18,6 +18,7 @@ class SchedulesPage extends StatefulWidget {
 
 class _SchedulesPageState extends State<SchedulesPage> {
   final _scheduleBloc = kiwi.Container().resolve<ScheduleBloc>();
+  Stream _stream;
 
   _read() async {
     _scheduleBloc.init();
@@ -27,6 +28,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
   void initState() {
     super.initState();
     _read();
+    _stream = _scheduleBloc.scheduleEventsStream;
   }
 
   @override
@@ -48,7 +50,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
       key: scheduleHomeScaffoldKey,
       title: "Schedules",
       body: StreamBuilder(
-        stream: _scheduleBloc.scheduleEventsStream,
+        stream: _stream,
         builder: (context, snapshot) {
           if (snapshot.data is SchedulesLoading) {
             return Center(
@@ -104,7 +106,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                   SizedBox(height: ScreenUtil().setHeight(20)),
                   Text(
                     snapshot.data.message,
-                    style: AppFontStyles().textStyle15BlackMedium,
+                    style: AppFontStyles(context).textStyle15BlackMedium,
                   ),
                   SizedBox(height: ScreenUtil().setHeight(20)),
                   RaisedButton(
@@ -123,7 +125,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                       ),
                       child: Text(
                         "Retry",
-                        style: AppFontStyles().textStyle15WhiteMedium,
+                        style: AppFontStyles(context).textStyle15WhiteMedium,
                       ),
                     ),
                   ),
@@ -147,7 +149,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                   SizedBox(height: ScreenUtil().setHeight(20)),
                   Text(
                     "You haven't added any schedules yet",
-                    style: AppFontStyles().textStyle15BlackMedium,
+                    style: AppFontStyles(context).textStyle15BlackMedium,
                   ),
                   SizedBox(height: 5),
                   Row(
@@ -155,15 +157,15 @@ class _SchedulesPageState extends State<SchedulesPage> {
                     children: <Widget>[
                       Text(
                         "Visit ",
-                        style: AppFontStyles().textStyle12BlackItalic,
+                        style: AppFontStyles(context).textStyle12BlackItalic,
                       ),
                       Text(
                         "app.beecreative.asia ",
-                        style: AppFontStyles().textStyle12BlackItalic,
+                        style: AppFontStyles(context).textStyle12BlackItalic,
                       ),
                       Text(
                         "to add schedules",
-                        style: AppFontStyles().textStyle12BlackItalic,
+                        style: AppFontStyles(context).textStyle12BlackItalic,
                       )
                     ],
                   ),
@@ -184,7 +186,7 @@ class _SchedulesPageState extends State<SchedulesPage> {
                       ),
                       child: Text(
                         "Refresh",
-                        style: AppFontStyles().textStyle15WhiteMedium,
+                        style: AppFontStyles(context).textStyle15WhiteMedium,
                       ),
                     ),
                   ),

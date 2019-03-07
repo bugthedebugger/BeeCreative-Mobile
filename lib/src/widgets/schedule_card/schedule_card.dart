@@ -73,6 +73,9 @@ class ScheduleCardState extends State<ScheduleCard>
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(
+        width: ScreenSize.screenWidth, height: ScreenSize.screenHeight)
+      ..init(context);
     String _comments = "";
     if (widget.schedule.comment != null) {
       widget.schedule.comment
@@ -96,14 +99,14 @@ class ScheduleCardState extends State<ScheduleCard>
                     ),
                     Text(
                       "${widget.schedule.startTime}",
-                      style: AppFontStyles().textStyle12BlackBold,
+                      style: AppFontStyles(context).textStyle12BlackBold,
                     ),
                     SizedBox(
                       height: ScreenUtil().setHeight(10),
                     ),
                     Text(
                       "${widget.schedule.endTime}",
-                      style: AppFontStyles().textStyle12BlackBold,
+                      style: AppFontStyles(context).textStyle12BlackBold,
                     ),
                   ],
                 ),
@@ -148,15 +151,15 @@ class ScheduleCardState extends State<ScheduleCard>
                           children: <Widget>[
                             Text(
                               "${widget.schedule.schoolName}",
-                              style: AppFontStyles().textStyle15White,
+                              style: AppFontStyles(context).textStyle15White,
                             ),
                             Text(
                               "${(widget.schedule.content == null) ? 'No content was assigned!' : widget.schedule.content}",
-                              style: AppFontStyles().textStyle12White,
+                              style: AppFontStyles(context).textStyle12White,
                             ),
                             Text(
                               "${widget.schedule.grade} ${widget.schedule.section}",
-                              style: AppFontStyles().textStyle12White,
+                              style: AppFontStyles(context).textStyle12White,
                             ),
                           ],
                         ),
@@ -200,7 +203,7 @@ class ScheduleCardState extends State<ScheduleCard>
                             children: <Widget>[
                               Text(
                                 _comments,
-                                style: AppFontStyles().textStyle12White,
+                                style: AppFontStyles(context).textStyle12White,
                               ),
                             ],
                           ),
@@ -219,7 +222,7 @@ class ScheduleCardState extends State<ScheduleCard>
                           child: Text(
                             widget.buttonLabel,
                             style: TextStyle(
-                              fontSize: 15,
+                              fontSize: ScreenUtil().setSp(15),
                               color: Color(widget.scheduleThemeData.cardColor),
                             ),
                           ),
@@ -323,21 +326,21 @@ class GenderCountCard extends StatelessWidget {
             padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(3)),
             child: Text(
               "$genderCount",
-              style: AppFontStyles().textStyle20White,
+              style: AppFontStyles(context).textStyle20White,
             ),
           ),
           SizedBox(width: 5),
           Container(
             alignment: Alignment.bottomCenter,
-            width: ScreenUtil().setWidth(35),
+            width: ScreenUtil().setWidth(40),
             padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(6)),
             child: Text(
               "$gender",
-              style: AppFontStyles().textStyle15White,
+              style: AppFontStyles(context).textStyle15White,
             ),
           ),
           SizedBox(
-            width: ScreenUtil().setWidth(28),
+            width: ScreenUtil().setWidth(23),
           ),
           Image.asset(
             genderIcon,

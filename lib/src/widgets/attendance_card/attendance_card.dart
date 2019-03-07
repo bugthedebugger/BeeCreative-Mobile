@@ -54,11 +54,11 @@ class AttendanceCard extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     "${student.fname + ' ' + student.lname}",
-                    style: AppFontStyles().textStyle15GreyMedium,
+                    style: AppFontStyles(context).textStyle15GreyMedium,
                   ),
                   Text(
                     "Gender",
-                    style: AppFontStyles().textStyle12Grey,
+                    style: AppFontStyles(context).textStyle12Grey,
                   )
                 ],
               ),
@@ -73,7 +73,7 @@ class AttendanceCard extends StatelessWidget {
               child: Center(
                 child: Text(
                   "A",
-                  style: AppFontStyles().textStyle15WhiteMedium,
+                  style: AppFontStyles(context).textStyle15WhiteMedium,
                 ),
               ),
             ),

@@ -125,7 +125,7 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
           Center(
             child: Text(
               "Class Cancelled",
-              style: AppFontStyles().classCancelledTextStyle,
+              style: AppFontStyles(context).classCancelledTextStyle,
             ),
           ),
           SizedBox(height: ScreenUtil().setHeight(20)),
@@ -140,7 +140,7 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                 children: <Widget>[
                   Text(
                     "Why was the class cancelled?",
-                    style: AppFontStyles().textStyle15Black,
+                    style: AppFontStyles(context).textStyle15Black,
                   ),
                   SizedBox(height: ScreenUtil().setHeight(5)),
                   Row(
@@ -158,7 +158,7 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                       ),
                       Text(
                         radioValues[0],
-                        style: AppFontStyles().textStyle12Black,
+                        style: AppFontStyles(context).textStyle12Black,
                       )
                     ],
                   ),
@@ -177,7 +177,7 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                       ),
                       Text(
                         radioValues[1],
-                        style: AppFontStyles().textStyle12Black,
+                        style: AppFontStyles(context).textStyle12Black,
                       )
                     ],
                   ),
@@ -196,7 +196,7 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                       ),
                       Text(
                         radioValues[2],
-                        style: AppFontStyles().textStyle12Black,
+                        style: AppFontStyles(context).textStyle12Black,
                       )
                     ],
                   ),
@@ -234,8 +234,8 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                         ),
                       ),
                       labelText: "Reason",
-                      labelStyle: AppFontStyles().textStyle15Black,
-                      counterStyle: AppFontStyles().textStyle15Black,
+                      labelStyle: AppFontStyles(context).textStyle15Black,
+                      counterStyle: AppFontStyles(context).textStyle15Black,
                     ),
                   ),*/
                   SizedBox(height: ScreenUtil().setHeight(20)),
@@ -267,7 +267,7 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                             SizedBox(width: 5),
                             Text(
                               "Save",
-                              style: AppFontStyles().textStyle15White,
+                              style: AppFontStyles(context).textStyle15White,
                             ),
                           ],
                         ),

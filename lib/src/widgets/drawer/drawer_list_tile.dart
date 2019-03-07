@@ -36,7 +36,7 @@ class _DrawerListTileState extends State<DrawerListTile> {
             ),
       title: Text(
         widget._title,
-        style: AppFontStyles().drawerListTextStyle,
+        style: AppFontStyles(context).drawerListTextStyle,
       ),
       onTap: widget._function,
     );

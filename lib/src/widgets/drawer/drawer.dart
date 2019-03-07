@@ -56,11 +56,11 @@ class _AppDrawerState extends State<AppDrawer> {
                           SizedBox(height: 10),
                           Text(
                             "$_userName",
-                            style: AppFontStyles().drawerHeaderStyle,
+                            style: AppFontStyles(context).drawerHeaderStyle,
                           ),
                           Text(
                             "View Profile",
-                            style: AppFontStyles().drawerSubTextStyle,
+                            style: AppFontStyles(context).drawerSubTextStyle,
                           )
                         ],
                       ),
