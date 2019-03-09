@@ -20,11 +20,21 @@ class _$AttendanceResponseSerializer
   Iterable serialize(Serializers serializers, AttendanceResponse object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
-      'data',
-      serializers.serialize(object.data, specifiedType: const FullType(String)),
       'code',
       serializers.serialize(object.code, specifiedType: const FullType(int)),
     ];
+    if (object.data != null) {
+      result
+        ..add('data')
+        ..add(serializers.serialize(object.data,
+            specifiedType: const FullType(String)));
+    }
+    if (object.error != null) {
+      result
+        ..add('error')
+        ..add(serializers.serialize(object.error,
+            specifiedType: const FullType(String)));
+    }
 
     return result;
   }
@@ -44,6 +54,10 @@ class _$AttendanceResponseSerializer
           result.data = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'error':
+          result.error = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'code':
           result.code = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
@@ -59,15 +73,14 @@ class _$AttendanceResponse extends AttendanceResponse {
   @override
   final String data;
   @override
+  final String error;
+  @override
   final int code;
 
   factory _$AttendanceResponse([void updates(AttendanceResponseBuilder b)]) =>
       (new AttendanceResponseBuilder()..update(updates)).build();
 
-  _$AttendanceResponse._({this.data, this.code}) : super._() {
-    if (data == null) {
-      throw new BuiltValueNullFieldError('AttendanceResponse', 'data');
-    }
+  _$AttendanceResponse._({this.data, this.error, this.code}) : super._() {
     if (code == null) {
       throw new BuiltValueNullFieldError('AttendanceResponse', 'code');
     }
@@ -86,18 +99,20 @@ class _$AttendanceResponse extends AttendanceResponse {
     if (identical(other, this)) return true;
     return other is AttendanceResponse &&
         data == other.data &&
+        error == other.error &&
         code == other.code;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, data.hashCode), code.hashCode));
+    return $jf($jc($jc($jc(0, data.hashCode), error.hashCode), code.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('AttendanceResponse')
           ..add('data', data)
+          ..add('error', error)
           ..add('code', code))
         .toString();
   }
@@ -111,6 +126,10 @@ class AttendanceResponseBuilder
   String get data => _$this._data;
   set data(String data) => _$this._data = data;
 
+  String _error;
+  String get error => _$this._error;
+  set error(String error) => _$this._error = error;
+
   int _code;
   int get code => _$this._code;
   set code(int code) => _$this._code = code;
@@ -120,6 +139,7 @@ class AttendanceResponseBuilder
   AttendanceResponseBuilder get _$this {
     if (_$v != null) {
       _data = _$v.data;
+      _error = _$v.error;
       _code = _$v.code;
       _$v = null;
     }
@@ -141,7 +161,8 @@ class AttendanceResponseBuilder
 
   @override
   _$AttendanceResponse build() {
-    final _$result = _$v ?? new _$AttendanceResponse._(data: data, code: code);
+    final _$result =
+        _$v ?? new _$AttendanceResponse._(data: data, error: error, code: code);
     replace(_$result);
     return _$result;
   }

@@ -1,9 +1,12 @@
+import 'package:BeeCreative/src/bloc/attendance_bloc/attendance_bloc.dart';
 import 'package:BeeCreative/src/bloc/delivery_report_bloc/delivery_report_bloc_export.dart';
 import 'package:BeeCreative/src/bloc/schedule_bloc/schedule_bloc_export.dart';
 import 'package:BeeCreative/src/bloc/user_bloc/user_bloc_export.dart';
+import 'package:BeeCreative/src/data/network/attendance_data_source.dart';
 import 'package:BeeCreative/src/data/network/delivery_report_source.dart';
 import 'package:BeeCreative/src/data/network/schedule_data_source.dart';
 import 'package:BeeCreative/src/data/network/user_data_source.dart';
+import 'package:BeeCreative/src/data/repository/attendance_repository.dart';
 import 'package:BeeCreative/src/data/repository/delivery_report_repository.dart';
 import 'package:BeeCreative/src/data/repository/schedule_respository.dart';
 import 'package:BeeCreative/src/data/repository/user_repository.dart';
@@ -37,4 +40,8 @@ Future initKiwi() async {
   Container().registerFactory(
       (c) => DeliveryReportBloc(c.resolve(), c.resolve<SharedPreferences>()));
   Container().registerFactory((c) => FirebaseAnalytics());
+  Container().registerFactory((c) => AttendanceDataSource(c.resolve()));
+  Container().registerFactory((c) => AttendanceRepository(c.resolve()));
+  Container().registerFactory(
+      (c) => AttendanceBloc(c.resolve(), c.resolve<SharedPreferences>()));
 }

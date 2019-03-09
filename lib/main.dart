@@ -1,7 +1,5 @@
 import 'package:BeeCreative/injection_container.dart';
 import 'package:BeeCreative/src/assets_repo/routes.dart';
-import 'package:BeeCreative/src/bloc/bloc_provider.dart';
-import 'package:BeeCreative/src/bloc/user_bloc/user_bloc_export.dart';
 import 'package:BeeCreative/src/pages/after_login_welcome_page/welcome.dart';
 import 'package:BeeCreative/src/pages/beecreative_login/email_login.dart';
 import 'package:BeeCreative/src/pages/beecreative_login/login.dart';

@@ -5,8 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AttendanceCard extends StatelessWidget {
   final Student student;
+  final bool attendance;
 
-  AttendanceCard({Key key, @required this.student}) : super(key: key);
+  AttendanceCard({
+    @required this.student,
+    this.attendance = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -67,12 +71,14 @@ class AttendanceCard extends StatelessWidget {
               width: ScreenUtil().setWidth(43),
               height: ScreenUtil().setHeight(43),
               decoration: BoxDecoration(
-                color: Color(AppColors.studentPresent),
+                color: (attendance)
+                    ? Color(AppColors.studentPresent)
+                    : Color(AppColors.studentAbsent),
                 borderRadius: BorderRadius.circular(15),
               ),
               child: Center(
                 child: Text(
-                  "A",
+                  (attendance) ? "P" : "A",
                   style: AppFontStyles(context).textStyle15WhiteMedium,
                 ),
               ),

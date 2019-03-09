@@ -1,7 +1,9 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:BeeCreative/src/pages/class_details/attendance.dart';
+import 'package:BeeCreative/src/widgets/app_bar/app_bar.dart';
 import 'package:BeeCreative/src/widgets/class_details_notification_card/class_details_notification_card.dart';
+import 'package:BeeCreative/src/widgets/drawer/drawer.dart';
 import 'package:BeeCreative/src/widgets/schedule_card/schedule_card.dart';
 import 'package:BeeCreative/src/widgets/schedule_card/schedule_theme_data.dart';
 import 'package:BeeCreative/src/widgets/schedule_scaffold/scaffold.dart';
@@ -13,11 +15,10 @@ class ClassDetails extends StatefulWidget {
   final Schedule schedule;
   final ScheduleResponseData scheduleResponseData;
   ClassDetails({
-    Key key,
     @required this.schedule,
     this.timeOfDay,
     this.scheduleResponseData,
-  }) : super(key: key);
+  });
 
   @override
   _ClassDetailsState createState() => _ClassDetailsState();
@@ -46,9 +47,12 @@ class _ClassDetailsState extends State<ClassDetails>
     final Color themeColor =
         Color(ScheduleThemeData(timeOfDay: widget.timeOfDay).cardColor);
 
-    return scaffoldBuilder(
-      title: widget.schedule.schoolName,
-      grade: 'Class ' + widget.schedule.grade + widget.schedule.section,
+    return Scaffold(
+      appBar: mainAppBar(
+        grade: 'Class ' + widget.schedule.grade + widget.schedule.section,
+        title: widget.schedule.schoolName,
+      ),
+      drawer: AppDrawer(),
       bottomNavigationBar: Container(
         height: ScreenUtil().setHeight(47),
         decoration: BoxDecoration(

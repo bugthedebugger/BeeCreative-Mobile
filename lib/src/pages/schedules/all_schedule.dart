@@ -3,6 +3,7 @@ import 'package:BeeCreative/src/bloc/bloc_provider.dart';
 import 'package:BeeCreative/src/bloc/schedule_bloc/schedule_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:BeeCreative/src/pages/schedules/schedules_tile.dart';
+import 'package:BeeCreative/src/widgets/app_bar/app_bar.dart';
 import 'package:BeeCreative/src/widgets/drawer/drawer.dart';
 import 'package:BeeCreative/src/widgets/schedule_scaffold/scaffold_key.dart';
 import 'package:built_collection/built_collection.dart';
@@ -32,53 +33,7 @@ class SchedulesScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scheduleHomeScaffoldKey,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
-        leading: Builder(
-          builder: (context) {
-            ScreenUtil.instance = ScreenUtil(
-              width: ScreenSize.screenWidth,
-              height: ScreenSize.screenHeight,
-              allowFontScaling: true,
-            )..init(context);
-            return IconButton(
-              icon: Icon(
-                Icons.menu,
-                size: ScreenUtil().setWidth(25),
-                color: Color(AppColors.meltingCardColor),
-              ),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              tooltip: "Drawer Menu",
-            );
-          },
-        ),
-        title: Builder(
-          builder: (context) {
-            ScreenUtil.instance = ScreenUtil(
-              width: ScreenSize.screenWidth,
-              height: ScreenSize.screenHeight,
-              allowFontScaling: true,
-            )..init(context);
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  "Schedules",
-                  style: TextStyle(
-                    color: Color(AppColors.meltingCardColor),
-                    fontWeight: FontWeight.bold,
-                    fontSize: ScreenUtil().setSp(18),
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
+      appBar: mainAppBar(title: 'Schedules'),
       drawer: AppDrawer(),
       body: StreamBuilder(
         stream: BlocProvider.of<ScheduleBloc>(context).scheduleEventsStream,
