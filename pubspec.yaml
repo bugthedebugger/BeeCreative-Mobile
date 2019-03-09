@@ -108,6 +108,7 @@ flutter:
    - assets/images/errors/under_construction.png
   # team assets
    - assets/images/team/animesh.jpg
+   - assets/images/team/willi.png
 
   fonts:
     - family: Poppins

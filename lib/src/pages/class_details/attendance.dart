@@ -1,8 +1,11 @@
+import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/bloc/attendance_bloc/attendance_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/attendance/attendance_model.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:BeeCreative/src/widgets/attendance_card/attendance_card.dart';
+import 'package:BeeCreative/src/widgets/loading_card/loading_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
 import 'dart:async';
 
@@ -26,41 +29,35 @@ class StudentAttendancePageState extends State<StudentAttendancePage> {
   @override
   void initState() {
     super.initState();
-    _stream = attendanceBloc.attendanceEventStream.listen((event) {
-      print(event);
-      if (event is SubmittingAttendance) {
-        showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (context) {
-            return Dialog(
-              child: Container(
-                color: Colors.white,
-                height: 80,
-                child: Row(
-                  children: <Widget>[
-                    CircularProgressIndicator(),
-                    SizedBox(width: 5),
-                    Text("Please wait ..."),
-                  ],
+    _stream = attendanceBloc.attendanceEventStream.listen(
+      (event) {
+        if (event is SubmittingAttendance) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) {
+              return Dialog(
+                child: LoadingCard(),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
                 ),
+              );
+            },
+          );
+        } else if (event is Success) {
+          Navigator.of(context).pop();
+          Scaffold.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Attendance submitted successfully!"),
+              action: SnackBarAction(
+                label: 'ok',
+                onPressed: () {},
               ),
-            );
-          },
-        );
-      } else if (event is Success) {
-        Navigator.of(context).pop();
-        Scaffold.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Attendance submitted successfully!"),
-            action: SnackBarAction(
-              label: 'ok',
-              onPressed: () {},
             ),
-          ),
-        );
-      }
-    });
+          );
+        }
+      },
+    );
     attendanceBloc.prepareAttendance(
       widget.scheduleResponseData.students,
       widget.schedule,
@@ -76,48 +73,74 @@ class StudentAttendancePageState extends State<StudentAttendancePage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(
+      width: ScreenSize.screenWidth,
+      height: ScreenSize.screenHeight,
+      allowFontScaling: true,
+    )..init(context);
     return StreamBuilder(
       stream: attendanceBloc.attendanceStream,
       builder: (context, AsyncSnapshot<Attendance> snapshot) {
         if (snapshot.hasData) {
-          return Column(
-            children: <Widget>[
-              Expanded(
-                child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemCount: snapshot.data.attendanceRecord.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        attendanceBloc.updateAttendance(
-                          snapshot.data.attendanceRecord
-                              .elementAt(index)
-                              .student,
-                          widget.schedule,
-                          !snapshot.data.attendanceRecord
-                              .elementAt(index)
-                              .attendance,
-                        );
-                      },
-                      child: AttendanceCard(
-                        student: snapshot.data.attendanceRecord
-                            .elementAt(index)
-                            .student,
-                        attendance: snapshot.data.attendanceRecord
-                            .elementAt(index)
-                            .attendance,
-                      ),
+          return ListView.builder(
+            physics: BouncingScrollPhysics(),
+            itemCount: snapshot.data.attendanceRecord.length + 1,
+            itemBuilder: (context, index) {
+              if (snapshot.data.attendanceRecord.length == index) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: ScreenUtil().setWidth(104),
+                    vertical: ScreenUtil().setHeight(8),
+                  ),
+                  child: RaisedButton(
+                    onPressed: () {
+                      attendanceBloc.submitAttendance();
+                    },
+                    padding: EdgeInsets.symmetric(
+                      horizontal: ScreenUtil().setWidth(46),
+                      vertical: ScreenUtil().setHeight(10),
+                    ),
+                    color: Color(AppColors.studentPresent),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          FontAwesomeIcons.save,
+                          size: ScreenUtil().setHeight(13),
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(8)),
+                        Text(
+                          "Save",
+                          style: AppFontStyles(context).textStyle15White,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              } else {
+                return GestureDetector(
+                  onTap: () {
+                    attendanceBloc.updateAttendance(
+                      snapshot.data.attendanceRecord.elementAt(index).student,
+                      widget.schedule,
+                      !snapshot.data.attendanceRecord
+                          .elementAt(index)
+                          .attendance,
                     );
                   },
-                ),
-              ),
-              FloatingActionButton(
-                child: Text("Save"),
-                onPressed: () {
-                  attendanceBloc.submitAttendance();
-                },
-              ),
-            ],
+                  child: AttendanceCard(
+                    student:
+                        snapshot.data.attendanceRecord.elementAt(index).student,
+                    attendance: snapshot.data.attendanceRecord
+                        .elementAt(index)
+                        .attendance,
+                  ),
+                );
+              }
+            },
           );
         } else {
           return Center(child: CircularProgressIndicator());

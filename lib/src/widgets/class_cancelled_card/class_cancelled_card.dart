@@ -1,6 +1,7 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/bloc/delivery_report_bloc/delivery_report_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
+import 'package:BeeCreative/src/widgets/loading_card/loading_card.dart';
 import 'package:BeeCreative/src/widgets/schedule_scaffold/scaffold_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,17 +39,9 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
             context: context,
             builder: (context) {
               return Dialog(
-                child: Container(
-                  padding: EdgeInsets.all(ScreenUtil().setHeight(8)),
-                  color: Colors.white,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      CircularProgressIndicator(),
-                      SizedBox(width: ScreenUtil().setWidth(5)),
-                      Text("Submitting please wait ..."),
-                    ],
-                  ),
+                child: LoadingCard(),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
                 ),
               );
             },

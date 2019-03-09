@@ -19,7 +19,18 @@ class LoadingCard extends StatelessWidget {
       ),
       child: Center(
         child: Column(
-          children: <Widget>[],
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Image.asset(
+              AppPhotos.willi,
+              width: ScreenUtil().setWidth(76),
+              height: ScreenUtil().setHeight(67),
+            ),
+            Text(
+              "Please Wait ...",
+              style: AppFontStyles(context).textStyle15GreyMedium,
+            ),
+          ],
         ),
       ),
     );
