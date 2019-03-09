@@ -89,16 +89,16 @@ class StudentAttendancePageState extends State<StudentAttendancePage> {
               if (snapshot.data.attendanceRecord.length == index) {
                 return Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: ScreenUtil().setWidth(104),
-                    vertical: ScreenUtil().setHeight(8),
+                    horizontal: ScreenUtil().setWidth(114),
+                    vertical: ScreenUtil().setHeight(5),
                   ),
                   child: RaisedButton(
                     onPressed: () {
                       attendanceBloc.submitAttendance();
                     },
                     padding: EdgeInsets.symmetric(
-                      horizontal: ScreenUtil().setWidth(46),
-                      vertical: ScreenUtil().setHeight(10),
+                      horizontal: ScreenUtil().setWidth(36),
+                      vertical: ScreenUtil().setHeight(5),
                     ),
                     color: Color(AppColors.studentPresent),
                     shape: RoundedRectangleBorder(

@@ -29,6 +29,9 @@ class _ClassDetailsState extends State<ClassDetails>
   TabController tabController;
   void initState() {
     tabController = TabController(vsync: this, length: 2);
+    tabController.addListener(() {
+      setState(() {});
+    });
     super.initState();
   }
 
@@ -54,7 +57,7 @@ class _ClassDetailsState extends State<ClassDetails>
       ),
       drawer: AppDrawer(),
       bottomNavigationBar: Container(
-        height: ScreenUtil().setHeight(47),
+        height: ScreenUtil().setHeight(35),
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -80,12 +83,14 @@ class _ClassDetailsState extends State<ClassDetails>
               color: (tabController.index == 0)
                   ? themeColor
                   : Color(AppColors.shadowColor),
+              size: ScreenUtil().setHeight(18),
             ),
             Icon(
               FontAwesomeIcons.clipboardList,
               color: (tabController.index == 1)
                   ? themeColor
                   : Color(AppColors.shadowColor),
+              size: ScreenUtil().setHeight(18),
             ),
           ],
         ),
