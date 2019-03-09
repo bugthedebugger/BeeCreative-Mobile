@@ -50,7 +50,7 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
           children: <Widget>[
             MeltingCard(
               color: Color(AppColors.meltingCardColor),
-              height: ScreenUtil().setHeight(300),
+              height: 350,
               child: Padding(
                 padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(150)),
                 child: Center(
@@ -58,9 +58,7 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     AvatarCircle(AppPhotos.staticAvatar, avatar),
-                    SizedBox(
-                      height: 5,
-                    ),
+                    SizedBox(height: ScreenUtil().setHeight(5)),
                     Text(
                       "$userName",
                       style: AppFontStyles(context).textStyle20White,
@@ -73,7 +71,8 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
                 key: _notificationFormKey,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                      horizontal: ScreenUtil().setWidth(50)),
+                    horizontal: ScreenUtil().setWidth(50),
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
@@ -84,9 +83,7 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
                         ),
                         textAlign: TextAlign.justify,
                       ),
-                      SizedBox(
-                        height: 12,
-                      ),
+                      SizedBox(height: ScreenUtil().setHeight(5)),
                       Row(
                         children: <Widget>[
                           Radio(
@@ -117,8 +114,10 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
                           Text(
                             "the evening before",
                             style: TextStyle(
-                                color: Color(0xff444444), fontSize: 12),
-                          )
+                              color: Color(0xff444444),
+                              fontSize: 12,
+                            ),
+                          ),
                         ],
                       ),
                       Row(
@@ -134,11 +133,13 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
                           Text(
                             "5 min earlier",
                             style: TextStyle(
-                                color: Color(0xff444444), fontSize: 12),
+                              color: Color(0xff444444),
+                              fontSize: 12,
+                            ),
                           )
                         ],
                       ),
-                      SizedBox(height: ScreenUtil().setHeight(15)),
+                      SizedBox(height: ScreenUtil().setHeight(5)),
                       RaisedButton(
                         elevation: 1,
                         padding:
@@ -155,13 +156,14 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
                         child: Container(
                           width: ScreenUtil().setWidth(138),
                           child: Center(
-                              child: Text(
-                            "Done",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
+                            child: Text(
+                              "Done",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
                             ),
-                          )),
+                          ),
                         ),
                       ),
                       GestureDetector(

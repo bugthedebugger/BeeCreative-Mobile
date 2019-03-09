@@ -12,11 +12,10 @@ class CardClipper extends CustomClipper<Path> {
           ..init(_context);
 
     final Path _path = Path();
-    final _height = ScreenUtil().setHeight(size.height.toInt()) -
-        ScreenUtil().setHeight(80);
-    final _width = ScreenUtil().setWidth(size.width.toInt());
+    final _height = size.height - ScreenUtil().setHeight(80);
+    final _width = ScreenUtil().setWidth(360);
     final _radius = ScreenUtil().setHeight(5);
-    final int _barWidth = _width ~/ 14;
+    final int _barWidth = _width ~/ ScreenUtil().setWidth(12);
     final _baseWidth = ScreenUtil().setWidth(_barWidth);
 
     _path.lineTo(0, _height);
