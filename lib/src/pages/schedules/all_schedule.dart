@@ -50,7 +50,11 @@ class SchedulesScaffold extends StatelessWidget {
       return 0;
   }
 
-  Widget _scheduleBuilder(context, snapshot) {
+  Widget _scheduleBuilder(context, AsyncSnapshot snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      BlocProvider.of<ScheduleBloc>(context).reInit();
+    }
+
     String formattedtoday = DateFormat("yyyy-MM-dd").format(DateTime.now());
     ScheduleBloc _scheduleBloc = BlocProvider.of<ScheduleBloc>(context);
     if (snapshot.data is SchedulesLoading) {
