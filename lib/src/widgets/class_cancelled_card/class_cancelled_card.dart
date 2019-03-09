@@ -1,6 +1,7 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/bloc/delivery_report_bloc/delivery_report_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
+import 'package:BeeCreative/src/widgets/loading_card/loading_card.dart';
 import 'package:BeeCreative/src/widgets/schedule_scaffold/scaffold_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,14 +11,19 @@ import 'dart:async';
 class ClassCancelledCard extends StatefulWidget {
   final Schedule _schedule;
 
-  ClassCancelledCard(this._schedule, {Key key}) : super(key: key);
+  ClassCancelledCard(this._schedule);
 
   _ClassCancelledCardState createState() => _ClassCancelledCardState();
 }
 
 class _ClassCancelledCardState extends State<ClassCancelledCard> {
   String _classCancelledReason = "Strike";
-  final List<String> radioValues = ["Strike", "School Event", "Other"];
+  final List<String> radioValues = [
+    "Strike",
+    "School Event",
+    "Vacation",
+    "Other",
+  ];
   String _submitData = "Strike";
   final _deliveryReportBloc = kiwi.Container().resolve<DeliveryReportBloc>();
   StreamSubscription _subscription;
@@ -33,23 +39,14 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
             context: context,
             builder: (context) {
               return Dialog(
-                child: Container(
-                  padding: EdgeInsets.all(8.0),
-                  color: Colors.white,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      CircularProgressIndicator(),
-                      SizedBox(width: 5),
-                      Text("Submitting please wait ..."),
-                    ],
-                  ),
+                child: LoadingCard(),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
                 ),
               );
             },
           );
         } else if (event is DeliveryReportSubmitted) {
-          Navigator.of(context).pop();
           Navigator.of(context).pop();
           scheduleHomeScaffoldKey.currentState.showSnackBar(
             SnackBar(
@@ -60,9 +57,10 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
               ),
             ),
           );
+          Navigator.of(context).pop();
         } else if (event is DeliveryReportError) {
           Navigator.of(context).pop();
-          Scaffold.of(context).showSnackBar(
+          scheduleHomeScaffoldKey.currentState.showSnackBar(
             SnackBar(
               content: Text("Error submitting report: ${event.message}"),
               action: SnackBarAction(
@@ -117,6 +115,7 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                   child: Icon(
                     FontAwesomeIcons.times,
                     color: Color(AppColors.classCancelledColor),
+                    size: ScreenUtil().setWidth(10),
                   ),
                 ),
               ),
@@ -128,7 +127,7 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
               style: AppFontStyles(context).classCancelledTextStyle,
             ),
           ),
-          SizedBox(height: ScreenUtil().setHeight(20)),
+          SizedBox(height: ScreenUtil().setHeight(5)),
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: ScreenUtil().setWidth(20),
@@ -154,7 +153,7 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
                       SizedBox(
-                        width: 5,
+                        width: ScreenUtil().setWidth(5),
                       ),
                       Text(
                         radioValues[0],
@@ -200,14 +199,32 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                       )
                     ],
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Radio(
+                        groupValue: _classCancelledReason,
+                        value: radioValues[3],
+                        activeColor: Color(AppColors.classCancelledColor),
+                        onChanged: _radioHandler,
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        radioValues[3],
+                        style: AppFontStyles(context).textStyle12Black,
+                      )
+                    ],
+                  ),
                   SizedBox(height: ScreenUtil().setHeight(5)),
-                  /*
                   TextFormField(
-                    enabled: (_classCancelledReason == radioValues[2])
+                    enabled: (_classCancelledReason == radioValues[3])
                         ? true
                         : false,
                     validator: (value) {
-                      if (_classCancelledReason == radioValues[2] &&
+                      if (_classCancelledReason == radioValues[3] &&
                           value.isEmpty) {
                         return 'Please enter a reason.';
                       } else {
@@ -234,11 +251,11 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                         ),
                       ),
                       labelText: "Reason",
-                      labelStyle: AppFontStyles(context).textStyle15Black,
-                      counterStyle: AppFontStyles(context).textStyle15Black,
+                      labelStyle: AppFontStyles(context).textStyle12Black,
+                      counterStyle: AppFontStyles(context).textStyle12Black,
                     ),
-                  ),*/
-                  SizedBox(height: ScreenUtil().setHeight(20)),
+                  ),
+                  SizedBox(height: ScreenUtil().setHeight(5)),
                   Center(
                     child: Container(
                       width: ScreenUtil().setWidth(129),
@@ -263,6 +280,7 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                             Icon(
                               Icons.save,
                               color: Colors.white,
+                              size: ScreenUtil().setWidth(13),
                             ),
                             SizedBox(width: 5),
                             Text(
@@ -274,7 +292,6 @@ class _ClassCancelledCardState extends State<ClassCancelledCard> {
                       ),
                     ),
                   ),
-                  SizedBox(height: ScreenUtil().setHeight(20)),
                 ],
               ),
             ),

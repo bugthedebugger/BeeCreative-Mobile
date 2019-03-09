@@ -1,5 +1,6 @@
 import 'package:BeeCreative/src/bloc/delivery_report_bloc/delivery_report_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
+import 'package:BeeCreative/src/widgets/loading_card/loading_card.dart';
 import 'package:BeeCreative/src/widgets/schedule_scaffold/scaffold_key.dart';
 import 'package:flutter/material.dart';
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
@@ -37,23 +38,14 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
             context: context,
             builder: (context) {
               return Dialog(
-                child: Container(
-                  padding: EdgeInsets.all(8.0),
-                  color: Colors.white,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      CircularProgressIndicator(),
-                      SizedBox(width: 5),
-                      Text("Submitting please wait ..."),
-                    ],
-                  ),
+                child: LoadingCard(),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
                 ),
               );
             },
           );
         } else if (event is DeliveryReportSubmitted) {
-          Navigator.of(context).pop();
           Navigator.of(context).pop();
           scheduleHomeScaffoldKey.currentState.showSnackBar(
             SnackBar(
@@ -64,6 +56,7 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
               ),
             ),
           );
+          Navigator.of(context).pop();
         } else if (event is DeliveryReportError) {
           Navigator.of(context).pop();
           Scaffold.of(context).showSnackBar(
@@ -91,8 +84,10 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(
-        width: ScreenSize.screenWidth, height: ScreenSize.screenHeight)
-      ..init(context);
+      width: ScreenSize.screenWidth,
+      height: ScreenSize.screenHeight,
+      allowFontScaling: true,
+    )..init(context);
 
     return Container(
       height: ScreenUtil().setHeight(215),
@@ -119,6 +114,7 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
                   child: Icon(
                     FontAwesomeIcons.times,
                     color: Colors.white,
+                    size: ScreenUtil().setHeight(13),
                   ),
                 ),
               ),
@@ -130,7 +126,7 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
               style: AppFontStyles(context).textStyle20WhiteMedium,
             ),
           ),
-          SizedBox(height: ScreenUtil().setHeight(20)),
+          SizedBox(height: ScreenUtil().setHeight(10)),
           Center(
             child: Container(
               child: Column(
@@ -154,14 +150,14 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: ratingStars(),
+                      children: ratingStars(context),
                     ),
                   ),
                 ],
               ),
             ),
           ),
-          SizedBox(height: ScreenUtil().setHeight(20)),
+          SizedBox(height: ScreenUtil().setHeight(10)),
           Center(
             child: Container(
               width: ScreenUtil().setWidth(129),
@@ -187,8 +183,9 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
                     Icon(
                       Icons.save,
                       color: Colors.white,
+                      size: ScreenUtil().setHeight(13),
                     ),
-                    SizedBox(width: 5),
+                    SizedBox(width: ScreenUtil().setWidth(5)),
                     Text(
                       "Save",
                       style: AppFontStyles(context).textStyle15White,
@@ -204,7 +201,12 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
     );
   }
 
-  List<Widget> ratingStars() {
+  List<Widget> ratingStars(context) {
+    ScreenUtil.instance = ScreenUtil(
+      width: ScreenSize.screenWidth,
+      height: ScreenSize.screenHeight,
+      allowFontScaling: true,
+    )..init(context);
     List<Widget> stars = [];
 
     for (int i = 1; i <= 5; i++) {
@@ -216,7 +218,7 @@ class _DeliveryReportCardState extends State<DeliveryReportCard> {
           },
           child: Icon(
             Icons.star,
-            size: 30,
+            size: ScreenUtil().setWidth(30),
             color: Color(colorController(i, _rating)),
           ),
         ),

@@ -21,6 +21,10 @@ class ScheduleBloc implements Bloc {
     getSchedules();
   }
 
+  void reInit(){
+    scheduleEventsStreamController.stream.listen(_mapEventsToState);
+  }
+
   StreamController<ScheduleEvents> scheduleEventsStreamController =
       StreamController<ScheduleEvents>.broadcast();
   Stream get scheduleEventsStream => scheduleEventsStreamController.stream;

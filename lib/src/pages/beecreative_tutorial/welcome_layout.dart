@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WelcomeLayout extends StatelessWidget {
   final String imageSrc;
@@ -14,68 +15,73 @@ class WelcomeLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(
+      width: ScreenSize.screenWidth,
+      height: ScreenSize.screenHeight,
+      allowFontScaling: true,
+    )..init(context);
+
     return Scaffold(
       backgroundColor: Color(bgColor),
-      body: new Center(
-          child: new Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          new Container(
-            width: 172.55,
-            height: 150.61,
-            decoration: BoxDecoration(
-                image: new DecorationImage(
-                    image: ExactAssetImage(imageSrc), fit: BoxFit.contain)),
-          ),
-          new Container(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              width: ScreenUtil().setWidth(173),
+              height: ScreenUtil().setHeight(151),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: ExactAssetImage(imageSrc), fit: BoxFit.contain),
+              ),
+            ),
+            Container(
               margin: EdgeInsets.only(top: 20),
-              width: 350,
-              height: 400,
+              width: ScreenUtil().setWidth(262),
+              height: ScreenUtil().setHeight(360),
               alignment: Alignment.topCenter,
-              padding:
-                  EdgeInsets.only(top: 50, bottom: 15, left: 50, right: 50),
-              decoration: new BoxDecoration(
+              padding: EdgeInsets.only(
+                top: ScreenUtil().setHeight(50),
+                bottom: ScreenUtil().setHeight(15),
+                left: ScreenUtil().setWidth(20),
+                right: ScreenUtil().setWidth(20),
+              ),
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
                 color: Colors.white,
                 boxShadow: [
-                  new BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 6.0,
-                      spreadRadius: 6.0,
-                      offset: new Offset(0.0, 3.0))
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 6.0,
+                    spreadRadius: 6.0,
+                    offset: Offset(0.0, 3.0),
+                  )
                 ],
                 shape: BoxShape.rectangle,
               ),
-              child: new Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  new Text(
+                  Text(
                     welcHeader,
                     style: headerStyle,
                   ),
-                  new Container(
+                  Container(
                     margin: EdgeInsets.only(top: 20),
-                    child: new Text(
+                    child: Text(
                       welcBody,
                       style: bodyStyle,
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Expanded(
-                    child: new Container(
-                      alignment: Alignment.bottomRight,
-                      child: Icon(
-                        FontAwesomeIcons.angleRight,
-                        color: Color(bgColor),
-                      ),
-                    ),
-                  )
                 ],
-              ))
-        ],
-      )),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

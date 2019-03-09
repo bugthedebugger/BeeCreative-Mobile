@@ -83,7 +83,7 @@ class ScheduleCardState extends State<ScheduleCard>
     }
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(ScreenUtil().setHeight(8)),
       child: Column(
         children: <Widget>[
           Row(
@@ -123,8 +123,8 @@ class ScheduleCardState extends State<ScheduleCard>
                 },
                 child: Container(
                   padding: EdgeInsets.only(
-                    top: 10.0,
-                    left: 10.0,
+                    top: ScreenUtil().setHeight(10),
+                    left: ScreenUtil().setWidth(10),
                   ),
                   width: ScreenUtil().setWidth(289),
                   height: ScreenUtil().setHeight(_animation.value.toInt()),
@@ -213,6 +213,10 @@ class ScheduleCardState extends State<ScheduleCard>
                         top: ScreenUtil().setHeight(205),
                         left: ScreenUtil().setWidth(85),
                         child: RaisedButton(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: ScreenUtil().setWidth(22),
+                            vertical: ScreenUtil().setHeight(7),
+                          ),
                           elevation: 0,
                           onPressed: widget.function,
                           color: Colors.white,
@@ -222,7 +226,7 @@ class ScheduleCardState extends State<ScheduleCard>
                           child: Text(
                             widget.buttonLabel,
                             style: TextStyle(
-                              fontSize: ScreenUtil().setSp(15),
+                              fontSize: ScreenUtil().setSp(12),
                               color: Color(widget.scheduleThemeData.cardColor),
                             ),
                           ),
@@ -332,7 +336,7 @@ class GenderCountCard extends StatelessWidget {
           SizedBox(width: 5),
           Container(
             alignment: Alignment.bottomCenter,
-            width: ScreenUtil().setWidth(40),
+            width: ScreenUtil().setWidth(38),
             padding: EdgeInsets.only(bottom: ScreenUtil().setHeight(6)),
             child: Text(
               "$gender",

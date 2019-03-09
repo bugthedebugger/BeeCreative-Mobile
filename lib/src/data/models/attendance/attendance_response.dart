@@ -10,7 +10,10 @@ part 'attendance_response.g.dart';
 
 abstract class AttendanceResponse
     implements Built<AttendanceResponse, AttendanceResponseBuilder> {
+  @nullable
   String get data;
+  @nullable
+  String get error;
   int get code;
 
   AttendanceResponse._();

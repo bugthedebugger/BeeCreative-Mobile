@@ -40,7 +40,7 @@ class LoggedInWelcomeState extends State<LoggedInWelcome> {
     return Scaffold(
       body: MeltingCard(
         color: Color(AppColors.meltingCardColor),
-        height: ScreenUtil().setHeight(440),
+        height: 540,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

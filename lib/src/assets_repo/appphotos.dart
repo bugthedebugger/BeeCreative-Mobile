@@ -62,4 +62,5 @@ class AppPhotos {
   static String underConstruction =
       "assets/images/errors/under_construction.png";
   static String animesh = "assets/images/team/animesh.jpg";
+  static String willi = "assets/images/team/willi.png";
 }

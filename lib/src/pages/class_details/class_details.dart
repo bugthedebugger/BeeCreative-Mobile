@@ -1,7 +1,9 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:BeeCreative/src/pages/class_details/attendance.dart';
+import 'package:BeeCreative/src/widgets/app_bar/app_bar.dart';
 import 'package:BeeCreative/src/widgets/class_details_notification_card/class_details_notification_card.dart';
+import 'package:BeeCreative/src/widgets/drawer/drawer.dart';
 import 'package:BeeCreative/src/widgets/schedule_card/schedule_card.dart';
 import 'package:BeeCreative/src/widgets/schedule_card/schedule_theme_data.dart';
 import 'package:BeeCreative/src/widgets/schedule_scaffold/scaffold.dart';
@@ -13,11 +15,10 @@ class ClassDetails extends StatefulWidget {
   final Schedule schedule;
   final ScheduleResponseData scheduleResponseData;
   ClassDetails({
-    Key key,
     @required this.schedule,
     this.timeOfDay,
     this.scheduleResponseData,
-  }) : super(key: key);
+  });
 
   @override
   _ClassDetailsState createState() => _ClassDetailsState();
@@ -28,6 +29,9 @@ class _ClassDetailsState extends State<ClassDetails>
   TabController tabController;
   void initState() {
     tabController = TabController(vsync: this, length: 2);
+    tabController.addListener(() {
+      setState(() {});
+    });
     super.initState();
   }
 
@@ -46,11 +50,14 @@ class _ClassDetailsState extends State<ClassDetails>
     final Color themeColor =
         Color(ScheduleThemeData(timeOfDay: widget.timeOfDay).cardColor);
 
-    return buildScaffold(
-      title: widget.schedule.schoolName,
-      grade: 'Class ' + widget.schedule.grade + widget.schedule.section,
+    return Scaffold(
+      appBar: mainAppBar(
+        grade: 'Class ' + widget.schedule.grade + widget.schedule.section,
+        title: widget.schedule.schoolName,
+      ),
+      drawer: AppDrawer(),
       bottomNavigationBar: Container(
-        height: ScreenUtil().setHeight(47),
+        height: ScreenUtil().setHeight(35),
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -76,16 +83,19 @@ class _ClassDetailsState extends State<ClassDetails>
               color: (tabController.index == 0)
                   ? themeColor
                   : Color(AppColors.shadowColor),
+              size: ScreenUtil().setHeight(18),
             ),
             Icon(
               FontAwesomeIcons.clipboardList,
               color: (tabController.index == 1)
                   ? themeColor
                   : Color(AppColors.shadowColor),
+              size: ScreenUtil().setHeight(18),
             ),
           ],
         ),
       ),
+      backgroundColor: Colors.white,
       body: TabBarView(
         physics: BouncingScrollPhysics(
           parent: AlwaysScrollableScrollPhysics(),
