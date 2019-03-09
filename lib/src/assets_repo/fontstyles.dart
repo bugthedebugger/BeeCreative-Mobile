@@ -99,7 +99,7 @@ class AppFontStyles {
 
   static TextStyle _16TextStyleWhite = TextStyle(
     color: Colors.white,
-    fontSize: _18TextSizeScaled,
+    fontSize: _16TextSizeScaled,
   );
 
   static TextStyle _15TextStyleWhite = TextStyle(
@@ -181,7 +181,7 @@ class AppFontStyles {
 
   static TextStyle _12TextGrey = TextStyle(
     color: Color(AppColors.grey),
-    fontSize: _15TextSizeScaled,
+    fontSize: _12TextSizeScaled,
   );
 
   TextStyle get gettingStartedBodyStyle => _gettingStBody;

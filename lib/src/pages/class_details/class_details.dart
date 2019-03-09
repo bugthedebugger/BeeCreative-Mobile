@@ -46,7 +46,7 @@ class _ClassDetailsState extends State<ClassDetails>
     final Color themeColor =
         Color(ScheduleThemeData(timeOfDay: widget.timeOfDay).cardColor);
 
-    return buildScaffold(
+    return scaffoldBuilder(
       title: widget.schedule.schoolName,
       grade: 'Class ' + widget.schedule.grade + widget.schedule.section,
       bottomNavigationBar: Container(

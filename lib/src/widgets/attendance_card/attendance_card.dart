@@ -16,7 +16,7 @@ class AttendanceCard extends StatelessWidget {
     )..init(context);
 
     return Padding(
-      padding: EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(ScreenUtil().setHeight(8)),
       child: Container(
         padding: EdgeInsets.only(
           top: ScreenUtil().setHeight(6),

@@ -1,8 +1,8 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:BeeCreative/src/pages/class_details/class_details.dart';
-import 'package:BeeCreative/src/widgets/class_cancelled_card/delivery_report_card.dart';
-import 'package:BeeCreative/src/widgets/delivery_report_card/class_cancelled_card.dart';
+import 'package:BeeCreative/src/widgets/class_cancelled_card/class_cancelled_card.dart';
+import 'package:BeeCreative/src/widgets/delivery_report_card/delivery_report_card.dart';
 import 'package:BeeCreative/src/widgets/schedule_card/schedule_card.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
@@ -49,16 +49,19 @@ class SchedulesTileState extends State<SchedulesTile>
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(
-        width: ScreenSize.screenWidth, height: ScreenSize.screenHeight)
-      ..init(context);
+      width: ScreenSize.screenWidth,
+      height: ScreenSize.screenHeight,
+      allowFontScaling: true,
+    )..init(context);
     List<Widget> _tileData = [
       Padding(
-        padding: const EdgeInsets.only(left: 25.0, top: 10.0),
+        padding: EdgeInsets.only(
+            left: ScreenUtil().setWidth(25), top: ScreenUtil().setHeight(10)),
         child: Text(
           "${widget._date}",
           style: TextStyle(
             color: Color(AppColors.meltingCardColor),
-            fontSize: 15.0,
+            fontSize: ScreenUtil().setSp(15),
           ),
         ),
       ),
@@ -87,23 +90,126 @@ class SchedulesTileState extends State<SchedulesTile>
           timeOfDay = 'evening';
 
         List<Widget> secondaryActionList = [
-          ClassDeliveredButton(
-            context: context,
-            schedule: schedule,
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: SlideAction(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Theme(
+                      data: ThemeData(
+                        dialogBackgroundColor: Colors.transparent,
+                      ),
+                      child: Dialog(
+                        shape: RoundedRectangleBorder(),
+                        child: DeliveryReportCard(schedule),
+                      ),
+                    );
+                  },
+                );
+              },
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 3,
+                    color: Color(0x33000000),
+                    offset: Offset(0, 1),
+                  )
+                ],
+                shape: BoxShape.circle,
+                color: Color(
+                  AppColors.deliveryRatingColor,
+                ),
+              ),
+              child: Icon(
+                Icons.star,
+                color: Colors.white,
+                size: ScreenUtil().setHeight(16),
+              ),
+            ),
           ),
         ];
         if (schedule.deliveryReport.delivered != null) {
           if (!schedule.deliveryReport.delivered) {
             secondaryActionList.add(
-              ClassCancelledButton(
-                schedule: schedule,
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: SlideAction(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Theme(
+                          data: ThemeData(
+                            dialogBackgroundColor: Colors.transparent,
+                          ),
+                          child: Dialog(
+                            shape: RoundedRectangleBorder(),
+                            child: ClassCancelledCard(schedule),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 3,
+                        color: Color(0x33000000),
+                        offset: Offset(0, 1),
+                      )
+                    ],
+                    shape: BoxShape.circle,
+                    color: Color(AppColors.classCancelledColor),
+                  ),
+                  child: Icon(
+                    FontAwesomeIcons.times,
+                    color: Colors.white,
+                    size: ScreenUtil().setHeight(13),
+                  ),
+                ),
               ),
             );
           }
         } else {
           secondaryActionList.add(
-            ClassCancelledButton(
-              schedule: schedule,
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: SlideAction(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Theme(
+                        data: ThemeData(
+                          dialogBackgroundColor: Colors.transparent,
+                        ),
+                        child: Dialog(
+                          shape: RoundedRectangleBorder(),
+                          child: ClassCancelledCard(schedule),
+                        ),
+                      );
+                    },
+                  );
+                },
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 3,
+                      color: Color(0x33000000),
+                      offset: Offset(0, 1),
+                    )
+                  ],
+                  shape: BoxShape.circle,
+                  color: Color(AppColors.classCancelledColor),
+                ),
+                child: Icon(
+                  FontAwesomeIcons.times,
+                  color: Colors.white,
+                  size: ScreenUtil().setHeight(13),
+                ),
+              ),
             ),
           );
         }
@@ -118,16 +224,15 @@ class SchedulesTileState extends State<SchedulesTile>
                 return false;
             },
           );
-          // Navigator.of(context).push(
-          //   MaterialPageRoute(
-          //     builder: (context) => ClassDetails(
-          //           schedule: schedule,
-          //           timeOfDay: timeOfDay,
-          //           scheduleResponseData: response,
-          //         ),
-          //   ),
-          // );
-          Navigator.of(context).pushNamed(Routes.UNDER_CONSTRUCTION);
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ClassDetails(
+                    schedule: schedule,
+                    timeOfDay: timeOfDay,
+                    scheduleResponseData: response,
+                  ),
+            ),
+          );
         }
 
         scheduleCardList.add(
@@ -206,13 +311,17 @@ class ClassDeliveredButton extends StatelessWidget {
   }
 }
 
-class ClassCancelledButton extends StatelessWidget {
+class ClassCancelledButton extends StatefulWidget {
   final Schedule schedule;
   ClassCancelledButton({
-    Key key,
     @required this.schedule,
-  }) : super(key: key);
+  });
 
+  @override
+  _ClassCancelledButtonState createState() => _ClassCancelledButtonState();
+}
+
+class _ClassCancelledButtonState extends State<ClassCancelledButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -228,7 +337,7 @@ class ClassCancelledButton extends StatelessWidget {
                 ),
                 child: Dialog(
                   shape: RoundedRectangleBorder(),
-                  child: ClassCancelledCard(schedule),
+                  child: ClassCancelledCard(widget.schedule),
                 ),
               );
             },

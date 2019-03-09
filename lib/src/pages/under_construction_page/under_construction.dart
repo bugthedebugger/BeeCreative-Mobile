@@ -14,8 +14,7 @@ class UnderConstruction extends StatelessWidget {
         width: ScreenSize.screenWidth, height: ScreenSize.screenHeight)
       ..init(context);
 
-    return buildScaffold(
-      key: underConstructionScaffoldKey,
+    return scaffoldBuilder(
       title: "Under construction",
       body: Builder(
         builder: (context) => Column(
