@@ -35,6 +35,7 @@ class SchedulesScaffold extends StatelessWidget {
       key: scheduleHomeScaffoldKey,
       appBar: mainAppBar(title: 'Schedules'),
       drawer: AppDrawer(),
+      backgroundColor: Colors.white,
       body: StreamBuilder(
         stream: BlocProvider.of<ScheduleBloc>(context).scheduleEventsStream,
         builder: _scheduleBuilder,

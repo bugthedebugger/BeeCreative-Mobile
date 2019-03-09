@@ -90,6 +90,7 @@ class _ClassDetailsState extends State<ClassDetails>
           ],
         ),
       ),
+      backgroundColor: Colors.white,
       body: TabBarView(
         physics: BouncingScrollPhysics(
           parent: AlwaysScrollableScrollPhysics(),
