@@ -21,7 +21,8 @@ class StudentAttendancePage extends StatefulWidget {
   StudentAttendancePageState createState() => StudentAttendancePageState();
 }
 
-class StudentAttendancePageState extends State<StudentAttendancePage> {
+class StudentAttendancePageState extends State<StudentAttendancePage>
+    with AutomaticKeepAliveClientMixin {
   final AttendanceBloc attendanceBloc =
       kiwi.Container().resolve<AttendanceBloc>();
   StreamSubscription _stream;
@@ -148,4 +149,8 @@ class StudentAttendancePageState extends State<StudentAttendancePage> {
       },
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

@@ -30,4 +30,5 @@ class AppColors {
   static var grey = 0xffACACAC;
   static var studentPresent = 0xff00B894;
   static var studentAbsent = 0xffEB4D4B;
+  static var fadedGrey = 0xffE5E5E5;
 }

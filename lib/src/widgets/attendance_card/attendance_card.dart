@@ -1,5 +1,5 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
-import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
+import 'package:BeeCreative/src/data/models/student/student.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

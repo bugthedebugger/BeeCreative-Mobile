@@ -184,6 +184,52 @@ class AppFontStyles {
     fontSize: _12TextSizeScaled,
   );
 
+  TextStyle getTextStyle(
+      {int fontSize, Color color = Colors.black, String weight}) {
+    double _fontSize;
+    var _weight;
+
+    switch (weight) {
+      case 'bold':
+        _weight = FontWeight.bold;
+        break;
+      case 'normal':
+        _weight = FontWeight.normal;
+        break;
+      case 'medium':
+        _weight = FontWeight.w500;
+        break;
+      default:
+        _weight = FontWeight.normal;
+    }
+
+    switch (fontSize) {
+      case 12:
+        _fontSize = _12TextSizeScaled;
+        break;
+      case 15:
+        _fontSize = _15TextSizeScaled;
+        break;
+      case 16:
+        _fontSize = _16TextSizeScaled;
+        break;
+      case 18:
+        _fontSize = _18TextSizeScaled;
+        break;
+      case 20:
+        _fontSize = _20TextSizeScaled;
+        break;
+      default:
+        _fontSize = _15TextSizeScaled;
+    }
+
+    return TextStyle(
+      color: color,
+      fontSize: _fontSize,
+      fontWeight: _weight,
+    );
+  }
+
   TextStyle get gettingStartedBodyStyle => _gettingStBody;
   TextStyle get gettingStartedAttendanceHeadStyle => _welcAttendanceHeader;
   TextStyle get gettingStartedPhotosHeadStyle => _welcPhotosHeader;
