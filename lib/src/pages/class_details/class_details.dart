@@ -111,176 +111,173 @@ class _ClassDetailsState extends State<ClassDetails>
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            IconButton(
-              tooltip: 'Class details',
-              onPressed: () {
+            GestureDetector(
+              onTap: () {
                 page = 0;
                 setState(() {});
                 pageController.animateToPage(
                   page,
-                  curve: ElasticInCurve(),
+                  curve: Curves.ease,
                   duration: Duration(
-                    milliseconds: 200,
+                    milliseconds: 300,
                   ),
                 );
               },
-              icon: Icon(
+              child: Icon(
                 FontAwesomeIcons.home,
                 color: (page == 0) ? themeColor : Color(AppColors.shadowColor),
                 size: ScreenUtil().setHeight(18),
               ),
             ),
-            IconButton(
-              tooltip: 'Attendance',
-              onPressed: () {
+            GestureDetector(
+              onTap: () {
                 page = 1;
                 setState(() {});
                 pageController.animateToPage(
                   page,
-                  curve: ElasticInCurve(),
+                  curve: Curves.ease,
                   duration: Duration(
                     milliseconds: 200,
                   ),
                 );
               },
-              icon: Icon(
+              child: Icon(
                 FontAwesomeIcons.clipboardList,
                 color: (page == 1) ? themeColor : Color(AppColors.shadowColor),
                 size: ScreenUtil().setHeight(18),
               ),
             ),
-            IconButton(
-              tooltip: 'Randomizer',
-              onPressed: () {
+            GestureDetector(
+              onTap: () {
                 prevPage = (page != 3) ? page : prevPage;
                 page = 3;
+                setState(() {});
                 showDialog(
                   context: context,
                   barrierDismissible: false,
                   builder: (context) {
                     return StreamBuilder<Student>(
-                        stream: randomizerBloc.studentStream,
-                        builder: (context, snapshot) {
-                          return Dialog(
-                            backgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Container(
-                              padding:
-                                  EdgeInsets.all(ScreenUtil().setWidth(13)),
-                              width: ScreenUtil().setWidth(331),
-                              height: ScreenUtil().setHeight(292),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                      stream: randomizerBloc.studentStream,
+                      builder: (context, snapshot) {
+                        return Dialog(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.all(ScreenUtil().setWidth(13)),
+                            width: ScreenUtil().setWidth(331),
+                            height: ScreenUtil().setHeight(292),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text(
+                                      "Randomizer",
+                                      style:
+                                          AppFontStyles(context).getTextStyle(
+                                        fontSize: 20,
+                                        color: themeColor,
+                                        weight: "medium",
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        page = prevPage;
+                                        setState(() {});
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Icon(
+                                        FontAwesomeIcons.times,
+                                        size: ScreenUtil().setHeight(21),
+                                        color: themeColor,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Container(
+                                  width: ScreenUtil().setWidth(296),
+                                  height: ScreenUtil().setHeight(161),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                      color: Color(AppColors.fadedGrey),
+                                      width: ScreenUtil().setHeight(1),
+                                    ),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Text(
-                                        "Randomizer",
+                                        (snapshot.connectionState ==
+                                                ConnectionState.waiting)
+                                            ? 'Start randomizer'
+                                            : (snapshot.hasData)
+                                                ? snapshot.data.fname +
+                                                    ' ' +
+                                                    snapshot.data.lname
+                                                : 'No students list.',
                                         style:
                                             AppFontStyles(context).getTextStyle(
-                                          fontSize: 20,
                                           color: themeColor,
-                                          weight: "medium",
+                                          fontSize: 30,
+                                          weight: 'medium',
                                         ),
+                                        textAlign: TextAlign.center,
                                       ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          page = prevPage;
-                                          setState(() {});
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Icon(
-                                          FontAwesomeIcons.times,
-                                          size: ScreenUtil().setHeight(21),
-                                          color: themeColor,
-                                        ),
-                                      )
                                     ],
                                   ),
-                                  Container(
-                                    width: ScreenUtil().setWidth(296),
-                                    height: ScreenUtil().setHeight(161),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(
-                                        color: Color(AppColors.fadedGrey),
-                                        width: ScreenUtil().setHeight(1),
-                                      ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: ScreenUtil().setWidth(70),
+                                  ),
+                                  child: RaisedButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
                                     ),
-                                    child: Column(
+                                    color: themeColor,
+                                    elevation: 0,
+                                    onPressed: () {
+                                      randomizerBloc.random();
+                                    },
+                                    child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.spaceEvenly,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: <Widget>[
+                                        Icon(
+                                          FontAwesomeIcons.dice,
+                                          color: Colors.white,
+                                          size: ScreenUtil().setWidth(15),
+                                        ),
                                         Text(
-                                          (snapshot.connectionState ==
-                                                  ConnectionState.waiting)
-                                              ? 'Start randomizer'
-                                              : (snapshot.hasData)
-                                                  ? snapshot.data.fname +
-                                                      ' ' +
-                                                      snapshot.data.lname
-                                                  : 'No students list.',
+                                          "Random",
                                           style: AppFontStyles(context)
-                                              .getTextStyle(
-                                            color: themeColor,
-                                            fontSize: 20,
-                                            weight: 'medium',
-                                          ),
+                                              .textStyle12White,
                                         ),
                                       ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: ScreenUtil().setWidth(70),
-                                    ),
-                                    child: RaisedButton(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      color: themeColor,
-                                      elevation: 0,
-                                      onPressed: () {
-                                        randomizerBloc.random();
-                                      },
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          Icon(
-                                            FontAwesomeIcons.dice,
-                                            color: Colors.white,
-                                          ),
-                                          Text(
-                                            "Random",
-                                            style: AppFontStyles(context)
-                                                .textStyle12White,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          );
-                        });
+                          ),
+                        );
+                      },
+                    );
                   },
                 );
               },
-              icon: Icon(
+              child: Icon(
                 FontAwesomeIcons.dice,
                 color: (page == 3) ? themeColor : Color(AppColors.shadowColor),
                 size: ScreenUtil().setHeight(18),
