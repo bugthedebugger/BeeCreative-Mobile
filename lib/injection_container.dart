@@ -1,6 +1,7 @@
 import 'package:BeeCreative/src/bloc/attendance_bloc/attendance_bloc.dart';
 import 'package:BeeCreative/src/bloc/delivery_report_bloc/delivery_report_bloc_export.dart';
 import 'package:BeeCreative/src/bloc/schedule_bloc/schedule_bloc_export.dart';
+import 'package:BeeCreative/src/bloc/student_randomizer_bloc/student_randomizer_bloc_export.dart';
 import 'package:BeeCreative/src/bloc/user_bloc/user_bloc_export.dart';
 import 'package:BeeCreative/src/data/network/attendance_data_source.dart';
 import 'package:BeeCreative/src/data/network/delivery_report_source.dart';
@@ -44,4 +45,5 @@ Future initKiwi() async {
   Container().registerFactory((c) => AttendanceRepository(c.resolve()));
   Container().registerFactory(
       (c) => AttendanceBloc(c.resolve(), c.resolve<SharedPreferences>()));
+  Container().registerFactory((c) => StudentRandomizerBloc());
 }

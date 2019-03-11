@@ -12,6 +12,12 @@ class _WelcomePageState extends State<WelcomePage> {
   PageController _pageController = PageController(initialPage: 1);
 
   @override
+  void dispose() {
+    super.dispose();
+    _pageController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(

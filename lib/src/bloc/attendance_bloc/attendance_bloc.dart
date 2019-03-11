@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:BeeCreative/src/data/exceptions/custom_exceptions.dart';
 import 'package:BeeCreative/src/data/models/attendance/attendance_model.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
+import 'package:BeeCreative/src/data/models/student/student.dart';
 import 'package:BeeCreative/src/data/repository/attendance_repository.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:shared_preferences/shared_preferences.dart';

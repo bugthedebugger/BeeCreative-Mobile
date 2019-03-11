@@ -2,8 +2,8 @@ library attendance_record;
 
 import 'dart:convert';
 import 'package:BeeCreative/src/data/models/schedules/schedule.dart';
-import 'package:BeeCreative/src/data/models/schedules/student.dart';
 import 'package:BeeCreative/src/data/models/serializer/serializers.dart';
+import 'package:BeeCreative/src/data/models/student/student.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
