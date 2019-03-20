@@ -73,6 +73,7 @@ class _PhotoGalleryState extends State<PhotoGallery> {
         builder: (context, snapshot) {
           if (snapshot.hasData)
             return GridView.builder(
+              addAutomaticKeepAlives: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
               ),

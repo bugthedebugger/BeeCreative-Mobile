@@ -71,31 +71,34 @@ class GalleryBloc extends Bloc {
     try {
       Map<String, String> imagesMap =
           await FilePicker.getMultiFilePath(type: FileType.IMAGE);
-      var images = imagesMap.values;
-      List<Gallery> galleries = List<Gallery>();
-      images.forEach((image) {
-        DateTime now = DateTime.now();
-        Gallery gallery = Gallery();
-        gallery.classId = event.schedule.classId;
-        gallery.scheduleId = event.schedule.scheduleId;
-        gallery.schoolId = event.schedule.scheduleId;
-        gallery.imagePath = image;
-        gallery.imageAlias = _aliasName(
-          event.schedule.schoolName,
-          event.schedule.grade,
-          event.schedule.section,
-          image,
-        );
-        gallery.uploaded = false;
-        gallery.deliveryDate = DateTime.parse(event.schedule.deliveryDate);
-        gallery.createdAt = now;
-        gallery.updatedAt = now;
-        galleries.add(gallery);
-      });
-      await _dbProvider.open(_path);
-      await _dbProvider.insertAll(galleries);
 
-      getGroupedByThumbnail(event.schedule.classId);
+      if (imagesMap != null) {
+        var images = imagesMap.values;
+        List<Gallery> galleries = List<Gallery>();
+        images.forEach((image) {
+          DateTime now = DateTime.now();
+          Gallery gallery = Gallery();
+          gallery.classId = event.schedule.classId;
+          gallery.scheduleId = event.schedule.scheduleId;
+          gallery.schoolId = event.schedule.scheduleId;
+          gallery.imagePath = image;
+          gallery.imageAlias = _aliasName(
+            event.schedule.schoolName,
+            event.schedule.grade,
+            event.schedule.section,
+            image,
+          );
+          gallery.uploaded = false;
+          gallery.deliveryDate = DateTime.parse(event.schedule.deliveryDate);
+          gallery.createdAt = now;
+          gallery.updatedAt = now;
+          galleries.add(gallery);
+        });
+        await _dbProvider.open(_path);
+        await _dbProvider.insertAll(galleries);
+
+        getGroupedByThumbnail(event.schedule.classId);
+      }
     } catch (e) {
       print(e);
     }
@@ -146,28 +149,31 @@ class GalleryBloc extends Bloc {
     try {
       await _dbProvider.open(_path);
       var image = await ImagePicker.pickImage(source: ImageSource.camera);
-      DateTime now = DateTime.now();
-      Gallery gallery = Gallery();
-      gallery.classId = event.schedule.classId;
-      gallery.scheduleId = event.schedule.scheduleId;
-      gallery.schoolId = event.schedule.scheduleId;
-      gallery.imagePath = image.path;
-      gallery.imageAlias = _aliasName(
-        event.schedule.schoolName,
-        event.schedule.grade,
-        event.schedule.section,
-        image.path.toString(),
-      );
-      gallery.uploaded = false;
-      gallery.deliveryDate = DateTime.parse(event.schedule.deliveryDate);
-      gallery.createdAt = now;
-      gallery.updatedAt = now;
-      gallery = await _dbProvider.insert(gallery);
-      List<Gallery> galleries =
-          await _dbProvider.getGallery(event.schedule.classId);
-      Map<DateTime, List<Gallery>> groupedGallery =
-          await _dbProvider.getGroupedByThumbnail(event.schedule.classId);
-      update(galleries: galleries, groupedGallery: groupedGallery);
+
+      if (image != null) {
+        DateTime now = DateTime.now();
+        Gallery gallery = Gallery();
+        gallery.classId = event.schedule.classId;
+        gallery.scheduleId = event.schedule.scheduleId;
+        gallery.schoolId = event.schedule.scheduleId;
+        gallery.imagePath = image.path;
+        gallery.imageAlias = _aliasName(
+          event.schedule.schoolName,
+          event.schedule.grade,
+          event.schedule.section,
+          image.path.toString(),
+        );
+        gallery.uploaded = false;
+        gallery.deliveryDate = DateTime.parse(event.schedule.deliveryDate);
+        gallery.createdAt = now;
+        gallery.updatedAt = now;
+        gallery = await _dbProvider.insert(gallery);
+        List<Gallery> galleries =
+            await _dbProvider.getGallery(event.schedule.classId);
+        Map<DateTime, List<Gallery>> groupedGallery =
+            await _dbProvider.getGroupedByThumbnail(event.schedule.classId);
+        update(galleries: galleries, groupedGallery: groupedGallery);
+      }
     } catch (e) {
       print(e);
     } finally {
