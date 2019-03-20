@@ -1,10 +1,7 @@
 library attendance_events;
 
-import 'dart:convert';
-
 import 'package:BeeCreative/src/data/models/attendance/attendance_model.dart';
 import 'package:built_value/built_value.dart';
-
 part 'attendance_events.g.dart';
 
 abstract class AttendanceEvent {}
