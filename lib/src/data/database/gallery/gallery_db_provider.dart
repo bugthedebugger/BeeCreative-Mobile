@@ -1,6 +1,8 @@
+import 'package:BeeCreative/src/data/database/database_name.dart';
 import 'package:BeeCreative/src/data/models/gallery/gallery.dart';
 import 'package:BeeCreative/src/data/models/gallery/gallery_wirename.dart';
 import 'package:collection/collection.dart';
+import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 
@@ -9,6 +11,11 @@ class GalleryDBProvider {
 
   /// open the connection to gallery table
   Future open(String path) async {
+    if (path.isEmpty) {
+      var databasePath = await getDatabasesPath();
+      path = join(databasePath, DATABASE_NAME);
+    }
+
     String query = '''
       CREATE TABLE $tableGallery (
         $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -144,5 +151,5 @@ class GalleryDBProvider {
   }
 
   /// close connection
-  Future close() async => db.close();
+  Future close() async => db?.close();
 }

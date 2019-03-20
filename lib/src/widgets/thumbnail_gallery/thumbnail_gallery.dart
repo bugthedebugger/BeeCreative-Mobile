@@ -1,5 +1,6 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/data/models/gallery/gallery.dart';
+import 'package:BeeCreative/src/widgets/see_more_thumbnail_widget.dart/see_more_thumbnail.dart';
 import 'package:BeeCreative/src/widgets/thumbnail_widget/thumbnail_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,7 +28,7 @@ class ThumbnailGallery extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Text(
-            'Gallery',
+            galleries.length > 0 ? 'Gallery' : '',
             style: AppFontStyles(context).textStyle15Grey,
           ),
           Container(
@@ -36,13 +37,25 @@ class ThumbnailGallery extends StatelessWidget {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               physics: BouncingScrollPhysics(),
-              itemCount: galleries.length,
+              itemCount: galleries.length > 0 ? galleries.length + 1 : 0,
               itemBuilder: (context, index) {
                 var keys = galleries.keys.toList();
-                return ThumbnailWidget(
-                  gallery: galleries[keys[index]][0],
-                  count: galleries[keys[index]].length,
-                );
+                if (index == galleries.length)
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        Routes.PHOTO_GALLERY,
+                        arguments: galleries[keys[0]][0].classId,
+                      );
+                    },
+                    child: SeeMoreThumbnail(),
+                  );
+                else
+                  return ThumbnailWidget(
+                    gallery: galleries[keys[index]][0],
+                    count: galleries[keys[index]].length,
+                  );
               },
             ),
           ),

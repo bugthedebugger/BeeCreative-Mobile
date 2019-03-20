@@ -76,7 +76,7 @@ class ThumbnailWidget extends StatelessWidget {
                     ),
                     SizedBox(width: ScreenUtil().setWidth(5)),
                     Text(
-                      '$count',
+                      count == -1 ? '' : '$count',
                       style: AppFontStyles(context).textStyle12White,
                     ),
                   ],

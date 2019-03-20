@@ -44,9 +44,9 @@ class GalleryBloc extends Bloc {
     _path = join(databasePath, DATABASE_NAME);
   }
 
-  void init() async {
+  Future init() async {
     _galleryEventsStreamController.stream.listen(_mapEventsToState);
-    await initDatabase();
+    return await initDatabase();
   }
 
   void _mapEventsToState(GalleryEvents event) {
@@ -126,7 +126,7 @@ class GalleryBloc extends Bloc {
     try {
       await _dbProvider.open(_path);
       List<Gallery> galleries = await _dbProvider.getGallery(event.classId);
-      addData(galleries);
+      update(galleries: galleries);
     } catch (e) {
       print(e);
     } finally {

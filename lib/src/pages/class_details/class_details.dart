@@ -42,14 +42,18 @@ class _ClassDetailsState extends State<ClassDetails>
   final GalleryBloc galleryBloc = kiwi.Container().resolve<GalleryBloc>();
 
   void initState() {
-    galleryBloc.init();
-    galleryBloc.getGroupedByThumbnail(widget.schedule.classId);
+    initializeGalleryDb();
     randomizerBloc.initializeRandomizer(widget.scheduleResponseData.students);
     pageController = PageController();
     pageController.addListener(() {
       setState(() {});
     });
     super.initState();
+  }
+
+  void initializeGalleryDb() async {
+    await galleryBloc.init();
+    galleryBloc.getGroupedByThumbnail(widget.schedule.classId);
   }
 
   @override
