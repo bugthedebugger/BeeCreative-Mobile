@@ -8,6 +8,7 @@ import 'package:BeeCreative/src/data/models/student/student_model.dart';
 import 'package:BeeCreative/src/pages/class_details/attendance.dart';
 import 'package:BeeCreative/src/widgets/app_bar/app_bar.dart';
 import 'package:BeeCreative/src/widgets/class_details_notification_card/class_details_notification_card.dart';
+import 'package:BeeCreative/src/widgets/class_details_widget.dart/class_details_widget.dart';
 import 'package:BeeCreative/src/widgets/drawer/drawer.dart';
 import 'package:BeeCreative/src/widgets/schedule_card/schedule_card.dart';
 import 'package:BeeCreative/src/widgets/schedule_card/schedule_theme_data.dart';
@@ -76,6 +77,7 @@ class _ClassDetailsState extends State<ClassDetails>
       drawer: AppDrawer(),
       backgroundColor: Colors.white,
       body: PageView(
+        key: PageStorageKey<String>(widget.schedule.toString()),
         controller: pageController,
         onPageChanged: (pageNumber) {
           page = pageNumber;
@@ -84,29 +86,9 @@ class _ClassDetailsState extends State<ClassDetails>
           parent: AlwaysScrollableScrollPhysics(),
         ),
         children: <Widget>[
-          ListView(
-            children: <Widget>[
-              ScheduleCard(
-                schedule: widget.schedule,
-                buttonLabel: 'See More',
-                timeOfDay: widget.timeOfDay,
-                openCard: true,
-                function: null,
-              ),
-              BlocProvider(
-                bloc: galleryBloc,
-                child: ClassDetailsNotificationCard(schedule: widget.schedule),
-              ),
-              StreamBuilder<Map<DateTime, List<Gallery>>>(
-                stream: galleryBloc.groupedGalleryStream,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ThumbnailGallery(galleries: snapshot.data);
-                  } else
-                    return Container();
-                },
-              ),
-            ],
+          BlocProvider(
+            bloc: galleryBloc,
+            child: ClassDetailsPageWidget(data: widget),
           ),
           StudentAttendancePage(
             scheduleResponseData: widget.scheduleResponseData,

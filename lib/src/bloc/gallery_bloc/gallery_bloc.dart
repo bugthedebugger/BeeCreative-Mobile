@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:BeeCreative/src/bloc/bloc_provider.dart';
 import 'package:BeeCreative/src/bloc/gallery_bloc/gallery_events.dart';
 import 'package:BeeCreative/src/data/database/database_name.dart';
@@ -56,6 +58,46 @@ class GalleryBloc extends Bloc {
       _mapTakePhoto(event);
     } else if (event is GetGroupedByThumbnail) {
       _mapGetGroupedByThumbnail(event);
+    } else if (event is UploadFromGallery) {
+      _mapUploadFromGallery(event);
+    }
+  }
+
+  void uploadFromGallery(Schedule schedule) {
+    dispatch(UploadFromGallery((b) => b..schedule.replace(schedule)));
+  }
+
+  void _mapUploadFromGallery(UploadFromGallery event) async {
+    try {
+      Map<String, String> imagesMap =
+          await FilePicker.getMultiFilePath(type: FileType.IMAGE);
+      var images = imagesMap.values;
+      List<Gallery> galleries = List<Gallery>();
+      images.forEach((image) {
+        DateTime now = DateTime.now();
+        Gallery gallery = Gallery();
+        gallery.classId = event.schedule.classId;
+        gallery.scheduleId = event.schedule.scheduleId;
+        gallery.schoolId = event.schedule.scheduleId;
+        gallery.imagePath = image;
+        gallery.imageAlias = _aliasName(
+          event.schedule.schoolName,
+          event.schedule.grade,
+          event.schedule.section,
+          image,
+        );
+        gallery.uploaded = false;
+        gallery.deliveryDate = DateTime.parse(event.schedule.deliveryDate);
+        gallery.createdAt = now;
+        gallery.updatedAt = now;
+        galleries.add(gallery);
+      });
+      await _dbProvider.open(_path);
+      await _dbProvider.insertAll(galleries);
+
+      getGroupedByThumbnail(event.schedule.classId);
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -96,6 +138,10 @@ class GalleryBloc extends Bloc {
     dispatch(TakePhoto((b) => b..schedule.replace(schedule)));
   }
 
+  String _aliasName(String school, String grade, String section, String image) {
+    return '$school\_$grade\_$section\_${image.substring(image.lastIndexOf("/") + 1)}';
+  }
+
   void _mapTakePhoto(TakePhoto event) async {
     try {
       await _dbProvider.open(_path);
@@ -106,15 +152,12 @@ class GalleryBloc extends Bloc {
       gallery.scheduleId = event.schedule.scheduleId;
       gallery.schoolId = event.schedule.scheduleId;
       gallery.imagePath = image.path;
-      gallery.imageAlias = event.schedule.schoolName +
-          '_' +
-          event.schedule.grade +
-          '_' +
-          event.schedule.section +
-          '_' +
-          image.path
-              .toString()
-              .substring(image.path.toString().lastIndexOf('/') + 1);
+      gallery.imageAlias = _aliasName(
+        event.schedule.schoolName,
+        event.schedule.grade,
+        event.schedule.section,
+        image.path.toString(),
+      );
       gallery.uploaded = false;
       gallery.deliveryDate = DateTime.parse(event.schedule.deliveryDate);
       gallery.createdAt = now;
@@ -122,10 +165,9 @@ class GalleryBloc extends Bloc {
       gallery = await _dbProvider.insert(gallery);
       List<Gallery> galleries =
           await _dbProvider.getGallery(event.schedule.classId);
-      addData(galleries);
       Map<DateTime, List<Gallery>> groupedGallery =
           await _dbProvider.getGroupedByThumbnail(event.schedule.classId);
-      addGrouped(groupedGallery);
+      update(galleries: galleries, groupedGallery: groupedGallery);
     } catch (e) {
       print(e);
     } finally {
@@ -142,12 +184,20 @@ class GalleryBloc extends Bloc {
       await _dbProvider.open(_path);
       List<Gallery> galleries =
           await _dbProvider.getGallery(event.classId, limit: 3);
-      addData(galleries);
+      update(galleries: galleries);
     } catch (e) {
       print(e);
     } finally {
       await _dbProvider.close();
     }
+  }
+
+  void update({
+    List<Gallery> galleries,
+    Map<DateTime, List<Gallery>> groupedGallery,
+  }) {
+    addData(galleries);
+    addGrouped(groupedGallery);
   }
 
   void addData(List<Gallery> galleries) {
@@ -167,5 +217,6 @@ class GalleryBloc extends Bloc {
     _galleryEventsStreamController.close();
     _galleryStreamController.close();
     _groupedGalleryStreamController.close();
+    _dbProvider.close();
   }
 }

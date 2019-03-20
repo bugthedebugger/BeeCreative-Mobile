@@ -47,15 +47,23 @@ class GalleryDBProvider {
   }
 
   /// insert multiple gallery
-  Future<List<Gallery>> insertAll(List<Gallery> galleries) async {
+  Future insertAll(List<Gallery> galleries) async {
     DateTime now = DateTime.now();
-    galleries.forEach((gallery) async {
-      gallery.createdAt = now;
-      gallery.updatedAt = now;
-      gallery.id = await db.insert(tableGallery, gallery.toMap());
-    });
+    // galleries.forEach((gallery) async {
+    //   gallery.createdAt = now;
+    //   gallery.updatedAt = now;
+    //   gallery.id = await db.insert(tableGallery, gallery.toMap());
+    // });
 
-    return galleries;
+    return await db.transaction((txn) async {
+      var batch = txn.batch();
+      galleries.forEach((gallery) {
+        gallery.createdAt = now;
+        gallery.updatedAt = now;
+        batch.insert(tableGallery, gallery.toMap());
+      });
+      return await batch.commit();
+    });
   }
 
   /// update gallery

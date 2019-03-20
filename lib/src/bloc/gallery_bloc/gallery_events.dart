@@ -31,7 +31,7 @@ abstract class TakePhoto extends GalleryEvents
 
 abstract class UploadFromGallery extends GalleryEvents
     implements Built<UploadFromGallery, UploadFromGalleryBuilder> {
-  // fields go here
+  Schedule get schedule;
 
   UploadFromGallery._();
 
@@ -50,7 +50,7 @@ abstract class PhotoTaken extends GalleryEvents
 
 abstract class UploadedFromGallery extends GalleryEvents
     implements Built<UploadedFromGallery, UploadedFromGalleryBuilder> {
-  // fields go here
+  Schedule get schedule;
 
   UploadedFromGallery._();
 

@@ -2,14 +2,13 @@
 
 New version of BeeCreative Mobile App.
 
-
-## Packages Used
-- Google Auth: https://pub.dartlang.org/packages/googleapis_auth
-- Google API: https://pub.dartlang.org/packages/googleapis
-- HTTP: https://pub.dartlang.org/packages/http
-
-
 ## References
+Google Auth:
+- https://pub.dartlang.org/packages/googleapis_auth
+
+Google Api:
+- https://pub.dartlang.org/packages/googleapis
+
 Google Drive:
 - https://pub.dartlang.org/documentation/googleapis/latest/googleapis.drive.v3/googleapis.drive.v3-library.html
 - https://github.com/dart-lang/googleapis_examples/tree/master/drive_upload_download_console
@@ -34,4 +33,11 @@ Icon Pack:
 Serialization:
 - https://pub.dartlang.org/packages/built_value
 - https://pub.dartlang.org/packages/built_collection
+
+Camera/gallery/image picker:
+- https://pub.dartlang.org/packages/image_picker
+- https://pub.dartlang.org/packages/file_picker
+
+Sqlite Database:
+- https://pub.dartlang.org/packages/sqflite
 

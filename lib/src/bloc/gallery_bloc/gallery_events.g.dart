@@ -172,10 +172,17 @@ class TakePhotoBuilder implements Builder<TakePhoto, TakePhotoBuilder> {
 }
 
 class _$UploadFromGallery extends UploadFromGallery {
+  @override
+  final Schedule schedule;
+
   factory _$UploadFromGallery([void updates(UploadFromGalleryBuilder b)]) =>
       (new UploadFromGalleryBuilder()..update(updates)).build();
 
-  _$UploadFromGallery._() : super._();
+  _$UploadFromGallery._({this.schedule}) : super._() {
+    if (schedule == null) {
+      throw new BuiltValueNullFieldError('UploadFromGallery', 'schedule');
+    }
+  }
 
   @override
   UploadFromGallery rebuild(void updates(UploadFromGalleryBuilder b)) =>
@@ -188,17 +195,19 @@ class _$UploadFromGallery extends UploadFromGallery {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is UploadFromGallery;
+    return other is UploadFromGallery && schedule == other.schedule;
   }
 
   @override
   int get hashCode {
-    return 715557682;
+    return $jf($jc(0, schedule.hashCode));
   }
 
   @override
   String toString() {
-    return newBuiltValueToStringHelper('UploadFromGallery').toString();
+    return (newBuiltValueToStringHelper('UploadFromGallery')
+          ..add('schedule', schedule))
+        .toString();
   }
 }
 
@@ -206,7 +215,19 @@ class UploadFromGalleryBuilder
     implements Builder<UploadFromGallery, UploadFromGalleryBuilder> {
   _$UploadFromGallery _$v;
 
+  ScheduleBuilder _schedule;
+  ScheduleBuilder get schedule => _$this._schedule ??= new ScheduleBuilder();
+  set schedule(ScheduleBuilder schedule) => _$this._schedule = schedule;
+
   UploadFromGalleryBuilder();
+
+  UploadFromGalleryBuilder get _$this {
+    if (_$v != null) {
+      _schedule = _$v.schedule?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
 
   @override
   void replace(UploadFromGallery other) {
@@ -223,7 +244,20 @@ class UploadFromGalleryBuilder
 
   @override
   _$UploadFromGallery build() {
-    final _$result = _$v ?? new _$UploadFromGallery._();
+    _$UploadFromGallery _$result;
+    try {
+      _$result = _$v ?? new _$UploadFromGallery._(schedule: schedule.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'schedule';
+        schedule.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'UploadFromGallery', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
@@ -286,10 +320,17 @@ class PhotoTakenBuilder implements Builder<PhotoTaken, PhotoTakenBuilder> {
 }
 
 class _$UploadedFromGallery extends UploadedFromGallery {
+  @override
+  final Schedule schedule;
+
   factory _$UploadedFromGallery([void updates(UploadedFromGalleryBuilder b)]) =>
       (new UploadedFromGalleryBuilder()..update(updates)).build();
 
-  _$UploadedFromGallery._() : super._();
+  _$UploadedFromGallery._({this.schedule}) : super._() {
+    if (schedule == null) {
+      throw new BuiltValueNullFieldError('UploadedFromGallery', 'schedule');
+    }
+  }
 
   @override
   UploadedFromGallery rebuild(void updates(UploadedFromGalleryBuilder b)) =>
@@ -302,17 +343,19 @@ class _$UploadedFromGallery extends UploadedFromGallery {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is UploadedFromGallery;
+    return other is UploadedFromGallery && schedule == other.schedule;
   }
 
   @override
   int get hashCode {
-    return 254850942;
+    return $jf($jc(0, schedule.hashCode));
   }
 
   @override
   String toString() {
-    return newBuiltValueToStringHelper('UploadedFromGallery').toString();
+    return (newBuiltValueToStringHelper('UploadedFromGallery')
+          ..add('schedule', schedule))
+        .toString();
   }
 }
 
@@ -320,7 +363,19 @@ class UploadedFromGalleryBuilder
     implements Builder<UploadedFromGallery, UploadedFromGalleryBuilder> {
   _$UploadedFromGallery _$v;
 
+  ScheduleBuilder _schedule;
+  ScheduleBuilder get schedule => _$this._schedule ??= new ScheduleBuilder();
+  set schedule(ScheduleBuilder schedule) => _$this._schedule = schedule;
+
   UploadedFromGalleryBuilder();
+
+  UploadedFromGalleryBuilder get _$this {
+    if (_$v != null) {
+      _schedule = _$v.schedule?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
 
   @override
   void replace(UploadedFromGallery other) {
@@ -337,7 +392,20 @@ class UploadedFromGalleryBuilder
 
   @override
   _$UploadedFromGallery build() {
-    final _$result = _$v ?? new _$UploadedFromGallery._();
+    _$UploadedFromGallery _$result;
+    try {
+      _$result = _$v ?? new _$UploadedFromGallery._(schedule: schedule.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'schedule';
+        schedule.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'UploadedFromGallery', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

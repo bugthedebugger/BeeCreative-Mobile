@@ -66,7 +66,10 @@ class ClassDetailsNotificationCard extends StatelessWidget {
                         children: <Widget>[
                           RaisedButton(
                             elevation: 0,
-                            onPressed: () {},
+                            onPressed: () {
+                              BlocProvider.of<GalleryBloc>(context)
+                                  .uploadFromGallery(schedule);
+                            },
                             color: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
