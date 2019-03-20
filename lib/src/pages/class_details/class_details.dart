@@ -1,5 +1,8 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
+import 'package:BeeCreative/src/bloc/bloc_provider.dart';
+import 'package:BeeCreative/src/bloc/gallery_bloc/gallery_bloc_export.dart';
 import 'package:BeeCreative/src/bloc/student_randomizer_bloc/student_randomizer_bloc_export.dart';
+import 'package:BeeCreative/src/data/models/gallery/gallery.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:BeeCreative/src/data/models/student/student_model.dart';
 import 'package:BeeCreative/src/pages/class_details/attendance.dart';
@@ -8,6 +11,7 @@ import 'package:BeeCreative/src/widgets/class_details_notification_card/class_de
 import 'package:BeeCreative/src/widgets/drawer/drawer.dart';
 import 'package:BeeCreative/src/widgets/schedule_card/schedule_card.dart';
 import 'package:BeeCreative/src/widgets/schedule_card/schedule_theme_data.dart';
+import 'package:BeeCreative/src/widgets/thumbnail_gallery/thumbnail_gallery.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
@@ -34,8 +38,11 @@ class _ClassDetailsState extends State<ClassDetails>
   int prevPage = 0;
   final StudentRandomizerBloc randomizerBloc =
       kiwi.Container().resolve<StudentRandomizerBloc>();
+  final GalleryBloc galleryBloc = kiwi.Container().resolve<GalleryBloc>();
 
   void initState() {
+    galleryBloc.init();
+    galleryBloc.getGroupedByThumbnail(widget.schedule.classId);
     randomizerBloc.initializeRandomizer(widget.scheduleResponseData.students);
     pageController = PageController();
     pageController.addListener(() {
@@ -48,6 +55,7 @@ class _ClassDetailsState extends State<ClassDetails>
   void dispose() {
     pageController.dispose();
     randomizerBloc.dispose();
+    galleryBloc.dispose();
     super.dispose();
   }
 
@@ -83,9 +91,21 @@ class _ClassDetailsState extends State<ClassDetails>
                 buttonLabel: 'See More',
                 timeOfDay: widget.timeOfDay,
                 openCard: true,
-                function: () {},
+                function: null,
               ),
-              ClassDetailsNotificationCard(),
+              BlocProvider(
+                bloc: galleryBloc,
+                child: ClassDetailsNotificationCard(schedule: widget.schedule),
+              ),
+              StreamBuilder<Map<DateTime, List<Gallery>>>(
+                stream: galleryBloc.groupedGalleryStream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ThumbnailGallery(galleries: snapshot.data);
+                  } else
+                    return Container();
+                },
+              ),
             ],
           ),
           StudentAttendancePage(
@@ -280,6 +300,16 @@ class _ClassDetailsState extends State<ClassDetails>
               child: Icon(
                 FontAwesomeIcons.dice,
                 color: (page == 3) ? themeColor : Color(AppColors.shadowColor),
+                size: ScreenUtil().setHeight(18),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                galleryBloc.takePhoto(widget.schedule);
+              },
+              child: Icon(
+                FontAwesomeIcons.camera,
+                color: (page == 4) ? themeColor : Color(AppColors.shadowColor),
                 size: ScreenUtil().setHeight(18),
               ),
             ),
