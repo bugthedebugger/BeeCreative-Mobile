@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/data/models/gallery/gallery.dart';
@@ -21,6 +22,8 @@ class ThumbnailWidget extends StatelessWidget {
       allowFontScaling: true,
     )..init(context);
 
+    Uint8List image = File(gallery.imagePath).readAsBytesSync();
+
     return Padding(
       padding: EdgeInsets.all(ScreenUtil().setWidth(5)),
       child: Container(
@@ -28,7 +31,8 @@ class ThumbnailWidget extends StatelessWidget {
         height: ScreenUtil().setHeight(101),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: FileImage(File(gallery.imagePath)),
+            // image: FileImage(File(gallery.imagePath)),
+            image: MemoryImage(image),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(15),
