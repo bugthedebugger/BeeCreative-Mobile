@@ -22,7 +22,20 @@ class ThumbnailWidget extends StatelessWidget {
       allowFontScaling: true,
     )..init(context);
 
-    Uint8List image = File(gallery.imagePath).readAsBytesSync();
+    File image =
+        File(gallery.cachePath == null ? gallery.imagePath : gallery.cachePath);
+
+    /*
+    if (gallery.cachePath == null) {
+      // print(gallery.toMap());
+      print(image.lengthInBytes);
+      print('${gallery.id} loading from original');
+    } else {
+      // print(gallery.toMap());
+      print(image.lengthInBytes);
+      print('${gallery.id} loading from cache');
+    }
+    */
 
     return Padding(
       padding: EdgeInsets.all(ScreenUtil().setWidth(5)),
@@ -31,8 +44,7 @@ class ThumbnailWidget extends StatelessWidget {
         height: ScreenUtil().setHeight(101),
         decoration: BoxDecoration(
           image: DecorationImage(
-            // image: FileImage(File(gallery.imagePath)),
-            image: MemoryImage(image),
+            image: FileImage(image),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(15),

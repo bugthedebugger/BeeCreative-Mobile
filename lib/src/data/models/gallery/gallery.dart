@@ -7,6 +7,7 @@ class Gallery {
   int classId;
   int schoolId;
   String imagePath;
+  String cachePath;
   String imageAlias;
   String driveFolderId;
   String driveId;
@@ -22,6 +23,7 @@ class Gallery {
       columnClassId: classId,
       columnSchoolId: schoolId,
       columnImagePath: imagePath,
+      columnCachePath: cachePath,
       columnImageAlias: imageAlias,
       columnDriveFolderId: driveFolderId,
       columnDriveId: driveId,
@@ -43,6 +45,7 @@ class Gallery {
     schoolId = map[columnSchoolId];
     scheduleId = map[columnScheduleId];
     imagePath = map[columnImagePath];
+    cachePath = map[columnCachePath];
     imageAlias = map[columnImageAlias];
     driveFolderId = map[columnDriveFolderId];
     driveId = map[columnDriveId];

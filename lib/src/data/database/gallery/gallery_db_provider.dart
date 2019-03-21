@@ -23,6 +23,7 @@ class GalleryDBProvider {
         $columnClassId INTEGER NOT NULL,
         $columnSchoolId INTEGER NOT NULL,
         $columnImagePath TEXT NOT NULL,
+        $columnCachePath TEXT,
         $columnImageAlias TEXT NOT NULL,
         $columnDriveFolderId TEXT,
         $columnDriveId TEXT,
@@ -39,9 +40,19 @@ class GalleryDBProvider {
       onCreate: (Database db, int version) async {
         db.execute(query);
       },
+      onUpgrade: _onUpgrade,
     );
 
+    // test();
+
     return db.isOpen;
+  }
+
+  _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    String addCachePath =
+        '''ALTER TABLE $tableGallery ADD $columnCachePath TEXT;''';
+
+    if (oldVersion <= 1) await db.execute(addCachePath);
   }
 
   /// insert data in gallery
@@ -73,6 +84,28 @@ class GalleryDBProvider {
     });
   }
 
+  /// update list of gallery
+  Future updateAll(List<Gallery> galleries) async {
+    if (galleries.length <= 0) return null;
+
+    DateTime now = DateTime.now();
+
+    return await db.transaction((txn) async {
+      var batch = txn.batch();
+      galleries.forEach((gallery) {
+        gallery.updatedAt = now;
+        batch.update(
+          tableGallery,
+          gallery.toMap(),
+          where: '$columnId = ?',
+          whereArgs: [gallery.id],
+        );
+      });
+
+      return await batch.commit();
+    });
+  }
+
   /// update gallery
   Future<Gallery> update(Gallery gallery) async {
     DateTime now = DateTime.now();
@@ -93,7 +126,7 @@ class GalleryDBProvider {
     List<Map> map = await db.query(
       tableGallery,
       columns: galleryColumns,
-      limit: 500,
+      limit: limit,
       orderBy: columnDeliveryDate,
       where: '$columnClassId = ?',
       whereArgs: [classId],
@@ -134,6 +167,7 @@ class GalleryDBProvider {
     Map<DateTime, List<Gallery>> thumbnails = Map<DateTime, List<Gallery>>();
     thumbnails = await getGroupedByDeliveryDate(classId);
     var keys = thumbnails.keys.toList();
+
     if (keys.length <= 3) {
       return thumbnails;
     } else {

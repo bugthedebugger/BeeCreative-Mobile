@@ -22,6 +22,9 @@ final columnDriveId = 'drive_id';
 /// image path
 final columnImagePath = 'image_path';
 
+/// image cache path
+final columnCachePath = 'cache_path';
+
 /// image alias
 final columnImageAlias = 'image_alias';
 
@@ -49,6 +52,7 @@ final galleryColumns = [
   columnDriveFolderId,
   columnDriveId,
   columnImagePath,
+  columnCachePath,
   columnImageAlias,
   columnDescription,
   columnUploaded,

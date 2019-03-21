@@ -10,10 +10,13 @@ import 'package:path/path.dart';
 import 'dart:async';
 import 'package:image_picker/image_picker.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class GalleryBloc extends Bloc {
   GalleryDBProvider _dbProvider;
   String _path;
+  Directory tempDir;
 
   GalleryBloc(this._dbProvider) {
     initDatabase();
@@ -46,6 +49,7 @@ class GalleryBloc extends Bloc {
 
   Future init() async {
     _galleryEventsStreamController.stream.listen(_mapEventsToState);
+    tempDir = await getTemporaryDirectory();
     return await initDatabase();
   }
 
@@ -75,7 +79,7 @@ class GalleryBloc extends Bloc {
       if (imagesMap != null) {
         var images = imagesMap.values;
         List<Gallery> galleries = List<Gallery>();
-        images.forEach((image) {
+        images.forEach((image) async {
           DateTime now = DateTime.now();
           Gallery gallery = Gallery();
           gallery.classId = event.schedule.classId;
@@ -96,8 +100,8 @@ class GalleryBloc extends Bloc {
         });
         await _dbProvider.open(_path);
         await _dbProvider.insertAll(galleries);
-
-        getGroupedByThumbnail(event.schedule.classId);
+        _cacheGallery(galleries)
+            .then((_) => getGroupedByThumbnail(event.schedule.classId));
       }
     } catch (e) {
       print(e);
@@ -113,11 +117,10 @@ class GalleryBloc extends Bloc {
       await _dbProvider.open(_path);
       Map<DateTime, List<Gallery>> groupedGallery =
           await _dbProvider.getGroupedByThumbnail(event.classId);
-      addGrouped(groupedGallery);
+      List<Gallery> galleries = await _dbProvider.getGallery(event.classId);
+      _cacheGallery(galleries).then((_) => addGrouped(groupedGallery));
     } catch (e) {
       print(e);
-    } finally {
-      await _dbProvider.close();
     }
   }
 
@@ -129,7 +132,7 @@ class GalleryBloc extends Bloc {
     try {
       await _dbProvider.open(_path);
       List<Gallery> galleries = await _dbProvider.getGallery(event.classId);
-      update(galleries: galleries);
+      _cacheGallery(galleries).then((_) => update(galleries: galleries));
     } catch (e) {
       print(e);
     } finally {
@@ -172,12 +175,11 @@ class GalleryBloc extends Bloc {
             await _dbProvider.getGallery(event.schedule.classId);
         Map<DateTime, List<Gallery>> groupedGallery =
             await _dbProvider.getGroupedByThumbnail(event.schedule.classId);
-        update(galleries: galleries, groupedGallery: groupedGallery);
+        _cacheGallery(galleries).then((_) =>
+            update(galleries: galleries, groupedGallery: groupedGallery));
       }
     } catch (e) {
       print(e);
-    } finally {
-      await _dbProvider.close();
     }
   }
 
@@ -190,7 +192,7 @@ class GalleryBloc extends Bloc {
       await _dbProvider.open(_path);
       List<Gallery> galleries =
           await _dbProvider.getGallery(event.classId, limit: 3);
-      update(galleries: galleries);
+      _cacheGallery(galleries).then((_) => update(galleries: galleries));
     } catch (e) {
       print(e);
     } finally {
@@ -204,6 +206,37 @@ class GalleryBloc extends Bloc {
   }) {
     addData(galleries);
     addGrouped(groupedGallery);
+  }
+
+  String cachGalleryPath(Gallery gallery) {
+    String cachePath = tempDir.path + '/' + gallery.imageAlias;
+    return cachePath;
+  }
+
+  Future _cacheGallery(List<Gallery> galleries) async {
+    await _dbProvider.open(_path);
+    if (tempDir == null) tempDir = await getTemporaryDirectory();
+    List<Gallery> updateGalleries = List<Gallery>();
+
+    galleries.forEach((gallery) async {
+      if (gallery.cachePath == null) {
+        gallery.cachePath = cachGalleryPath(gallery);
+        updateGalleries.add(gallery);
+      }
+      bool cacheExists = await File(gallery.cachePath).exists();
+
+      if (!cacheExists) {
+        updateGalleries.remove(gallery);
+        updateGalleries.add(gallery);
+        await FlutterImageCompress.compressAndGetFile(
+          gallery.imagePath,
+          gallery.cachePath,
+          quality: 10,
+        );
+      }
+    });
+
+    return await _dbProvider.updateAll(updateGalleries);
   }
 
   void addData(List<Gallery> galleries) {
