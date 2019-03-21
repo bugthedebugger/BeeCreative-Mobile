@@ -36,7 +36,7 @@ class GalleryDBProvider {
     ''';
     db = await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: (Database db, int version) async {
         db.execute(query);
       },
