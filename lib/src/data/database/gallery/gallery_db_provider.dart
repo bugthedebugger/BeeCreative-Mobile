@@ -139,6 +139,26 @@ class GalleryDBProvider {
     return gallery.reversed.toList();
   }
 
+  Future<List<Gallery>> getGalleryForUpload(int classId,
+      {int limit = 500}) async {
+    List<Gallery> gallery = List<Gallery>();
+
+    List<Map> map = await db.query(
+      tableGallery,
+      columns: galleryColumns,
+      limit: limit,
+      orderBy: columnDeliveryDate,
+      where: '$columnClassId = ? AND $columnDriveId IS NULL',
+      whereArgs: [classId],
+    );
+
+    map.forEach((map) {
+      gallery.add(Gallery.fromMap(map));
+    });
+
+    return gallery.reversed.toList();
+  }
+
   Future<Map<DateTime, List<Gallery>>> getGroupedByDeliveryDate(int classId,
       {int limit = 500}) async {
     List<Gallery> gallery = List<Gallery>();
@@ -147,6 +167,7 @@ class GalleryDBProvider {
       tableGallery,
       columns: galleryColumns,
       where: '$columnClassId = ?',
+      orderBy: columnDeliveryDate,
       whereArgs: [classId],
     );
 
@@ -162,16 +183,16 @@ class GalleryDBProvider {
     return newMap;
   }
 
-  Future<Map<DateTime, List<Gallery>>> getGroupedByThumbnail(
-      int classId) async {
+  Future<Map<DateTime, List<Gallery>>> getGroupedByThumbnail(int classId,
+      {int limit = 500}) async {
     Map<DateTime, List<Gallery>> thumbnails = Map<DateTime, List<Gallery>>();
     thumbnails = await getGroupedByDeliveryDate(classId);
     var keys = thumbnails.keys.toList();
 
-    if (keys.length <= 3) {
+    if (keys.length <= limit) {
       return thumbnails;
     } else {
-      for (int i = 3; i <= keys.length; i++) {
+      for (int i = 3; i < keys.length; i++) {
         thumbnails.remove(keys[i]);
       }
       return thumbnails;

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:BeeCreative/src/assets_repo/google_drive_client.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:BeeCreative/src/bloc/bloc_provider.dart';
 import 'package:BeeCreative/src/bloc/gallery_bloc/gallery_events.dart';
@@ -12,11 +13,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:googleapis/drive/v3.dart' as googleDrive;
+import 'package:googleapis_auth/auth_io.dart';
 
 class GalleryBloc extends Bloc {
   GalleryDBProvider _dbProvider;
   String _path;
   Directory tempDir;
+  AutoRefreshingAuthClient _client;
 
   GalleryBloc(this._dbProvider) {
     initDatabase();
@@ -47,6 +51,10 @@ class GalleryBloc extends Bloc {
     _path = join(databasePath, DATABASE_NAME);
   }
 
+  void reInit() {
+    _galleryEventsStreamController.stream.listen(_mapEventsToState);
+  }
+
   Future init() async {
     _galleryEventsStreamController.stream.listen(_mapEventsToState);
     tempDir = await getTemporaryDirectory();
@@ -64,6 +72,72 @@ class GalleryBloc extends Bloc {
       _mapGetGroupedByThumbnail(event);
     } else if (event is UploadFromGallery) {
       _mapUploadFromGallery(event);
+    } else if (event is SyncToGoogleDrive) {
+      _mapSyncToGoogleDrive(event);
+    }
+  }
+
+  void syncToGoogleDrive(int classId) {
+    dispatch(SyncToGoogleDrive((b) => b..classId = classId));
+  }
+
+  Future _initGoogleDrive() async {
+    ServiceAccountCredentials _credentials =
+        ServiceAccountCredentials.fromJson(GOOGLE_DRIVE_CREDENTIAL);
+    _client = await clientViaServiceAccount(
+      _credentials,
+      [googleDrive.DriveApi.DriveScope],
+    );
+    return;
+  }
+
+  void _mapSyncToGoogleDrive(SyncToGoogleDrive event) async {
+    try {
+      int uploadCount = 0;
+      List<Gallery> galleries = await _dbProvider.getGallery(event.classId);
+      dispatch(
+        SyncingToGoogleDrive((b) => b
+          ..total = galleries.length
+          ..done = uploadCount),
+      );
+      await _initGoogleDrive();
+      googleDrive.DriveApi api = googleDrive.DriveApi(_client);
+      List<Gallery> updateGalleries = List<Gallery>();
+
+      for (Gallery gallery in galleries) {
+        googleDrive.File file = googleDrive.File();
+
+        File tempFile = File(gallery.imagePath);
+
+        file.name = gallery.imageAlias;
+        file.description = gallery.description;
+
+        if (gallery.driveFolderId == null)
+          gallery.driveFolderId = UNRACKED_FOLDER_ID;
+
+        file.parents = [gallery.driveFolderId];
+        file.kind = 'drive#file';
+
+        googleDrive.Media media =
+            googleDrive.Media(tempFile.openRead(), tempFile.lengthSync());
+
+        googleDrive.File uploaded =
+            await api.files.create(file, uploadMedia: media);
+
+        gallery.driveId = uploaded.id;
+        gallery.uploaded = true;
+        updateGalleries.add(gallery);
+        uploadCount++;
+        dispatch(
+          SyncingToGoogleDrive((b) => b
+            ..total = galleries.length
+            ..done = uploadCount),
+        );
+      }
+      await _dbProvider.updateAll(updateGalleries);
+      dispatch(SyncingToGoogleDriveCompleted());
+    } catch (_) {
+      dispatch(SyncingToGoogleDriveError((b) => b..message = _.toString()));
     }
   }
 
@@ -108,15 +182,17 @@ class GalleryBloc extends Bloc {
     }
   }
 
-  void getGroupedByThumbnail(int classId) {
-    dispatch(GetGroupedByThumbnail((b) => b..classId = classId));
+  void getGroupedByThumbnail(int classId, {int limit = 500}) {
+    dispatch(GetGroupedByThumbnail((b) => b
+      ..classId = classId
+      ..limit = limit));
   }
 
   void _mapGetGroupedByThumbnail(GetGroupedByThumbnail event) async {
     try {
       await _dbProvider.open(_path);
-      Map<DateTime, List<Gallery>> groupedGallery =
-          await _dbProvider.getGroupedByThumbnail(event.classId);
+      Map<DateTime, List<Gallery>> groupedGallery = await _dbProvider
+          .getGroupedByThumbnail(event.classId, limit: event.limit);
       List<Gallery> galleries = await _dbProvider.getGallery(event.classId);
       _cacheGallery(galleries).then((_) => addGrouped(groupedGallery));
     } catch (e) {

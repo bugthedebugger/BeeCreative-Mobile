@@ -10,7 +10,7 @@ class ScheduleCard extends StatefulWidget {
   final String timeOfDay;
   final Function function;
   final String buttonLabel;
-  bool openCard;
+  final bool openCard;
   ScheduleThemeData scheduleThemeData;
 
   ScheduleCard({

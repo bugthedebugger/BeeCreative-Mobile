@@ -1,0 +1,1 @@
+const String DATABASE_NAME = 'databasename.db';

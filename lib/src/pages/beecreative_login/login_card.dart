@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
-import 'package:BeeCreative/src/bloc/bloc_provider.dart';
 import 'package:BeeCreative/src/bloc/user_bloc/user_events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

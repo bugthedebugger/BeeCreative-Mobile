@@ -1,7 +1,12 @@
+import 'dart:async';
+
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
+import 'package:BeeCreative/src/bloc/bloc_provider.dart';
 import 'package:BeeCreative/src/bloc/gallery_bloc/gallery_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/gallery/gallery.dart';
-import 'package:BeeCreative/src/widgets/thumbnail_widget/thumbnail_widget.dart';
+import 'package:BeeCreative/src/widgets/image_picker/image_picker.dart';
+import 'package:BeeCreative/src/widgets/loading_card/loading_card.dart';
+import 'package:BeeCreative/src/widgets/loading_card/loading_card_with_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
@@ -15,24 +20,44 @@ class PhotoGallery extends StatefulWidget {
   _PhotoGalleryState createState() => _PhotoGalleryState();
 }
 
-class _PhotoGalleryState extends State<PhotoGallery> {
+class _PhotoGalleryState extends State<PhotoGallery>
+    with AutomaticKeepAliveClientMixin {
   GalleryBloc galleryBloc = kiwi.Container().resolve<GalleryBloc>();
+  StreamSubscription sub;
 
   @override
   void initState() {
     initGallery();
+    sub = galleryBloc.galleryEventsStream.listen(
+      (onData) {
+        if (onData is SyncToGoogleDrive) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) {
+              return Dialog(
+                child: LoadingCardWithProgress(
+                  galleryEventStream: galleryBloc.galleryEventsStream,
+                ),
+              );
+            },
+          );
+        }
+      },
+    );
     super.initState();
   }
 
   @override
   void dispose() {
+    sub.cancel();
     galleryBloc.dispose();
     super.dispose();
   }
 
   void initGallery() async {
     await galleryBloc.init();
-    galleryBloc.getFullGallery(widget.classId);
+    galleryBloc.getGroupedByThumbnail(widget.classId);
   }
 
   @override
@@ -65,25 +90,33 @@ class _PhotoGalleryState extends State<PhotoGallery> {
             weight: 'bold',
           ),
         ),
+        actions: <Widget>[
+          Center(
+            child: Padding(
+              padding: EdgeInsets.all(ScreenUtil().setWidth(8)),
+              child: IconButton(
+                onPressed: () {
+                  galleryBloc.reInit();
+                  galleryBloc.syncToGoogleDrive(widget.classId);
+                },
+                icon: Icon(
+                  FontAwesomeIcons.upload,
+                  color: Color(AppColors.meltingCardColor),
+                  size: ScreenUtil().setWidth(14),
+                ),
+              ),
+            ),
+          ),
+        ],
         backgroundColor: Colors.white,
         textTheme: TextTheme(),
       ),
-      body: StreamBuilder<List<Gallery>>(
-        stream: galleryBloc.galleryStream,
+      body: StreamBuilder<Map<DateTime, List<Gallery>>>(
+        stream: galleryBloc.groupedGalleryStream,
         builder: (context, snapshot) {
           if (snapshot.hasData)
-            return GridView.builder(
-              addAutomaticKeepAlives: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-              ),
-              itemCount: snapshot.data.length,
-              itemBuilder: (context, index) {
-                return ThumbnailWidget(
-                  gallery: snapshot.data[index],
-                  count: -1,
-                );
-              },
+            return ImagePicker(
+              groupedGallery: snapshot.data,
             );
           else
             return Container();
@@ -91,4 +124,7 @@ class _PhotoGalleryState extends State<PhotoGallery> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

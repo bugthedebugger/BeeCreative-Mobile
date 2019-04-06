@@ -62,7 +62,7 @@ class AttendanceCard extends StatelessWidget {
                     style: AppFontStyles(context).textStyle15GreyMedium,
                   ),
                   Text(
-                    "Gender",
+                    "${student.gender.toUpperCase()}",
                     style: AppFontStyles(context).textStyle12Grey,
                   )
                 ],

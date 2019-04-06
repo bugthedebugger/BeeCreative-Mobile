@@ -493,14 +493,19 @@ class GetFullGalleryBuilder
 class _$GetGroupedByThumbnail extends GetGroupedByThumbnail {
   @override
   final int classId;
+  @override
+  final int limit;
 
   factory _$GetGroupedByThumbnail(
           [void updates(GetGroupedByThumbnailBuilder b)]) =>
       (new GetGroupedByThumbnailBuilder()..update(updates)).build();
 
-  _$GetGroupedByThumbnail._({this.classId}) : super._() {
+  _$GetGroupedByThumbnail._({this.classId, this.limit}) : super._() {
     if (classId == null) {
       throw new BuiltValueNullFieldError('GetGroupedByThumbnail', 'classId');
+    }
+    if (limit == null) {
+      throw new BuiltValueNullFieldError('GetGroupedByThumbnail', 'limit');
     }
   }
 
@@ -515,18 +520,21 @@ class _$GetGroupedByThumbnail extends GetGroupedByThumbnail {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is GetGroupedByThumbnail && classId == other.classId;
+    return other is GetGroupedByThumbnail &&
+        classId == other.classId &&
+        limit == other.limit;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, classId.hashCode));
+    return $jf($jc($jc(0, classId.hashCode), limit.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('GetGroupedByThumbnail')
-          ..add('classId', classId))
+          ..add('classId', classId)
+          ..add('limit', limit))
         .toString();
   }
 }
@@ -539,11 +547,16 @@ class GetGroupedByThumbnailBuilder
   int get classId => _$this._classId;
   set classId(int classId) => _$this._classId = classId;
 
+  int _limit;
+  int get limit => _$this._limit;
+  set limit(int limit) => _$this._limit = limit;
+
   GetGroupedByThumbnailBuilder();
 
   GetGroupedByThumbnailBuilder get _$this {
     if (_$v != null) {
       _classId = _$v.classId;
+      _limit = _$v.limit;
       _$v = null;
     }
     return this;
@@ -564,7 +577,327 @@ class GetGroupedByThumbnailBuilder
 
   @override
   _$GetGroupedByThumbnail build() {
-    final _$result = _$v ?? new _$GetGroupedByThumbnail._(classId: classId);
+    final _$result =
+        _$v ?? new _$GetGroupedByThumbnail._(classId: classId, limit: limit);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SyncToGoogleDrive extends SyncToGoogleDrive {
+  @override
+  final int classId;
+
+  factory _$SyncToGoogleDrive([void updates(SyncToGoogleDriveBuilder b)]) =>
+      (new SyncToGoogleDriveBuilder()..update(updates)).build();
+
+  _$SyncToGoogleDrive._({this.classId}) : super._() {
+    if (classId == null) {
+      throw new BuiltValueNullFieldError('SyncToGoogleDrive', 'classId');
+    }
+  }
+
+  @override
+  SyncToGoogleDrive rebuild(void updates(SyncToGoogleDriveBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SyncToGoogleDriveBuilder toBuilder() =>
+      new SyncToGoogleDriveBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SyncToGoogleDrive && classId == other.classId;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, classId.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('SyncToGoogleDrive')
+          ..add('classId', classId))
+        .toString();
+  }
+}
+
+class SyncToGoogleDriveBuilder
+    implements Builder<SyncToGoogleDrive, SyncToGoogleDriveBuilder> {
+  _$SyncToGoogleDrive _$v;
+
+  int _classId;
+  int get classId => _$this._classId;
+  set classId(int classId) => _$this._classId = classId;
+
+  SyncToGoogleDriveBuilder();
+
+  SyncToGoogleDriveBuilder get _$this {
+    if (_$v != null) {
+      _classId = _$v.classId;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(SyncToGoogleDrive other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$SyncToGoogleDrive;
+  }
+
+  @override
+  void update(void updates(SyncToGoogleDriveBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SyncToGoogleDrive build() {
+    final _$result = _$v ?? new _$SyncToGoogleDrive._(classId: classId);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SyncingToGoogleDrive extends SyncingToGoogleDrive {
+  @override
+  final int total;
+  @override
+  final int done;
+
+  factory _$SyncingToGoogleDrive(
+          [void updates(SyncingToGoogleDriveBuilder b)]) =>
+      (new SyncingToGoogleDriveBuilder()..update(updates)).build();
+
+  _$SyncingToGoogleDrive._({this.total, this.done}) : super._() {
+    if (total == null) {
+      throw new BuiltValueNullFieldError('SyncingToGoogleDrive', 'total');
+    }
+    if (done == null) {
+      throw new BuiltValueNullFieldError('SyncingToGoogleDrive', 'done');
+    }
+  }
+
+  @override
+  SyncingToGoogleDrive rebuild(void updates(SyncingToGoogleDriveBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SyncingToGoogleDriveBuilder toBuilder() =>
+      new SyncingToGoogleDriveBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SyncingToGoogleDrive &&
+        total == other.total &&
+        done == other.done;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, total.hashCode), done.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('SyncingToGoogleDrive')
+          ..add('total', total)
+          ..add('done', done))
+        .toString();
+  }
+}
+
+class SyncingToGoogleDriveBuilder
+    implements Builder<SyncingToGoogleDrive, SyncingToGoogleDriveBuilder> {
+  _$SyncingToGoogleDrive _$v;
+
+  int _total;
+  int get total => _$this._total;
+  set total(int total) => _$this._total = total;
+
+  int _done;
+  int get done => _$this._done;
+  set done(int done) => _$this._done = done;
+
+  SyncingToGoogleDriveBuilder();
+
+  SyncingToGoogleDriveBuilder get _$this {
+    if (_$v != null) {
+      _total = _$v.total;
+      _done = _$v.done;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(SyncingToGoogleDrive other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$SyncingToGoogleDrive;
+  }
+
+  @override
+  void update(void updates(SyncingToGoogleDriveBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SyncingToGoogleDrive build() {
+    final _$result =
+        _$v ?? new _$SyncingToGoogleDrive._(total: total, done: done);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SyncingToGoogleDriveCompleted extends SyncingToGoogleDriveCompleted {
+  factory _$SyncingToGoogleDriveCompleted(
+          [void updates(SyncingToGoogleDriveCompletedBuilder b)]) =>
+      (new SyncingToGoogleDriveCompletedBuilder()..update(updates)).build();
+
+  _$SyncingToGoogleDriveCompleted._() : super._();
+
+  @override
+  SyncingToGoogleDriveCompleted rebuild(
+          void updates(SyncingToGoogleDriveCompletedBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SyncingToGoogleDriveCompletedBuilder toBuilder() =>
+      new SyncingToGoogleDriveCompletedBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SyncingToGoogleDriveCompleted;
+  }
+
+  @override
+  int get hashCode {
+    return 821526419;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('SyncingToGoogleDriveCompleted')
+        .toString();
+  }
+}
+
+class SyncingToGoogleDriveCompletedBuilder
+    implements
+        Builder<SyncingToGoogleDriveCompleted,
+            SyncingToGoogleDriveCompletedBuilder> {
+  _$SyncingToGoogleDriveCompleted _$v;
+
+  SyncingToGoogleDriveCompletedBuilder();
+
+  @override
+  void replace(SyncingToGoogleDriveCompleted other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$SyncingToGoogleDriveCompleted;
+  }
+
+  @override
+  void update(void updates(SyncingToGoogleDriveCompletedBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SyncingToGoogleDriveCompleted build() {
+    final _$result = _$v ?? new _$SyncingToGoogleDriveCompleted._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SyncingToGoogleDriveError extends SyncingToGoogleDriveError {
+  @override
+  final String message;
+
+  factory _$SyncingToGoogleDriveError(
+          [void updates(SyncingToGoogleDriveErrorBuilder b)]) =>
+      (new SyncingToGoogleDriveErrorBuilder()..update(updates)).build();
+
+  _$SyncingToGoogleDriveError._({this.message}) : super._() {
+    if (message == null) {
+      throw new BuiltValueNullFieldError(
+          'SyncingToGoogleDriveError', 'message');
+    }
+  }
+
+  @override
+  SyncingToGoogleDriveError rebuild(
+          void updates(SyncingToGoogleDriveErrorBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SyncingToGoogleDriveErrorBuilder toBuilder() =>
+      new SyncingToGoogleDriveErrorBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SyncingToGoogleDriveError && message == other.message;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, message.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('SyncingToGoogleDriveError')
+          ..add('message', message))
+        .toString();
+  }
+}
+
+class SyncingToGoogleDriveErrorBuilder
+    implements
+        Builder<SyncingToGoogleDriveError, SyncingToGoogleDriveErrorBuilder> {
+  _$SyncingToGoogleDriveError _$v;
+
+  String _message;
+  String get message => _$this._message;
+  set message(String message) => _$this._message = message;
+
+  SyncingToGoogleDriveErrorBuilder();
+
+  SyncingToGoogleDriveErrorBuilder get _$this {
+    if (_$v != null) {
+      _message = _$v.message;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(SyncingToGoogleDriveError other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$SyncingToGoogleDriveError;
+  }
+
+  @override
+  void update(void updates(SyncingToGoogleDriveErrorBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SyncingToGoogleDriveError build() {
+    final _$result = _$v ?? new _$SyncingToGoogleDriveError._(message: message);
     replace(_$result);
     return _$result;
   }

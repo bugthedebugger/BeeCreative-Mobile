@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 class ApiURL {
-  static String serverUrl = "https://dev.beecreative.asia/";
-  static String _baseUrl = serverUrl + "api/";
-  static String login = _baseUrl + "login/google";
-  static String schedules = _baseUrl + "schedules";
-  static String deliveryReport = _baseUrl + "deliveryreport";
-  static String attendance = _baseUrl + "attendance";
+  static const String serverUrl = "https://dev.beecreative.asia/";
+  static const String _baseUrl = serverUrl + "api/";
+  static const String login = _baseUrl + "login/google";
+  static const String schedules = _baseUrl + "schedules";
+  static const String deliveryReport = _baseUrl + "deliveryreport";
+  static const String attendance = _baseUrl + "attendance";
 }

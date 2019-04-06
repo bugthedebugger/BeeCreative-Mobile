@@ -1,11 +1,7 @@
 library gallery_events;
 
-import 'dart:convert';
-
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
 
 part 'gallery_events.g.dart';
 
@@ -70,9 +66,56 @@ abstract class GetFullGallery extends GalleryEvents
 abstract class GetGroupedByThumbnail extends GalleryEvents
     implements Built<GetGroupedByThumbnail, GetGroupedByThumbnailBuilder> {
   int get classId;
+  int get limit;
 
   GetGroupedByThumbnail._();
 
   factory GetGroupedByThumbnail([updates(GetGroupedByThumbnailBuilder b)]) =
       _$GetGroupedByThumbnail;
+}
+
+abstract class SyncToGoogleDrive extends GalleryEvents
+    implements Built<SyncToGoogleDrive, SyncToGoogleDriveBuilder> {
+  int get classId;
+
+  SyncToGoogleDrive._();
+
+  factory SyncToGoogleDrive([updates(SyncToGoogleDriveBuilder b)]) =
+      _$SyncToGoogleDrive;
+}
+
+abstract class SyncingToGoogleDrive extends GalleryEvents
+    implements Built<SyncingToGoogleDrive, SyncingToGoogleDriveBuilder> {
+  int get total;
+  int get done;
+
+  SyncingToGoogleDrive._();
+
+  factory SyncingToGoogleDrive([updates(SyncingToGoogleDriveBuilder b)]) =
+      _$SyncingToGoogleDrive;
+}
+
+abstract class SyncingToGoogleDriveCompleted extends GalleryEvents
+    implements
+        Built<SyncingToGoogleDriveCompleted,
+            SyncingToGoogleDriveCompletedBuilder> {
+  // fields go here
+
+  SyncingToGoogleDriveCompleted._();
+
+  factory SyncingToGoogleDriveCompleted(
+          [updates(SyncingToGoogleDriveCompletedBuilder b)]) =
+      _$SyncingToGoogleDriveCompleted;
+}
+
+abstract class SyncingToGoogleDriveError extends GalleryEvents
+    implements
+        Built<SyncingToGoogleDriveError, SyncingToGoogleDriveErrorBuilder> {
+  String get message;
+
+  SyncingToGoogleDriveError._();
+
+  factory SyncingToGoogleDriveError(
+          [updates(SyncingToGoogleDriveErrorBuilder b)]) =
+      _$SyncingToGoogleDriveError;
 }

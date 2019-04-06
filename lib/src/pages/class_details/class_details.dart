@@ -2,17 +2,13 @@ import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/bloc/bloc_provider.dart';
 import 'package:BeeCreative/src/bloc/gallery_bloc/gallery_bloc_export.dart';
 import 'package:BeeCreative/src/bloc/student_randomizer_bloc/student_randomizer_bloc_export.dart';
-import 'package:BeeCreative/src/data/models/gallery/gallery.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:BeeCreative/src/data/models/student/student_model.dart';
 import 'package:BeeCreative/src/pages/class_details/attendance.dart';
 import 'package:BeeCreative/src/widgets/app_bar/app_bar.dart';
-import 'package:BeeCreative/src/widgets/class_details_notification_card/class_details_notification_card.dart';
 import 'package:BeeCreative/src/widgets/class_details_widget.dart/class_details_widget.dart';
 import 'package:BeeCreative/src/widgets/drawer/drawer.dart';
-import 'package:BeeCreative/src/widgets/schedule_card/schedule_card.dart';
 import 'package:BeeCreative/src/widgets/schedule_card/schedule_theme_data.dart';
-import 'package:BeeCreative/src/widgets/thumbnail_gallery/thumbnail_gallery.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
@@ -53,7 +49,7 @@ class _ClassDetailsState extends State<ClassDetails>
 
   void initializeGalleryDb() async {
     await galleryBloc.init();
-    galleryBloc.getGroupedByThumbnail(widget.schedule.classId);
+    galleryBloc.getGroupedByThumbnail(widget.schedule.classId, limit: 3);
   }
 
   @override

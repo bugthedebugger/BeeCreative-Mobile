@@ -72,3 +72,4 @@ build/
 **/android/app/google-services.json
 **/android/app/key.jks
 **/lib/src/data/database/database_name.dart
+**/lib/src/assets_repo/google_drive_client.dart

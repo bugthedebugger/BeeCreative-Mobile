@@ -1,7 +1,6 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/widgets/animesh_card/animesh_card.dart';
 import 'package:BeeCreative/src/widgets/schedule_scaffold/scaffold.dart';
-import 'package:BeeCreative/src/widgets/schedule_scaffold/scaffold_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
