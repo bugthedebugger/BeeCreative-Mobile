@@ -94,7 +94,8 @@ class GalleryBloc extends Bloc {
   void _mapSyncToGoogleDrive(SyncToGoogleDrive event) async {
     try {
       int uploadCount = 0;
-      List<Gallery> galleries = await _dbProvider.getGallery(event.classId);
+      List<Gallery> galleries =
+          await _dbProvider.getGalleryForUpload(event.classId);
       dispatch(
         SyncingToGoogleDrive((b) => b
           ..total = galleries.length

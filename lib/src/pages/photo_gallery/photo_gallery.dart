@@ -96,7 +96,6 @@ class _PhotoGalleryState extends State<PhotoGallery>
               padding: EdgeInsets.all(ScreenUtil().setWidth(8)),
               child: IconButton(
                 onPressed: () {
-                  galleryBloc.reInit();
                   galleryBloc.syncToGoogleDrive(widget.classId);
                 },
                 icon: Icon(
