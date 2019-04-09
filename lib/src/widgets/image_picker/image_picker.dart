@@ -1,5 +1,6 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/data/models/gallery/gallery.dart';
+import 'package:BeeCreative/src/widgets/narrative_uploader_widget.dart/narrative_uploader_widget.dart';
 import 'package:BeeCreative/src/widgets/thumbnail_widget/thumbnail_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -116,7 +117,20 @@ class _ImagePickerState extends State<ImagePicker> {
                 bottom: ScreenUtil().setHeight(14),
                 right: ScreenUtil().setWidth(8),
                 child: RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (selectedGallery.length > 0) {
+                      showDialog(
+                        barrierDismissible: false,
+                        builder: (context) => NarrativeUploaderWidget(
+                              galleries: selectedGallery,
+                            ),
+                        context: context,
+                      );
+                    } else {
+                      enabled = false;
+                      setState(() {});
+                    }
+                  },
                   padding: EdgeInsets.symmetric(
                     vertical: ScreenUtil().setHeight(10),
                     horizontal: ScreenUtil().setWidth(25),
@@ -132,7 +146,9 @@ class _ImagePickerState extends State<ImagePicker> {
                         width: ScreenUtil().setWidth(6),
                       ),
                       Text(
-                        "Upload (${selectedGallery.length})",
+                        selectedGallery.length > 0
+                            ? "Upload (${selectedGallery.length})"
+                            : "Cancel",
                         style: AppFontStyles(context).textStyle15White,
                       )
                     ],

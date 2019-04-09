@@ -168,6 +168,7 @@ class GalleryBloc extends Bloc {
             image,
           );
           gallery.uploaded = false;
+          gallery.driveFolderId = event.schedule.folderId;
           gallery.deliveryDate = DateTime.parse(event.schedule.deliveryDate);
           gallery.createdAt = now;
           gallery.updatedAt = now;
@@ -247,6 +248,7 @@ class GalleryBloc extends Bloc {
         gallery.deliveryDate = DateTime.parse(event.schedule.deliveryDate);
         gallery.createdAt = now;
         gallery.updatedAt = now;
+        gallery.driveFolderId = event.schedule.folderId;
         gallery = await _dbProvider.insert(gallery);
         List<Gallery> galleries =
             await _dbProvider.getGallery(event.schedule.classId);

@@ -42,6 +42,8 @@ abstract class Schedule implements Built<Schedule, ScheduleBuilder> {
   @nullable
   @BuiltValueField(wireName: 'delivery_report')
   DeliveryReport get deliveryReport;
+  @BuiltValueField(wireName: 'folder_id')
+  String get folderId;
 
   Schedule._();
 
@@ -53,7 +55,9 @@ abstract class Schedule implements Built<Schedule, ScheduleBuilder> {
 
   static Schedule fromJson(String jsonString) {
     return serializers.deserializeWith(
-        Schedule.serializer, json.decode(jsonString));
+      Schedule.serializer,
+      json.decode(jsonString),
+    );
   }
 
   static Serializer<Schedule> get serializer => _$scheduleSerializer;

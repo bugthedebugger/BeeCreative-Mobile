@@ -1,5 +1,6 @@
 library gallery_events;
 
+import 'package:BeeCreative/src/data/models/gallery/gallery.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:built_value/built_value.dart';
 
@@ -118,4 +119,74 @@ abstract class SyncingToGoogleDriveError extends GalleryEvents
   factory SyncingToGoogleDriveError(
           [updates(SyncingToGoogleDriveErrorBuilder b)]) =
       _$SyncingToGoogleDriveError;
+}
+
+abstract class SyncGalleryToServer extends GalleryEvents
+    implements Built<SyncGalleryToServer, SyncGalleryToServerBuilder> {
+  List<Gallery> get galleries;
+
+  SyncGalleryToServer._();
+
+  factory SyncGalleryToServer([updates(SyncGalleryToServerBuilder b)]) =
+      _$SyncGalleryToServer;
+}
+
+abstract class SyncingGalleryToServerCompleted extends GalleryEvents
+    implements
+        Built<SyncingGalleryToServerCompleted,
+            SyncingGalleryToServerCompletedBuilder> {
+  SyncingGalleryToServerCompleted._();
+
+  factory SyncingGalleryToServerCompleted(
+          [updates(SyncingGalleryToServerCompletedBuilder b)]) =
+      _$SyncingGalleryToServerCompleted;
+}
+
+abstract class SyncingGalleryToServerError extends GalleryEvents
+    implements
+        Built<SyncingGalleryToServerError, SyncingGalleryToServerErrorBuilder> {
+  String get message;
+
+  SyncingGalleryToServerError._();
+
+  factory SyncingGalleryToServerError(
+          [updates(SyncingGalleryToServerErrorBuilder b)]) =
+      _$SyncingGalleryToServerError;
+}
+
+abstract class SyncNarrativeToDrive extends GalleryEvents
+    implements Built<SyncNarrativeToDrive, SyncNarrativeToDriveBuilder> {
+  List<Gallery> get galleries;
+  String get narrativeTitle;
+  String get narrative;
+  String get date;
+
+  SyncNarrativeToDrive._();
+
+  factory SyncNarrativeToDrive([updates(SyncNarrativeToDriveBuilder b)]) =
+      _$SyncNarrativeToDrive;
+}
+
+abstract class SyncingNarrativeToDrive extends GalleryEvents
+    implements Built<SyncingNarrativeToDrive, SyncingNarrativeToDriveBuilder> {
+  int get total;
+  int get done;
+
+  SyncingNarrativeToDrive._();
+
+  factory SyncingNarrativeToDrive([updates(SyncingNarrativeToDriveBuilder b)]) =
+      _$SyncingNarrativeToDrive;
+}
+
+abstract class SyncingNarrativeToDriveError
+    implements
+        Built<SyncingNarrativeToDriveError,
+            SyncingNarrativeToDriveErrorBuilder> {
+  String get message;
+
+  SyncingNarrativeToDriveError._();
+
+  factory SyncingNarrativeToDriveError(
+          [updates(SyncingNarrativeToDriveErrorBuilder b)]) =
+      _$SyncingNarrativeToDriveError;
 }

@@ -903,4 +903,542 @@ class SyncingToGoogleDriveErrorBuilder
   }
 }
 
+class _$SyncGalleryToServer extends SyncGalleryToServer {
+  @override
+  final List<Gallery> galleries;
+
+  factory _$SyncGalleryToServer([void updates(SyncGalleryToServerBuilder b)]) =>
+      (new SyncGalleryToServerBuilder()..update(updates)).build();
+
+  _$SyncGalleryToServer._({this.galleries}) : super._() {
+    if (galleries == null) {
+      throw new BuiltValueNullFieldError('SyncGalleryToServer', 'galleries');
+    }
+  }
+
+  @override
+  SyncGalleryToServer rebuild(void updates(SyncGalleryToServerBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SyncGalleryToServerBuilder toBuilder() =>
+      new SyncGalleryToServerBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SyncGalleryToServer && galleries == other.galleries;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, galleries.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('SyncGalleryToServer')
+          ..add('galleries', galleries))
+        .toString();
+  }
+}
+
+class SyncGalleryToServerBuilder
+    implements Builder<SyncGalleryToServer, SyncGalleryToServerBuilder> {
+  _$SyncGalleryToServer _$v;
+
+  List<Gallery> _galleries;
+  List<Gallery> get galleries => _$this._galleries;
+  set galleries(List<Gallery> galleries) => _$this._galleries = galleries;
+
+  SyncGalleryToServerBuilder();
+
+  SyncGalleryToServerBuilder get _$this {
+    if (_$v != null) {
+      _galleries = _$v.galleries;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(SyncGalleryToServer other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$SyncGalleryToServer;
+  }
+
+  @override
+  void update(void updates(SyncGalleryToServerBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SyncGalleryToServer build() {
+    final _$result = _$v ?? new _$SyncGalleryToServer._(galleries: galleries);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SyncingGalleryToServerCompleted
+    extends SyncingGalleryToServerCompleted {
+  factory _$SyncingGalleryToServerCompleted(
+          [void updates(SyncingGalleryToServerCompletedBuilder b)]) =>
+      (new SyncingGalleryToServerCompletedBuilder()..update(updates)).build();
+
+  _$SyncingGalleryToServerCompleted._() : super._();
+
+  @override
+  SyncingGalleryToServerCompleted rebuild(
+          void updates(SyncingGalleryToServerCompletedBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SyncingGalleryToServerCompletedBuilder toBuilder() =>
+      new SyncingGalleryToServerCompletedBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SyncingGalleryToServerCompleted;
+  }
+
+  @override
+  int get hashCode {
+    return 957072733;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('SyncingGalleryToServerCompleted')
+        .toString();
+  }
+}
+
+class SyncingGalleryToServerCompletedBuilder
+    implements
+        Builder<SyncingGalleryToServerCompleted,
+            SyncingGalleryToServerCompletedBuilder> {
+  _$SyncingGalleryToServerCompleted _$v;
+
+  SyncingGalleryToServerCompletedBuilder();
+
+  @override
+  void replace(SyncingGalleryToServerCompleted other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$SyncingGalleryToServerCompleted;
+  }
+
+  @override
+  void update(void updates(SyncingGalleryToServerCompletedBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SyncingGalleryToServerCompleted build() {
+    final _$result = _$v ?? new _$SyncingGalleryToServerCompleted._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SyncingGalleryToServerError extends SyncingGalleryToServerError {
+  @override
+  final String message;
+
+  factory _$SyncingGalleryToServerError(
+          [void updates(SyncingGalleryToServerErrorBuilder b)]) =>
+      (new SyncingGalleryToServerErrorBuilder()..update(updates)).build();
+
+  _$SyncingGalleryToServerError._({this.message}) : super._() {
+    if (message == null) {
+      throw new BuiltValueNullFieldError(
+          'SyncingGalleryToServerError', 'message');
+    }
+  }
+
+  @override
+  SyncingGalleryToServerError rebuild(
+          void updates(SyncingGalleryToServerErrorBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SyncingGalleryToServerErrorBuilder toBuilder() =>
+      new SyncingGalleryToServerErrorBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SyncingGalleryToServerError && message == other.message;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, message.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('SyncingGalleryToServerError')
+          ..add('message', message))
+        .toString();
+  }
+}
+
+class SyncingGalleryToServerErrorBuilder
+    implements
+        Builder<SyncingGalleryToServerError,
+            SyncingGalleryToServerErrorBuilder> {
+  _$SyncingGalleryToServerError _$v;
+
+  String _message;
+  String get message => _$this._message;
+  set message(String message) => _$this._message = message;
+
+  SyncingGalleryToServerErrorBuilder();
+
+  SyncingGalleryToServerErrorBuilder get _$this {
+    if (_$v != null) {
+      _message = _$v.message;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(SyncingGalleryToServerError other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$SyncingGalleryToServerError;
+  }
+
+  @override
+  void update(void updates(SyncingGalleryToServerErrorBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SyncingGalleryToServerError build() {
+    final _$result =
+        _$v ?? new _$SyncingGalleryToServerError._(message: message);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SyncNarrativeToDrive extends SyncNarrativeToDrive {
+  @override
+  final List<Gallery> galleries;
+  @override
+  final String narrativeTitle;
+  @override
+  final String narrative;
+  @override
+  final String date;
+
+  factory _$SyncNarrativeToDrive(
+          [void updates(SyncNarrativeToDriveBuilder b)]) =>
+      (new SyncNarrativeToDriveBuilder()..update(updates)).build();
+
+  _$SyncNarrativeToDrive._(
+      {this.galleries, this.narrativeTitle, this.narrative, this.date})
+      : super._() {
+    if (galleries == null) {
+      throw new BuiltValueNullFieldError('SyncNarrativeToDrive', 'galleries');
+    }
+    if (narrativeTitle == null) {
+      throw new BuiltValueNullFieldError(
+          'SyncNarrativeToDrive', 'narrativeTitle');
+    }
+    if (narrative == null) {
+      throw new BuiltValueNullFieldError('SyncNarrativeToDrive', 'narrative');
+    }
+    if (date == null) {
+      throw new BuiltValueNullFieldError('SyncNarrativeToDrive', 'date');
+    }
+  }
+
+  @override
+  SyncNarrativeToDrive rebuild(void updates(SyncNarrativeToDriveBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SyncNarrativeToDriveBuilder toBuilder() =>
+      new SyncNarrativeToDriveBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SyncNarrativeToDrive &&
+        galleries == other.galleries &&
+        narrativeTitle == other.narrativeTitle &&
+        narrative == other.narrative &&
+        date == other.date;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(
+        $jc($jc($jc(0, galleries.hashCode), narrativeTitle.hashCode),
+            narrative.hashCode),
+        date.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('SyncNarrativeToDrive')
+          ..add('galleries', galleries)
+          ..add('narrativeTitle', narrativeTitle)
+          ..add('narrative', narrative)
+          ..add('date', date))
+        .toString();
+  }
+}
+
+class SyncNarrativeToDriveBuilder
+    implements Builder<SyncNarrativeToDrive, SyncNarrativeToDriveBuilder> {
+  _$SyncNarrativeToDrive _$v;
+
+  List<Gallery> _galleries;
+  List<Gallery> get galleries => _$this._galleries;
+  set galleries(List<Gallery> galleries) => _$this._galleries = galleries;
+
+  String _narrativeTitle;
+  String get narrativeTitle => _$this._narrativeTitle;
+  set narrativeTitle(String narrativeTitle) =>
+      _$this._narrativeTitle = narrativeTitle;
+
+  String _narrative;
+  String get narrative => _$this._narrative;
+  set narrative(String narrative) => _$this._narrative = narrative;
+
+  String _date;
+  String get date => _$this._date;
+  set date(String date) => _$this._date = date;
+
+  SyncNarrativeToDriveBuilder();
+
+  SyncNarrativeToDriveBuilder get _$this {
+    if (_$v != null) {
+      _galleries = _$v.galleries;
+      _narrativeTitle = _$v.narrativeTitle;
+      _narrative = _$v.narrative;
+      _date = _$v.date;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(SyncNarrativeToDrive other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$SyncNarrativeToDrive;
+  }
+
+  @override
+  void update(void updates(SyncNarrativeToDriveBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SyncNarrativeToDrive build() {
+    final _$result = _$v ??
+        new _$SyncNarrativeToDrive._(
+            galleries: galleries,
+            narrativeTitle: narrativeTitle,
+            narrative: narrative,
+            date: date);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SyncingNarrativeToDrive extends SyncingNarrativeToDrive {
+  @override
+  final int total;
+  @override
+  final int done;
+
+  factory _$SyncingNarrativeToDrive(
+          [void updates(SyncingNarrativeToDriveBuilder b)]) =>
+      (new SyncingNarrativeToDriveBuilder()..update(updates)).build();
+
+  _$SyncingNarrativeToDrive._({this.total, this.done}) : super._() {
+    if (total == null) {
+      throw new BuiltValueNullFieldError('SyncingNarrativeToDrive', 'total');
+    }
+    if (done == null) {
+      throw new BuiltValueNullFieldError('SyncingNarrativeToDrive', 'done');
+    }
+  }
+
+  @override
+  SyncingNarrativeToDrive rebuild(
+          void updates(SyncingNarrativeToDriveBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SyncingNarrativeToDriveBuilder toBuilder() =>
+      new SyncingNarrativeToDriveBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SyncingNarrativeToDrive &&
+        total == other.total &&
+        done == other.done;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, total.hashCode), done.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('SyncingNarrativeToDrive')
+          ..add('total', total)
+          ..add('done', done))
+        .toString();
+  }
+}
+
+class SyncingNarrativeToDriveBuilder
+    implements
+        Builder<SyncingNarrativeToDrive, SyncingNarrativeToDriveBuilder> {
+  _$SyncingNarrativeToDrive _$v;
+
+  int _total;
+  int get total => _$this._total;
+  set total(int total) => _$this._total = total;
+
+  int _done;
+  int get done => _$this._done;
+  set done(int done) => _$this._done = done;
+
+  SyncingNarrativeToDriveBuilder();
+
+  SyncingNarrativeToDriveBuilder get _$this {
+    if (_$v != null) {
+      _total = _$v.total;
+      _done = _$v.done;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(SyncingNarrativeToDrive other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$SyncingNarrativeToDrive;
+  }
+
+  @override
+  void update(void updates(SyncingNarrativeToDriveBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SyncingNarrativeToDrive build() {
+    final _$result =
+        _$v ?? new _$SyncingNarrativeToDrive._(total: total, done: done);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SyncingNarrativeToDriveError extends SyncingNarrativeToDriveError {
+  @override
+  final String message;
+
+  factory _$SyncingNarrativeToDriveError(
+          [void updates(SyncingNarrativeToDriveErrorBuilder b)]) =>
+      (new SyncingNarrativeToDriveErrorBuilder()..update(updates)).build();
+
+  _$SyncingNarrativeToDriveError._({this.message}) : super._() {
+    if (message == null) {
+      throw new BuiltValueNullFieldError(
+          'SyncingNarrativeToDriveError', 'message');
+    }
+  }
+
+  @override
+  SyncingNarrativeToDriveError rebuild(
+          void updates(SyncingNarrativeToDriveErrorBuilder b)) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SyncingNarrativeToDriveErrorBuilder toBuilder() =>
+      new SyncingNarrativeToDriveErrorBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SyncingNarrativeToDriveError && message == other.message;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, message.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('SyncingNarrativeToDriveError')
+          ..add('message', message))
+        .toString();
+  }
+}
+
+class SyncingNarrativeToDriveErrorBuilder
+    implements
+        Builder<SyncingNarrativeToDriveError,
+            SyncingNarrativeToDriveErrorBuilder> {
+  _$SyncingNarrativeToDriveError _$v;
+
+  String _message;
+  String get message => _$this._message;
+  set message(String message) => _$this._message = message;
+
+  SyncingNarrativeToDriveErrorBuilder();
+
+  SyncingNarrativeToDriveErrorBuilder get _$this {
+    if (_$v != null) {
+      _message = _$v.message;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(SyncingNarrativeToDriveError other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$SyncingNarrativeToDriveError;
+  }
+
+  @override
+  void update(void updates(SyncingNarrativeToDriveErrorBuilder b)) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SyncingNarrativeToDriveError build() {
+    final _$result =
+        _$v ?? new _$SyncingNarrativeToDriveError._(message: message);
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

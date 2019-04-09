@@ -55,6 +55,9 @@ class _$ScheduleSerializer implements StructuredSerializer<Schedule> {
       'number_of_female',
       serializers.serialize(object.femaleCount,
           specifiedType: const FullType(int)),
+      'folder_id',
+      serializers.serialize(object.folderId,
+          specifiedType: const FullType(String)),
     ];
     if (object.content != null) {
       result
@@ -156,6 +159,10 @@ class _$ScheduleSerializer implements StructuredSerializer<Schedule> {
           result.deliveryReport.replace(serializers.deserialize(value,
               specifiedType: const FullType(DeliveryReport)) as DeliveryReport);
           break;
+        case 'folder_id':
+          result.folderId = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -196,6 +203,8 @@ class _$Schedule extends Schedule {
   final int femaleCount;
   @override
   final DeliveryReport deliveryReport;
+  @override
+  final String folderId;
 
   factory _$Schedule([void updates(ScheduleBuilder b)]) =>
       (new ScheduleBuilder()..update(updates)).build();
@@ -216,7 +225,8 @@ class _$Schedule extends Schedule {
       this.hoursTaught,
       this.maleCount,
       this.femaleCount,
-      this.deliveryReport})
+      this.deliveryReport,
+      this.folderId})
       : super._() {
     if (scheduleId == null) {
       throw new BuiltValueNullFieldError('Schedule', 'scheduleId');
@@ -257,6 +267,9 @@ class _$Schedule extends Schedule {
     if (femaleCount == null) {
       throw new BuiltValueNullFieldError('Schedule', 'femaleCount');
     }
+    if (folderId == null) {
+      throw new BuiltValueNullFieldError('Schedule', 'folderId');
+    }
   }
 
   @override
@@ -285,7 +298,8 @@ class _$Schedule extends Schedule {
         hoursTaught == other.hoursTaught &&
         maleCount == other.maleCount &&
         femaleCount == other.femaleCount &&
-        deliveryReport == other.deliveryReport;
+        deliveryReport == other.deliveryReport &&
+        folderId == other.folderId;
   }
 
   @override
@@ -306,25 +320,29 @@ class _$Schedule extends Schedule {
                                                         $jc(
                                                             $jc(
                                                                 $jc(
-                                                                    0,
-                                                                    scheduleId
+                                                                    $jc(
+                                                                        0,
+                                                                        scheduleId
+                                                                            .hashCode),
+                                                                    startTime
                                                                         .hashCode),
-                                                                startTime
+                                                                endTime
                                                                     .hashCode),
-                                                            endTime.hashCode),
-                                                        deliveryDate.hashCode),
-                                                    day.hashCode),
-                                                schoolName.hashCode),
-                                            content.hashCode),
-                                        grade.hashCode),
-                                    section.hashCode),
-                                schoolId.hashCode),
-                            classId.hashCode),
-                        comment.hashCode),
-                    hoursTaught.hashCode),
-                maleCount.hashCode),
-            femaleCount.hashCode),
-        deliveryReport.hashCode));
+                                                            deliveryDate
+                                                                .hashCode),
+                                                        day.hashCode),
+                                                    schoolName.hashCode),
+                                                content.hashCode),
+                                            grade.hashCode),
+                                        section.hashCode),
+                                    schoolId.hashCode),
+                                classId.hashCode),
+                            comment.hashCode),
+                        hoursTaught.hashCode),
+                    maleCount.hashCode),
+                femaleCount.hashCode),
+            deliveryReport.hashCode),
+        folderId.hashCode));
   }
 
   @override
@@ -345,7 +363,8 @@ class _$Schedule extends Schedule {
           ..add('hoursTaught', hoursTaught)
           ..add('maleCount', maleCount)
           ..add('femaleCount', femaleCount)
-          ..add('deliveryReport', deliveryReport))
+          ..add('deliveryReport', deliveryReport)
+          ..add('folderId', folderId))
         .toString();
   }
 }
@@ -420,6 +439,10 @@ class ScheduleBuilder implements Builder<Schedule, ScheduleBuilder> {
   set deliveryReport(DeliveryReportBuilder deliveryReport) =>
       _$this._deliveryReport = deliveryReport;
 
+  String _folderId;
+  String get folderId => _$this._folderId;
+  set folderId(String folderId) => _$this._folderId = folderId;
+
   ScheduleBuilder();
 
   ScheduleBuilder get _$this {
@@ -440,6 +463,7 @@ class ScheduleBuilder implements Builder<Schedule, ScheduleBuilder> {
       _maleCount = _$v.maleCount;
       _femaleCount = _$v.femaleCount;
       _deliveryReport = _$v.deliveryReport?.toBuilder();
+      _folderId = _$v.folderId;
       _$v = null;
     }
     return this;
@@ -479,7 +503,8 @@ class ScheduleBuilder implements Builder<Schedule, ScheduleBuilder> {
               hoursTaught: hoursTaught,
               maleCount: maleCount,
               femaleCount: femaleCount,
-              deliveryReport: _deliveryReport?.build());
+              deliveryReport: _deliveryReport?.build(),
+              folderId: folderId);
     } catch (_) {
       String _$failedField;
       try {

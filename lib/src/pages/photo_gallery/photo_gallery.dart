@@ -36,6 +36,9 @@ class _PhotoGalleryState extends State<PhotoGallery>
             barrierDismissible: false,
             builder: (context) {
               return Dialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 child: LoadingCardWithProgress(
                   galleryEventStream: galleryBloc.galleryEventsStream,
                 ),
