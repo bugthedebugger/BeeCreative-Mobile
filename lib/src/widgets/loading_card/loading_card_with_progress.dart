@@ -58,13 +58,14 @@ class _LoadingCardWithProgressState extends State<LoadingCardWithProgress> {
             onData is SyncNarrativeToServerError ||
             onData is SyncingNarrativeToGoogleDriveError) {
           error = true;
-          errorMessage = 'Error: ' +
-              onData.message.toString().substring(
-                  0,
-                  onData.message.toString().length > 30
-                      ? 30
-                      : onData.message.toString().length) +
-              '...';
+          // errorMessage = 'Error: ' +
+          //     onData.message.toString().substring(
+          //         0,
+          //         onData.message.toString().length > 30
+          //             ? 30
+          //             : onData.message.toString().length) +
+          //     '...';
+          errorMessage = 'Error: ' + onData.message.toString();
           setState(() {});
         }
       },
