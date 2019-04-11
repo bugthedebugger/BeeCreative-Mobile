@@ -1,14 +1,19 @@
 import 'package:BeeCreative/src/bloc/attendance_bloc/attendance_bloc.dart';
 import 'package:BeeCreative/src/bloc/delivery_report_bloc/delivery_report_bloc_export.dart';
+import 'package:BeeCreative/src/bloc/gallery_bloc/gallery_bloc_export.dart';
+import 'package:BeeCreative/src/bloc/narrative_bloc/narrative_bloc.dart';
 import 'package:BeeCreative/src/bloc/schedule_bloc/schedule_bloc_export.dart';
 import 'package:BeeCreative/src/bloc/student_randomizer_bloc/student_randomizer_bloc_export.dart';
 import 'package:BeeCreative/src/bloc/user_bloc/user_bloc_export.dart';
+import 'package:BeeCreative/src/data/database/gallery/gallery_db_provider.dart';
 import 'package:BeeCreative/src/data/network/attendance_data_source.dart';
 import 'package:BeeCreative/src/data/network/delivery_report_source.dart';
+import 'package:BeeCreative/src/data/network/photo_gallery_network.dart';
 import 'package:BeeCreative/src/data/network/schedule_data_source.dart';
 import 'package:BeeCreative/src/data/network/user_data_source.dart';
 import 'package:BeeCreative/src/data/repository/attendance_repository.dart';
 import 'package:BeeCreative/src/data/repository/delivery_report_repository.dart';
+import 'package:BeeCreative/src/data/repository/gallery_repository.dart';
 import 'package:BeeCreative/src/data/repository/schedule_respository.dart';
 import 'package:BeeCreative/src/data/repository/user_repository.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -46,4 +51,11 @@ Future initKiwi() async {
   Container().registerFactory(
       (c) => AttendanceBloc(c.resolve(), c.resolve<SharedPreferences>()));
   Container().registerFactory((c) => StudentRandomizerBloc());
+  Container().registerFactory((c) => GalleryDBProvider());
+  Container().registerFactory((c) => GalleryNetworkCall(c.resolve()));
+  Container().registerFactory((c) => GalleryRepository(c.resolve()));
+  Container().registerFactory((c) =>
+      GalleryBloc(c.resolve(), c.resolve(), c.resolve<SharedPreferences>()));
+  Container().registerFactory((c) =>
+      NarrativeBloc(c.resolve(), c.resolve(), c.resolve<SharedPreferences>()));
 }

@@ -48,6 +48,7 @@ class AttendanceCard extends StatelessWidget {
               backgroundImage: AssetImage(
                 AppPhotos.staticAvatar,
               ),
+              radius: ScreenUtil().setHeight(20),
             ),
             SizedBox(
               width: ScreenUtil().setWidth(12),
@@ -61,7 +62,7 @@ class AttendanceCard extends StatelessWidget {
                     style: AppFontStyles(context).textStyle15GreyMedium,
                   ),
                   Text(
-                    "Gender",
+                    "${student.gender.toUpperCase()}",
                     style: AppFontStyles(context).textStyle12Grey,
                   )
                 ],

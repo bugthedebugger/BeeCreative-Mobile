@@ -244,6 +244,7 @@ class SchedulesTileState extends State<SchedulesTile>
               timeOfDay: timeOfDay,
               buttonLabel: "Go to Class",
               function: handleButton,
+              openCard: widget.today,
             ),
             secondaryActions: secondaryActionList,
           ),

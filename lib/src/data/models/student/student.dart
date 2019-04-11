@@ -24,6 +24,7 @@ abstract class Student implements Built<Student, StudentBuilder> {
   @BuiltValueField(wireName: 'class')
   String get grade;
   String get section;
+  String get gender;
 
   Student._();
 

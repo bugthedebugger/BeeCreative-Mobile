@@ -1,7 +1,7 @@
 import 'package:BeeCreative/src/bloc/bloc_provider.dart';
 import 'package:BeeCreative/src/bloc/user_bloc/user_bloc_export.dart';
 import 'dart:async';
-
+import 'package:BeeCreative/src/data/exceptions/custom_exceptions.dart';
 import 'package:BeeCreative/src/data/models/user/user_model.dart';
 import 'package:BeeCreative/src/data/repository/user_repository.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -73,6 +73,8 @@ class UserBloc implements Bloc {
       _sharedPreferences.setString('email', registeredUser.data.email);
       registerUser(registeredUser);
       _userLoggedIn();
+    } on UserError catch (error) {
+      print(error.message);
     } catch (error, stackTrace) {
       print("Error: $error, StackTrace: $stackTrace");
     }

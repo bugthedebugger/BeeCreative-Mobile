@@ -35,8 +35,8 @@ class DeliveryReportBloc implements Bloc {
       StreamController<DeliveryReportResponse>.broadcast();
   Stream<DeliveryReportResponse> get deliveryReport =>
       _deliveryStreamController.stream;
-  Sink<DeliveryReportResponse> get _deliveryReportIn =>
-      _deliveryStreamController.sink;
+  // Sink<DeliveryReportResponse> get _deliveryReportIn =>
+  //     _deliveryStreamController.sink;
 
   void _mapEventToStates(DeliveryReportEvent event) {
     if (event is ClassDeliveredEvent) {

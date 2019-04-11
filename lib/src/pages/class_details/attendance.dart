@@ -151,6 +151,5 @@ class StudentAttendancePageState extends State<StudentAttendancePage>
   }
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }

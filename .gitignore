@@ -71,5 +71,10 @@ build/
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 **/android/app/google-services.json
 **/android/app/key.jks
+<<<<<<< HEAD
 **/android/app/bin/google-services.json
 **/android/app/bin/key.jks
+=======
+**/lib/src/data/database/database_name.dart
+**/lib/src/assets_repo/google_drive_client.dart
+>>>>>>> dev

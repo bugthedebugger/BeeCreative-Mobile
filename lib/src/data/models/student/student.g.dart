@@ -41,6 +41,9 @@ class _$StudentSerializer implements StructuredSerializer<Student> {
       'section',
       serializers.serialize(object.section,
           specifiedType: const FullType(String)),
+      'gender',
+      serializers.serialize(object.gender,
+          specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -89,6 +92,10 @@ class _$StudentSerializer implements StructuredSerializer<Student> {
           result.section = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'gender':
+          result.gender = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -113,6 +120,8 @@ class _$Student extends Student {
   final String grade;
   @override
   final String section;
+  @override
+  final String gender;
 
   factory _$Student([void updates(StudentBuilder b)]) =>
       (new StudentBuilder()..update(updates)).build();
@@ -125,7 +134,8 @@ class _$Student extends Student {
       this.classId,
       this.schoolName,
       this.grade,
-      this.section})
+      this.section,
+      this.gender})
       : super._() {
     if (studentId == null) {
       throw new BuiltValueNullFieldError('Student', 'studentId');
@@ -151,6 +161,9 @@ class _$Student extends Student {
     if (section == null) {
       throw new BuiltValueNullFieldError('Student', 'section');
     }
+    if (gender == null) {
+      throw new BuiltValueNullFieldError('Student', 'gender');
+    }
   }
 
   @override
@@ -171,7 +184,8 @@ class _$Student extends Student {
         classId == other.classId &&
         schoolName == other.schoolName &&
         grade == other.grade &&
-        section == other.section;
+        section == other.section &&
+        gender == other.gender;
   }
 
   @override
@@ -181,13 +195,15 @@ class _$Student extends Student {
             $jc(
                 $jc(
                     $jc(
-                        $jc($jc($jc(0, studentId.hashCode), fname.hashCode),
-                            lname.hashCode),
-                        schoolId.hashCode),
-                    classId.hashCode),
-                schoolName.hashCode),
-            grade.hashCode),
-        section.hashCode));
+                        $jc(
+                            $jc($jc($jc(0, studentId.hashCode), fname.hashCode),
+                                lname.hashCode),
+                            schoolId.hashCode),
+                        classId.hashCode),
+                    schoolName.hashCode),
+                grade.hashCode),
+            section.hashCode),
+        gender.hashCode));
   }
 
   @override
@@ -200,7 +216,8 @@ class _$Student extends Student {
           ..add('classId', classId)
           ..add('schoolName', schoolName)
           ..add('grade', grade)
-          ..add('section', section))
+          ..add('section', section)
+          ..add('gender', gender))
         .toString();
   }
 }
@@ -240,6 +257,10 @@ class StudentBuilder implements Builder<Student, StudentBuilder> {
   String get section => _$this._section;
   set section(String section) => _$this._section = section;
 
+  String _gender;
+  String get gender => _$this._gender;
+  set gender(String gender) => _$this._gender = gender;
+
   StudentBuilder();
 
   StudentBuilder get _$this {
@@ -252,6 +273,7 @@ class StudentBuilder implements Builder<Student, StudentBuilder> {
       _schoolName = _$v.schoolName;
       _grade = _$v.grade;
       _section = _$v.section;
+      _gender = _$v.gender;
       _$v = null;
     }
     return this;
@@ -281,7 +303,8 @@ class StudentBuilder implements Builder<Student, StudentBuilder> {
             classId: classId,
             schoolName: schoolName,
             grade: grade,
-            section: section);
+            section: section,
+            gender: gender);
     replace(_$result);
     return _$result;
   }

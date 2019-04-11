@@ -8,4 +8,5 @@ class Routes {
   static const SCHEDULES = '/app/schedules';
   static const UNDER_CONSTRUCTION = '/app/under-construction';
   static const CLASS_DETAILS = 'app/schedules/class-details';
+  static const PHOTO_GALLERY = 'app/schedules/class-details/photo-gallery';
 }
