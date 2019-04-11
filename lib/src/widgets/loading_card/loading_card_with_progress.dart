@@ -1,14 +1,19 @@
 import 'dart:async';
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/bloc/gallery_bloc/gallery_bloc_export.dart';
+import 'package:BeeCreative/src/bloc/narrative_bloc/narrative_bloc_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoadingCardWithProgress extends StatefulWidget {
   final Stream galleryEventStream;
+  final bool doublePop;
 
-  const LoadingCardWithProgress({Key key, this.galleryEventStream})
-      : super(key: key);
+  const LoadingCardWithProgress({
+    Key key,
+    @required this.galleryEventStream,
+    this.doublePop = false,
+  }) : super(key: key);
 
   @override
   _LoadingCardWithProgressState createState() =>
@@ -20,19 +25,46 @@ class _LoadingCardWithProgressState extends State<LoadingCardWithProgress> {
   int done = 0;
   int total = 0;
   bool completed = false;
+  bool synced = false;
+  bool syncing = true;
+  bool error = false;
+  String errorMessage;
   StreamSubscription sub;
 
   @override
   void initState() {
     sub = widget.galleryEventStream.listen(
       (onData) {
-        if (onData is SyncingToGoogleDrive) {
+        if (onData is SyncingToGoogleDrive ||
+            onData is SyncingNarrativeToGoogleDrive) {
           total = onData.total;
           done = onData.done;
           total == 0 ? percentDone = 1 : percentDone = done / total;
           setState(() {});
-        } else if (onData is SyncingToGoogleDriveCompleted) {
+        } else if (onData is SyncingToGoogleDriveCompleted ||
+            onData is SyncingNarrativeToGoogleDriveSuccess) {
           completed = true;
+          setState(() {});
+        } else if (onData is SyncGalleryToServer ||
+            onData is SyncNarrativeToServer) {
+          syncing = true;
+        } else if (onData is SyncingGalleryToServerCompleted ||
+            onData is SyncNarrativeToServerSuccessful) {
+          synced = true;
+          setState(() {});
+        } else if (onData is SyncingGalleryToServerError ||
+            onData is SyncingToGoogleDriveError ||
+            onData is SyncingNarrativeToDriveError ||
+            onData is SyncNarrativeToServerError ||
+            onData is SyncingNarrativeToGoogleDriveError) {
+          error = true;
+          errorMessage = 'Error: ' +
+              onData.message.toString().substring(
+                  0,
+                  onData.message.toString().length > 30
+                      ? 30
+                      : onData.message.toString().length) +
+              '...';
           setState(() {});
         }
       },
@@ -83,9 +115,11 @@ class _LoadingCardWithProgressState extends State<LoadingCardWithProgress> {
               width: ScreenUtil().setWidth(76),
               height: ScreenUtil().setHeight(67),
             ),
-            completed
+            completed || synced || error
                 ? Text(
-                    'Uploaded',
+                    completed && !synced && !error
+                        ? 'Syncing to server ...'
+                        : error ? '$errorMessage' : 'Uploaded',
                     style: AppFontStyles(context).textStyle15Grey,
                   )
                 : Row(
@@ -109,19 +143,27 @@ class _LoadingCardWithProgressState extends State<LoadingCardWithProgress> {
                       ),
                     ],
                   ),
-            completed
+            (completed && synced) || error
                 ? RaisedButton(
                     shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(ScreenUtil().setWidth(30)),
                     ),
                     elevation: 0,
-                    onPressed:
-                        completed ? () => Navigator.of(context).pop() : null,
+                    onPressed: (completed && synced) || error
+                        ? () {
+                            if (widget.doublePop) {
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pop();
+                            } else {
+                              Navigator.of(context).pop();
+                            }
+                          }
+                        : null,
                     color: Color(AppColors.studentAbsent),
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      completed ? 'Done' : '',
+                      'Done',
                       style: AppFontStyles(context).textStyle12White,
                     ),
                   )

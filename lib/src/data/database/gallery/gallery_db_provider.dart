@@ -159,6 +159,22 @@ class GalleryDBProvider {
     return gallery.reversed.toList();
   }
 
+  Future<Map<int, List<Gallery>>> getGroupedBySchedules() async {
+    List<Map> map = await db.query(
+      tableGallery,
+      columns: galleryColumns,
+      where: '$columnUploaded = 0 AND $columnDriveId IS NOT NULL',
+    );
+
+    List<Gallery> galleries = List<Gallery>();
+    map.forEach((gallery) => galleries.add(Gallery.fromMap(gallery)));
+
+    Map<int, List<Gallery>> newMap =
+        groupBy<Gallery, int>(galleries, (obj) => obj.scheduleId);
+
+    return newMap;
+  }
+
   Future<Map<DateTime, List<Gallery>>> getGroupedByDeliveryDate(int classId,
       {int limit = 500}) async {
     List<Gallery> gallery = List<Gallery>();

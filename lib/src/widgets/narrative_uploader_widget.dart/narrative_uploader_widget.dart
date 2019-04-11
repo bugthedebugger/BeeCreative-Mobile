@@ -1,9 +1,13 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
+import 'package:BeeCreative/src/bloc/narrative_bloc/narrative_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/gallery/gallery.dart';
+import 'package:BeeCreative/src/widgets/loading_card/loading_card_with_progress.dart';
 import 'package:BeeCreative/src/widgets/thumbnail_widget/thumbnail_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:kiwi/kiwi.dart' as kiwi;
+import 'dart:async';
 
 class NarrativeUploaderWidget extends StatefulWidget {
   final List<Gallery> galleries;
@@ -18,6 +22,42 @@ class NarrativeUploaderWidget extends StatefulWidget {
 class _NarrativeUploaderWidgetState extends State<NarrativeUploaderWidget> {
   DateTime pickedDate = DateTime.now();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final NarrativeBloc narrativeBloc = kiwi.Container().resolve<NarrativeBloc>();
+  StreamSubscription sub;
+  String narrative;
+  String title;
+
+  @override
+  void initState() {
+    sub = narrativeBloc.narrativeEventStream.listen(
+      (onData) {
+        if (onData is SyncNarrativeToGoogleDrive) {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return Dialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: LoadingCardWithProgress(
+                  galleryEventStream: narrativeBloc.narrativeEventStream,
+                  doublePop: true,
+                ),
+              );
+            },
+          );
+        }
+      },
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    narrativeBloc?.dispose();
+    sub?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +92,10 @@ class _NarrativeUploaderWidgetState extends State<NarrativeUploaderWidget> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     IconButton(
+                      iconSize: ScreenUtil().setWidth(15),
                       onPressed: () => Navigator.of(context).pop(),
                       icon: Icon(
                         FontAwesomeIcons.times,
-                        size: ScreenUtil().setWidth(15),
                         color: Color(AppColors.meltingCardColor),
                       ),
                     ),
@@ -81,11 +121,38 @@ class _NarrativeUploaderWidgetState extends State<NarrativeUploaderWidget> {
                       crossAxisCount: 4,
                     ),
                     itemBuilder: (context, index) {
-                      return ThumbnailWidget(
-                        gallery: widget.galleries[0],
-                        count: -1,
-                        thumbnailInfo: false,
-                      );
+                      if (index == 3)
+                        return Padding(
+                          padding: EdgeInsets.all(ScreenUtil().setWidth(5)),
+                          child: Container(
+                            width: ScreenUtil().setWidth(152),
+                            height: ScreenUtil().setHeight(101),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.grey,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 3,
+                                  offset: Offset(0, 1),
+                                  spreadRadius: 1,
+                                  color: Color(AppColors.shadowColor),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Text(
+                                '+${widget.galleries.length - 3}',
+                                style: AppFontStyles(context).textStyle12White,
+                              ),
+                            ),
+                          ),
+                        );
+                      else
+                        return ThumbnailWidget(
+                          gallery: widget.galleries[index],
+                          count: -1,
+                          thumbnailInfo: false,
+                        );
                     },
                   ),
                 ),
@@ -106,32 +173,43 @@ class _NarrativeUploaderWidgetState extends State<NarrativeUploaderWidget> {
                     }
                     setState(() {});
                   },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Choose Date: ',
-                        style: AppFontStyles(context).getTextStyle(
-                          color: Color(AppColors.meltingCardColor),
-                          fontSize: 15,
+                  child: Padding(
+                    padding: EdgeInsets.all(ScreenUtil().setHeight(5)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          DateFormat.yMMMd().format(pickedDate),
+                          style: AppFontStyles(context).getTextStyle(
+                            color: Color(AppColors.studentPresent),
+                            fontSize: 15,
+                            weight: 'medium',
+                          ),
                         ),
-                      ),
-                      Text(
-                        DateFormat.yMMMd().format(pickedDate),
-                        style: AppFontStyles(context).getTextStyle(
-                          color: Color(AppColors.meltingCardColor),
-                          fontSize: 15,
+                        SizedBox(
+                          width: ScreenUtil().setWidth(5),
+                          height: ScreenUtil().setHeight(20),
                         ),
-                      ),
-                    ],
+                        Icon(
+                          FontAwesomeIcons.edit,
+                          size: ScreenUtil().setWidth(15),
+                          color: Color(AppColors.studentPresent),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(ScreenUtil().setWidth(8)),
                   child: TextFormField(
                     autovalidate: true,
-                    validator: (value) =>
-                        value.isEmpty ? 'Narrative title is required' : null,
+                    validator: (value) {
+                      if (value.isEmpty)
+                        return 'Narrative title is required';
+                      else
+                        title = value;
+                    },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Title of narrative',
@@ -143,8 +221,12 @@ class _NarrativeUploaderWidgetState extends State<NarrativeUploaderWidget> {
                   child: TextFormField(
                     autovalidate: true,
                     maxLines: 5,
-                    validator: (value) =>
-                        value.isEmpty ? 'Narrative is required' : null,
+                    validator: (value) {
+                      if (value.isEmpty)
+                        return 'Narrative is required';
+                      else
+                        narrative = value;
+                    },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Narrative',
@@ -158,7 +240,12 @@ class _NarrativeUploaderWidgetState extends State<NarrativeUploaderWidget> {
                     elevation: 0,
                     onPressed: () {
                       if (formKey.currentState.validate()) {
-                        print('validated');
+                        narrativeBloc.syncNarrativeToGoogleDrive(
+                          date: pickedDate,
+                          galleries: widget.galleries,
+                          narrative: narrative,
+                          narrativeName: title,
+                        );
                       }
                     },
                     color: Color(AppColors.studentPresent),

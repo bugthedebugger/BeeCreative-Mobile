@@ -13,16 +13,23 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AttendeeData.serializer)
       ..add(DeliveryReport.serializer)
       ..add(DeliveryReportResponse.serializer)
+      ..add(DriveFolder.serializer)
+      ..add(GoogleDrive.serializer)
+      ..add(PhotoData.serializer)
       ..add(Schedule.serializer)
       ..add(ScheduleResponse.serializer)
       ..add(ScheduleResponseData.serializer)
       ..add(SchedulesPagination.serializer)
+      ..add(SocialMedia.serializer)
       ..add(Student.serializer)
       ..add(User.serializer)
       ..add(UserData.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(AttendeeData)]),
           () => new ListBuilder<AttendeeData>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(PhotoData)]),
+          () => new ListBuilder<PhotoData>())
       ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType(ScheduleResponseData)]),

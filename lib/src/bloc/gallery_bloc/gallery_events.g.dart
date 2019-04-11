@@ -904,17 +904,10 @@ class SyncingToGoogleDriveErrorBuilder
 }
 
 class _$SyncGalleryToServer extends SyncGalleryToServer {
-  @override
-  final List<Gallery> galleries;
-
   factory _$SyncGalleryToServer([void updates(SyncGalleryToServerBuilder b)]) =>
       (new SyncGalleryToServerBuilder()..update(updates)).build();
 
-  _$SyncGalleryToServer._({this.galleries}) : super._() {
-    if (galleries == null) {
-      throw new BuiltValueNullFieldError('SyncGalleryToServer', 'galleries');
-    }
-  }
+  _$SyncGalleryToServer._() : super._();
 
   @override
   SyncGalleryToServer rebuild(void updates(SyncGalleryToServerBuilder b)) =>
@@ -927,19 +920,17 @@ class _$SyncGalleryToServer extends SyncGalleryToServer {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is SyncGalleryToServer && galleries == other.galleries;
+    return other is SyncGalleryToServer;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, galleries.hashCode));
+    return 444382513;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SyncGalleryToServer')
-          ..add('galleries', galleries))
-        .toString();
+    return newBuiltValueToStringHelper('SyncGalleryToServer').toString();
   }
 }
 
@@ -947,19 +938,7 @@ class SyncGalleryToServerBuilder
     implements Builder<SyncGalleryToServer, SyncGalleryToServerBuilder> {
   _$SyncGalleryToServer _$v;
 
-  List<Gallery> _galleries;
-  List<Gallery> get galleries => _$this._galleries;
-  set galleries(List<Gallery> galleries) => _$this._galleries = galleries;
-
   SyncGalleryToServerBuilder();
-
-  SyncGalleryToServerBuilder get _$this {
-    if (_$v != null) {
-      _galleries = _$v.galleries;
-      _$v = null;
-    }
-    return this;
-  }
 
   @override
   void replace(SyncGalleryToServer other) {
@@ -976,7 +955,7 @@ class SyncGalleryToServerBuilder
 
   @override
   _$SyncGalleryToServer build() {
-    final _$result = _$v ?? new _$SyncGalleryToServer._(galleries: galleries);
+    final _$result = _$v ?? new _$SyncGalleryToServer._();
     replace(_$result);
     return _$result;
   }

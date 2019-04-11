@@ -5,7 +5,6 @@ import 'package:BeeCreative/src/bloc/bloc_provider.dart';
 import 'package:BeeCreative/src/bloc/gallery_bloc/gallery_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/gallery/gallery.dart';
 import 'package:BeeCreative/src/widgets/image_picker/image_picker.dart';
-import 'package:BeeCreative/src/widgets/loading_card/loading_card.dart';
 import 'package:BeeCreative/src/widgets/loading_card/loading_card_with_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -117,8 +116,11 @@ class _PhotoGalleryState extends State<PhotoGallery>
         stream: galleryBloc.groupedGalleryStream,
         builder: (context, snapshot) {
           if (snapshot.hasData)
-            return ImagePicker(
-              groupedGallery: snapshot.data,
+            return BlocProvider(
+              bloc: galleryBloc,
+              child: ImagePicker(
+                groupedGallery: snapshot.data,
+              ),
             );
           else
             return Container();

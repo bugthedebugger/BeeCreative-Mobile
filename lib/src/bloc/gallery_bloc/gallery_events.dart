@@ -123,8 +123,6 @@ abstract class SyncingToGoogleDriveError extends GalleryEvents
 
 abstract class SyncGalleryToServer extends GalleryEvents
     implements Built<SyncGalleryToServer, SyncGalleryToServerBuilder> {
-  List<Gallery> get galleries;
-
   SyncGalleryToServer._();
 
   factory SyncGalleryToServer([updates(SyncGalleryToServerBuilder b)]) =

@@ -1,5 +1,8 @@
 import 'dart:io';
 import 'package:BeeCreative/src/assets_repo/google_drive_client.dart';
+import 'package:BeeCreative/src/data/exceptions/custom_exceptions.dart';
+import 'package:BeeCreative/src/data/repository/connection_check.dart';
+import 'package:BeeCreative/src/data/repository/gallery_repository.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:BeeCreative/src/bloc/bloc_provider.dart';
 import 'package:BeeCreative/src/bloc/gallery_bloc/gallery_events.dart';
@@ -10,6 +13,7 @@ import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:path/path.dart';
 import 'dart:async';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -17,12 +21,14 @@ import 'package:googleapis/drive/v3.dart' as googleDrive;
 import 'package:googleapis_auth/auth_io.dart';
 
 class GalleryBloc extends Bloc {
-  GalleryDBProvider _dbProvider;
+  final GalleryDBProvider _dbProvider;
+  final GalleryRepository _galleryRepository;
+  final SharedPreferences _preferences;
   String _path;
-  Directory tempDir;
+  Directory _tempDir;
   AutoRefreshingAuthClient _client;
 
-  GalleryBloc(this._dbProvider) {
+  GalleryBloc(this._dbProvider, this._galleryRepository, this._preferences) {
     initDatabase();
   }
 
@@ -49,6 +55,7 @@ class GalleryBloc extends Bloc {
   Future initDatabase() async {
     var databasePath = await getDatabasesPath();
     _path = join(databasePath, DATABASE_NAME);
+    return;
   }
 
   void reInit() {
@@ -57,7 +64,7 @@ class GalleryBloc extends Bloc {
 
   Future init() async {
     _galleryEventsStreamController.stream.listen(_mapEventsToState);
-    tempDir = await getTemporaryDirectory();
+    _tempDir = await getTemporaryDirectory();
     return await initDatabase();
   }
 
@@ -74,6 +81,75 @@ class GalleryBloc extends Bloc {
       _mapUploadFromGallery(event);
     } else if (event is SyncToGoogleDrive) {
       _mapSyncToGoogleDrive(event);
+    } else if (event is SyncGalleryToServer) {
+      _mapSyncGalleryToServer(event);
+    }
+  }
+
+  void syncToServer() {
+    dispatch(SyncGalleryToServer());
+  }
+
+  void _mapSyncGalleryToServer(SyncGalleryToServer event) async {
+    await _dbProvider.open(_path);
+    Map<int, List<Gallery>> galleries =
+        await _dbProvider.getGroupedBySchedules();
+    List<Gallery> synced = List<Gallery>();
+    try {
+      List<Map> serverSyncList = List<Map>();
+      galleries.forEach(
+        (key, value) {
+          int scheduleId = key;
+          String mediaType = 'drive';
+          int numberOfPhoto = value.length;
+          int numberOfVideo = 0;
+          bool uploaded = true;
+          List<Map> photos = List<Map>();
+          value.forEach(
+            (p) {
+              p.uploaded = true;
+              synced.add(p);
+              photos.add(
+                {
+                  'drive_id': p.driveId,
+                  'name': p.imageAlias,
+                  'type': 'photo',
+                  'narrative': p.description == null ? false : true,
+                },
+              );
+            },
+          );
+          Map serverSync = {
+            'schedule_id': scheduleId,
+            'mediatype': mediaType,
+            'number_of_photo': numberOfPhoto,
+            'number_of_video': numberOfVideo,
+            'uploaded': uploaded,
+            'photos': photos
+          };
+          serverSyncList.add(serverSync);
+        },
+      );
+
+      _galleryRepository
+          .syncGalleryToServer(
+        socialMedia: serverSyncList,
+        token: _preferences.get('token'),
+      )
+          .then(
+        (onvalue) async {
+          if (onvalue) {
+            await _dbProvider.open(_path);
+            await _dbProvider.updateAll(synced);
+            dispatch(SyncingGalleryToServerCompleted());
+          } else {
+            dispatch(SyncingGalleryToServerError(
+                (b) => b..message = 'An unknown error occured.'));
+          }
+        },
+      );
+    } catch (_) {
+      dispatch(SyncingGalleryToServerError((b) => b..message = _.toString()));
     }
   }
 
@@ -88,11 +164,13 @@ class GalleryBloc extends Bloc {
       _credentials,
       [googleDrive.DriveApi.DriveScope],
     );
-    return;
   }
 
   void _mapSyncToGoogleDrive(SyncToGoogleDrive event) async {
     try {
+      bool connection = await ConnectionCheck().checkConnection();
+      if (connection == false) throw NoConnection();
+
       int uploadCount = 0;
       List<Gallery> galleries =
           await _dbProvider.getGalleryForUpload(event.classId);
@@ -113,7 +191,7 @@ class GalleryBloc extends Bloc {
         file.name = gallery.imageAlias;
         file.description = gallery.description;
 
-        if (gallery.driveFolderId == null)
+        if (gallery.driveFolderId.isEmpty)
           gallery.driveFolderId = UNRACKED_FOLDER_ID;
 
         file.parents = [gallery.driveFolderId];
@@ -126,7 +204,7 @@ class GalleryBloc extends Bloc {
             await api.files.create(file, uploadMedia: media);
 
         gallery.driveId = uploaded.id;
-        gallery.uploaded = true;
+        gallery.uploaded = false;
         updateGalleries.add(gallery);
         uploadCount++;
         dispatch(
@@ -135,8 +213,12 @@ class GalleryBloc extends Bloc {
             ..done = uploadCount),
         );
       }
+      await _dbProvider.open(_path);
       await _dbProvider.updateAll(updateGalleries);
       dispatch(SyncingToGoogleDriveCompleted());
+      syncToServer();
+    } on NoConnection catch (_) {
+      dispatch(SyncingToGoogleDriveError((b) => b..message = _.message));
     } catch (_) {
       dispatch(SyncingToGoogleDriveError((b) => b..message = _.toString()));
     }
@@ -176,8 +258,8 @@ class GalleryBloc extends Bloc {
         });
         await _dbProvider.open(_path);
         await _dbProvider.insertAll(galleries);
-        _cacheGallery(galleries)
-            .then((_) => getGroupedByThumbnail(event.schedule.classId));
+        _cacheGallery(galleries).then(
+            (_) => getGroupedByThumbnail(event.schedule.classId, limit: 3));
       }
     } catch (e) {
       print(e);
@@ -252,8 +334,8 @@ class GalleryBloc extends Bloc {
         gallery = await _dbProvider.insert(gallery);
         List<Gallery> galleries =
             await _dbProvider.getGallery(event.schedule.classId);
-        Map<DateTime, List<Gallery>> groupedGallery =
-            await _dbProvider.getGroupedByThumbnail(event.schedule.classId);
+        Map<DateTime, List<Gallery>> groupedGallery = await _dbProvider
+            .getGroupedByThumbnail(event.schedule.classId, limit: 3);
         _cacheGallery(galleries).then((_) =>
             update(galleries: galleries, groupedGallery: groupedGallery));
       }
@@ -288,13 +370,13 @@ class GalleryBloc extends Bloc {
   }
 
   String cachGalleryPath(Gallery gallery) {
-    String cachePath = tempDir.path + '/' + gallery.imageAlias;
+    String cachePath = _tempDir.path + '/' + gallery.imageAlias;
     return cachePath;
   }
 
   Future _cacheGallery(List<Gallery> galleries) async {
     await _dbProvider.open(_path);
-    if (tempDir == null) tempDir = await getTemporaryDirectory();
+    if (_tempDir == null) _tempDir = await getTemporaryDirectory();
     List<Gallery> updateGalleries = List<Gallery>();
 
     galleries.forEach((gallery) async {
