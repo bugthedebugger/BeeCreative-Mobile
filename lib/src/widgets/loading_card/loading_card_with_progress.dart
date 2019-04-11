@@ -122,6 +122,7 @@ class _LoadingCardWithProgressState extends State<LoadingCardWithProgress> {
                         ? 'Syncing to server ...'
                         : error ? '$errorMessage' : 'Uploaded',
                     style: AppFontStyles(context).textStyle15Grey,
+                    textAlign: TextAlign.center,
                   )
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -139,7 +140,9 @@ class _LoadingCardWithProgressState extends State<LoadingCardWithProgress> {
                       ),
                       SizedBox(width: ScreenUtil().setWidth(5)),
                       Text(
-                        "Uploading ($done / $total)",
+                        total == 0
+                            ? "Initializing..."
+                            : "Uploading ($done / $total)",
                         style: AppFontStyles(context).textStyle15Grey,
                       ),
                     ],
