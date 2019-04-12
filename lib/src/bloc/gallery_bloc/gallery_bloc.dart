@@ -191,8 +191,13 @@ class GalleryBloc extends Bloc {
         file.name = gallery.imageAlias;
         file.description = gallery.description;
 
-        if (gallery.driveFolderId == null)
+        if (gallery.driveFolderId == null) {
           gallery.driveFolderId = UNRACKED_FOLDER_ID;
+        } else {
+          if (gallery.driveFolderId.isEmpty) {
+            gallery.driveFolderId = UNRACKED_FOLDER_ID;
+          }
+        }
 
         file.parents = [gallery.driveFolderId];
         file.kind = 'drive#file';

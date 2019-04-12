@@ -43,6 +43,9 @@ final columnCreatedAt = 'created_at';
 /// updated at
 final columnUpdatedAt = 'updated_at';
 
+/// synced_to_photos
+final columnSyncedToPhotos = 'synced_to_photos';
+
 /// gallery columns
 final galleryColumns = [
   columnId,
@@ -58,5 +61,6 @@ final galleryColumns = [
   columnUploaded,
   columnDeliveryDate,
   columnCreatedAt,
-  columnUpdatedAt
+  columnUpdatedAt,
+  columnSyncedToPhotos
 ];

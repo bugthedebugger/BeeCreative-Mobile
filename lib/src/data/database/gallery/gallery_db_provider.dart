@@ -36,7 +36,7 @@ class GalleryDBProvider {
     ''';
     db = await openDatabase(
       path,
-      version: 2,
+      version: 3,
       onCreate: (Database db, int version) async {
         db.execute(query);
       },
@@ -51,8 +51,11 @@ class GalleryDBProvider {
   _onUpgrade(Database db, int oldVersion, int newVersion) async {
     String addCachePath =
         '''ALTER TABLE $tableGallery ADD $columnCachePath TEXT;''';
+    String addSyncedToPhoto =
+        '''ALTER TABLE $tableGallery ADD $columnSyncedToPhotos INTEGER NOT NULL DEFAULT 0;''';
 
     if (oldVersion <= 1) await db.execute(addCachePath);
+    if (oldVersion <= 2) await db.execute(addSyncedToPhoto);
   }
 
   /// insert data in gallery
