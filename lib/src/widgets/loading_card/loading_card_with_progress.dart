@@ -129,7 +129,7 @@ class _LoadingCardWithProgressState extends State<LoadingCardWithProgress> {
                     children: <Widget>[
                       SizedBox(
                         width: ScreenUtil().setWidth(18),
-                        height: ScreenUtil().setHeight(18),
+                        height: ScreenUtil().setWidth(18),
                         child: CircularProgressIndicator(
                           backgroundColor: Colors.red,
                           strokeWidth: ScreenUtil().setSp(2),
