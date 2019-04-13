@@ -151,7 +151,7 @@ class GalleryDBProvider {
       columns: galleryColumns,
       limit: limit,
       orderBy: columnDeliveryDate,
-      where: '$columnClassId = ? AND $columnDriveId IS NULL',
+      where: '$columnClassId = ? AND $columnSyncedToPhotos = 0',
       whereArgs: [classId],
     );
 

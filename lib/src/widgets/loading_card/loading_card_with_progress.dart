@@ -90,7 +90,7 @@ class _LoadingCardWithProgressState extends State<LoadingCardWithProgress> {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: ScreenUtil().setWidth(5),
-        vertical: ScreenUtil().setHeight(40),
+        vertical: ScreenUtil().setHeight(20),
       ),
       width: ScreenUtil().setWidth(334),
       height: ScreenUtil().setHeight(300),
@@ -164,8 +164,8 @@ class _LoadingCardWithProgressState extends State<LoadingCardWithProgress> {
                             }
                           }
                         : null,
-                    color: Color(AppColors.studentAbsent),
-                    padding: const EdgeInsets.all(8.0),
+                    color: Color(AppColors.studentPresent),
+                    padding: EdgeInsets.all(ScreenUtil().setWidth(8)),
                     child: Text(
                       'Done',
                       style: AppFontStyles(context).textStyle12White,

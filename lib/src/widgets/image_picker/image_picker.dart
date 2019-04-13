@@ -94,6 +94,7 @@ class _ImagePickerState extends State<ImagePicker> {
                             },
                             child: ThumbnailWidget(
                               gallery: galleryData[index],
+                              showSynced: true,
                               thumbnailInfo: false,
                               enabled: enabled,
                               selected:
@@ -120,7 +121,7 @@ class _ImagePickerState extends State<ImagePicker> {
                   onPressed: () {
                     if (selectedGallery.length > 0) {
                       showDialog(
-                        barrierDismissible: false,
+                        barrierDismissible: true,
                         builder: (context) => NarrativeUploaderWidget(
                               galleries: selectedGallery,
                             ),
@@ -138,7 +139,9 @@ class _ImagePickerState extends State<ImagePicker> {
                   child: Row(
                     children: <Widget>[
                       Icon(
-                        FontAwesomeIcons.upload,
+                        selectedGallery.length > 0
+                            ? FontAwesomeIcons.upload
+                            : FontAwesomeIcons.times,
                         color: Colors.white,
                         size: ScreenUtil().setSp(15),
                       ),
