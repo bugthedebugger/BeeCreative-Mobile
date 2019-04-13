@@ -79,7 +79,7 @@ class ThumbnailWidget extends StatelessWidget {
                       children: <Widget>[
                         Container(
                           width: ScreenUtil().setWidth(19),
-                          height: ScreenUtil().setHeight(19),
+                          height: ScreenUtil().setWidth(19),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
                             color: Color(AppColors.studentPresent),
