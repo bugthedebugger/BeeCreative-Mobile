@@ -11,7 +11,6 @@ class ScheduleCard extends StatefulWidget {
   final Function function;
   final String buttonLabel;
   final bool openCard;
-  ScheduleThemeData scheduleThemeData;
 
   ScheduleCard({
     Key key,
@@ -20,9 +19,7 @@ class ScheduleCard extends StatefulWidget {
     @required this.function,
     @required this.buttonLabel,
     this.openCard = false,
-  }) : super(key: key) {
-    this.scheduleThemeData = ScheduleThemeData(timeOfDay: this.timeOfDay);
-  }
+  }) : super(key: key);
 
   @override
   ScheduleCardState createState() {
@@ -37,9 +34,12 @@ class ScheduleCardState extends State<ScheduleCard>
   final _minimizedCard = 70.0;
   final _expandedCard = 264.0;
   bool _expanded = false;
+  ScheduleThemeData scheduleThemeData;
 
   @override
   void initState() {
+    scheduleThemeData = ScheduleThemeData(timeOfDay: widget.timeOfDay);
+
     super.initState();
     _controller = AnimationController(
       vsync: this,
@@ -130,7 +130,7 @@ class ScheduleCardState extends State<ScheduleCard>
                   height: ScreenUtil().setHeight(_animation.value.toInt()),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Color(widget.scheduleThemeData.cardColor),
+                    color: Color(scheduleThemeData.cardColor),
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 3,
@@ -172,14 +172,14 @@ class ScheduleCardState extends State<ScheduleCard>
                             GenderCountCard(
                               gender: "boys",
                               genderCount: widget.schedule.maleCount,
-                              genderIcon: widget.scheduleThemeData.maleIcon,
+                              genderIcon: scheduleThemeData.maleIcon,
                               timeOfDay: widget.timeOfDay,
                             ),
                             SizedBox(width: ScreenUtil().setWidth(19)),
                             GenderCountCard(
                               gender: "girls",
                               genderCount: widget.schedule.femaleCount,
-                              genderIcon: widget.scheduleThemeData.femaleIcon,
+                              genderIcon: scheduleThemeData.femaleIcon,
                               timeOfDay: widget.timeOfDay,
                             ),
                           ],
@@ -194,8 +194,7 @@ class ScheduleCardState extends State<ScheduleCard>
                           height: ScreenUtil().setHeight(93),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            color:
-                                Color(widget.scheduleThemeData.darkCardColor),
+                            color: Color(scheduleThemeData.darkCardColor),
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -227,7 +226,7 @@ class ScheduleCardState extends State<ScheduleCard>
                             widget.buttonLabel,
                             style: TextStyle(
                               fontSize: ScreenUtil().setSp(12),
-                              color: Color(widget.scheduleThemeData.cardColor),
+                              color: Color(scheduleThemeData.cardColor),
                             ),
                           ),
                         ),
@@ -241,7 +240,7 @@ class ScheduleCardState extends State<ScheduleCard>
                         bottom: ScreenUtil().setHeight(48),
                         right: ScreenUtil().setWidth(47),
                         child: Image.asset(
-                          widget.scheduleThemeData.sun,
+                          scheduleThemeData.sun,
                           width: ScreenUtil().setWidth(10),
                         ),
                       ),
@@ -250,7 +249,7 @@ class ScheduleCardState extends State<ScheduleCard>
                         bottom: ScreenUtil().setHeight(48),
                         right: ScreenUtil().setWidth(10),
                         child: Image.asset(
-                          widget.scheduleThemeData.cloud,
+                          scheduleThemeData.cloud,
                           width: ScreenUtil().setWidth(15),
                         ),
                       ),
@@ -259,7 +258,7 @@ class ScheduleCardState extends State<ScheduleCard>
                         bottom: ScreenUtil().setHeight(35),
                         right: ScreenUtil().setWidth(68),
                         child: Image.asset(
-                          widget.scheduleThemeData.cloud,
+                          scheduleThemeData.cloud,
                           width: ScreenUtil().setWidth(23),
                         ),
                       ),
@@ -267,7 +266,7 @@ class ScheduleCardState extends State<ScheduleCard>
                         bottom: 0,
                         right: ScreenUtil().setWidth(16),
                         child: Image.asset(
-                          widget.scheduleThemeData.house,
+                          scheduleThemeData.house,
                           width: ScreenUtil().setWidth(47),
                         ),
                       )

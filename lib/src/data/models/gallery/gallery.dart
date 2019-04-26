@@ -16,6 +16,7 @@ class Gallery {
   DateTime deliveryDate;
   DateTime createdAt;
   DateTime updatedAt;
+  bool syncedToPhotos;
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
@@ -29,6 +30,7 @@ class Gallery {
       columnDriveId: driveId,
       columnDescription: description,
       columnUploaded: uploaded ? 1 : 0,
+      columnSyncedToPhotos: syncedToPhotos ? 1 : 0,
       columnDeliveryDate: deliveryDate?.millisecondsSinceEpoch,
       columnCreatedAt: createdAt?.millisecondsSinceEpoch,
       columnUpdatedAt: updatedAt?.millisecondsSinceEpoch,
@@ -51,6 +53,7 @@ class Gallery {
     driveId = map[columnDriveId];
     description = map[columnDescription];
     uploaded = map[columnUploaded] == 1;
+    syncedToPhotos = map[columnSyncedToPhotos] == 1;
     deliveryDate = DateTime.fromMillisecondsSinceEpoch(map[columnDeliveryDate]);
     createdAt = DateTime.fromMillisecondsSinceEpoch(map[columnCreatedAt]);
     updatedAt = DateTime.fromMillisecondsSinceEpoch(map[columnUpdatedAt]);

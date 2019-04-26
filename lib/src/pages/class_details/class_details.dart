@@ -156,7 +156,7 @@ class _ClassDetailsState extends State<ClassDetails>
                 setState(() {});
                 showDialog(
                   context: context,
-                  barrierDismissible: false,
+                  barrierDismissible: true,
                   builder: (context) {
                     return StreamBuilder<Student>(
                       stream: randomizerBloc.studentStream,

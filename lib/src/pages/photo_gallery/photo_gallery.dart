@@ -101,7 +101,7 @@ class _PhotoGalleryState extends State<PhotoGallery>
                   galleryBloc.syncToGoogleDrive(widget.classId);
                 },
                 icon: Icon(
-                  FontAwesomeIcons.upload,
+                  FontAwesomeIcons.sync,
                   color: Color(AppColors.meltingCardColor),
                   size: ScreenUtil().setWidth(14),
                 ),

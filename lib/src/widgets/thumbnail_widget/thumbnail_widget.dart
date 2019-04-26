@@ -11,6 +11,7 @@ class ThumbnailWidget extends StatelessWidget {
   final bool thumbnailInfo;
   final bool enabled;
   final bool selected;
+  final bool showSynced;
 
   const ThumbnailWidget({
     Key key,
@@ -19,6 +20,7 @@ class ThumbnailWidget extends StatelessWidget {
     this.thumbnailInfo = true,
     this.enabled = false,
     this.selected = false,
+    this.showSynced = false,
   }) : super(key: key);
 
   @override
@@ -54,7 +56,7 @@ class ThumbnailWidget extends StatelessWidget {
             image: FileImage(image),
             fit: BoxFit.cover,
           ),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(ScreenUtil().setWidth(8)),
           color: Colors.white,
           boxShadow: [
             BoxShadow(
@@ -66,8 +68,34 @@ class ThumbnailWidget extends StatelessWidget {
           ],
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            !showSynced
+                ? Container()
+                : Container(
+                    padding: EdgeInsets.all(ScreenUtil().setWidth(5)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Container(
+                          width: ScreenUtil().setWidth(19),
+                          height: ScreenUtil().setWidth(19),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Color(AppColors.studentPresent),
+                          ),
+                          child: Icon(
+                            gallery.syncedToPhotos
+                                ? FontAwesomeIcons.check
+                                : FontAwesomeIcons.sync,
+                            size: ScreenUtil().setWidth(8),
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+            Expanded(child: Container()),
             enabled
                 ? !selected
                     ? Opacity(

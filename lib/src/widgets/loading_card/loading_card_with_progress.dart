@@ -58,13 +58,14 @@ class _LoadingCardWithProgressState extends State<LoadingCardWithProgress> {
             onData is SyncNarrativeToServerError ||
             onData is SyncingNarrativeToGoogleDriveError) {
           error = true;
-          errorMessage = 'Error: ' +
-              onData.message.toString().substring(
-                  0,
-                  onData.message.toString().length > 30
-                      ? 30
-                      : onData.message.toString().length) +
-              '...';
+          // errorMessage = 'Error: ' +
+          //     onData.message.toString().substring(
+          //         0,
+          //         onData.message.toString().length > 30
+          //             ? 30
+          //             : onData.message.toString().length) +
+          //     '...';
+          errorMessage = 'Error: ' + onData.message.toString();
           setState(() {});
         }
       },
@@ -89,7 +90,7 @@ class _LoadingCardWithProgressState extends State<LoadingCardWithProgress> {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: ScreenUtil().setWidth(5),
-        vertical: ScreenUtil().setHeight(40),
+        vertical: ScreenUtil().setHeight(20),
       ),
       width: ScreenUtil().setWidth(334),
       height: ScreenUtil().setHeight(300),
@@ -121,13 +122,14 @@ class _LoadingCardWithProgressState extends State<LoadingCardWithProgress> {
                         ? 'Syncing to server ...'
                         : error ? '$errorMessage' : 'Uploaded',
                     style: AppFontStyles(context).textStyle15Grey,
+                    textAlign: TextAlign.center,
                   )
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       SizedBox(
                         width: ScreenUtil().setWidth(18),
-                        height: ScreenUtil().setHeight(18),
+                        height: ScreenUtil().setWidth(18),
                         child: CircularProgressIndicator(
                           backgroundColor: Colors.red,
                           strokeWidth: ScreenUtil().setSp(2),
@@ -138,7 +140,9 @@ class _LoadingCardWithProgressState extends State<LoadingCardWithProgress> {
                       ),
                       SizedBox(width: ScreenUtil().setWidth(5)),
                       Text(
-                        "Uploading ($done / $total)",
+                        total == 0
+                            ? "Initializing..."
+                            : "Uploading ($done / $total)",
                         style: AppFontStyles(context).textStyle15Grey,
                       ),
                     ],
@@ -160,8 +164,8 @@ class _LoadingCardWithProgressState extends State<LoadingCardWithProgress> {
                             }
                           }
                         : null,
-                    color: Color(AppColors.studentAbsent),
-                    padding: const EdgeInsets.all(8.0),
+                    color: Color(AppColors.studentPresent),
+                    padding: EdgeInsets.all(ScreenUtil().setWidth(8)),
                     child: Text(
                       'Done',
                       style: AppFontStyles(context).textStyle12White,

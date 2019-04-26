@@ -191,8 +191,13 @@ class GalleryBloc extends Bloc {
         file.name = gallery.imageAlias;
         file.description = gallery.description;
 
-        if (gallery.driveFolderId.isEmpty)
+        if (gallery.driveFolderId == null) {
           gallery.driveFolderId = UNRACKED_FOLDER_ID;
+        } else {
+          if (gallery.driveFolderId.isEmpty) {
+            gallery.driveFolderId = UNRACKED_FOLDER_ID;
+          }
+        }
 
         file.parents = [gallery.driveFolderId];
         file.kind = 'drive#file';
@@ -205,6 +210,7 @@ class GalleryBloc extends Bloc {
 
         gallery.driveId = uploaded.id;
         gallery.uploaded = false;
+        gallery.syncedToPhotos = true;
         updateGalleries.add(gallery);
         uploadCount++;
         dispatch(
@@ -250,6 +256,7 @@ class GalleryBloc extends Bloc {
             image,
           );
           gallery.uploaded = false;
+          gallery.syncedToPhotos = false;
           gallery.driveFolderId = event.schedule.folderId;
           gallery.deliveryDate = DateTime.parse(event.schedule.deliveryDate);
           gallery.createdAt = now;
@@ -327,6 +334,7 @@ class GalleryBloc extends Bloc {
           image.path.toString(),
         );
         gallery.uploaded = false;
+        gallery.syncedToPhotos = false;
         gallery.deliveryDate = DateTime.parse(event.schedule.deliveryDate);
         gallery.createdAt = now;
         gallery.updatedAt = now;
