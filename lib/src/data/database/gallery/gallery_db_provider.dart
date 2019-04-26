@@ -29,6 +29,7 @@ class GalleryDBProvider {
         $columnDriveId TEXT,
         $columnDescription TEXT,
         $columnUploaded INTEGER NOT NULL DEFAULT 0,
+        $columnSyncedToPhotos INTEGER NOT NULL DEFAULT 0,
         $columnDeliveryDate INTEGER NOT NULL,
         $columnCreatedAt INTEGER NOT NULL,
         $columnUpdatedAt INTEGER NOT NULL
