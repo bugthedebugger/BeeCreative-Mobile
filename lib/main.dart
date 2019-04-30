@@ -7,6 +7,7 @@ import 'package:BeeCreative/src/pages/beecreative_notification_welcome.dart/noti
 import 'package:BeeCreative/src/pages/beecreative_splash_screen/splash_screen.dart';
 import 'package:BeeCreative/src/pages/beecreative_tutorial/welcome.dart';
 import 'package:BeeCreative/src/pages/photo_gallery/photo_gallery.dart';
+import 'package:BeeCreative/src/pages/profile/profile.dart';
 import 'package:BeeCreative/src/pages/schedules/all_schedule.dart';
 import 'package:BeeCreative/src/pages/under_construction_page/under_construction.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -42,11 +43,12 @@ class MyApp extends StatelessWidget {
         Routes.SCHEDULES: (BuildContext context) => SchedulesPage(),
         Routes.UNDER_CONSTRUCTION: (BuildContext context) =>
             UnderConstruction(),
+        Routes.USER_PROFILE: (BuildContext context) => UserProfile(),
         // Routes.PHOTO_GALLERY: (BuildContext context) => PhotoGallery(),
       },
       onGenerateRoute: _getRoute,
       theme: ThemeData(
-        fontFamily: "Poppins",
+        fontFamily: "Montserrat",
         cursorColor: Color(0xff444444),
       ),
       debugShowCheckedModeBanner: false,

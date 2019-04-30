@@ -58,9 +58,15 @@ class _AppDrawerState extends State<AppDrawer> {
                             "$_userName",
                             style: AppFontStyles(context).drawerHeaderStyle,
                           ),
-                          Text(
-                            "View Profile",
-                            style: AppFontStyles(context).drawerSubTextStyle,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushNamed(Routes.USER_PROFILE);
+                            },
+                            child: Text(
+                              "View Profile",
+                              style: AppFontStyles(context).drawerSubTextStyle,
+                            ),
                           )
                         ],
                       ),

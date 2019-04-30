@@ -31,4 +31,8 @@ class AppColors {
   static var studentPresent = 0xff00B894;
   static var studentAbsent = 0xffEB4D4B;
   static var fadedGrey = 0xffE5E5E5;
+  static var profileBlue = 0xff005792;
+  static var profileOrange = 0xffD3560E;
+  static var profileRed = 0xffBE3737;
+  static var profileYellow = 0xffE6B31E;
 }

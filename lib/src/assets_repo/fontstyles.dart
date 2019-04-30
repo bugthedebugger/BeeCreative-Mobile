@@ -20,12 +20,14 @@ class AppFontStyles {
   static const int _12TextSize = 12;
   static const int _20TextSize = 20;
   static const int _30TextSize = 30;
+  static const int _48TextSize = 48;
   static double _textSizeScaled18;
   static double _textSizeScaled16;
   static double _textSizeScaled15;
   static double _textSizeScaled12;
   static double _textSizeScaled20;
   static double _textSizeScaled30;
+  static double _textSizeScaled48;
   var context;
 
   AppFontStyles(this.context) {
@@ -40,6 +42,7 @@ class AppFontStyles {
     _textSizeScaled18 = ScreenUtil().setSp(_18TextSize);
     _textSizeScaled20 = ScreenUtil().setSp(_20TextSize);
     _textSizeScaled30 = ScreenUtil().setSp(_30TextSize);
+    _textSizeScaled48 = ScreenUtil().setSp(_48TextSize);
   }
 
   static TextStyle _welcAttendanceHeader = TextStyle(
@@ -226,6 +229,9 @@ class AppFontStyles {
         break;
       case 30:
         _fontSize = _textSizeScaled30;
+        break;
+      case 48:
+        _fontSize = _textSizeScaled48;
         break;
       default:
         _fontSize = _textSizeScaled15;

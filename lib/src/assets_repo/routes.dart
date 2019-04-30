@@ -9,4 +9,5 @@ class Routes {
   static const UNDER_CONSTRUCTION = '/app/under-construction';
   static const CLASS_DETAILS = 'app/schedules/class-details';
   static const PHOTO_GALLERY = 'app/schedules/class-details/photo-gallery';
+  static const USER_PROFILE = 'app/user-profile';
 }
