@@ -7,7 +7,7 @@ description: Mobile app for BeeCreative Karkhana.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 2.0.15+29
+version: 2.0.17+31
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
@@ -115,6 +115,11 @@ flutter:
   # team assets
    - assets/images/team/animesh.jpg
    - assets/images/team/willi.png
+  # profile assets
+   - assets/images/profile_page/achievements.png
+   - assets/images/profile_page/classes.png
+   - assets/images/profile_page/hour.png
+   - assets/images/profile_page/students.png
 
   fonts:
     - family: Poppins
@@ -125,5 +130,14 @@ flutter:
         - asset: assets/fonts/poppins/Poppins-Italic.ttf
           style: italic
         - asset: assets/fonts/poppins/Poppins-Medium.ttf
+          weight: 500
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/montserrat/Montserrat-Regular.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/montserrat/Montserrat-Italic.ttf
+          style: italic
+        - asset: assets/fonts/montserrat/Montserrat-Medium.ttf
           weight: 500
         
