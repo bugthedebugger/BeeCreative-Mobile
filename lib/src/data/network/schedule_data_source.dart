@@ -19,6 +19,7 @@ class ScheduleDataSource {
     });
 
     if (response.statusCode == 200) {
+      print(response.body);
       return ScheduleResponse.fromJson(response.body);
     } else {
       throw Unauthenticated();

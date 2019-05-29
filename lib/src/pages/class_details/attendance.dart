@@ -83,6 +83,31 @@ class StudentAttendancePageState extends State<StudentAttendancePage>
       stream: attendanceBloc.attendanceStream,
       builder: (context, AsyncSnapshot<Attendance> snapshot) {
         if (snapshot.hasData) {
+          if (snapshot.data.attendanceRecord.length == 0) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset(
+                  AppPhotos.noSchedules,
+                  height: ScreenUtil().setHeight(125),
+                  width: ScreenUtil().setWidth(141),
+                ),
+                SizedBox(height: ScreenUtil().setHeight(10)),
+                Text(
+                  'No students have been added to this class',
+                  style: AppFontStyles(context).textStyle15BlackMedium,
+                ),
+                Text(
+                  'Visit app.beecreative.asia to add students',
+                  style: AppFontStyles(context).getTextStyle(
+                    color: Color(AppColors.partialBlack),
+                    fontSize: 12,
+                    style: 'italic',
+                  ),
+                ),
+              ],
+            );
+          }
           return ListView.builder(
             physics: BouncingScrollPhysics(),
             itemCount: snapshot.data.attendanceRecord.length + 1,

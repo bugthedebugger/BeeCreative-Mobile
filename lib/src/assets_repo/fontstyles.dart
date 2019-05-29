@@ -193,9 +193,10 @@ class AppFontStyles {
   );
 
   TextStyle getTextStyle(
-      {int fontSize, Color color = Colors.black, String weight}) {
+      {int fontSize, Color color = Colors.black, String weight, String style}) {
     double _fontSize;
     var _weight;
+    var _style;
 
     switch (weight) {
       case 'bold':
@@ -237,10 +238,19 @@ class AppFontStyles {
         _fontSize = _textSizeScaled15;
     }
 
+    switch (style) {
+      case 'italic':
+        _style = FontStyle.italic;
+        break;
+      default:
+        _style = FontStyle.normal;
+    }
+
     return TextStyle(
       color: color,
       fontSize: _fontSize,
       fontWeight: _weight,
+      fontStyle: _style,
     );
   }
 
