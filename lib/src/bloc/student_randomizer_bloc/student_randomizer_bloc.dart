@@ -54,6 +54,7 @@ class StudentRandomizerBloc extends Bloc {
 
   void _mapReinitializeRandomizer(ReinitializeRandomizerEvent event) {
     randomStudents.addAll(students);
+    randomStudents.shuffle();
     random();
   }
 
@@ -71,6 +72,7 @@ class StudentRandomizerBloc extends Bloc {
   void _mapInitializeRandomizer(InitializeRandomizer event) {
     if (randomStudents.length <= 0 && students.length > 0) {
       randomStudents.addAll(students);
+      randomStudents.shuffle();
       random();
     } else if (randomStudents.length > 0) {
       random();

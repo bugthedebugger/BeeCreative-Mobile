@@ -132,6 +132,7 @@ class _ClassDetailsState extends State<ClassDetails>
               ),
             ),
             GestureDetector(
+              behavior: HitTestBehavior.opaque,
               onTap: () {
                 page = 1;
                 setState(() {});
