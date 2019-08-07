@@ -52,3 +52,12 @@ abstract class UserStoredSuccessfully extends UserEvent
   factory UserStoredSuccessfully([updates(UserStoredSuccessfullyBuilder b)]) =
       _$UserStoredSuccessfully;
 }
+
+abstract class UserErrorEvent extends UserEvent
+    implements Built<UserErrorEvent, UserErrorEventBuilder> {
+  String get message;
+
+  UserErrorEvent._();
+
+  factory UserErrorEvent([updates(UserErrorEventBuilder b)]) = _$UserErrorEvent;
+}

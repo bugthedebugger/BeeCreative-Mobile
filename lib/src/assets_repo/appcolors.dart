@@ -14,10 +14,14 @@ class AppColors {
   static var drawerColor = 0xff34B2CC;
   static var morningScheduleCard = 0xff41A7B3;
   static var morningScheduleCardDark = 0xff368F9A;
+  static var morningScheduleCardDarker = 0xff215C64;
   static var afternoonScheduleCard = 0xffD3560E;
   static var afternoonScheduleCardDark = 0xffB2490C;
+  static var afternoonScheduleCardDarker = 0xff80360C;
   static var eveningScheduleCard = 0xff521168;
   static var eveningScheduleCardDark = 0xff3F0D50;
+  static var eveningScheduleCardDarker = 0xff2A0736;
+  static var eveningScheduleFont = 0xffB26FC8;
   static var deliveryRatingColor = 0xffF8B500;
   static var classCancelledColor = 0xffBE3737;
   static var deliveryReportCard = 0xff521168;
@@ -35,4 +39,8 @@ class AppColors {
   static var profileOrange = 0xffD3560E;
   static var profileRed = 0xffBE3737;
   static var profileYellow = 0xffE6B31E;
+  static var momonationRaw = 0xff5A3D5C;
+  static var momonationCooked = 0xff00818A;
+  static var green = 0xff1CD547;
+  static var pink = 0xffF36886;
 }

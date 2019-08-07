@@ -10,7 +10,7 @@ description: Mobile app for BeeCreative Karkhana.
 version: 2.0.22+38
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
@@ -120,6 +120,8 @@ flutter:
    - assets/images/profile_page/classes.png
    - assets/images/profile_page/hour.png
    - assets/images/profile_page/students.png
+  # momonation assets
+   - assets/images/momonation/ 
 
   fonts:
     - family: Poppins

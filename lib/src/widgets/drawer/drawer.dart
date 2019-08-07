@@ -112,6 +112,25 @@ class _AppDrawerState extends State<AppDrawer> {
                     function: () {},
                   ),
                   */
+                  ListTile(
+                    leading: ImageIcon(
+                      AssetImage(
+                        AppPhotos.cookedDumpling,
+                      ),
+                      size: ScreenUtil().setSp(14),
+                      color: Colors.white,
+                    ),
+                    title: Text(
+                      "MOMONATION",
+                      style: AppFontStyles(context).textStyle15White,
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        Routes.MOMONATION,
+                        (predicate) => false,
+                      );
+                    },
+                  ),
                   DrawerListTile(
                     icon: FontAwesomeIcons.signOutAlt,
                     title: "LOGOUT",
