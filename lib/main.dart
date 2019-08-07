@@ -7,6 +7,7 @@ import 'package:BeeCreative/src/pages/beecreative_notification_welcome.dart/noti
 import 'package:BeeCreative/src/pages/beecreative_splash_screen/splash_screen.dart';
 import 'package:BeeCreative/src/pages/beecreative_tutorial/welcome.dart';
 import 'package:BeeCreative/src/pages/momonation/dashboard.dart';
+import 'package:BeeCreative/src/pages/momonation/notification.dart';
 import 'package:BeeCreative/src/pages/photo_gallery/photo_gallery.dart';
 import 'package:BeeCreative/src/pages/profile/profile.dart';
 import 'package:BeeCreative/src/pages/schedules/all_schedule.dart';
@@ -46,6 +47,8 @@ class MyApp extends StatelessWidget {
             UnderConstruction(),
         Routes.USER_PROFILE: (BuildContext context) => UserProfile(),
         Routes.MOMONATION: (BuildContext context) => MomonationDashboard(),
+        Routes.MOMONATION_NOTIFICATION: (BuildContext context) =>
+            NotificationPage(),
         // Routes.PHOTO_GALLERY: (BuildContext context) => PhotoGallery(),
       },
       onGenerateRoute: _getRoute,

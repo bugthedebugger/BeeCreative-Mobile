@@ -78,7 +78,9 @@ class MomonationScaffold extends StatelessWidget {
               color: Color(AppColors.momonationRaw),
               size: ScreenUtil().setSp(15),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(Routes.MOMONATION_NOTIFICATION);
+            },
           ),
         ],
       ),

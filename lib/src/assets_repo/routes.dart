@@ -11,4 +11,5 @@ class Routes {
   static const PHOTO_GALLERY = 'app/schedules/class-details/photo-gallery';
   static const USER_PROFILE = 'app/user-profile';
   static const MOMONATION = 'app/momonation/';
+  static const MOMONATION_NOTIFICATION = 'app/momonation/notification';
 }

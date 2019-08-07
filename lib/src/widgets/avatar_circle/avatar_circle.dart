@@ -8,6 +8,7 @@ class AvatarCircle extends StatefulWidget {
   final bool showCloud;
   final Color ringColor;
   final int radius;
+  final int ringWidth;
 
   AvatarCircle(
     this._staticAvatarImage,
@@ -15,6 +16,7 @@ class AvatarCircle extends StatefulWidget {
     this.showCloud = true,
     this.ringColor = Colors.white,
     this.radius = 80,
+    this.ringWidth = 4,
   });
 
   @override
@@ -36,7 +38,7 @@ class AvatarCircleState extends State<AvatarCircle> {
         Container(
           width: ScreenUtil().setWidth(widget.radius),
           height: ScreenUtil().setWidth(widget.radius),
-          padding: EdgeInsets.all(2),
+          padding: EdgeInsets.all(ScreenUtil().setWidth(widget.ringWidth)),
           decoration: BoxDecoration(
             color: widget.ringColor,
             shape: BoxShape.circle,
