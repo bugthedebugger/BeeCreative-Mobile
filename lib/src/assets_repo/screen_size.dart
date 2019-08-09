@@ -1,5 +1,4 @@
-
 class ScreenSize {
-  static var screenHeight = 640;
-  static var screenWidth = 360;
+  static double screenHeight = 640;
+  static double screenWidth = 360;
 }

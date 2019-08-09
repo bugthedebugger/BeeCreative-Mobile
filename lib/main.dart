@@ -6,7 +6,9 @@ import 'package:BeeCreative/src/pages/beecreative_login/login.dart';
 import 'package:BeeCreative/src/pages/beecreative_notification_welcome.dart/notification_welcome.dart';
 import 'package:BeeCreative/src/pages/beecreative_splash_screen/splash_screen.dart';
 import 'package:BeeCreative/src/pages/beecreative_tutorial/welcome.dart';
+import 'package:BeeCreative/src/pages/momonation/appreciate.dart';
 import 'package:BeeCreative/src/pages/momonation/dashboard.dart';
+import 'package:BeeCreative/src/pages/momonation/leaderboard.dart';
 import 'package:BeeCreative/src/pages/momonation/notification.dart';
 import 'package:BeeCreative/src/pages/photo_gallery/photo_gallery.dart';
 import 'package:BeeCreative/src/pages/profile/profile.dart';
@@ -49,6 +51,8 @@ class MyApp extends StatelessWidget {
         Routes.MOMONATION: (BuildContext context) => MomonationDashboard(),
         Routes.MOMONATION_NOTIFICATION: (BuildContext context) =>
             NotificationPage(),
+        Routes.LEADERBOARDS: (BuildContext context) => LeaderBoardsPage(),
+        Routes.APPRECIATE_PAGE: (BuildContext context) => AppreciatePage(),
         // Routes.PHOTO_GALLERY: (BuildContext context) => PhotoGallery(),
       },
       onGenerateRoute: _getRoute,

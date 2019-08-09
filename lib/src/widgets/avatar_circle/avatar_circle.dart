@@ -7,8 +7,9 @@ class AvatarCircle extends StatefulWidget {
   final String _avatarImage;
   final bool showCloud;
   final Color ringColor;
-  final int radius;
-  final int ringWidth;
+  final double radius;
+  final double ringWidth;
+  final Color backgroudColor;
 
   AvatarCircle(
     this._staticAvatarImage,
@@ -17,6 +18,7 @@ class AvatarCircle extends StatefulWidget {
     this.ringColor = Colors.white,
     this.radius = 80,
     this.ringWidth = 4,
+    this.backgroudColor = Colors.white,
   });
 
   @override
@@ -44,7 +46,7 @@ class AvatarCircleState extends State<AvatarCircle> {
             shape: BoxShape.circle,
           ),
           child: CircleAvatar(
-            backgroundColor: Colors.white,
+            backgroundColor: widget.backgroudColor,
             backgroundImage: (widget._avatarImage == null)
                 ? AssetImage(widget._staticAvatarImage)
                 : NetworkImage(widget._avatarImage),

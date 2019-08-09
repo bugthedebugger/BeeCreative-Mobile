@@ -70,7 +70,9 @@ class MomonationScaffold extends StatelessWidget {
               color: Color(AppColors.momonationRaw),
               size: ScreenUtil().setSp(15),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(Routes.LEADERBOARDS);
+            },
           ),
           IconButton(
             icon: Icon(
@@ -90,7 +92,9 @@ class MomonationScaffold extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed(Routes.APPRECIATE_PAGE);
+        },
         backgroundColor: Color(AppColors.pink),
         child: Icon(
           FontAwesomeIcons.handHoldingHeart,

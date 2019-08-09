@@ -12,4 +12,6 @@ class Routes {
   static const USER_PROFILE = 'app/user-profile';
   static const MOMONATION = 'app/momonation/';
   static const MOMONATION_NOTIFICATION = 'app/momonation/notification';
+  static const LEADERBOARDS = 'app/momonation/achievements';
+  static const APPRECIATE_PAGE = 'app/momonation/appreciate';
 }
