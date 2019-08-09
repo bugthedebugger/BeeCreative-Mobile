@@ -134,6 +134,5 @@ class _UserSelectionWidgetState extends State<UserSelectionWidget> {
         ),
       ),
     );
-    ;
   }
 }

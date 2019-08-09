@@ -53,6 +53,5 @@ class NoInternetWidget extends StatelessWidget {
         ],
       ),
     );
-    ;
   }
 }
