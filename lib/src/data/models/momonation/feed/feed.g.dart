@@ -40,10 +40,14 @@ class _$FeedSerializer implements StructuredSerializer<Feed> {
       'receiver',
       serializers.serialize(object.receiver,
           specifiedType: const FullType(User)),
-      'comments',
-      serializers.serialize(object.comments,
-          specifiedType: const FullType(Comments)),
     ];
+    if (object.comments != null) {
+      result
+        ..add('comments')
+        ..add(serializers.serialize(object.comments,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Comment)])));
+    }
 
     return result;
   }
@@ -97,7 +101,8 @@ class _$FeedSerializer implements StructuredSerializer<Feed> {
           break;
         case 'comments':
           result.comments.replace(serializers.deserialize(value,
-              specifiedType: const FullType(Comments)) as Comments);
+              specifiedType: const FullType(
+                  BuiltList, const [const FullType(Comment)])) as BuiltList);
           break;
       }
     }
@@ -126,7 +131,7 @@ class _$Feed extends Feed {
   @override
   final User receiver;
   @override
-  final Comments comments;
+  final BuiltList<Comment> comments;
 
   factory _$Feed([void updates(FeedBuilder b)]) =>
       (new FeedBuilder()..update(updates)).build();
@@ -169,9 +174,6 @@ class _$Feed extends Feed {
     }
     if (receiver == null) {
       throw new BuiltValueNullFieldError('Feed', 'receiver');
-    }
-    if (comments == null) {
-      throw new BuiltValueNullFieldError('Feed', 'comments');
     }
   }
 
@@ -274,9 +276,10 @@ class FeedBuilder implements Builder<Feed, FeedBuilder> {
   UserBuilder get receiver => _$this._receiver ??= new UserBuilder();
   set receiver(UserBuilder receiver) => _$this._receiver = receiver;
 
-  CommentsBuilder _comments;
-  CommentsBuilder get comments => _$this._comments ??= new CommentsBuilder();
-  set comments(CommentsBuilder comments) => _$this._comments = comments;
+  ListBuilder<Comment> _comments;
+  ListBuilder<Comment> get comments =>
+      _$this._comments ??= new ListBuilder<Comment>();
+  set comments(ListBuilder<Comment> comments) => _$this._comments = comments;
 
   FeedBuilder();
 
@@ -325,7 +328,7 @@ class FeedBuilder implements Builder<Feed, FeedBuilder> {
               likedByMe: likedByMe,
               sender: sender.build(),
               receiver: receiver.build(),
-              comments: comments.build());
+              comments: _comments?.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -334,7 +337,7 @@ class FeedBuilder implements Builder<Feed, FeedBuilder> {
         _$failedField = 'receiver';
         receiver.build();
         _$failedField = 'comments';
-        comments.build();
+        _comments?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'Feed', _$failedField, e.toString());

@@ -25,10 +25,13 @@ class _$UserSerializer implements StructuredSerializer<User> {
       'email',
       serializers.serialize(object.email,
           specifiedType: const FullType(String)),
-      'avatar',
-      serializers.serialize(object.avatar,
-          specifiedType: const FullType(String)),
     ];
+    if (object.avatar != null) {
+      result
+        ..add('avatar')
+        ..add(serializers.serialize(object.avatar,
+            specifiedType: const FullType(String)));
+    }
 
     return result;
   }
@@ -89,9 +92,6 @@ class _$User extends User {
     }
     if (email == null) {
       throw new BuiltValueNullFieldError('User', 'email');
-    }
-    if (avatar == null) {
-      throw new BuiltValueNullFieldError('User', 'avatar');
     }
   }
 

@@ -1,10 +1,9 @@
 library feed;
 
 import 'dart:convert';
-
-import 'package:BeeCreative/src/data/models/momonation/comments/comments.dart';
 import 'package:BeeCreative/src/data/models/momonation/momonation_models.dart';
 import 'package:BeeCreative/src/data/models/serializer/momonation_serializers.dart';
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -20,7 +19,8 @@ abstract class Feed implements Built<Feed, FeedBuilder> {
   bool get likedByMe;
   User get sender;
   User get receiver;
-  Comments get comments;
+  @nullable
+  BuiltList<Comment> get comments;
 
   Feed._();
 

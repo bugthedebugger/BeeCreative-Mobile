@@ -1,8 +1,10 @@
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/data/models/colors/colors_model.dart';
+import 'package:BeeCreative/src/data/models/momonation/momonation_models.dart';
 import 'package:BeeCreative/src/widgets/avatar_circle/avatar_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class FeedCard extends StatefulWidget {
   final ColorModel colorModel;
@@ -18,6 +20,8 @@ class FeedCard extends StatefulWidget {
 }
 
 class _FeedCardState extends State<FeedCard> {
+  Feed _feed;
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(
@@ -25,6 +29,9 @@ class _FeedCardState extends State<FeedCard> {
       height: ScreenSize.screenHeight,
       allowFontScaling: true,
     )..init(context);
+
+    _feed = Provider.of<Feed>(context);
+
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
@@ -70,15 +77,6 @@ class _FeedCardState extends State<FeedCard> {
               ),
             ),
             Positioned(
-              right: ScreenUtil().setWidth(8),
-              bottom: ScreenUtil().setWidth(8),
-              child: Icon(
-                FontAwesomeIcons.heart,
-                color: Colors.white,
-                size: ScreenUtil().setSp(16),
-              ),
-            ),
-            Positioned(
               left: 0,
               bottom: 0,
               child: ImageIcon(
@@ -94,13 +92,13 @@ class _FeedCardState extends State<FeedCard> {
                 SizedBox(height: ScreenUtil().setHeight(23)),
                 AvatarCircle(
                   AppPhotos.staticAvatar,
-                  'https://cdn3.iconfinder.com/data/icons/users-6/100/654853-user-men-2-512.png',
+                  _feed.receiver.avatar,
                   showCloud: false,
                   ringColor: widget.colorModel.darker,
                 ),
                 SizedBox(height: ScreenUtil().setHeight(10)),
                 Text(
-                  'Person\'s Name',
+                  _feed.receiver.name,
                   style: TextStyle(
                     color: widget.colorModel.fontColor,
                     fontSize: ScreenUtil().setSp(15),
@@ -109,7 +107,7 @@ class _FeedCardState extends State<FeedCard> {
                 ),
                 SizedBox(height: ScreenUtil().setHeight(2)),
                 Text(
-                  'received 3 mo:mo(s)',
+                  'received ${_feed.amount} mo:mo(s)',
                   style: TextStyle(
                     color: widget.colorModel.fontColor,
                     fontSize: ScreenUtil().setSp(10),
@@ -136,7 +134,7 @@ class _FeedCardState extends State<FeedCard> {
                     horizontal: ScreenUtil().setWidth(23),
                   ),
                   child: Text(
-                    'Thanks for the designs',
+                    _feed.title,
                     maxLines: 3,
                     style: TextStyle(
                       color: widget.colorModel.fontColor,
@@ -153,7 +151,7 @@ class _FeedCardState extends State<FeedCard> {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      '- Appreciator',
+                      '- ${_feed.sender.name}',
                       style: TextStyle(
                         color: widget.colorModel.fontColor,
                         fontSize: ScreenUtil().setSp(12),

@@ -20,9 +20,14 @@ class _$MomoFeedSerializer implements StructuredSerializer<MomoFeed> {
     final result = <Object>[
       'bank',
       serializers.serialize(object.bank, specifiedType: const FullType(Bank)),
-      'feed',
-      serializers.serialize(object.feed, specifiedType: const FullType(Feeds)),
     ];
+    if (object.feed != null) {
+      result
+        ..add('feed')
+        ..add(serializers.serialize(object.feed,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Feed)])));
+    }
 
     return result;
   }
@@ -44,7 +49,9 @@ class _$MomoFeedSerializer implements StructuredSerializer<MomoFeed> {
           break;
         case 'feed':
           result.feed.replace(serializers.deserialize(value,
-              specifiedType: const FullType(Feeds)) as Feeds);
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(Feed)]))
+              as BuiltList);
           break;
       }
     }
@@ -57,7 +64,7 @@ class _$MomoFeed extends MomoFeed {
   @override
   final Bank bank;
   @override
-  final Feeds feed;
+  final BuiltList<Feed> feed;
 
   factory _$MomoFeed([void updates(MomoFeedBuilder b)]) =>
       (new MomoFeedBuilder()..update(updates)).build();
@@ -65,9 +72,6 @@ class _$MomoFeed extends MomoFeed {
   _$MomoFeed._({this.bank, this.feed}) : super._() {
     if (bank == null) {
       throw new BuiltValueNullFieldError('MomoFeed', 'bank');
-    }
-    if (feed == null) {
-      throw new BuiltValueNullFieldError('MomoFeed', 'feed');
     }
   }
 
@@ -105,9 +109,9 @@ class MomoFeedBuilder implements Builder<MomoFeed, MomoFeedBuilder> {
   BankBuilder get bank => _$this._bank ??= new BankBuilder();
   set bank(BankBuilder bank) => _$this._bank = bank;
 
-  FeedsBuilder _feed;
-  FeedsBuilder get feed => _$this._feed ??= new FeedsBuilder();
-  set feed(FeedsBuilder feed) => _$this._feed = feed;
+  ListBuilder<Feed> _feed;
+  ListBuilder<Feed> get feed => _$this._feed ??= new ListBuilder<Feed>();
+  set feed(ListBuilder<Feed> feed) => _$this._feed = feed;
 
   MomoFeedBuilder();
 
@@ -138,14 +142,14 @@ class MomoFeedBuilder implements Builder<MomoFeed, MomoFeedBuilder> {
     _$MomoFeed _$result;
     try {
       _$result =
-          _$v ?? new _$MomoFeed._(bank: bank.build(), feed: feed.build());
+          _$v ?? new _$MomoFeed._(bank: bank.build(), feed: _feed?.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'bank';
         bank.build();
         _$failedField = 'feed';
-        feed.build();
+        _feed?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'MomoFeed', _$failedField, e.toString());

@@ -13,9 +13,9 @@ part 'momonation_serializers.g.dart';
   Comment,
   Comments,
   Feed,
-  Feeds,
   MomoFeed,
   User,
+  UserList,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

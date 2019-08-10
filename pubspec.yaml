@@ -7,7 +7,7 @@ description: Mobile app for BeeCreative Karkhana.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 2.0.22+38
+version: 2.1.2+40
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
@@ -39,6 +39,7 @@ dependencies:
   path_provider: ^0.5.0+1
   googleapis_auth: ^0.2.7
   googleapis: ^0.53.0
+  provider: ^3.0.0+1
 
 dev_dependencies:
   flutter_test:
@@ -142,4 +143,7 @@ flutter:
           style: italic
         - asset: assets/fonts/montserrat/Montserrat-Medium.ttf
           weight: 500
+    - family: Pacifico
+      fonts:
+        - asset: assets/fonts/pacifico/Pacifico-Regular.ttf
         

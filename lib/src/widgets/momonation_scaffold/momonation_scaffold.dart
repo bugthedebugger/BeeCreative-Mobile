@@ -5,8 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MomonationScaffold extends StatelessWidget {
   final Widget body;
+  final Function onPressed;
 
-  const MomonationScaffold({Key key, this.body}) : super(key: key);
+  const MomonationScaffold({Key key, this.body, this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -92,9 +94,7 @@ class MomonationScaffold extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed(Routes.APPRECIATE_PAGE);
-        },
+        onPressed: onPressed,
         backgroundColor: Color(AppColors.pink),
         child: Icon(
           FontAwesomeIcons.handHoldingHeart,
