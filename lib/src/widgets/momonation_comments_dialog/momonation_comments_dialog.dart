@@ -245,8 +245,8 @@ class _MomonationCommentsDialogState extends State<MomonationCommentsDialog> {
 
                           return CommentCard(
                             colorModel: widget.colorModel,
-                            avatar: _feed.comments[index].user.avatar,
-                            comment: _feed.comments[index].comment,
+                            avatar: _feed.comments[index - 1].user.avatar,
+                            comment: _feed.comments[index - 1].comment,
                           );
                         },
                       ),
