@@ -106,6 +106,7 @@ class _MomonationCommentsDialogState extends State<MomonationCommentsDialog> {
         height: ScreenUtil().setHeight(530),
         width: ScreenUtil().setWidth(336),
         child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Stack(
             children: <Widget>[
               Positioned(
@@ -191,7 +192,7 @@ class _MomonationCommentsDialogState extends State<MomonationCommentsDialog> {
                           ringColor: widget.colorModel.darker,
                         ),
                         Container(
-                          width: ScreenUtil().setWidth(40),
+                          width: ScreenUtil().setWidth(30),
                           height: ScreenUtil().setHeight(5),
                           color: widget.colorModel.darker,
                         ),
@@ -213,7 +214,7 @@ class _MomonationCommentsDialogState extends State<MomonationCommentsDialog> {
                           ),
                         ),
                         Container(
-                          width: ScreenUtil().setWidth(40),
+                          width: ScreenUtil().setWidth(30),
                           height: ScreenUtil().setHeight(5),
                           color: widget.colorModel.darker,
                         ),

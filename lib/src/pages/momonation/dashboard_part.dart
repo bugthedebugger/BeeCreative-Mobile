@@ -3,6 +3,7 @@ import 'package:BeeCreative/src/assets_repo/color_selector.dart';
 import 'package:BeeCreative/src/bloc/momonation_bloc/momonation_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/colors/colors_model.dart';
 import 'package:BeeCreative/src/data/models/momonation/feed/feed.dart';
+import 'package:BeeCreative/src/widgets/avatar_circle/avatar_circle.dart';
 import 'package:BeeCreative/src/widgets/momo_info_widget/momo_info_widget.dart';
 import 'package:BeeCreative/src/widgets/momonation_comments_dialog/momonation_comments_dialog.dart';
 import 'package:BeeCreative/src/widgets/momonation_feed_card/momonation_feed_card.dart';
@@ -111,7 +112,6 @@ class _DashboardPartState extends State<DashboardPart> {
             },
           ),
         ),
-        /*
         SizedBox(height: ScreenUtil().setHeight(20)),
         Padding(
           padding: EdgeInsets.only(
@@ -130,7 +130,7 @@ class _DashboardPartState extends State<DashboardPart> {
         Container(
           height: ScreenUtil().setHeight(50),
           child: ListView.builder(
-            itemCount: 10,
+            itemCount: _events.feed.leaderboard.length,
             scrollDirection: Axis.horizontal,
             physics: BouncingScrollPhysics(),
             itemBuilder: (context, index) {
@@ -145,14 +145,14 @@ class _DashboardPartState extends State<DashboardPart> {
                   children: <Widget>[
                     AvatarCircle(
                       AppPhotos.staticAvatar,
-                      'https://cdn3.iconfinder.com/data/icons/users-6/100/654853-user-men-2-512.png',
+                      _events.feed.leaderboard[index].avatar,
                       showCloud: false,
                       ringColor: Color(AppColors.green),
                       radius: 32,
                       ringWidth: 2,
                     ),
                     Text(
-                      '69',
+                      '${_events.feed.leaderboard[index].momo}',
                       style: TextStyle(
                         color: Color(AppColors.grey),
                         fontSize: ScreenUtil().setSp(12),
@@ -164,7 +164,6 @@ class _DashboardPartState extends State<DashboardPart> {
             },
           ),
         ),
-        */
       ],
     );
   }

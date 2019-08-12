@@ -11,6 +11,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Comment.serializer)
       ..add(Comments.serializer)
       ..add(Feed.serializer)
+      ..add(Leaderboard.serializer)
+      ..add(Leaderboards.serializer)
       ..add(MomoFeed.serializer)
       ..add(User.serializer)
       ..add(UserList.serializer)
@@ -23,6 +25,15 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Feed)]),
           () => new ListBuilder<Feed>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(User)]),
+          () => new ListBuilder<User>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Leaderboard)]),
+          () => new ListBuilder<Leaderboard>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(User)]),
+          () => new ListBuilder<User>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(User)]),
           () => new ListBuilder<User>()))

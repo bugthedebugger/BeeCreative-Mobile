@@ -20,4 +20,5 @@ class MomonationURL {
   static const String transfer = _baseUrl + 'transfer';
   static const String comment = _baseUrl + 'comment';
   static const String users = _baseUrl + 'users';
+  static const String leaderboards = _baseUrl + 'leaderboard';
 }

@@ -99,4 +99,22 @@ class MomonationFeedsDataSource {
       throw MomonationException(response.body);
     }
   }
+
+  Future<Leaderboards> getLeaderboards({@required String token}) async {
+    final url = MomonationURL.leaderboards;
+    final encodedURL = Uri.encodeFull(url);
+    final response = await client.get(
+      encodedURL,
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return Leaderboards.fromJson(response.body);
+    } else {
+      throw MomonationException(response.body);
+    }
+  }
 }

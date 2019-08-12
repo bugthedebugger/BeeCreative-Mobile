@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:BeeCreative/src/data/models/momonation/bank/bank.dart';
 import 'package:BeeCreative/src/data/models/momonation/feed/feed.dart';
+import 'package:BeeCreative/src/data/models/momonation/user/user.dart';
 import 'package:BeeCreative/src/data/models/serializer/momonation_serializers.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
@@ -15,6 +16,8 @@ abstract class MomoFeed implements Built<MomoFeed, MomoFeedBuilder> {
   Bank get bank;
   @nullable
   BuiltList<Feed> get feed;
+  @nullable
+  BuiltList<User> get leaderboard;
 
   MomoFeed._();
 

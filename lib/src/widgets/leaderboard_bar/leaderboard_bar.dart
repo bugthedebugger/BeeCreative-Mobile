@@ -9,12 +9,14 @@ class LeaderBoardBar extends StatelessWidget {
   final int amount;
   final int highest;
   static const double _maxHeight = 178;
+  final String avatar;
 
   const LeaderBoardBar({
     Key key,
     @required this.colorModel,
     @required this.amount,
     @required this.highest,
+    @required this.avatar,
   }) : super(key: key);
 
   @override
@@ -52,7 +54,7 @@ class LeaderBoardBar extends StatelessWidget {
                 left: ScreenUtil().setWidth(9),
                 child: AvatarCircle(
                   AppPhotos.staticAvatar,
-                  'https://cdn3.iconfinder.com/data/icons/users-6/100/654853-user-men-2-512.png',
+                  avatar,
                   showCloud: false,
                   radius: 28,
                   ringWidth: 1.5,

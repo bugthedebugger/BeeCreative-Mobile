@@ -32,6 +32,12 @@ class _$UserSerializer implements StructuredSerializer<User> {
         ..add(serializers.serialize(object.avatar,
             specifiedType: const FullType(String)));
     }
+    if (object.momo != null) {
+      result
+        ..add('momo')
+        ..add(serializers.serialize(object.momo,
+            specifiedType: const FullType(int)));
+    }
 
     return result;
   }
@@ -63,6 +69,10 @@ class _$UserSerializer implements StructuredSerializer<User> {
           result.avatar = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'momo':
+          result.momo = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
       }
     }
 
@@ -79,11 +89,14 @@ class _$User extends User {
   final String email;
   @override
   final String avatar;
+  @override
+  final int momo;
 
   factory _$User([void updates(UserBuilder b)]) =>
       (new UserBuilder()..update(updates)).build();
 
-  _$User._({this.id, this.name, this.email, this.avatar}) : super._() {
+  _$User._({this.id, this.name, this.email, this.avatar, this.momo})
+      : super._() {
     if (id == null) {
       throw new BuiltValueNullFieldError('User', 'id');
     }
@@ -109,13 +122,16 @@ class _$User extends User {
         id == other.id &&
         name == other.name &&
         email == other.email &&
-        avatar == other.avatar;
+        avatar == other.avatar &&
+        momo == other.momo;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc($jc(0, id.hashCode), name.hashCode), email.hashCode),
-        avatar.hashCode));
+    return $jf($jc(
+        $jc($jc($jc($jc(0, id.hashCode), name.hashCode), email.hashCode),
+            avatar.hashCode),
+        momo.hashCode));
   }
 
   @override
@@ -124,7 +140,8 @@ class _$User extends User {
           ..add('id', id)
           ..add('name', name)
           ..add('email', email)
-          ..add('avatar', avatar))
+          ..add('avatar', avatar)
+          ..add('momo', momo))
         .toString();
   }
 }
@@ -148,6 +165,10 @@ class UserBuilder implements Builder<User, UserBuilder> {
   String get avatar => _$this._avatar;
   set avatar(String avatar) => _$this._avatar = avatar;
 
+  int _momo;
+  int get momo => _$this._momo;
+  set momo(int momo) => _$this._momo = momo;
+
   UserBuilder();
 
   UserBuilder get _$this {
@@ -156,6 +177,7 @@ class UserBuilder implements Builder<User, UserBuilder> {
       _name = _$v.name;
       _email = _$v.email;
       _avatar = _$v.avatar;
+      _momo = _$v.momo;
       _$v = null;
     }
     return this;
@@ -176,8 +198,9 @@ class UserBuilder implements Builder<User, UserBuilder> {
 
   @override
   _$User build() {
-    final _$result =
-        _$v ?? new _$User._(id: id, name: name, email: email, avatar: avatar);
+    final _$result = _$v ??
+        new _$User._(
+            id: id, name: name, email: email, avatar: avatar, momo: momo);
     replace(_$result);
     return _$result;
   }

@@ -28,6 +28,13 @@ class _$MomoFeedSerializer implements StructuredSerializer<MomoFeed> {
             specifiedType:
                 const FullType(BuiltList, const [const FullType(Feed)])));
     }
+    if (object.leaderboard != null) {
+      result
+        ..add('leaderboard')
+        ..add(serializers.serialize(object.leaderboard,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(User)])));
+    }
 
     return result;
   }
@@ -53,6 +60,12 @@ class _$MomoFeedSerializer implements StructuredSerializer<MomoFeed> {
                       const FullType(BuiltList, const [const FullType(Feed)]))
               as BuiltList);
           break;
+        case 'leaderboard':
+          result.leaderboard.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(User)]))
+              as BuiltList);
+          break;
       }
     }
 
@@ -65,11 +78,13 @@ class _$MomoFeed extends MomoFeed {
   final Bank bank;
   @override
   final BuiltList<Feed> feed;
+  @override
+  final BuiltList<User> leaderboard;
 
   factory _$MomoFeed([void updates(MomoFeedBuilder b)]) =>
       (new MomoFeedBuilder()..update(updates)).build();
 
-  _$MomoFeed._({this.bank, this.feed}) : super._() {
+  _$MomoFeed._({this.bank, this.feed, this.leaderboard}) : super._() {
     if (bank == null) {
       throw new BuiltValueNullFieldError('MomoFeed', 'bank');
     }
@@ -85,19 +100,24 @@ class _$MomoFeed extends MomoFeed {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is MomoFeed && bank == other.bank && feed == other.feed;
+    return other is MomoFeed &&
+        bank == other.bank &&
+        feed == other.feed &&
+        leaderboard == other.leaderboard;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, bank.hashCode), feed.hashCode));
+    return $jf(
+        $jc($jc($jc(0, bank.hashCode), feed.hashCode), leaderboard.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('MomoFeed')
           ..add('bank', bank)
-          ..add('feed', feed))
+          ..add('feed', feed)
+          ..add('leaderboard', leaderboard))
         .toString();
   }
 }
@@ -113,12 +133,19 @@ class MomoFeedBuilder implements Builder<MomoFeed, MomoFeedBuilder> {
   ListBuilder<Feed> get feed => _$this._feed ??= new ListBuilder<Feed>();
   set feed(ListBuilder<Feed> feed) => _$this._feed = feed;
 
+  ListBuilder<User> _leaderboard;
+  ListBuilder<User> get leaderboard =>
+      _$this._leaderboard ??= new ListBuilder<User>();
+  set leaderboard(ListBuilder<User> leaderboard) =>
+      _$this._leaderboard = leaderboard;
+
   MomoFeedBuilder();
 
   MomoFeedBuilder get _$this {
     if (_$v != null) {
       _bank = _$v.bank?.toBuilder();
       _feed = _$v.feed?.toBuilder();
+      _leaderboard = _$v.leaderboard?.toBuilder();
       _$v = null;
     }
     return this;
@@ -141,8 +168,11 @@ class MomoFeedBuilder implements Builder<MomoFeed, MomoFeedBuilder> {
   _$MomoFeed build() {
     _$MomoFeed _$result;
     try {
-      _$result =
-          _$v ?? new _$MomoFeed._(bank: bank.build(), feed: _feed?.build());
+      _$result = _$v ??
+          new _$MomoFeed._(
+              bank: bank.build(),
+              feed: _feed?.build(),
+              leaderboard: _leaderboard?.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -150,6 +180,8 @@ class MomoFeedBuilder implements Builder<MomoFeed, MomoFeedBuilder> {
         bank.build();
         _$failedField = 'feed';
         _feed?.build();
+        _$failedField = 'leaderboard';
+        _leaderboard?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'MomoFeed', _$failedField, e.toString());

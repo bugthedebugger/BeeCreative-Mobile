@@ -150,6 +150,7 @@ class GalleryBloc extends Bloc {
       );
     } catch (_) {
       dispatch(SyncingGalleryToServerError((b) => b..message = _.toString()));
+      print(_);
     }
   }
 
@@ -227,6 +228,7 @@ class GalleryBloc extends Bloc {
       dispatch(SyncingToGoogleDriveError((b) => b..message = _.message));
     } catch (_) {
       dispatch(SyncingToGoogleDriveError((b) => b..message = _.toString()));
+      print(_);
     }
   }
 

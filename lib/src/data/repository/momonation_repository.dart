@@ -1,8 +1,5 @@
 import 'package:BeeCreative/src/data/exceptions/custom_exceptions.dart';
-import 'package:BeeCreative/src/data/models/momonation/feed/feed.dart';
-import 'package:BeeCreative/src/data/models/momonation/momo_feed/momo_feed.dart';
-import 'package:BeeCreative/src/data/models/momonation/user/user.dart';
-import 'package:BeeCreative/src/data/models/momonation/user_list/user_list.dart';
+import 'package:BeeCreative/src/data/models/momonation/momonation_models.dart';
 import 'package:BeeCreative/src/data/network/momonation_feeds_data_source.dart';
 import 'package:BeeCreative/src/data/repository/connection_check.dart';
 import 'package:meta/meta.dart';
@@ -62,6 +59,15 @@ class MomonationRepository {
     if (connection == false) throw NoConnection();
 
     return dataSource.getUsers(
+      token: preferences.get('token'),
+    );
+  }
+
+  Future<Leaderboards> getLeaderboards() async {
+    bool connection = await ConnectionCheck().checkConnection();
+    if (connection == false) throw NoConnection();
+
+    return dataSource.getLeaderboards(
       token: preferences.get('token'),
     );
   }

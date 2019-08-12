@@ -3,6 +3,7 @@ import 'package:BeeCreative/src/bloc/attendance_bloc/attendance_bloc.dart';
 import 'package:BeeCreative/src/bloc/comment_bloc/comment_bloc.dart';
 import 'package:BeeCreative/src/bloc/delivery_report_bloc/delivery_report_bloc_export.dart';
 import 'package:BeeCreative/src/bloc/gallery_bloc/gallery_bloc_export.dart';
+import 'package:BeeCreative/src/bloc/leaderboards_bloc/leaderboards_bloc.dart';
 import 'package:BeeCreative/src/bloc/momonation_bloc/momonation_bloc.dart';
 import 'package:BeeCreative/src/bloc/narrative_bloc/narrative_bloc.dart';
 import 'package:BeeCreative/src/bloc/schedule_bloc/schedule_bloc_export.dart';
@@ -69,4 +70,5 @@ Future initKiwi() async {
   Container().registerFactory((c) => MomonationBloc(c.resolve()));
   Container().registerFactory((c) => CommentBloc(c.resolve()));
   Container().registerFactory((c) => AppreciationBloc(c.resolve()));
+  Container().registerFactory((c) => LeaderboardBloc(c.resolve()));
 }
