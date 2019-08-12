@@ -105,38 +105,39 @@ class _MomonationCommentsDialogState extends State<MomonationCommentsDialog> {
       child: Container(
         height: ScreenUtil().setHeight(530),
         width: ScreenUtil().setWidth(336),
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                bottom: ScreenUtil().setHeight(103),
-                left: ScreenUtil().setWidth(42),
-                child: Icon(
-                  FontAwesomeIcons.seedling,
-                  color: widget.colorModel.dark,
-                  size: ScreenUtil().setSp(65),
-                ),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Positioned(
+              bottom: ScreenUtil().setHeight(103),
+              left: ScreenUtil().setWidth(42),
+              child: Icon(
+                FontAwesomeIcons.seedling,
+                color: widget.colorModel.dark,
+                size: ScreenUtil().setSp(65),
               ),
-              Positioned(
-                left: 0,
-                bottom: 0,
-                child: ImageIcon(
-                  AssetImage(AppPhotos.bar),
-                  color: widget.colorModel.darker,
-                  size: ScreenUtil().setSp(162),
-                ),
+            ),
+            Positioned(
+              left: 0,
+              bottom: 0,
+              child: ImageIcon(
+                AssetImage(AppPhotos.bar),
+                color: widget.colorModel.darker,
+                size: ScreenUtil().setSp(162),
               ),
-              Positioned(
-                right: ScreenUtil().setWidth(28),
-                bottom: ScreenUtil().setHeight(60),
-                child: ImageIcon(
-                  AssetImage(AppPhotos.outlineDumpling),
-                  color: widget.colorModel.dark,
-                  size: ScreenUtil().setSp(64),
-                ),
+            ),
+            Positioned(
+              right: ScreenUtil().setWidth(28),
+              bottom: ScreenUtil().setHeight(60),
+              child: ImageIcon(
+                AssetImage(AppPhotos.outlineDumpling),
+                color: widget.colorModel.dark,
+                size: ScreenUtil().setSp(64),
               ),
-              Padding(
+            ),
+            SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Padding(
                 padding: EdgeInsets.only(
                   left: ScreenUtil().setWidth(12),
                   right: ScreenUtil().setWidth(12),
@@ -252,85 +253,94 @@ class _MomonationCommentsDialogState extends State<MomonationCommentsDialog> {
                         },
                       ),
                     ),
-                    Form(
-                      key: formKey,
-                      child: Container(
-                        width: ScreenUtil().setWidth(287),
-                        height: ScreenUtil().setHeight(42),
-                        margin: EdgeInsets.only(
-                          top: ScreenUtil().setHeight(15),
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              child: Container(
+                width: ScreenUtil().setWidth(300),
+                child: Center(
+                  child: Form(
+                    key: formKey,
+                    child: Container(
+                      width: ScreenUtil().setWidth(287),
+                      height: ScreenUtil().setHeight(42),
+                      margin: EdgeInsets.only(
+                        top: ScreenUtil().setHeight(15),
+                      ),
+                      child: Theme(
+                        data: ThemeData(
+                          primaryColor: widget.colorModel.darker,
+                          hintColor: widget.colorModel.dark,
                         ),
-                        child: Theme(
-                          data: ThemeData(
-                            primaryColor: widget.colorModel.darker,
-                            hintColor: widget.colorModel.dark,
-                          ),
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value.length < 2)
-                                return 'Comment has to be min two characters.';
-                              else {
-                                comment = value;
-                              }
-                            },
-                            textAlign: TextAlign.start,
-                            cursorColor: widget.colorModel.darker,
-                            decoration: InputDecoration(
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  FontAwesomeIcons.paperPlane,
-                                  color: widget.colorModel.darker,
-                                  size: ScreenUtil().setSp(15),
-                                ),
-                                onPressed: () {
-                                  if (formKey.currentState.validate()) {
-                                    _bloc.postComment(
-                                      comment: comment,
-                                      feed: _feed,
-                                    );
-                                  }
-                                },
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value.length < 2)
+                              return 'Comment has to be min two characters.';
+                            else {
+                              comment = value;
+                            }
+                          },
+                          textAlign: TextAlign.start,
+                          cursorColor: widget.colorModel.darker,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                FontAwesomeIcons.paperPlane,
+                                color: widget.colorModel.darker,
+                                size: ScreenUtil().setSp(15),
                               ),
-                              contentPadding: EdgeInsets.only(
-                                top: ScreenUtil().setHeight(20),
-                                left: ScreenUtil().setWidth(10),
+                              onPressed: () {
+                                if (formKey.currentState.validate()) {
+                                  _bloc.postComment(
+                                    comment: comment,
+                                    feed: _feed,
+                                  );
+                                }
+                              },
+                            ),
+                            contentPadding: EdgeInsets.only(
+                              top: ScreenUtil().setHeight(20),
+                              left: ScreenUtil().setWidth(10),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: widget.colorModel.darker,
+                                width: ScreenUtil().setWidth(3),
                               ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: widget.colorModel.darker,
-                                  width: ScreenUtil().setWidth(3),
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                  ScreenUtil().setWidth(30),
-                                ),
+                              borderRadius: BorderRadius.circular(
+                                ScreenUtil().setWidth(30),
                               ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: widget.colorModel.darker,
-                                  width: ScreenUtil().setWidth(3),
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                  ScreenUtil().setWidth(30),
-                                ),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: widget.colorModel.darker,
+                                width: ScreenUtil().setWidth(3),
                               ),
-                              fillColor: Colors.white,
-                              focusColor: Colors.white,
-                              filled: true,
-                              hintText: 'Write a comment ...',
-                              hintStyle: TextStyle(
-                                fontSize: ScreenUtil().setSp(12),
-                                color: Color(AppColors.grey),
+                              borderRadius: BorderRadius.circular(
+                                ScreenUtil().setWidth(30),
                               ),
+                            ),
+                            fillColor: Colors.white,
+                            focusColor: Colors.white,
+                            filled: true,
+                            hintText: 'Write a comment ...',
+                            hintStyle: TextStyle(
+                              fontSize: ScreenUtil().setSp(12),
+                              color: Color(AppColors.grey),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
