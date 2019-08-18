@@ -127,7 +127,7 @@ class ScheduleCardState extends State<ScheduleCard>
                     left: ScreenUtil().setWidth(10),
                   ),
                   width: ScreenUtil().setWidth(289),
-                  height: ScreenUtil().setHeight(_animation.value.toInt()),
+                  height: ScreenUtil().setHeight(_animation.value),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: Color(scheduleThemeData.cardColor),

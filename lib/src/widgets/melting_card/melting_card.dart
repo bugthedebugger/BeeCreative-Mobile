@@ -4,14 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MeltingCard extends StatefulWidget {
   Widget _child;
-  int _height;
+  double _height;
   var _color;
 
   // MeltingCard({this.child, int this.height, this.color});
 
   MeltingCard({var child, @required double height, @required var color}) {
     this._child = child;
-    this._height = height.toInt();
+    this._height = height;
     this._color = color;
   }
 

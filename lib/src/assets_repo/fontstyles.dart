@@ -14,13 +14,13 @@ class AppFontStyles {
   static double _drawerSubTextSize = 16.0;
   static double _drawerListTextSize = 18.0;
   */
-  static const int _18TextSize = 18;
-  static const int _16TextSize = 16;
-  static const int _15TextSize = 15;
-  static const int _12TextSize = 12;
-  static const int _20TextSize = 20;
-  static const int _30TextSize = 30;
-  static const int _48TextSize = 48;
+  static const double _18TextSize = 18;
+  static const double _16TextSize = 16;
+  static const double _15TextSize = 15;
+  static const double _12TextSize = 12;
+  static const double _20TextSize = 20;
+  static const double _30TextSize = 30;
+  static const double _48TextSize = 48;
   static double _textSizeScaled18;
   static double _textSizeScaled16;
   static double _textSizeScaled15;
@@ -192,8 +192,12 @@ class AppFontStyles {
     fontSize: _textSizeScaled12,
   );
 
-  TextStyle getTextStyle(
-      {int fontSize, Color color = Colors.black, String weight, String style}) {
+  TextStyle getTextStyle({
+    int fontSize,
+    Color color = Colors.black,
+    String weight,
+    String style,
+  }) {
     double _fontSize;
     var _weight;
     var _style;

@@ -67,4 +67,9 @@ class AppPhotos {
   static String achievements = 'assets/images/profile_page/achievements.png';
   static String classes = 'assets/images/profile_page/classes.png';
   static String students = 'assets/images/profile_page/students.png';
+  static String cookedDumpling = 'assets/images/momonation/dumpling.png';
+  static String rawDumpling = 'assets/images/momonation/raw-dumpling.png';
+  static String outlineDumpling =
+      'assets/images/momonation/outline-dumpling.png';
+  static String bar = 'assets/images/momonation/bar.png';
 }

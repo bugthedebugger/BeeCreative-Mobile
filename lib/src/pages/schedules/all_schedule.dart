@@ -5,6 +5,7 @@ import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:BeeCreative/src/pages/schedules/schedules_tile.dart';
 import 'package:BeeCreative/src/widgets/app_bar/app_bar.dart';
 import 'package:BeeCreative/src/widgets/drawer/drawer.dart';
+import 'package:BeeCreative/src/widgets/no_internet_widget/no_internet_widget.dart';
 import 'package:BeeCreative/src/widgets/schedule_scaffold/scaffold_key.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:collection/collection.dart';
@@ -100,43 +101,9 @@ class SchedulesScaffold extends StatelessWidget {
         ),
       );
     } else if (snapshot.data is SchedulesError) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(
-              AppPhotos.noInternet,
-              width: ScreenUtil().setWidth(154),
-              height: ScreenUtil().setHeight(134),
-            ),
-            SizedBox(height: ScreenUtil().setHeight(20)),
-            Text(
-              snapshot.data.message,
-              style: AppFontStyles(context).textStyle15BlackMedium,
-            ),
-            SizedBox(height: ScreenUtil().setHeight(20)),
-            RaisedButton(
-              onPressed: () {
-                _scheduleBloc.reloadSchedules();
-              },
-              color: Color(AppColors.meltingCardColor),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              textColor: Colors.white,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: ScreenUtil().setWidth(50),
-                  vertical: ScreenUtil().setHeight(8),
-                ),
-                child: Text(
-                  "Retry",
-                  style: AppFontStyles(context).textStyle15WhiteMedium,
-                ),
-              ),
-            ),
-          ],
-        ),
+      return NoInternetWidget(
+        message: snapshot.data.message,
+        onPressed: () => _scheduleBloc.reloadSchedules(),
       );
     } else if (snapshot.data is SchedulesReloading) {
       return Center(

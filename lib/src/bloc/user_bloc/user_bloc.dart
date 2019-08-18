@@ -52,6 +52,7 @@ class UserBloc implements Bloc {
       _initiateServerLogin();
     } catch (error, stackTrace) {
       print("Error: $error, Stack: $stackTrace");
+      dispatch(UserErrorEvent((b) => b..message = error.toString()));
     }
   }
 
@@ -59,7 +60,9 @@ class UserBloc implements Bloc {
     try {
       _sharedPreferences.clear();
       _googleSignIn.signOut();
-    } catch (_) {}
+    } catch (_) {
+      dispatch(UserErrorEvent((b) => b..message = _.toString()));
+    }
   }
 
   void _mapUserLoginRequest(UserLoginRequested event) async {
@@ -75,8 +78,10 @@ class UserBloc implements Bloc {
       _userLoggedIn();
     } on UserError catch (error) {
       print(error.message);
+      dispatch(UserErrorEvent((b) => b..message = error.message));
     } catch (error, stackTrace) {
       print("Error: $error, StackTrace: $stackTrace");
+      dispatch(UserErrorEvent((b) => b..message = error.toString()));
     }
   }
 

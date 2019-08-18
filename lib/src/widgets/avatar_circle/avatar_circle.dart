@@ -5,8 +5,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AvatarCircle extends StatefulWidget {
   final String _staticAvatarImage;
   final String _avatarImage;
+  final bool showCloud;
+  final Color ringColor;
+  final double radius;
+  final double ringWidth;
+  final Color backgroudColor;
 
-  AvatarCircle(this._staticAvatarImage, this._avatarImage);
+  AvatarCircle(
+    this._staticAvatarImage,
+    this._avatarImage, {
+    this.showCloud = true,
+    this.ringColor = Colors.white,
+    this.radius = 80,
+    this.ringWidth = 4,
+    this.backgroudColor = Colors.white,
+  });
 
   @override
   AvatarCircleState createState() {
@@ -25,26 +38,29 @@ class AvatarCircleState extends State<AvatarCircle> {
       overflow: Overflow.visible,
       children: <Widget>[
         Container(
-          width: ScreenUtil().setWidth(80),
-          height: ScreenUtil().setWidth(80),
-          padding: EdgeInsets.all(2),
-          decoration:
-              BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+          width: ScreenUtil().setWidth(widget.radius),
+          height: ScreenUtil().setWidth(widget.radius),
+          padding: EdgeInsets.all(ScreenUtil().setWidth(widget.ringWidth)),
+          decoration: BoxDecoration(
+            color: widget.ringColor,
+            shape: BoxShape.circle,
+          ),
           child: CircleAvatar(
-            backgroundColor: Colors.white,
+            backgroundColor: widget.backgroudColor,
             backgroundImage: (widget._avatarImage == null)
                 ? AssetImage(widget._staticAvatarImage)
                 : NetworkImage(widget._avatarImage),
           ),
         ),
-        Positioned(
-          top: ScreenUtil().setHeight(40),
-          left: -30,
-          child: Image.asset(
-            AppPhotos.avatarCloud,
-            width: ScreenUtil().setWidth(50),
+        if (widget.showCloud)
+          Positioned(
+            top: ScreenUtil().setHeight(40),
+            left: -30,
+            child: Image.asset(
+              AppPhotos.avatarCloud,
+              width: ScreenUtil().setWidth(50),
+            ),
           ),
-        ),
       ],
     );
   }

@@ -26,6 +26,15 @@ class LoginCardState extends State<LoginCard> {
         if (event is UserStoredSuccessfully) {
           Navigator.pushNamedAndRemoveUntil(
               context, Routes.NOTIFICATION_SETUP, (route) => false);
+        } else if (event is UserErrorEvent) {
+          Navigator.of(context).pop();
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text(event.message),
+            action: SnackBarAction(
+              label: 'Ok',
+              onPressed: () {},
+            ),
+          ));
         }
       },
     );
