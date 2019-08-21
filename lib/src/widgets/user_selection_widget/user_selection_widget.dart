@@ -138,7 +138,9 @@ class _UserSelectionWidgetState extends State<UserSelectionWidget> {
                         childAspectRatio: 1,
                         crossAxisSpacing: ScreenUtil().setHeight(10),
                       ),
-                      itemCount: widget.userList.users.length,
+                      itemCount: widget.userList.users.length <= 10
+                          ? widget.userList.users.length
+                          : 10,
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {

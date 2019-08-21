@@ -104,9 +104,14 @@ class _MomonationCommentsDialogState extends State<MomonationCommentsDialog> {
       ),
       child: Container(
         height: ScreenUtil().setHeight(530),
-        width: ScreenUtil().setWidth(336),
+        // width: ScreenUtil().setWidth(336),
+        constraints: BoxConstraints(
+          minWidth: 280,
+          maxWidth: ScreenUtil().setWidth(336),
+        ),
         child: Stack(
           fit: StackFit.expand,
+          alignment: Alignment.center,
           children: [
             Positioned(
               bottom: ScreenUtil().setHeight(103),
@@ -259,80 +264,85 @@ class _MomonationCommentsDialogState extends State<MomonationCommentsDialog> {
             ),
             Positioned(
               bottom: 0,
-              left: 0,
-              child: Container(
-                width: ScreenUtil().setWidth(300),
-                child: Center(
-                  child: Form(
-                    key: formKey,
-                    child: Container(
-                      width: ScreenUtil().setWidth(287),
-                      height: ScreenUtil().setHeight(42),
-                      margin: EdgeInsets.only(
-                        top: ScreenUtil().setHeight(15),
-                      ),
-                      child: Theme(
-                        data: ThemeData(
-                          primaryColor: widget.colorModel.darker,
-                          hintColor: widget.colorModel.dark,
-                        ),
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value.length < 2)
-                              return 'Comment has to be min two characters.';
-                            else {
-                              comment = value;
+              // left: 0,
+              child: Form(
+                key: formKey,
+                child: Container(
+                  height: ScreenUtil().setHeight(42),
+                  // color: Colors.red,
+                  constraints: BoxConstraints(
+                    minWidth: 280,
+                    maxWidth: ScreenUtil().setWidth(280),
+                  ),
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(
+                    top: ScreenUtil().setHeight(15),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: ScreenUtil().setWidth(10),
+                    vertical: ScreenUtil().setHeight(5),
+                  ),
+                  child: Theme(
+                    data: ThemeData(
+                      primaryColor: widget.colorModel.darker,
+                      hintColor: widget.colorModel.dark,
+                      fontFamily: 'Montserrat',
+                    ),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value.length < 2)
+                          return 'Comment has to be min two characters.';
+                        else {
+                          comment = value;
+                        }
+                      },
+                      textAlign: TextAlign.start,
+                      cursorColor: widget.colorModel.darker,
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            FontAwesomeIcons.paperPlane,
+                            color: widget.colorModel.darker,
+                            size: ScreenUtil().setSp(15),
+                          ),
+                          onPressed: () {
+                            if (formKey.currentState.validate()) {
+                              _bloc.postComment(
+                                comment: comment,
+                                feed: _feed,
+                              );
                             }
                           },
-                          textAlign: TextAlign.start,
-                          cursorColor: widget.colorModel.darker,
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                FontAwesomeIcons.paperPlane,
-                                color: widget.colorModel.darker,
-                                size: ScreenUtil().setSp(15),
-                              ),
-                              onPressed: () {
-                                if (formKey.currentState.validate()) {
-                                  _bloc.postComment(
-                                    comment: comment,
-                                    feed: _feed,
-                                  );
-                                }
-                              },
-                            ),
-                            contentPadding: EdgeInsets.only(
-                              top: ScreenUtil().setHeight(20),
-                              left: ScreenUtil().setWidth(10),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: widget.colorModel.darker,
-                                width: ScreenUtil().setWidth(3),
-                              ),
-                              borderRadius: BorderRadius.circular(
-                                ScreenUtil().setWidth(30),
-                              ),
-                            ),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: widget.colorModel.darker,
-                                width: ScreenUtil().setWidth(3),
-                              ),
-                              borderRadius: BorderRadius.circular(
-                                ScreenUtil().setWidth(30),
-                              ),
-                            ),
-                            fillColor: Colors.white,
-                            focusColor: Colors.white,
-                            filled: true,
-                            hintText: 'Write a comment ...',
-                            hintStyle: TextStyle(
-                              fontSize: ScreenUtil().setSp(12),
-                              color: Color(AppColors.grey),
-                            ),
+                        ),
+                        contentPadding: EdgeInsets.only(
+                          top: ScreenUtil().setHeight(20),
+                          left: ScreenUtil().setWidth(10),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: widget.colorModel.darker,
+                            width: ScreenUtil().setWidth(3),
                           ),
+                          borderRadius: BorderRadius.circular(
+                            ScreenUtil().setWidth(30),
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: widget.colorModel.darker,
+                            width: ScreenUtil().setWidth(3),
+                          ),
+                          borderRadius: BorderRadius.circular(
+                            ScreenUtil().setWidth(30),
+                          ),
+                        ),
+                        fillColor: Colors.white,
+                        focusColor: Colors.white,
+                        filled: true,
+                        hintText: 'Write a comment ...',
+                        hintStyle: TextStyle(
+                          fontSize: ScreenUtil().setSp(12),
+                          color: Color(AppColors.grey),
                         ),
                       ),
                     ),

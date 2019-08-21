@@ -65,7 +65,7 @@ class CommentCard extends StatelessWidget {
         ),
         Positioned(
           right: ScreenUtil().setWidth(20),
-          top: -ScreenUtil().setHeight(-5),
+          top: ScreenUtil().setHeight(10),
           child: AvatarCircle(
             AppPhotos.staticAvatar,
             avatar,

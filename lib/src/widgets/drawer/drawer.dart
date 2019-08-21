@@ -113,11 +113,12 @@ class _AppDrawerState extends State<AppDrawer> {
                   ),
                   */
                   ListTile(
+                    dense: true,
                     leading: ImageIcon(
                       AssetImage(
                         AppPhotos.cookedDumpling,
                       ),
-                      size: ScreenUtil().setSp(14),
+                      size: ScreenUtil().setWidth(16),
                       color: Colors.white,
                     ),
                     title: Text(
@@ -158,6 +159,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     height: ScreenUtil().setHeight(400),
                     child: Stack(
                       overflow: Overflow.visible,
+                      alignment: Alignment.center,
                       children: <Widget>[
                         Positioned(
                           top: ScreenUtil().setHeight(-30),
@@ -237,7 +239,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         ),
                         Positioned(
                           bottom: ScreenUtil().setHeight(15),
-                          left: ScreenUtil().setWidth(24),
+                          // left: ScreenUtil().setWidth(24),
                           child: Image.asset(
                             AppPhotos.loginScreenKarkhanaBuilding,
                             width: ScreenUtil().setWidth(199),

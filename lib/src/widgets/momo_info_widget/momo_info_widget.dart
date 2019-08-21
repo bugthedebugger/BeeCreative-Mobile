@@ -22,10 +22,10 @@ class MomoInfoWidget extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.only(
-        top: 15,
-        left: 13,
-        right: 13,
-        bottom: 15,
+        top: ScreenUtil().setHeight(15),
+        left: ScreenUtil().setWidth(13),
+        right: ScreenUtil().setWidth(13),
+        bottom: ScreenUtil().setHeight(5),
       ),
       width: ScreenUtil().setWidth(162),
       height: ScreenUtil().setHeight(89),

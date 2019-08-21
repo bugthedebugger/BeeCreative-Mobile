@@ -72,7 +72,7 @@ class _AppreciatePageState extends State<AppreciatePage> {
               ),
             ),
           );
-        } else if(onData is AppreciationSuccess) {
+        } else if (onData is AppreciationSuccess) {
           Navigator.of(context).pop();
           Navigator.of(context).pop(true);
         }
@@ -291,7 +291,7 @@ class _AppreciatePageState extends State<AppreciatePage> {
                       child: TextFormField(
                         validator: (value) {
                           if (value.length < 6)
-                            return 'Message must be atleast 3 characters.';
+                            return 'Message must be atleast 6 characters.';
                           message = value;
                         },
                         keyboardType: TextInputType.multiline,
