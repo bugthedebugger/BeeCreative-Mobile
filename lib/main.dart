@@ -10,6 +10,7 @@ import 'package:BeeCreative/src/pages/momonation/appreciate.dart';
 import 'package:BeeCreative/src/pages/momonation/dashboard.dart';
 import 'package:BeeCreative/src/pages/momonation/leaderboard.dart';
 import 'package:BeeCreative/src/pages/momonation/notification.dart';
+import 'package:BeeCreative/src/pages/moodmeter/moodemeter.dart';
 import 'package:BeeCreative/src/pages/photo_gallery/photo_gallery.dart';
 import 'package:BeeCreative/src/pages/profile/profile.dart';
 import 'package:BeeCreative/src/pages/schedules/all_schedule.dart';
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
             NotificationPage(),
         Routes.LEADERBOARDS: (BuildContext context) => LeaderBoardsPage(),
         Routes.APPRECIATE_PAGE: (BuildContext context) => AppreciatePage(),
+        Routes.MOODMETER: (BuildContext context) => MoodMeter(),
         // Routes.PHOTO_GALLERY: (BuildContext context) => PhotoGallery(),
       },
       onGenerateRoute: _getRoute,
@@ -83,3 +85,15 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+/*
+                  DrawerListTile(
+                    image: AppPhotos.drawerHelp,
+                    title: "HELP",
+                    function: () {},
+                  ),
+                  DrawerListTile(
+                    image: AppPhotos.drawerAbout,
+                    title: "ABOUT",
+                    function: () {},
+                  ),
+                  */

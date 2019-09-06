@@ -133,6 +133,13 @@ class _AppDrawerState extends State<AppDrawer> {
                     },
                   ),
                   DrawerListTile(
+                    icon: FontAwesomeIcons.solidSmile,
+                    title: "MOODMETER",
+                    function: () {
+                      Navigator.of(context).pushNamed(Routes.MOODMETER);
+                    },
+                  ),
+                  DrawerListTile(
                     icon: FontAwesomeIcons.signOutAlt,
                     title: "LOGOUT",
                     function: () {
