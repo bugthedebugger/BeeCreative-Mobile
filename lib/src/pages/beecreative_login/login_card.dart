@@ -68,10 +68,11 @@ class LoginCardState extends State<LoginCard> {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-              color: Colors.black12,
-              blurRadius: 6.0,
-              spreadRadius: 6.0,
-              offset: Offset(0.0, 3.0))
+            color: Colors.black12,
+            blurRadius: 6.0,
+            spreadRadius: 6.0,
+            offset: Offset(0.0, 3.0),
+          )
         ],
         shape: BoxShape.rectangle,
       ),

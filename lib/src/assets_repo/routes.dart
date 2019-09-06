@@ -14,4 +14,5 @@ class Routes {
   static const MOMONATION_NOTIFICATION = 'app/momonation/notification';
   static const LEADERBOARDS = 'app/momonation/achievements';
   static const APPRECIATE_PAGE = 'app/momonation/appreciate';
+  static const MOODMETER = 'app/moodmeter';
 }

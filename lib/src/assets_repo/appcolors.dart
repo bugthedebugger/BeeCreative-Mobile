@@ -43,4 +43,13 @@ class AppColors {
   static var momonationCooked = 0xff00818A;
   static var green = 0xff1CD547;
   static var pink = 0xffF36886;
+  static var yellow = 0xffFEBE40;
+
+  static var emotionHappy = 0xff2ECC71;
+  static var emotionSad = 0xffE74C3C;
+  static var emotionTired = 0xff7F8C8D;
+  static var emotionEnergized = 0xffF39C12;
+  static var emotionIamok = 0xff8E44AD;
+  static var emotionSatisfied = 0xff079992;
+  static var emotionDissatisfied = 0xffEB2F06;
 }
