@@ -43,9 +43,13 @@ class UserProfile extends StatelessWidget {
               height: 308,
               child: Column(
                 children: <Widget>[
-                  AvatarCircle(
-                    AppPhotos.staticAvatar,
-                    _preferences.get('avatar'),
+                  Hero(
+                    transitionOnUserGestures: true,
+                    tag: 'avatar',
+                    child: AvatarCircle(
+                      AppPhotos.staticAvatar,
+                      _preferences.get('avatar'),
+                    ),
                   ),
                   SizedBox(
                     height: ScreenUtil().setHeight(13),

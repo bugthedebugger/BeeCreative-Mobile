@@ -57,7 +57,11 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
                     child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    AvatarCircle(AppPhotos.staticAvatar, avatar),
+                    Hero(
+                      transitionOnUserGestures: true,
+                      tag: 'avatar',
+                      child: AvatarCircle(AppPhotos.staticAvatar, avatar),
+                    ),
                     SizedBox(height: ScreenUtil().setHeight(5)),
                     Text(
                       "$userName",

@@ -52,7 +52,12 @@ class _AppDrawerState extends State<AppDrawer> {
                     child: Center(
                       child: Column(
                         children: <Widget>[
-                          AvatarCircle(AppPhotos.staticAvatar, _avatar),
+                          Hero(
+                            tag: 'avatar',
+                            child:
+                                AvatarCircle(AppPhotos.staticAvatar, _avatar),
+                            transitionOnUserGestures: true,
+                          ),
                           SizedBox(height: 10),
                           Text(
                             "$_userName",

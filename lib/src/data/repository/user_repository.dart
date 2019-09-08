@@ -16,7 +16,6 @@ class UserRepository {
 
     try {
       final user = await _userDataSource.requestLogin(token: token);
-      print(user);
       return user;
     } catch (e) {
       throw UserError(e.message);

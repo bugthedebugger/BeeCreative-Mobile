@@ -45,7 +45,11 @@ class LoggedInWelcomeState extends State<LoggedInWelcome> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              AvatarCircle(AppPhotos.staticAvatar, avatar),
+              Hero(
+                transitionOnUserGestures: true,
+                tag: 'avatar',
+                child: AvatarCircle(AppPhotos.staticAvatar, avatar),
+              ),
               SizedBox(
                 height: 20,
               ),
