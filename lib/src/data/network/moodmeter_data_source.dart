@@ -27,7 +27,6 @@ class MoodMeterDataSource {
         'mood_id': mood,
       }),
     );
-    print(response.body);
     if (response.statusCode == 200) {
       return MoodMeterResponse.fromJson(response.body);
     } else if (response.statusCode == 403) {
