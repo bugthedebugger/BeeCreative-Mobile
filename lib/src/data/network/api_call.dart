@@ -11,6 +11,8 @@ class ApiURL {
   static const String socialUploads = _baseUrl + 'socialmedia/uploads';
   static const String narrativeFolder =
       _baseUrl + 'socialmedia/create/drive/folder';
+  static const String moodMeterSave = _baseUrl + 'moodmeter';
+  static const String getMoods = _baseUrl + 'moods';
 }
 
 class MomonationURL {

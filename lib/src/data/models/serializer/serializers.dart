@@ -4,6 +4,8 @@ import 'package:BeeCreative/src/data/models/attendance/attendance_model.dart';
 import 'package:BeeCreative/src/data/models/delivery_report/delivery_response_model.dart';
 import 'package:BeeCreative/src/data/models/google_drive_folder_model/drive_folder.dart';
 import 'package:BeeCreative/src/data/models/google_drive_folder_model/google_drive.dart';
+import 'package:BeeCreative/src/data/models/mood_meter/mood_meter.dart';
+import 'package:BeeCreative/src/data/models/mood_meter_response/mood_meter_response.dart';
 import 'package:BeeCreative/src/data/models/schedules/schedule_model.dart';
 import 'package:BeeCreative/src/data/models/socialmedia/photo_data.dart';
 import 'package:BeeCreative/src/data/models/socialmedia/social_media.dart';
@@ -34,6 +36,8 @@ part 'serializers.g.dart';
   PhotoData,
   DriveFolder,
   GoogleDrive,
+  MoodMeter,
+  MoodMeterResponse,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

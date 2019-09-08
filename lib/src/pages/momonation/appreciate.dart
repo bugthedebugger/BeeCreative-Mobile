@@ -217,9 +217,18 @@ class _AppreciatePageState extends State<AppreciatePage> {
                               ringColor: colorModel.darker,
                             ),
                     ),
-                    SizedBox(
-                      height: ScreenUtil().setHeight(26),
+                    // SizedBox(
+                    //   height: ScreenUtil().setHeight(26),
+                    // ),
+                    SizedBox(height: ScreenUtil().setHeight(5)),
+                    Text(
+                      _selectedUser == null ? '' : _selectedUser.name,
+                      style: TextStyle(
+                        color: colorModel.fontColor,
+                        fontSize: ScreenUtil().setSp(12),
+                      ),
                     ),
+                    SizedBox(height: ScreenUtil().setHeight(13)),
                     MomoSelectorWidget(
                       colorModel: colorModel,
                       max: 3,
@@ -387,18 +396,22 @@ class _AppreciatePageState extends State<AppreciatePage> {
               ),
             ),
           ),
+          Positioned(
+            top: ScreenUtil().setHeight(580),
+            right: ScreenUtil().setWidth(17),
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              backgroundColor: Color(AppColors.pink),
+              child: Icon(
+                FontAwesomeIcons.times,
+                size: ScreenUtil().setSp(18),
+                color: Colors.white,
+              ),
+            ),
+          ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pop(false);
-        },
-        backgroundColor: Color(AppColors.pink),
-        child: Icon(
-          FontAwesomeIcons.times,
-          size: ScreenUtil().setSp(18),
-          color: Colors.white,
-        ),
       ),
     );
   }

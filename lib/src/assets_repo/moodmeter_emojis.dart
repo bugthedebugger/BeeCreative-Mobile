@@ -11,7 +11,7 @@ enum MoodMeterEmotions {
   dissatisfied,
 }
 
-class MoodeMeterEmojis {
+class MoodMeterEmojis {
   static List<MoodMeterEmotions> emojiList = [
     MoodMeterEmotions.happy,
     MoodMeterEmotions.sad,
@@ -22,34 +22,53 @@ class MoodeMeterEmojis {
     MoodMeterEmotions.dissatisfied,
   ];
 
-  static Map<MoodMeterEmotions, Map> emojiMap = {
-    MoodMeterEmotions.happy: {
-      'emoji': FontAwesomeIcons.solidSmile,
-      'color': AppColors.emotionHappy,
-    },
-    MoodMeterEmotions.sad: {
-      'emoji': FontAwesomeIcons.solidSmile,
-      'color': AppColors.emotionSad,
-    },
-    MoodMeterEmotions.tired: {
-      'emoji': FontAwesomeIcons.solidSmile,
-      'color': AppColors.emotionTired,
-    },
-    MoodMeterEmotions.energized: {
-      'emoji': FontAwesomeIcons.solidSmile,
-      'color': AppColors.emotionEnergized,
-    },
-    MoodMeterEmotions.iamok: {
-      'emoji': FontAwesomeIcons.solidSmile,
-      'color': AppColors.emotionIamok,
-    },
-    MoodMeterEmotions.satisfied: {
-      'emoji': FontAwesomeIcons.solidSmile,
-      'color': AppColors.emotionSatisfied,
-    },
-    MoodMeterEmotions.dissatisfied: {
-      'emoji': FontAwesomeIcons.solidSmile,
-      'color': AppColors.emotionDissatisfied,
-    },
+  static Map<MoodMeterEmotions, MoodmeterEmojiModel> emojiMap = {
+    MoodMeterEmotions.happy: MoodmeterEmojiModel(
+      icon: FontAwesomeIcons.solidSmile,
+      color: AppColors.emotionHappy,
+      emotion: MoodMeterEmotions.happy,
+    ),
+    MoodMeterEmotions.sad: MoodmeterEmojiModel(
+      icon: FontAwesomeIcons.solidFrown,
+      color: AppColors.emotionSad,
+      emotion: MoodMeterEmotions.sad,
+    ),
+    MoodMeterEmotions.tired: MoodmeterEmojiModel(
+      icon: FontAwesomeIcons.solidDizzy,
+      color: AppColors.emotionTired,
+      emotion: MoodMeterEmotions.tired,
+    ),
+    MoodMeterEmotions.energized: MoodmeterEmojiModel(
+      icon: FontAwesomeIcons.solidGrinStars,
+      color: AppColors.emotionEnergized,
+      emotion: MoodMeterEmotions.energized,
+    ),
+    MoodMeterEmotions.iamok: MoodmeterEmojiModel(
+      icon: FontAwesomeIcons.solidMehBlank,
+      color: AppColors.emotionIamok,
+      emotion: MoodMeterEmotions.iamok,
+    ),
+    MoodMeterEmotions.satisfied: MoodmeterEmojiModel(
+      icon: FontAwesomeIcons.solidGrinBeam,
+      color: AppColors.emotionSatisfied,
+      emotion: MoodMeterEmotions.satisfied,
+    ),
+    MoodMeterEmotions.dissatisfied: MoodmeterEmojiModel(
+      icon: FontAwesomeIcons.solidAngry,
+      color: AppColors.emotionDissatisfied,
+      emotion: MoodMeterEmotions.dissatisfied,
+    ),
   };
+}
+
+class MoodmeterEmojiModel {
+  final int color;
+  final IconData icon;
+  final MoodMeterEmotions emotion;
+
+  MoodmeterEmojiModel({
+    @required this.color,
+    @required this.icon,
+    @required this.emotion,
+  });
 }
