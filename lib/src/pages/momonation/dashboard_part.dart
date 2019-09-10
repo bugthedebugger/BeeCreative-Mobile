@@ -127,41 +127,46 @@ class _DashboardPartState extends State<DashboardPart> {
           ),
         ),
         SizedBox(height: ScreenUtil().setHeight(10)),
-        Container(
-          height: ScreenUtil().setHeight(50),
-          child: ListView.builder(
-            itemCount: _events.feed.leaderboard.length,
-            scrollDirection: Axis.horizontal,
-            physics: BouncingScrollPhysics(),
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(
-                  left: ScreenUtil().setWidth(12),
-                  right: ScreenUtil().setWidth(5),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    AvatarCircle(
-                      AppPhotos.staticAvatar,
-                      _events.feed.leaderboard[index].avatar,
-                      showCloud: false,
-                      ringColor: Color(AppColors.green),
-                      radius: 32,
-                      ringWidth: 2,
-                    ),
-                    Text(
-                      '${_events.feed.leaderboard[index].momo}',
-                      style: TextStyle(
-                        color: Color(AppColors.grey),
-                        fontSize: ScreenUtil().setSp(12),
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).pushNamed(Routes.LEADERBOARDS);
+          },
+          child: Container(
+            height: ScreenUtil().setHeight(50),
+            child: ListView.builder(
+              itemCount: _events.feed.leaderboard.length,
+              scrollDirection: Axis.horizontal,
+              physics: BouncingScrollPhysics(),
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.only(
+                    left: ScreenUtil().setWidth(12),
+                    right: ScreenUtil().setWidth(5),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      AvatarCircle(
+                        AppPhotos.staticAvatar,
+                        _events.feed.leaderboard[index].avatar,
+                        showCloud: false,
+                        ringColor: Color(AppColors.green),
+                        radius: 32,
+                        ringWidth: 2,
                       ),
-                    )
-                  ],
-                ),
-              );
-            },
+                      Text(
+                        '${_events.feed.leaderboard[index].momo}',
+                        style: TextStyle(
+                          color: Color(AppColors.grey),
+                          fontSize: ScreenUtil().setSp(12),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ],

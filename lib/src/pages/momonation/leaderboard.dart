@@ -7,6 +7,7 @@ import 'package:BeeCreative/src/bloc/leaderboards_bloc/leaderboards_events.dart'
 import 'package:BeeCreative/src/data/models/colors/colors_model.dart';
 import 'package:BeeCreative/src/data/models/momonation/leaderboards/leaderboards.dart';
 import 'package:BeeCreative/src/widgets/leaderboard_bar/leaderboard_bar.dart';
+import 'package:BeeCreative/src/widgets/leaderboard_widget/leaderboard_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
@@ -123,49 +124,8 @@ class _LeaderBoardsPageState extends State<LeaderBoardsPage> {
                         ),
                       ),
                       enabled: true,
-                      subtitle: Container(
-                        margin: EdgeInsets.only(
-                          top: ScreenUtil().setHeight(10),
-                          bottom: ScreenUtil().setHeight(10),
-                        ),
-                        padding: EdgeInsets.all(
-                          ScreenUtil().setWidth(12),
-                        ),
-                        height: ScreenUtil().setHeight(256),
-                        width: ScreenUtil().setWidth(335),
-                        decoration: BoxDecoration(
-                          color: colorModel.light,
-                          borderRadius: BorderRadius.circular(
-                            ScreenUtil().setWidth(15),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 3,
-                              offset: Offset(0, 1),
-                              spreadRadius: 1,
-                              color: Color(AppColors.shadowColor),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            for (int i = 0;
-                                i <
-                                    snapshot
-                                        .data.leaderboards[index].users.length;
-                                i++)
-                              LeaderBoardBar(
-                                colorModel: colorModel,
-                                highest: snapshot.data.leaderboards[index].max,
-                                amount: snapshot
-                                    .data.leaderboards[index].users[i].momo,
-                                avatar: snapshot
-                                    .data.leaderboards[index].users[i].avatar,
-                              ),
-                          ],
-                        ),
+                      subtitle: LeaderboardWidget(
+                        colorModel: colorModel,
                       ),
                     );
                   },
