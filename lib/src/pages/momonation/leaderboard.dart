@@ -112,6 +112,7 @@ class _LeaderBoardsPageState extends State<LeaderBoardsPage> {
                   return _completer.future;
                 },
                 child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
                   itemCount: snapshot.data.leaderboards.length,
                   itemBuilder: (context, index) {
                     ColorModel colorModel = ColorSelector.getColor(index);
