@@ -52,7 +52,7 @@ class LeaderboardBloc extends Bloc {
   }
 
   void addData(Leaderboards data) {
-    _dataSink.add(data);
+    _dataSink?.add(data);
   }
 
   void getLeaderboards() {
