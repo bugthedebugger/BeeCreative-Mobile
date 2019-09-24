@@ -12,7 +12,8 @@ class UserDataSource {
 
   UserDataSource(this.client);
 
-  Future<User> requestLogin({@required String token}) async {
+  Future<User> requestLogin(
+      {@required String token, String notificationToken}) async {
     final url = ApiURL.login;
     final encodedUrl = Uri.encodeFull(url);
     final response = await client.post(encodedUrl, body: {

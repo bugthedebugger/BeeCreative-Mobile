@@ -13,6 +13,7 @@ class ApiURL {
       _baseUrl + 'socialmedia/create/drive/folder';
   static const String moodMeterSave = _baseUrl + 'moodmeter';
   static const String getMoods = _baseUrl + 'moods';
+  static const String logout = _baseUrl + 'logout';
 }
 
 class MomonationURL {
