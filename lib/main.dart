@@ -113,15 +113,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-/*
-                  DrawerListTile(
-                    image: AppPhotos.drawerHelp,
-                    title: "HELP",
-                    function: () {},
-                  ),
-                  DrawerListTile(
-                    image: AppPhotos.drawerAbout,
-                    title: "ABOUT",
-                    function: () {},
-                  ),
-                  */
