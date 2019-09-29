@@ -8,13 +8,14 @@ part of student_randomizer_events;
 
 class _$InitializeRandomizer extends InitializeRandomizer {
   factory _$InitializeRandomizer(
-          [void updates(InitializeRandomizerBuilder b)]) =>
+          [void Function(InitializeRandomizerBuilder) updates]) =>
       (new InitializeRandomizerBuilder()..update(updates)).build();
 
   _$InitializeRandomizer._() : super._();
 
   @override
-  InitializeRandomizer rebuild(void updates(InitializeRandomizerBuilder b)) =>
+  InitializeRandomizer rebuild(
+          void Function(InitializeRandomizerBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -53,7 +54,7 @@ class InitializeRandomizerBuilder
   }
 
   @override
-  void update(void updates(InitializeRandomizerBuilder b)) {
+  void update(void Function(InitializeRandomizerBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -66,13 +67,13 @@ class InitializeRandomizerBuilder
 }
 
 class _$RandomStudent extends RandomStudent {
-  factory _$RandomStudent([void updates(RandomStudentBuilder b)]) =>
+  factory _$RandomStudent([void Function(RandomStudentBuilder) updates]) =>
       (new RandomStudentBuilder()..update(updates)).build();
 
   _$RandomStudent._() : super._();
 
   @override
-  RandomStudent rebuild(void updates(RandomStudentBuilder b)) =>
+  RandomStudent rebuild(void Function(RandomStudentBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -110,7 +111,7 @@ class RandomStudentBuilder
   }
 
   @override
-  void update(void updates(RandomStudentBuilder b)) {
+  void update(void Function(RandomStudentBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -123,13 +124,13 @@ class RandomStudentBuilder
 }
 
 class _$NoStudentsEvent extends NoStudentsEvent {
-  factory _$NoStudentsEvent([void updates(NoStudentsEventBuilder b)]) =>
+  factory _$NoStudentsEvent([void Function(NoStudentsEventBuilder) updates]) =>
       (new NoStudentsEventBuilder()..update(updates)).build();
 
   _$NoStudentsEvent._() : super._();
 
   @override
-  NoStudentsEvent rebuild(void updates(NoStudentsEventBuilder b)) =>
+  NoStudentsEvent rebuild(void Function(NoStudentsEventBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -168,7 +169,7 @@ class NoStudentsEventBuilder
   }
 
   @override
-  void update(void updates(NoStudentsEventBuilder b)) {
+  void update(void Function(NoStudentsEventBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -182,14 +183,14 @@ class NoStudentsEventBuilder
 
 class _$ReinitializeRandomizerEvent extends ReinitializeRandomizerEvent {
   factory _$ReinitializeRandomizerEvent(
-          [void updates(ReinitializeRandomizerEventBuilder b)]) =>
+          [void Function(ReinitializeRandomizerEventBuilder) updates]) =>
       (new ReinitializeRandomizerEventBuilder()..update(updates)).build();
 
   _$ReinitializeRandomizerEvent._() : super._();
 
   @override
   ReinitializeRandomizerEvent rebuild(
-          void updates(ReinitializeRandomizerEventBuilder b)) =>
+          void Function(ReinitializeRandomizerEventBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -231,7 +232,7 @@ class ReinitializeRandomizerEventBuilder
   }
 
   @override
-  void update(void updates(ReinitializeRandomizerEventBuilder b)) {
+  void update(void Function(ReinitializeRandomizerEventBuilder) updates) {
     if (updates != null) updates(this);
   }
 

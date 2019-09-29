@@ -15,7 +15,7 @@ class _$AttendanceSerializer implements StructuredSerializer<Attendance> {
   final String wireName = 'Attendance';
 
   @override
-  Iterable serialize(Serializers serializers, Attendance object,
+  Iterable<Object> serialize(Serializers serializers, Attendance object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'attendanceRecord',
@@ -28,7 +28,7 @@ class _$AttendanceSerializer implements StructuredSerializer<Attendance> {
   }
 
   @override
-  Attendance deserialize(Serializers serializers, Iterable serialized,
+  Attendance deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new AttendanceBuilder();
 
@@ -42,7 +42,7 @@ class _$AttendanceSerializer implements StructuredSerializer<Attendance> {
           result.attendanceRecord.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(AttendanceRecord)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
       }
     }
@@ -55,7 +55,7 @@ class _$Attendance extends Attendance {
   @override
   final BuiltList<AttendanceRecord> attendanceRecord;
 
-  factory _$Attendance([void updates(AttendanceBuilder b)]) =>
+  factory _$Attendance([void Function(AttendanceBuilder) updates]) =>
       (new AttendanceBuilder()..update(updates)).build();
 
   _$Attendance._({this.attendanceRecord}) : super._() {
@@ -65,7 +65,7 @@ class _$Attendance extends Attendance {
   }
 
   @override
-  Attendance rebuild(void updates(AttendanceBuilder b)) =>
+  Attendance rebuild(void Function(AttendanceBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -118,7 +118,7 @@ class AttendanceBuilder implements Builder<Attendance, AttendanceBuilder> {
   }
 
   @override
-  void update(void updates(AttendanceBuilder b)) {
+  void update(void Function(AttendanceBuilder) updates) {
     if (updates != null) updates(this);
   }
 

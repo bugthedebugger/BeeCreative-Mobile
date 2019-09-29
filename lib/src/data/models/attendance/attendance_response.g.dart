@@ -17,7 +17,7 @@ class _$AttendanceResponseSerializer
   final String wireName = 'AttendanceResponse';
 
   @override
-  Iterable serialize(Serializers serializers, AttendanceResponse object,
+  Iterable<Object> serialize(Serializers serializers, AttendanceResponse object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'code',
@@ -35,12 +35,12 @@ class _$AttendanceResponseSerializer
         ..add(serializers.serialize(object.error,
             specifiedType: const FullType(String)));
     }
-
     return result;
   }
 
   @override
-  AttendanceResponse deserialize(Serializers serializers, Iterable serialized,
+  AttendanceResponse deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new AttendanceResponseBuilder();
 
@@ -77,7 +77,8 @@ class _$AttendanceResponse extends AttendanceResponse {
   @override
   final int code;
 
-  factory _$AttendanceResponse([void updates(AttendanceResponseBuilder b)]) =>
+  factory _$AttendanceResponse(
+          [void Function(AttendanceResponseBuilder) updates]) =>
       (new AttendanceResponseBuilder()..update(updates)).build();
 
   _$AttendanceResponse._({this.data, this.error, this.code}) : super._() {
@@ -87,7 +88,8 @@ class _$AttendanceResponse extends AttendanceResponse {
   }
 
   @override
-  AttendanceResponse rebuild(void updates(AttendanceResponseBuilder b)) =>
+  AttendanceResponse rebuild(
+          void Function(AttendanceResponseBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -155,7 +157,7 @@ class AttendanceResponseBuilder
   }
 
   @override
-  void update(void updates(AttendanceResponseBuilder b)) {
+  void update(void Function(AttendanceResponseBuilder) updates) {
     if (updates != null) updates(this);
   }
 

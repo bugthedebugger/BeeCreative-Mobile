@@ -15,7 +15,7 @@ class _$LeaderboardSerializer implements StructuredSerializer<Leaderboard> {
   final String wireName = 'Leaderboard';
 
   @override
-  Iterable serialize(Serializers serializers, Leaderboard object,
+  Iterable<Object> serialize(Serializers serializers, Leaderboard object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
     if (object.users != null) {
@@ -43,12 +43,11 @@ class _$LeaderboardSerializer implements StructuredSerializer<Leaderboard> {
         ..add(serializers.serialize(object.max,
             specifiedType: const FullType(int)));
     }
-
     return result;
   }
 
   @override
-  Leaderboard deserialize(Serializers serializers, Iterable serialized,
+  Leaderboard deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new LeaderboardBuilder();
 
@@ -62,7 +61,7 @@ class _$LeaderboardSerializer implements StructuredSerializer<Leaderboard> {
           result.users.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(User)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
         case 'date':
           result.date = serializers.deserialize(value,
@@ -93,13 +92,13 @@ class _$Leaderboard extends Leaderboard {
   @override
   final int max;
 
-  factory _$Leaderboard([void updates(LeaderboardBuilder b)]) =>
+  factory _$Leaderboard([void Function(LeaderboardBuilder) updates]) =>
       (new LeaderboardBuilder()..update(updates)).build();
 
   _$Leaderboard._({this.users, this.date, this.min, this.max}) : super._();
 
   @override
-  Leaderboard rebuild(void updates(LeaderboardBuilder b)) =>
+  Leaderboard rebuild(void Function(LeaderboardBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -174,7 +173,7 @@ class LeaderboardBuilder implements Builder<Leaderboard, LeaderboardBuilder> {
   }
 
   @override
-  void update(void updates(LeaderboardBuilder b)) {
+  void update(void Function(LeaderboardBuilder) updates) {
     if (updates != null) updates(this);
   }
 

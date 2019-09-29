@@ -15,7 +15,7 @@ class _$FeedSerializer implements StructuredSerializer<Feed> {
   final String wireName = 'Feed';
 
   @override
-  Iterable serialize(Serializers serializers, Feed object,
+  Iterable<Object> serialize(Serializers serializers, Feed object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'id',
@@ -48,12 +48,11 @@ class _$FeedSerializer implements StructuredSerializer<Feed> {
             specifiedType:
                 const FullType(BuiltList, const [const FullType(Comment)])));
     }
-
     return result;
   }
 
   @override
-  Feed deserialize(Serializers serializers, Iterable serialized,
+  Feed deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new FeedBuilder();
 
@@ -101,8 +100,9 @@ class _$FeedSerializer implements StructuredSerializer<Feed> {
           break;
         case 'comments':
           result.comments.replace(serializers.deserialize(value,
-              specifiedType: const FullType(
-                  BuiltList, const [const FullType(Comment)])) as BuiltList);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(Comment)]))
+              as BuiltList<dynamic>);
           break;
       }
     }
@@ -133,7 +133,7 @@ class _$Feed extends Feed {
   @override
   final BuiltList<Comment> comments;
 
-  factory _$Feed([void updates(FeedBuilder b)]) =>
+  factory _$Feed([void Function(FeedBuilder) updates]) =>
       (new FeedBuilder()..update(updates)).build();
 
   _$Feed._(
@@ -178,7 +178,7 @@ class _$Feed extends Feed {
   }
 
   @override
-  Feed rebuild(void updates(FeedBuilder b)) =>
+  Feed rebuild(void Function(FeedBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -309,7 +309,7 @@ class FeedBuilder implements Builder<Feed, FeedBuilder> {
   }
 
   @override
-  void update(void updates(FeedBuilder b)) {
+  void update(void Function(FeedBuilder) updates) {
     if (updates != null) updates(this);
   }
 

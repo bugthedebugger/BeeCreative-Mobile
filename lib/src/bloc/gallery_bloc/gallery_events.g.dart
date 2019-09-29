@@ -10,7 +10,7 @@ class _$Thumbnail extends Thumbnail {
   @override
   final int classId;
 
-  factory _$Thumbnail([void updates(ThumbnailBuilder b)]) =>
+  factory _$Thumbnail([void Function(ThumbnailBuilder) updates]) =>
       (new ThumbnailBuilder()..update(updates)).build();
 
   _$Thumbnail._({this.classId}) : super._() {
@@ -20,7 +20,7 @@ class _$Thumbnail extends Thumbnail {
   }
 
   @override
-  Thumbnail rebuild(void updates(ThumbnailBuilder b)) =>
+  Thumbnail rebuild(void Function(ThumbnailBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -70,7 +70,7 @@ class ThumbnailBuilder implements Builder<Thumbnail, ThumbnailBuilder> {
   }
 
   @override
-  void update(void updates(ThumbnailBuilder b)) {
+  void update(void Function(ThumbnailBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -86,7 +86,7 @@ class _$TakePhoto extends TakePhoto {
   @override
   final Schedule schedule;
 
-  factory _$TakePhoto([void updates(TakePhotoBuilder b)]) =>
+  factory _$TakePhoto([void Function(TakePhotoBuilder) updates]) =>
       (new TakePhotoBuilder()..update(updates)).build();
 
   _$TakePhoto._({this.schedule}) : super._() {
@@ -96,7 +96,7 @@ class _$TakePhoto extends TakePhoto {
   }
 
   @override
-  TakePhoto rebuild(void updates(TakePhotoBuilder b)) =>
+  TakePhoto rebuild(void Function(TakePhotoBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -146,7 +146,7 @@ class TakePhotoBuilder implements Builder<TakePhoto, TakePhotoBuilder> {
   }
 
   @override
-  void update(void updates(TakePhotoBuilder b)) {
+  void update(void Function(TakePhotoBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -175,7 +175,8 @@ class _$UploadFromGallery extends UploadFromGallery {
   @override
   final Schedule schedule;
 
-  factory _$UploadFromGallery([void updates(UploadFromGalleryBuilder b)]) =>
+  factory _$UploadFromGallery(
+          [void Function(UploadFromGalleryBuilder) updates]) =>
       (new UploadFromGalleryBuilder()..update(updates)).build();
 
   _$UploadFromGallery._({this.schedule}) : super._() {
@@ -185,7 +186,7 @@ class _$UploadFromGallery extends UploadFromGallery {
   }
 
   @override
-  UploadFromGallery rebuild(void updates(UploadFromGalleryBuilder b)) =>
+  UploadFromGallery rebuild(void Function(UploadFromGalleryBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -238,7 +239,7 @@ class UploadFromGalleryBuilder
   }
 
   @override
-  void update(void updates(UploadFromGalleryBuilder b)) {
+  void update(void Function(UploadFromGalleryBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -264,13 +265,13 @@ class UploadFromGalleryBuilder
 }
 
 class _$PhotoTaken extends PhotoTaken {
-  factory _$PhotoTaken([void updates(PhotoTakenBuilder b)]) =>
+  factory _$PhotoTaken([void Function(PhotoTakenBuilder) updates]) =>
       (new PhotoTakenBuilder()..update(updates)).build();
 
   _$PhotoTaken._() : super._();
 
   @override
-  PhotoTaken rebuild(void updates(PhotoTakenBuilder b)) =>
+  PhotoTaken rebuild(void Function(PhotoTakenBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -307,7 +308,7 @@ class PhotoTakenBuilder implements Builder<PhotoTaken, PhotoTakenBuilder> {
   }
 
   @override
-  void update(void updates(PhotoTakenBuilder b)) {
+  void update(void Function(PhotoTakenBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -323,7 +324,8 @@ class _$UploadedFromGallery extends UploadedFromGallery {
   @override
   final Schedule schedule;
 
-  factory _$UploadedFromGallery([void updates(UploadedFromGalleryBuilder b)]) =>
+  factory _$UploadedFromGallery(
+          [void Function(UploadedFromGalleryBuilder) updates]) =>
       (new UploadedFromGalleryBuilder()..update(updates)).build();
 
   _$UploadedFromGallery._({this.schedule}) : super._() {
@@ -333,7 +335,8 @@ class _$UploadedFromGallery extends UploadedFromGallery {
   }
 
   @override
-  UploadedFromGallery rebuild(void updates(UploadedFromGalleryBuilder b)) =>
+  UploadedFromGallery rebuild(
+          void Function(UploadedFromGalleryBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -386,7 +389,7 @@ class UploadedFromGalleryBuilder
   }
 
   @override
-  void update(void updates(UploadedFromGalleryBuilder b)) {
+  void update(void Function(UploadedFromGalleryBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -415,7 +418,7 @@ class _$GetFullGallery extends GetFullGallery {
   @override
   final int classId;
 
-  factory _$GetFullGallery([void updates(GetFullGalleryBuilder b)]) =>
+  factory _$GetFullGallery([void Function(GetFullGalleryBuilder) updates]) =>
       (new GetFullGalleryBuilder()..update(updates)).build();
 
   _$GetFullGallery._({this.classId}) : super._() {
@@ -425,7 +428,7 @@ class _$GetFullGallery extends GetFullGallery {
   }
 
   @override
-  GetFullGallery rebuild(void updates(GetFullGalleryBuilder b)) =>
+  GetFullGallery rebuild(void Function(GetFullGalleryBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -478,7 +481,7 @@ class GetFullGalleryBuilder
   }
 
   @override
-  void update(void updates(GetFullGalleryBuilder b)) {
+  void update(void Function(GetFullGalleryBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -497,7 +500,7 @@ class _$GetGroupedByThumbnail extends GetGroupedByThumbnail {
   final int limit;
 
   factory _$GetGroupedByThumbnail(
-          [void updates(GetGroupedByThumbnailBuilder b)]) =>
+          [void Function(GetGroupedByThumbnailBuilder) updates]) =>
       (new GetGroupedByThumbnailBuilder()..update(updates)).build();
 
   _$GetGroupedByThumbnail._({this.classId, this.limit}) : super._() {
@@ -510,7 +513,8 @@ class _$GetGroupedByThumbnail extends GetGroupedByThumbnail {
   }
 
   @override
-  GetGroupedByThumbnail rebuild(void updates(GetGroupedByThumbnailBuilder b)) =>
+  GetGroupedByThumbnail rebuild(
+          void Function(GetGroupedByThumbnailBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -571,7 +575,7 @@ class GetGroupedByThumbnailBuilder
   }
 
   @override
-  void update(void updates(GetGroupedByThumbnailBuilder b)) {
+  void update(void Function(GetGroupedByThumbnailBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -588,7 +592,8 @@ class _$SyncToGoogleDrive extends SyncToGoogleDrive {
   @override
   final int classId;
 
-  factory _$SyncToGoogleDrive([void updates(SyncToGoogleDriveBuilder b)]) =>
+  factory _$SyncToGoogleDrive(
+          [void Function(SyncToGoogleDriveBuilder) updates]) =>
       (new SyncToGoogleDriveBuilder()..update(updates)).build();
 
   _$SyncToGoogleDrive._({this.classId}) : super._() {
@@ -598,7 +603,7 @@ class _$SyncToGoogleDrive extends SyncToGoogleDrive {
   }
 
   @override
-  SyncToGoogleDrive rebuild(void updates(SyncToGoogleDriveBuilder b)) =>
+  SyncToGoogleDrive rebuild(void Function(SyncToGoogleDriveBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -651,7 +656,7 @@ class SyncToGoogleDriveBuilder
   }
 
   @override
-  void update(void updates(SyncToGoogleDriveBuilder b)) {
+  void update(void Function(SyncToGoogleDriveBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -670,7 +675,7 @@ class _$SyncingToGoogleDrive extends SyncingToGoogleDrive {
   final int done;
 
   factory _$SyncingToGoogleDrive(
-          [void updates(SyncingToGoogleDriveBuilder b)]) =>
+          [void Function(SyncingToGoogleDriveBuilder) updates]) =>
       (new SyncingToGoogleDriveBuilder()..update(updates)).build();
 
   _$SyncingToGoogleDrive._({this.total, this.done}) : super._() {
@@ -683,7 +688,8 @@ class _$SyncingToGoogleDrive extends SyncingToGoogleDrive {
   }
 
   @override
-  SyncingToGoogleDrive rebuild(void updates(SyncingToGoogleDriveBuilder b)) =>
+  SyncingToGoogleDrive rebuild(
+          void Function(SyncingToGoogleDriveBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -744,7 +750,7 @@ class SyncingToGoogleDriveBuilder
   }
 
   @override
-  void update(void updates(SyncingToGoogleDriveBuilder b)) {
+  void update(void Function(SyncingToGoogleDriveBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -759,14 +765,14 @@ class SyncingToGoogleDriveBuilder
 
 class _$SyncingToGoogleDriveCompleted extends SyncingToGoogleDriveCompleted {
   factory _$SyncingToGoogleDriveCompleted(
-          [void updates(SyncingToGoogleDriveCompletedBuilder b)]) =>
+          [void Function(SyncingToGoogleDriveCompletedBuilder) updates]) =>
       (new SyncingToGoogleDriveCompletedBuilder()..update(updates)).build();
 
   _$SyncingToGoogleDriveCompleted._() : super._();
 
   @override
   SyncingToGoogleDriveCompleted rebuild(
-          void updates(SyncingToGoogleDriveCompletedBuilder b)) =>
+          void Function(SyncingToGoogleDriveCompletedBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -808,7 +814,7 @@ class SyncingToGoogleDriveCompletedBuilder
   }
 
   @override
-  void update(void updates(SyncingToGoogleDriveCompletedBuilder b)) {
+  void update(void Function(SyncingToGoogleDriveCompletedBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -825,7 +831,7 @@ class _$SyncingToGoogleDriveError extends SyncingToGoogleDriveError {
   final String message;
 
   factory _$SyncingToGoogleDriveError(
-          [void updates(SyncingToGoogleDriveErrorBuilder b)]) =>
+          [void Function(SyncingToGoogleDriveErrorBuilder) updates]) =>
       (new SyncingToGoogleDriveErrorBuilder()..update(updates)).build();
 
   _$SyncingToGoogleDriveError._({this.message}) : super._() {
@@ -837,7 +843,7 @@ class _$SyncingToGoogleDriveError extends SyncingToGoogleDriveError {
 
   @override
   SyncingToGoogleDriveError rebuild(
-          void updates(SyncingToGoogleDriveErrorBuilder b)) =>
+          void Function(SyncingToGoogleDriveErrorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -891,7 +897,7 @@ class SyncingToGoogleDriveErrorBuilder
   }
 
   @override
-  void update(void updates(SyncingToGoogleDriveErrorBuilder b)) {
+  void update(void Function(SyncingToGoogleDriveErrorBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -904,13 +910,15 @@ class SyncingToGoogleDriveErrorBuilder
 }
 
 class _$SyncGalleryToServer extends SyncGalleryToServer {
-  factory _$SyncGalleryToServer([void updates(SyncGalleryToServerBuilder b)]) =>
+  factory _$SyncGalleryToServer(
+          [void Function(SyncGalleryToServerBuilder) updates]) =>
       (new SyncGalleryToServerBuilder()..update(updates)).build();
 
   _$SyncGalleryToServer._() : super._();
 
   @override
-  SyncGalleryToServer rebuild(void updates(SyncGalleryToServerBuilder b)) =>
+  SyncGalleryToServer rebuild(
+          void Function(SyncGalleryToServerBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -949,7 +957,7 @@ class SyncGalleryToServerBuilder
   }
 
   @override
-  void update(void updates(SyncGalleryToServerBuilder b)) {
+  void update(void Function(SyncGalleryToServerBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -964,14 +972,14 @@ class SyncGalleryToServerBuilder
 class _$SyncingGalleryToServerCompleted
     extends SyncingGalleryToServerCompleted {
   factory _$SyncingGalleryToServerCompleted(
-          [void updates(SyncingGalleryToServerCompletedBuilder b)]) =>
+          [void Function(SyncingGalleryToServerCompletedBuilder) updates]) =>
       (new SyncingGalleryToServerCompletedBuilder()..update(updates)).build();
 
   _$SyncingGalleryToServerCompleted._() : super._();
 
   @override
   SyncingGalleryToServerCompleted rebuild(
-          void updates(SyncingGalleryToServerCompletedBuilder b)) =>
+          void Function(SyncingGalleryToServerCompletedBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -1013,7 +1021,7 @@ class SyncingGalleryToServerCompletedBuilder
   }
 
   @override
-  void update(void updates(SyncingGalleryToServerCompletedBuilder b)) {
+  void update(void Function(SyncingGalleryToServerCompletedBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -1030,7 +1038,7 @@ class _$SyncingGalleryToServerError extends SyncingGalleryToServerError {
   final String message;
 
   factory _$SyncingGalleryToServerError(
-          [void updates(SyncingGalleryToServerErrorBuilder b)]) =>
+          [void Function(SyncingGalleryToServerErrorBuilder) updates]) =>
       (new SyncingGalleryToServerErrorBuilder()..update(updates)).build();
 
   _$SyncingGalleryToServerError._({this.message}) : super._() {
@@ -1042,7 +1050,7 @@ class _$SyncingGalleryToServerError extends SyncingGalleryToServerError {
 
   @override
   SyncingGalleryToServerError rebuild(
-          void updates(SyncingGalleryToServerErrorBuilder b)) =>
+          void Function(SyncingGalleryToServerErrorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -1097,7 +1105,7 @@ class SyncingGalleryToServerErrorBuilder
   }
 
   @override
-  void update(void updates(SyncingGalleryToServerErrorBuilder b)) {
+  void update(void Function(SyncingGalleryToServerErrorBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -1121,7 +1129,7 @@ class _$SyncNarrativeToDrive extends SyncNarrativeToDrive {
   final String date;
 
   factory _$SyncNarrativeToDrive(
-          [void updates(SyncNarrativeToDriveBuilder b)]) =>
+          [void Function(SyncNarrativeToDriveBuilder) updates]) =>
       (new SyncNarrativeToDriveBuilder()..update(updates)).build();
 
   _$SyncNarrativeToDrive._(
@@ -1143,7 +1151,8 @@ class _$SyncNarrativeToDrive extends SyncNarrativeToDrive {
   }
 
   @override
-  SyncNarrativeToDrive rebuild(void updates(SyncNarrativeToDriveBuilder b)) =>
+  SyncNarrativeToDrive rebuild(
+          void Function(SyncNarrativeToDriveBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -1222,7 +1231,7 @@ class SyncNarrativeToDriveBuilder
   }
 
   @override
-  void update(void updates(SyncNarrativeToDriveBuilder b)) {
+  void update(void Function(SyncNarrativeToDriveBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -1246,7 +1255,7 @@ class _$SyncingNarrativeToDrive extends SyncingNarrativeToDrive {
   final int done;
 
   factory _$SyncingNarrativeToDrive(
-          [void updates(SyncingNarrativeToDriveBuilder b)]) =>
+          [void Function(SyncingNarrativeToDriveBuilder) updates]) =>
       (new SyncingNarrativeToDriveBuilder()..update(updates)).build();
 
   _$SyncingNarrativeToDrive._({this.total, this.done}) : super._() {
@@ -1260,7 +1269,7 @@ class _$SyncingNarrativeToDrive extends SyncingNarrativeToDrive {
 
   @override
   SyncingNarrativeToDrive rebuild(
-          void updates(SyncingNarrativeToDriveBuilder b)) =>
+          void Function(SyncingNarrativeToDriveBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -1322,7 +1331,7 @@ class SyncingNarrativeToDriveBuilder
   }
 
   @override
-  void update(void updates(SyncingNarrativeToDriveBuilder b)) {
+  void update(void Function(SyncingNarrativeToDriveBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -1340,7 +1349,7 @@ class _$SyncingNarrativeToDriveError extends SyncingNarrativeToDriveError {
   final String message;
 
   factory _$SyncingNarrativeToDriveError(
-          [void updates(SyncingNarrativeToDriveErrorBuilder b)]) =>
+          [void Function(SyncingNarrativeToDriveErrorBuilder) updates]) =>
       (new SyncingNarrativeToDriveErrorBuilder()..update(updates)).build();
 
   _$SyncingNarrativeToDriveError._({this.message}) : super._() {
@@ -1352,7 +1361,7 @@ class _$SyncingNarrativeToDriveError extends SyncingNarrativeToDriveError {
 
   @override
   SyncingNarrativeToDriveError rebuild(
-          void updates(SyncingNarrativeToDriveErrorBuilder b)) =>
+          void Function(SyncingNarrativeToDriveErrorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -1407,7 +1416,7 @@ class SyncingNarrativeToDriveErrorBuilder
   }
 
   @override
-  void update(void updates(SyncingNarrativeToDriveErrorBuilder b)) {
+  void update(void Function(SyncingNarrativeToDriveErrorBuilder) updates) {
     if (updates != null) updates(this);
   }
 

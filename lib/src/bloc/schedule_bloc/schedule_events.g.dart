@@ -11,7 +11,7 @@ class _$GetScheduleFromNetwork extends GetScheduleFromNetwork {
   final String token;
 
   factory _$GetScheduleFromNetwork(
-          [void updates(GetScheduleFromNetworkBuilder b)]) =>
+          [void Function(GetScheduleFromNetworkBuilder) updates]) =>
       (new GetScheduleFromNetworkBuilder()..update(updates)).build();
 
   _$GetScheduleFromNetwork._({this.token}) : super._() {
@@ -22,7 +22,7 @@ class _$GetScheduleFromNetwork extends GetScheduleFromNetwork {
 
   @override
   GetScheduleFromNetwork rebuild(
-          void updates(GetScheduleFromNetworkBuilder b)) =>
+          void Function(GetScheduleFromNetworkBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -75,7 +75,7 @@ class GetScheduleFromNetworkBuilder
   }
 
   @override
-  void update(void updates(GetScheduleFromNetworkBuilder b)) {
+  void update(void Function(GetScheduleFromNetworkBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -92,7 +92,7 @@ class _$GetScheduleFromStorage extends GetScheduleFromStorage {
   final String token;
 
   factory _$GetScheduleFromStorage(
-          [void updates(GetScheduleFromStorageBuilder b)]) =>
+          [void Function(GetScheduleFromStorageBuilder) updates]) =>
       (new GetScheduleFromStorageBuilder()..update(updates)).build();
 
   _$GetScheduleFromStorage._({this.token}) : super._() {
@@ -103,7 +103,7 @@ class _$GetScheduleFromStorage extends GetScheduleFromStorage {
 
   @override
   GetScheduleFromStorage rebuild(
-          void updates(GetScheduleFromStorageBuilder b)) =>
+          void Function(GetScheduleFromStorageBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -156,7 +156,7 @@ class GetScheduleFromStorageBuilder
   }
 
   @override
-  void update(void updates(GetScheduleFromStorageBuilder b)) {
+  void update(void Function(GetScheduleFromStorageBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -172,7 +172,7 @@ class _$ScheduleExpired extends ScheduleExpired {
   @override
   final DateTime date;
 
-  factory _$ScheduleExpired([void updates(ScheduleExpiredBuilder b)]) =>
+  factory _$ScheduleExpired([void Function(ScheduleExpiredBuilder) updates]) =>
       (new ScheduleExpiredBuilder()..update(updates)).build();
 
   _$ScheduleExpired._({this.date}) : super._() {
@@ -182,7 +182,7 @@ class _$ScheduleExpired extends ScheduleExpired {
   }
 
   @override
-  ScheduleExpired rebuild(void updates(ScheduleExpiredBuilder b)) =>
+  ScheduleExpired rebuild(void Function(ScheduleExpiredBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -234,7 +234,7 @@ class ScheduleExpiredBuilder
   }
 
   @override
-  void update(void updates(ScheduleExpiredBuilder b)) {
+  void update(void Function(ScheduleExpiredBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -247,13 +247,14 @@ class ScheduleExpiredBuilder
 }
 
 class _$SchedulesLoading extends SchedulesLoading {
-  factory _$SchedulesLoading([void updates(SchedulesLoadingBuilder b)]) =>
+  factory _$SchedulesLoading(
+          [void Function(SchedulesLoadingBuilder) updates]) =>
       (new SchedulesLoadingBuilder()..update(updates)).build();
 
   _$SchedulesLoading._() : super._();
 
   @override
-  SchedulesLoading rebuild(void updates(SchedulesLoadingBuilder b)) =>
+  SchedulesLoading rebuild(void Function(SchedulesLoadingBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -292,7 +293,7 @@ class SchedulesLoadingBuilder
   }
 
   @override
-  void update(void updates(SchedulesLoadingBuilder b)) {
+  void update(void Function(SchedulesLoadingBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -309,7 +310,7 @@ class _$ScheduleLoadedSuccessfully extends ScheduleLoadedSuccessfully {
   final ScheduleResponse scheduleResponse;
 
   factory _$ScheduleLoadedSuccessfully(
-          [void updates(ScheduleLoadedSuccessfullyBuilder b)]) =>
+          [void Function(ScheduleLoadedSuccessfullyBuilder) updates]) =>
       (new ScheduleLoadedSuccessfullyBuilder()..update(updates)).build();
 
   _$ScheduleLoadedSuccessfully._({this.scheduleResponse}) : super._() {
@@ -321,7 +322,7 @@ class _$ScheduleLoadedSuccessfully extends ScheduleLoadedSuccessfully {
 
   @override
   ScheduleLoadedSuccessfully rebuild(
-          void updates(ScheduleLoadedSuccessfullyBuilder b)) =>
+          void Function(ScheduleLoadedSuccessfullyBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -378,7 +379,7 @@ class ScheduleLoadedSuccessfullyBuilder
   }
 
   @override
-  void update(void updates(ScheduleLoadedSuccessfullyBuilder b)) {
+  void update(void Function(ScheduleLoadedSuccessfullyBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -410,7 +411,7 @@ class _$ReloadSchedulesFromNetwork extends ReloadSchedulesFromNetwork {
   final String token;
 
   factory _$ReloadSchedulesFromNetwork(
-          [void updates(ReloadSchedulesFromNetworkBuilder b)]) =>
+          [void Function(ReloadSchedulesFromNetworkBuilder) updates]) =>
       (new ReloadSchedulesFromNetworkBuilder()..update(updates)).build();
 
   _$ReloadSchedulesFromNetwork._({this.token}) : super._() {
@@ -421,7 +422,7 @@ class _$ReloadSchedulesFromNetwork extends ReloadSchedulesFromNetwork {
 
   @override
   ReloadSchedulesFromNetwork rebuild(
-          void updates(ReloadSchedulesFromNetworkBuilder b)) =>
+          void Function(ReloadSchedulesFromNetworkBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -475,7 +476,7 @@ class ReloadSchedulesFromNetworkBuilder
   }
 
   @override
-  void update(void updates(ReloadSchedulesFromNetworkBuilder b)) {
+  void update(void Function(ReloadSchedulesFromNetworkBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -491,7 +492,7 @@ class _$SchedulesError extends SchedulesError {
   @override
   final String message;
 
-  factory _$SchedulesError([void updates(SchedulesErrorBuilder b)]) =>
+  factory _$SchedulesError([void Function(SchedulesErrorBuilder) updates]) =>
       (new SchedulesErrorBuilder()..update(updates)).build();
 
   _$SchedulesError._({this.message}) : super._() {
@@ -501,7 +502,7 @@ class _$SchedulesError extends SchedulesError {
   }
 
   @override
-  SchedulesError rebuild(void updates(SchedulesErrorBuilder b)) =>
+  SchedulesError rebuild(void Function(SchedulesErrorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -554,7 +555,7 @@ class SchedulesErrorBuilder
   }
 
   @override
-  void update(void updates(SchedulesErrorBuilder b)) {
+  void update(void Function(SchedulesErrorBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -567,13 +568,13 @@ class SchedulesErrorBuilder
 }
 
 class _$NoSchedules extends NoSchedules {
-  factory _$NoSchedules([void updates(NoSchedulesBuilder b)]) =>
+  factory _$NoSchedules([void Function(NoSchedulesBuilder) updates]) =>
       (new NoSchedulesBuilder()..update(updates)).build();
 
   _$NoSchedules._() : super._();
 
   @override
-  NoSchedules rebuild(void updates(NoSchedulesBuilder b)) =>
+  NoSchedules rebuild(void Function(NoSchedulesBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -610,7 +611,7 @@ class NoSchedulesBuilder implements Builder<NoSchedules, NoSchedulesBuilder> {
   }
 
   @override
-  void update(void updates(NoSchedulesBuilder b)) {
+  void update(void Function(NoSchedulesBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -623,13 +624,15 @@ class NoSchedulesBuilder implements Builder<NoSchedules, NoSchedulesBuilder> {
 }
 
 class _$SchedulesReloading extends SchedulesReloading {
-  factory _$SchedulesReloading([void updates(SchedulesReloadingBuilder b)]) =>
+  factory _$SchedulesReloading(
+          [void Function(SchedulesReloadingBuilder) updates]) =>
       (new SchedulesReloadingBuilder()..update(updates)).build();
 
   _$SchedulesReloading._() : super._();
 
   @override
-  SchedulesReloading rebuild(void updates(SchedulesReloadingBuilder b)) =>
+  SchedulesReloading rebuild(
+          void Function(SchedulesReloadingBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -668,7 +671,7 @@ class SchedulesReloadingBuilder
   }
 
   @override
-  void update(void updates(SchedulesReloadingBuilder b)) {
+  void update(void Function(SchedulesReloadingBuilder) updates) {
     if (updates != null) updates(this);
   }
 

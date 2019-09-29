@@ -15,7 +15,7 @@ class _$UserDataSerializer implements StructuredSerializer<UserData> {
   final String wireName = 'UserData';
 
   @override
-  Iterable serialize(Serializers serializers, UserData object,
+  Iterable<Object> serialize(Serializers serializers, UserData object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'user_name',
@@ -58,12 +58,11 @@ class _$UserDataSerializer implements StructuredSerializer<UserData> {
         ..add(serializers.serialize(object.bio,
             specifiedType: const FullType(String)));
     }
-
     return result;
   }
 
   @override
-  UserData deserialize(Serializers serializers, Iterable serialized,
+  UserData deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new UserDataBuilder();
 
@@ -136,7 +135,7 @@ class _$UserData extends UserData {
   @override
   final String bio;
 
-  factory _$UserData([void updates(UserDataBuilder b)]) =>
+  factory _$UserData([void Function(UserDataBuilder) updates]) =>
       (new UserDataBuilder()..update(updates)).build();
 
   _$UserData._(
@@ -168,7 +167,7 @@ class _$UserData extends UserData {
   }
 
   @override
-  UserData rebuild(void updates(UserDataBuilder b)) =>
+  UserData rebuild(void Function(UserDataBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -289,7 +288,7 @@ class UserDataBuilder implements Builder<UserData, UserDataBuilder> {
   }
 
   @override
-  void update(void updates(UserDataBuilder b)) {
+  void update(void Function(UserDataBuilder) updates) {
     if (updates != null) updates(this);
   }
 

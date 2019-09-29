@@ -17,7 +17,7 @@ class _$ScheduleResponseSerializer
   final String wireName = 'ScheduleResponse';
 
   @override
-  Iterable serialize(Serializers serializers, ScheduleResponse object,
+  Iterable<Object> serialize(Serializers serializers, ScheduleResponse object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
     if (object.data != null) {
@@ -46,12 +46,12 @@ class _$ScheduleResponseSerializer
         ..add(serializers.serialize(object.pagination,
             specifiedType: const FullType(SchedulesPagination)));
     }
-
     return result;
   }
 
   @override
-  ScheduleResponse deserialize(Serializers serializers, Iterable serialized,
+  ScheduleResponse deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ScheduleResponseBuilder();
 
@@ -65,12 +65,13 @@ class _$ScheduleResponseSerializer
           result.data.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(ScheduleResponseData)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
         case 'schedule':
           result.schedule.replace(serializers.deserialize(value,
-              specifiedType: const FullType(
-                  BuiltList, const [const FullType(Schedule)])) as BuiltList);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(Schedule)]))
+              as BuiltList<dynamic>);
           break;
         case 'attendee':
           result.attendee.replace(serializers.deserialize(value,
@@ -98,7 +99,8 @@ class _$ScheduleResponse extends ScheduleResponse {
   @override
   final SchedulesPagination pagination;
 
-  factory _$ScheduleResponse([void updates(ScheduleResponseBuilder b)]) =>
+  factory _$ScheduleResponse(
+          [void Function(ScheduleResponseBuilder) updates]) =>
       (new ScheduleResponseBuilder()..update(updates)).build();
 
   _$ScheduleResponse._(
@@ -106,7 +108,7 @@ class _$ScheduleResponse extends ScheduleResponse {
       : super._();
 
   @override
-  ScheduleResponse rebuild(void updates(ScheduleResponseBuilder b)) =>
+  ScheduleResponse rebuild(void Function(ScheduleResponseBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -187,7 +189,7 @@ class ScheduleResponseBuilder
   }
 
   @override
-  void update(void updates(ScheduleResponseBuilder b)) {
+  void update(void Function(ScheduleResponseBuilder) updates) {
     if (updates != null) updates(this);
   }
 

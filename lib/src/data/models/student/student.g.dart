@@ -15,7 +15,7 @@ class _$StudentSerializer implements StructuredSerializer<Student> {
   final String wireName = 'Student';
 
   @override
-  Iterable serialize(Serializers serializers, Student object,
+  Iterable<Object> serialize(Serializers serializers, Student object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'student_id',
@@ -50,7 +50,7 @@ class _$StudentSerializer implements StructuredSerializer<Student> {
   }
 
   @override
-  Student deserialize(Serializers serializers, Iterable serialized,
+  Student deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new StudentBuilder();
 
@@ -123,7 +123,7 @@ class _$Student extends Student {
   @override
   final String gender;
 
-  factory _$Student([void updates(StudentBuilder b)]) =>
+  factory _$Student([void Function(StudentBuilder) updates]) =>
       (new StudentBuilder()..update(updates)).build();
 
   _$Student._(
@@ -167,7 +167,7 @@ class _$Student extends Student {
   }
 
   @override
-  Student rebuild(void updates(StudentBuilder b)) =>
+  Student rebuild(void Function(StudentBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -288,7 +288,7 @@ class StudentBuilder implements Builder<Student, StudentBuilder> {
   }
 
   @override
-  void update(void updates(StudentBuilder b)) {
+  void update(void Function(StudentBuilder) updates) {
     if (updates != null) updates(this);
   }
 

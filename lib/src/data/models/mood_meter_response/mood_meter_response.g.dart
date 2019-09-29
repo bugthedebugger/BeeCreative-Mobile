@@ -17,7 +17,7 @@ class _$MoodMeterResponseSerializer
   final String wireName = 'MoodMeterResponse';
 
   @override
-  Iterable serialize(Serializers serializers, MoodMeterResponse object,
+  Iterable<Object> serialize(Serializers serializers, MoodMeterResponse object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
     if (object.moodMeter != null) {
@@ -26,12 +26,12 @@ class _$MoodMeterResponseSerializer
         ..add(serializers.serialize(object.moodMeter,
             specifiedType: const FullType(MoodMeter)));
     }
-
     return result;
   }
 
   @override
-  MoodMeterResponse deserialize(Serializers serializers, Iterable serialized,
+  MoodMeterResponse deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new MoodMeterResponseBuilder();
 
@@ -56,13 +56,14 @@ class _$MoodMeterResponse extends MoodMeterResponse {
   @override
   final MoodMeter moodMeter;
 
-  factory _$MoodMeterResponse([void updates(MoodMeterResponseBuilder b)]) =>
+  factory _$MoodMeterResponse(
+          [void Function(MoodMeterResponseBuilder) updates]) =>
       (new MoodMeterResponseBuilder()..update(updates)).build();
 
   _$MoodMeterResponse._({this.moodMeter}) : super._();
 
   @override
-  MoodMeterResponse rebuild(void updates(MoodMeterResponseBuilder b)) =>
+  MoodMeterResponse rebuild(void Function(MoodMeterResponseBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -116,7 +117,7 @@ class MoodMeterResponseBuilder
   }
 
   @override
-  void update(void updates(MoodMeterResponseBuilder b)) {
+  void update(void Function(MoodMeterResponseBuilder) updates) {
     if (updates != null) updates(this);
   }
 

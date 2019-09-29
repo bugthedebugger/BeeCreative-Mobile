@@ -7,13 +7,13 @@ part of momonation_bloc_events;
 // **************************************************************************
 
 class _$GetFeed extends GetFeed {
-  factory _$GetFeed([void updates(GetFeedBuilder b)]) =>
+  factory _$GetFeed([void Function(GetFeedBuilder) updates]) =>
       (new GetFeedBuilder()..update(updates)).build();
 
   _$GetFeed._() : super._();
 
   @override
-  GetFeed rebuild(void updates(GetFeedBuilder b)) =>
+  GetFeed rebuild(void Function(GetFeedBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -50,7 +50,7 @@ class GetFeedBuilder implements Builder<GetFeed, GetFeedBuilder> {
   }
 
   @override
-  void update(void updates(GetFeedBuilder b)) {
+  void update(void Function(GetFeedBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -66,7 +66,7 @@ class _$FeedLoadSuccess extends FeedLoadSuccess {
   @override
   final MomoFeed feed;
 
-  factory _$FeedLoadSuccess([void updates(FeedLoadSuccessBuilder b)]) =>
+  factory _$FeedLoadSuccess([void Function(FeedLoadSuccessBuilder) updates]) =>
       (new FeedLoadSuccessBuilder()..update(updates)).build();
 
   _$FeedLoadSuccess._({this.feed}) : super._() {
@@ -76,7 +76,7 @@ class _$FeedLoadSuccess extends FeedLoadSuccess {
   }
 
   @override
-  FeedLoadSuccess rebuild(void updates(FeedLoadSuccessBuilder b)) =>
+  FeedLoadSuccess rebuild(void Function(FeedLoadSuccessBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -128,7 +128,7 @@ class FeedLoadSuccessBuilder
   }
 
   @override
-  void update(void updates(FeedLoadSuccessBuilder b)) {
+  void update(void Function(FeedLoadSuccessBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -157,7 +157,8 @@ class _$MomonationSuccess extends MomonationSuccess {
   @override
   final String message;
 
-  factory _$MomonationSuccess([void updates(MomonationSuccessBuilder b)]) =>
+  factory _$MomonationSuccess(
+          [void Function(MomonationSuccessBuilder) updates]) =>
       (new MomonationSuccessBuilder()..update(updates)).build();
 
   _$MomonationSuccess._({this.message}) : super._() {
@@ -167,7 +168,7 @@ class _$MomonationSuccess extends MomonationSuccess {
   }
 
   @override
-  MomonationSuccess rebuild(void updates(MomonationSuccessBuilder b)) =>
+  MomonationSuccess rebuild(void Function(MomonationSuccessBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -220,7 +221,7 @@ class MomonationSuccessBuilder
   }
 
   @override
-  void update(void updates(MomonationSuccessBuilder b)) {
+  void update(void Function(MomonationSuccessBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -236,7 +237,7 @@ class _$MomonationError extends MomonationError {
   @override
   final String message;
 
-  factory _$MomonationError([void updates(MomonationErrorBuilder b)]) =>
+  factory _$MomonationError([void Function(MomonationErrorBuilder) updates]) =>
       (new MomonationErrorBuilder()..update(updates)).build();
 
   _$MomonationError._({this.message}) : super._() {
@@ -246,7 +247,7 @@ class _$MomonationError extends MomonationError {
   }
 
   @override
-  MomonationError rebuild(void updates(MomonationErrorBuilder b)) =>
+  MomonationError rebuild(void Function(MomonationErrorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -299,7 +300,7 @@ class MomonationErrorBuilder
   }
 
   @override
-  void update(void updates(MomonationErrorBuilder b)) {
+  void update(void Function(MomonationErrorBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -315,7 +316,7 @@ class _$NoInternetEvent extends NoInternetEvent {
   @override
   final String message;
 
-  factory _$NoInternetEvent([void updates(NoInternetEventBuilder b)]) =>
+  factory _$NoInternetEvent([void Function(NoInternetEventBuilder) updates]) =>
       (new NoInternetEventBuilder()..update(updates)).build();
 
   _$NoInternetEvent._({this.message}) : super._() {
@@ -325,7 +326,7 @@ class _$NoInternetEvent extends NoInternetEvent {
   }
 
   @override
-  NoInternetEvent rebuild(void updates(NoInternetEventBuilder b)) =>
+  NoInternetEvent rebuild(void Function(NoInternetEventBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -378,7 +379,7 @@ class NoInternetEventBuilder
   }
 
   @override
-  void update(void updates(NoInternetEventBuilder b)) {
+  void update(void Function(NoInternetEventBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -391,13 +392,13 @@ class NoInternetEventBuilder
 }
 
 class _$Retry extends Retry {
-  factory _$Retry([void updates(RetryBuilder b)]) =>
+  factory _$Retry([void Function(RetryBuilder) updates]) =>
       (new RetryBuilder()..update(updates)).build();
 
   _$Retry._() : super._();
 
   @override
-  Retry rebuild(void updates(RetryBuilder b)) =>
+  Retry rebuild(void Function(RetryBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -434,7 +435,7 @@ class RetryBuilder implements Builder<Retry, RetryBuilder> {
   }
 
   @override
-  void update(void updates(RetryBuilder b)) {
+  void update(void Function(RetryBuilder) updates) {
     if (updates != null) updates(this);
   }
 

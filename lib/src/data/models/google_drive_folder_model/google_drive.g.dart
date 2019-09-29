@@ -15,7 +15,7 @@ class _$GoogleDriveSerializer implements StructuredSerializer<GoogleDrive> {
   final String wireName = 'GoogleDrive';
 
   @override
-  Iterable serialize(Serializers serializers, GoogleDrive object,
+  Iterable<Object> serialize(Serializers serializers, GoogleDrive object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'data',
@@ -29,7 +29,7 @@ class _$GoogleDriveSerializer implements StructuredSerializer<GoogleDrive> {
   }
 
   @override
-  GoogleDrive deserialize(Serializers serializers, Iterable serialized,
+  GoogleDrive deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new GoogleDriveBuilder();
 
@@ -60,7 +60,7 @@ class _$GoogleDrive extends GoogleDrive {
   @override
   final int code;
 
-  factory _$GoogleDrive([void updates(GoogleDriveBuilder b)]) =>
+  factory _$GoogleDrive([void Function(GoogleDriveBuilder) updates]) =>
       (new GoogleDriveBuilder()..update(updates)).build();
 
   _$GoogleDrive._({this.folder, this.code}) : super._() {
@@ -73,7 +73,7 @@ class _$GoogleDrive extends GoogleDrive {
   }
 
   @override
-  GoogleDrive rebuild(void updates(GoogleDriveBuilder b)) =>
+  GoogleDrive rebuild(void Function(GoogleDriveBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -130,7 +130,7 @@ class GoogleDriveBuilder implements Builder<GoogleDrive, GoogleDriveBuilder> {
   }
 
   @override
-  void update(void updates(GoogleDriveBuilder b)) {
+  void update(void Function(GoogleDriveBuilder) updates) {
     if (updates != null) updates(this);
   }
 

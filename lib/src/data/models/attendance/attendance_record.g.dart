@@ -17,7 +17,7 @@ class _$AttendanceRecordSerializer
   final String wireName = 'AttendanceRecord';
 
   @override
-  Iterable serialize(Serializers serializers, AttendanceRecord object,
+  Iterable<Object> serialize(Serializers serializers, AttendanceRecord object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'student',
@@ -35,7 +35,8 @@ class _$AttendanceRecordSerializer
   }
 
   @override
-  AttendanceRecord deserialize(Serializers serializers, Iterable serialized,
+  AttendanceRecord deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new AttendanceRecordBuilder();
 
@@ -72,7 +73,8 @@ class _$AttendanceRecord extends AttendanceRecord {
   @override
   final bool attendance;
 
-  factory _$AttendanceRecord([void updates(AttendanceRecordBuilder b)]) =>
+  factory _$AttendanceRecord(
+          [void Function(AttendanceRecordBuilder) updates]) =>
       (new AttendanceRecordBuilder()..update(updates)).build();
 
   _$AttendanceRecord._({this.student, this.schedule, this.attendance})
@@ -89,7 +91,7 @@ class _$AttendanceRecord extends AttendanceRecord {
   }
 
   @override
-  AttendanceRecord rebuild(void updates(AttendanceRecordBuilder b)) =>
+  AttendanceRecord rebuild(void Function(AttendanceRecordBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -158,7 +160,7 @@ class AttendanceRecordBuilder
   }
 
   @override
-  void update(void updates(AttendanceRecordBuilder b)) {
+  void update(void Function(AttendanceRecordBuilder) updates) {
     if (updates != null) updates(this);
   }
 

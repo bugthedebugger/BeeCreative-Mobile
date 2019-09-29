@@ -16,7 +16,7 @@ class _$LeaderboardsSerializer implements StructuredSerializer<Leaderboards> {
   final String wireName = 'Leaderboards';
 
   @override
-  Iterable serialize(Serializers serializers, Leaderboards object,
+  Iterable<Object> serialize(Serializers serializers, Leaderboards object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
     if (object.leaderboards != null) {
@@ -26,12 +26,11 @@ class _$LeaderboardsSerializer implements StructuredSerializer<Leaderboards> {
             specifiedType: const FullType(
                 BuiltList, const [const FullType(Leaderboard)])));
     }
-
     return result;
   }
 
   @override
-  Leaderboards deserialize(Serializers serializers, Iterable serialized,
+  Leaderboards deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new LeaderboardsBuilder();
 
@@ -45,7 +44,7 @@ class _$LeaderboardsSerializer implements StructuredSerializer<Leaderboards> {
           result.leaderboards.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(Leaderboard)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
       }
     }
@@ -58,13 +57,13 @@ class _$Leaderboards extends Leaderboards {
   @override
   final BuiltList<Leaderboard> leaderboards;
 
-  factory _$Leaderboards([void updates(LeaderboardsBuilder b)]) =>
+  factory _$Leaderboards([void Function(LeaderboardsBuilder) updates]) =>
       (new LeaderboardsBuilder()..update(updates)).build();
 
   _$Leaderboards._({this.leaderboards}) : super._();
 
   @override
-  Leaderboards rebuild(void updates(LeaderboardsBuilder b)) =>
+  Leaderboards rebuild(void Function(LeaderboardsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -118,7 +117,7 @@ class LeaderboardsBuilder
   }
 
   @override
-  void update(void updates(LeaderboardsBuilder b)) {
+  void update(void Function(LeaderboardsBuilder) updates) {
     if (updates != null) updates(this);
   }
 

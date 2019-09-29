@@ -16,7 +16,7 @@ class _$ScheduleState extends ScheduleState {
   @override
   final bool isReloading;
 
-  factory _$ScheduleState([void updates(ScheduleStateBuilder b)]) =>
+  factory _$ScheduleState([void Function(ScheduleStateBuilder) updates]) =>
       (new ScheduleStateBuilder()..update(updates)).build();
 
   _$ScheduleState._(
@@ -37,7 +37,7 @@ class _$ScheduleState extends ScheduleState {
   }
 
   @override
-  ScheduleState rebuild(void updates(ScheduleStateBuilder b)) =>
+  ScheduleState rebuild(void Function(ScheduleStateBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -116,7 +116,7 @@ class ScheduleStateBuilder
   }
 
   @override
-  void update(void updates(ScheduleStateBuilder b)) {
+  void update(void Function(ScheduleStateBuilder) updates) {
     if (updates != null) updates(this);
   }
 

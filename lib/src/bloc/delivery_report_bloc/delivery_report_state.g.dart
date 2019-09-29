@@ -14,7 +14,8 @@ class _$DeliveryReportState extends DeliveryReportState {
   @override
   final DeliveryReportResponse deliveryReportResponse;
 
-  factory _$DeliveryReportState([void updates(DeliveryReportStateBuilder b)]) =>
+  factory _$DeliveryReportState(
+          [void Function(DeliveryReportStateBuilder) updates]) =>
       (new DeliveryReportStateBuilder()..update(updates)).build();
 
   _$DeliveryReportState._(
@@ -33,7 +34,8 @@ class _$DeliveryReportState extends DeliveryReportState {
   }
 
   @override
-  DeliveryReportState rebuild(void updates(DeliveryReportStateBuilder b)) =>
+  DeliveryReportState rebuild(
+          void Function(DeliveryReportStateBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -105,7 +107,7 @@ class DeliveryReportStateBuilder
   }
 
   @override
-  void update(void updates(DeliveryReportStateBuilder b)) {
+  void update(void Function(DeliveryReportStateBuilder) updates) {
     if (updates != null) updates(this);
   }
 

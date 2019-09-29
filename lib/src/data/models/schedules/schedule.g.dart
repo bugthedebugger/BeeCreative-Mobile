@@ -15,7 +15,7 @@ class _$ScheduleSerializer implements StructuredSerializer<Schedule> {
   final String wireName = 'Schedule';
 
   @override
-  Iterable serialize(Serializers serializers, Schedule object,
+  Iterable<Object> serialize(Serializers serializers, Schedule object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'schedule_id',
@@ -78,12 +78,11 @@ class _$ScheduleSerializer implements StructuredSerializer<Schedule> {
         ..add(serializers.serialize(object.deliveryReport,
             specifiedType: const FullType(DeliveryReport)));
     }
-
     return result;
   }
 
   @override
-  Schedule deserialize(Serializers serializers, Iterable serialized,
+  Schedule deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ScheduleBuilder();
 
@@ -141,7 +140,7 @@ class _$ScheduleSerializer implements StructuredSerializer<Schedule> {
           result.comment.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(String)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
         case 'hoursTaught':
           result.hoursTaught = serializers.deserialize(value,
@@ -206,7 +205,7 @@ class _$Schedule extends Schedule {
   @override
   final String folderId;
 
-  factory _$Schedule([void updates(ScheduleBuilder b)]) =>
+  factory _$Schedule([void Function(ScheduleBuilder) updates]) =>
       (new ScheduleBuilder()..update(updates)).build();
 
   _$Schedule._(
@@ -273,7 +272,7 @@ class _$Schedule extends Schedule {
   }
 
   @override
-  Schedule rebuild(void updates(ScheduleBuilder b)) =>
+  Schedule rebuild(void Function(ScheduleBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -478,7 +477,7 @@ class ScheduleBuilder implements Builder<Schedule, ScheduleBuilder> {
   }
 
   @override
-  void update(void updates(ScheduleBuilder b)) {
+  void update(void Function(ScheduleBuilder) updates) {
     if (updates != null) updates(this);
   }
 

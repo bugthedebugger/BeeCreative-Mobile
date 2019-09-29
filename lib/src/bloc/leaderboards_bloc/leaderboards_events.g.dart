@@ -7,13 +7,13 @@ part of leaderboards_events;
 // **************************************************************************
 
 class _$GetLeaderboards extends GetLeaderboards {
-  factory _$GetLeaderboards([void updates(GetLeaderboardsBuilder b)]) =>
+  factory _$GetLeaderboards([void Function(GetLeaderboardsBuilder) updates]) =>
       (new GetLeaderboardsBuilder()..update(updates)).build();
 
   _$GetLeaderboards._() : super._();
 
   @override
-  GetLeaderboards rebuild(void updates(GetLeaderboardsBuilder b)) =>
+  GetLeaderboards rebuild(void Function(GetLeaderboardsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -52,7 +52,7 @@ class GetLeaderboardsBuilder
   }
 
   @override
-  void update(void updates(GetLeaderboardsBuilder b)) {
+  void update(void Function(GetLeaderboardsBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -69,7 +69,7 @@ class _$GetLeaderboardsSuccess extends GetLeaderboardsSuccess {
   final Leaderboards leaderboards;
 
   factory _$GetLeaderboardsSuccess(
-          [void updates(GetLeaderboardsSuccessBuilder b)]) =>
+          [void Function(GetLeaderboardsSuccessBuilder) updates]) =>
       (new GetLeaderboardsSuccessBuilder()..update(updates)).build();
 
   _$GetLeaderboardsSuccess._({this.leaderboards}) : super._() {
@@ -81,7 +81,7 @@ class _$GetLeaderboardsSuccess extends GetLeaderboardsSuccess {
 
   @override
   GetLeaderboardsSuccess rebuild(
-          void updates(GetLeaderboardsSuccessBuilder b)) =>
+          void Function(GetLeaderboardsSuccessBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -137,7 +137,7 @@ class GetLeaderboardsSuccessBuilder
   }
 
   @override
-  void update(void updates(GetLeaderboardsSuccessBuilder b)) {
+  void update(void Function(GetLeaderboardsSuccessBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -167,7 +167,8 @@ class _$LeaderboardsError extends LeaderboardsError {
   @override
   final String message;
 
-  factory _$LeaderboardsError([void updates(LeaderboardsErrorBuilder b)]) =>
+  factory _$LeaderboardsError(
+          [void Function(LeaderboardsErrorBuilder) updates]) =>
       (new LeaderboardsErrorBuilder()..update(updates)).build();
 
   _$LeaderboardsError._({this.message}) : super._() {
@@ -177,7 +178,7 @@ class _$LeaderboardsError extends LeaderboardsError {
   }
 
   @override
-  LeaderboardsError rebuild(void updates(LeaderboardsErrorBuilder b)) =>
+  LeaderboardsError rebuild(void Function(LeaderboardsErrorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -230,7 +231,7 @@ class LeaderboardsErrorBuilder
   }
 
   @override
-  void update(void updates(LeaderboardsErrorBuilder b)) {
+  void update(void Function(LeaderboardsErrorBuilder) updates) {
     if (updates != null) updates(this);
   }
 

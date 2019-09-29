@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:BeeCreative/src/bloc/user_bloc/user_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/shared_preferences/user_shared_preferences.dart';
@@ -15,6 +17,7 @@ class _AppDrawerState extends State<AppDrawer> {
   String _userName = "User Name";
   String _avatar;
   final _userBloc = kiwi.Container().resolve<UserBloc>();
+  StreamSubscription _subscription;
 
   _read() async {
     final _userSharedPreferences = UserSharedPreferences();
@@ -28,12 +31,23 @@ class _AppDrawerState extends State<AppDrawer> {
   void initState() {
     super.initState();
     _read();
+    _subscription = _userBloc.userEvent.listen(
+      (event) {
+        if (event is UserLoggedOut) {
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            Routes.GOOGLE_LOGIN,
+            (route) => false,
+          );
+        }
+      },
+    );
   }
 
   @override
   void dispose() {
+    _userBloc?.dispose();
+    _subscription?.cancel();
     super.dispose();
-    _userBloc.dispose();
   }
 
   @override
@@ -149,10 +163,6 @@ class _AppDrawerState extends State<AppDrawer> {
                     title: "LOGOUT",
                     function: () {
                       _userBloc.logout();
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        Routes.GOOGLE_LOGIN,
-                        (route) => false,
-                      );
                     },
                   ),
                   /*

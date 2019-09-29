@@ -41,7 +41,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     try {
-      _firebaseMessaging.getToken().then((token) => print(token));
       _firebaseMessaging.configure(
         onMessage: (Map<String, dynamic> message) async {
           print('on message $message');

@@ -15,7 +15,7 @@ class _$MoodMeterSerializer implements StructuredSerializer<MoodMeter> {
   final String wireName = 'MoodMeter';
 
   @override
-  Iterable serialize(Serializers serializers, MoodMeter object,
+  Iterable<Object> serialize(Serializers serializers, MoodMeter object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'mood_id',
@@ -30,7 +30,7 @@ class _$MoodMeterSerializer implements StructuredSerializer<MoodMeter> {
   }
 
   @override
-  MoodMeter deserialize(Serializers serializers, Iterable serialized,
+  MoodMeter deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new MoodMeterBuilder();
 
@@ -67,7 +67,7 @@ class _$MoodMeter extends MoodMeter {
   @override
   final int id;
 
-  factory _$MoodMeter([void updates(MoodMeterBuilder b)]) =>
+  factory _$MoodMeter([void Function(MoodMeterBuilder) updates]) =>
       (new MoodMeterBuilder()..update(updates)).build();
 
   _$MoodMeter._({this.moodID, this.userID, this.id}) : super._() {
@@ -83,7 +83,7 @@ class _$MoodMeter extends MoodMeter {
   }
 
   @override
-  MoodMeter rebuild(void updates(MoodMeterBuilder b)) =>
+  MoodMeter rebuild(void Function(MoodMeterBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -149,7 +149,7 @@ class MoodMeterBuilder implements Builder<MoodMeter, MoodMeterBuilder> {
   }
 
   @override
-  void update(void updates(MoodMeterBuilder b)) {
+  void update(void Function(MoodMeterBuilder) updates) {
     if (updates != null) updates(this);
   }
 

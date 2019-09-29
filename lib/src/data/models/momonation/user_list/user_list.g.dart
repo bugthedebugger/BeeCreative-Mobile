@@ -15,7 +15,7 @@ class _$UserListSerializer implements StructuredSerializer<UserList> {
   final String wireName = 'UserList';
 
   @override
-  Iterable serialize(Serializers serializers, UserList object,
+  Iterable<Object> serialize(Serializers serializers, UserList object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
     if (object.users != null) {
@@ -25,12 +25,11 @@ class _$UserListSerializer implements StructuredSerializer<UserList> {
             specifiedType:
                 const FullType(BuiltList, const [const FullType(User)])));
     }
-
     return result;
   }
 
   @override
-  UserList deserialize(Serializers serializers, Iterable serialized,
+  UserList deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new UserListBuilder();
 
@@ -44,7 +43,7 @@ class _$UserListSerializer implements StructuredSerializer<UserList> {
           result.users.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(User)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
       }
     }
@@ -57,13 +56,13 @@ class _$UserList extends UserList {
   @override
   final BuiltList<User> users;
 
-  factory _$UserList([void updates(UserListBuilder b)]) =>
+  factory _$UserList([void Function(UserListBuilder) updates]) =>
       (new UserListBuilder()..update(updates)).build();
 
   _$UserList._({this.users}) : super._();
 
   @override
-  UserList rebuild(void updates(UserListBuilder b)) =>
+  UserList rebuild(void Function(UserListBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -113,7 +112,7 @@ class UserListBuilder implements Builder<UserList, UserListBuilder> {
   }
 
   @override
-  void update(void updates(UserListBuilder b)) {
+  void update(void Function(UserListBuilder) updates) {
     if (updates != null) updates(this);
   }
 
