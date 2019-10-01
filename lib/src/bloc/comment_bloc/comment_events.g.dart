@@ -12,7 +12,7 @@ class _$PostComment extends PostComment {
   @override
   final Feed feed;
 
-  factory _$PostComment([void updates(PostCommentBuilder b)]) =>
+  factory _$PostComment([void Function(PostCommentBuilder) updates]) =>
       (new PostCommentBuilder()..update(updates)).build();
 
   _$PostComment._({this.comment, this.feed}) : super._() {
@@ -25,7 +25,7 @@ class _$PostComment extends PostComment {
   }
 
   @override
-  PostComment rebuild(void updates(PostCommentBuilder b)) =>
+  PostComment rebuild(void Function(PostCommentBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -84,7 +84,7 @@ class PostCommentBuilder implements Builder<PostComment, PostCommentBuilder> {
   }
 
   @override
-  void update(void updates(PostCommentBuilder b)) {
+  void update(void Function(PostCommentBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -111,13 +111,13 @@ class PostCommentBuilder implements Builder<PostComment, PostCommentBuilder> {
 }
 
 class _$CommentPosted extends CommentPosted {
-  factory _$CommentPosted([void updates(CommentPostedBuilder b)]) =>
+  factory _$CommentPosted([void Function(CommentPostedBuilder) updates]) =>
       (new CommentPostedBuilder()..update(updates)).build();
 
   _$CommentPosted._() : super._();
 
   @override
-  CommentPosted rebuild(void updates(CommentPostedBuilder b)) =>
+  CommentPosted rebuild(void Function(CommentPostedBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -155,7 +155,7 @@ class CommentPostedBuilder
   }
 
   @override
-  void update(void updates(CommentPostedBuilder b)) {
+  void update(void Function(CommentPostedBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -171,7 +171,7 @@ class _$CommentError extends CommentError {
   @override
   final String message;
 
-  factory _$CommentError([void updates(CommentErrorBuilder b)]) =>
+  factory _$CommentError([void Function(CommentErrorBuilder) updates]) =>
       (new CommentErrorBuilder()..update(updates)).build();
 
   _$CommentError._({this.message}) : super._() {
@@ -181,7 +181,7 @@ class _$CommentError extends CommentError {
   }
 
   @override
-  CommentError rebuild(void updates(CommentErrorBuilder b)) =>
+  CommentError rebuild(void Function(CommentErrorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -233,7 +233,7 @@ class CommentErrorBuilder
   }
 
   @override
-  void update(void updates(CommentErrorBuilder b)) {
+  void update(void Function(CommentErrorBuilder) updates) {
     if (updates != null) updates(this);
   }
 

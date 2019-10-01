@@ -15,7 +15,7 @@ class _$CommentSerializer implements StructuredSerializer<Comment> {
   final String wireName = 'Comment';
 
   @override
-  Iterable serialize(Serializers serializers, Comment object,
+  Iterable<Object> serialize(Serializers serializers, Comment object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'id',
@@ -33,7 +33,7 @@ class _$CommentSerializer implements StructuredSerializer<Comment> {
   }
 
   @override
-  Comment deserialize(Serializers serializers, Iterable serialized,
+  Comment deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CommentBuilder();
 
@@ -76,7 +76,7 @@ class _$Comment extends Comment {
   @override
   final User user;
 
-  factory _$Comment([void updates(CommentBuilder b)]) =>
+  factory _$Comment([void Function(CommentBuilder) updates]) =>
       (new CommentBuilder()..update(updates)).build();
 
   _$Comment._({this.id, this.comment, this.time, this.user}) : super._() {
@@ -95,7 +95,7 @@ class _$Comment extends Comment {
   }
 
   @override
-  Comment rebuild(void updates(CommentBuilder b)) =>
+  Comment rebuild(void Function(CommentBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -170,7 +170,7 @@ class CommentBuilder implements Builder<Comment, CommentBuilder> {
   }
 
   @override
-  void update(void updates(CommentBuilder b)) {
+  void update(void Function(CommentBuilder) updates) {
     if (updates != null) updates(this);
   }
 

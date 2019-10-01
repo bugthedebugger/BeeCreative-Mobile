@@ -4,10 +4,12 @@ import 'dart:async';
 import 'package:BeeCreative/src/data/exceptions/custom_exceptions.dart';
 import 'package:BeeCreative/src/data/models/user/user_model.dart';
 import 'package:BeeCreative/src/data/repository/user_repository.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserBloc implements Bloc {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   UserRepository _repository;
   User registeredUser;
   String token;
@@ -56,10 +58,13 @@ class UserBloc implements Bloc {
     }
   }
 
-  void _mapUserLogoutRequest(UserLogoutRequested event) {
+  void _mapUserLogoutRequest(UserLogoutRequested event) async {
     try {
+      await _repository.requestLogout(token: _sharedPreferences.get('token'));
+      await _firebaseMessaging.deleteInstanceID();
       _sharedPreferences.clear();
       _googleSignIn.signOut();
+      dispatch(UserLoggedOut());
     } catch (_) {
       dispatch(UserErrorEvent((b) => b..message = _.toString()));
     }
@@ -67,7 +72,11 @@ class UserBloc implements Bloc {
 
   void _mapUserLoginRequest(UserLoginRequested event) async {
     try {
-      var response = await this._repository.requestLogin(_idToken);
+      String notificationToken = await _firebaseMessaging.getToken();
+      var response = await this._repository.requestLogin(
+            _idToken,
+            notificationToken: notificationToken,
+          );
       registeredUser = response;
       token = registeredUser.data.token;
       _sharedPreferences.setString('token', registeredUser.data.token);

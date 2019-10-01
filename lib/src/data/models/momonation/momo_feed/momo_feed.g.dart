@@ -15,7 +15,7 @@ class _$MomoFeedSerializer implements StructuredSerializer<MomoFeed> {
   final String wireName = 'MomoFeed';
 
   @override
-  Iterable serialize(Serializers serializers, MomoFeed object,
+  Iterable<Object> serialize(Serializers serializers, MomoFeed object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'bank',
@@ -35,12 +35,11 @@ class _$MomoFeedSerializer implements StructuredSerializer<MomoFeed> {
             specifiedType:
                 const FullType(BuiltList, const [const FullType(User)])));
     }
-
     return result;
   }
 
   @override
-  MomoFeed deserialize(Serializers serializers, Iterable serialized,
+  MomoFeed deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new MomoFeedBuilder();
 
@@ -58,13 +57,13 @@ class _$MomoFeedSerializer implements StructuredSerializer<MomoFeed> {
           result.feed.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(Feed)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
         case 'leaderboard':
           result.leaderboard.replace(serializers.deserialize(value,
                   specifiedType:
                       const FullType(BuiltList, const [const FullType(User)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
       }
     }
@@ -81,7 +80,7 @@ class _$MomoFeed extends MomoFeed {
   @override
   final BuiltList<User> leaderboard;
 
-  factory _$MomoFeed([void updates(MomoFeedBuilder b)]) =>
+  factory _$MomoFeed([void Function(MomoFeedBuilder) updates]) =>
       (new MomoFeedBuilder()..update(updates)).build();
 
   _$MomoFeed._({this.bank, this.feed, this.leaderboard}) : super._() {
@@ -91,7 +90,7 @@ class _$MomoFeed extends MomoFeed {
   }
 
   @override
-  MomoFeed rebuild(void updates(MomoFeedBuilder b)) =>
+  MomoFeed rebuild(void Function(MomoFeedBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -160,7 +159,7 @@ class MomoFeedBuilder implements Builder<MomoFeed, MomoFeedBuilder> {
   }
 
   @override
-  void update(void updates(MomoFeedBuilder b)) {
+  void update(void Function(MomoFeedBuilder) updates) {
     if (updates != null) updates(this);
   }
 

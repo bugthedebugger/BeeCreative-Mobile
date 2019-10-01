@@ -20,15 +20,43 @@ import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:kiwi/kiwi.dart' as kiwi;
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 Future main() async {
   await initKiwi();
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final FirebaseAnalytics analytics =
       kiwi.Container().resolve<FirebaseAnalytics>();
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
+  @override
+  void initState() {
+    super.initState();
+    try {
+      _firebaseMessaging.configure(
+        onMessage: (Map<String, dynamic> message) async {
+          print('on message $message');
+        },
+        onResume: (Map<String, dynamic> message) async {
+          print('on resume $message');
+        },
+        onLaunch: (Map<String, dynamic> message) async {
+          print('on launch $message');
+        },
+      );
+    } catch (_) {
+      print(_);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -85,15 +113,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-/*
-                  DrawerListTile(
-                    image: AppPhotos.drawerHelp,
-                    title: "HELP",
-                    function: () {},
-                  ),
-                  DrawerListTile(
-                    image: AppPhotos.drawerAbout,
-                    title: "ABOUT",
-                    function: () {},
-                  ),
-                  */

@@ -10,7 +10,8 @@ class _$SubmitAttendance extends SubmitAttendance {
   @override
   final Attendance attendance;
 
-  factory _$SubmitAttendance([void updates(SubmitAttendanceBuilder b)]) =>
+  factory _$SubmitAttendance(
+          [void Function(SubmitAttendanceBuilder) updates]) =>
       (new SubmitAttendanceBuilder()..update(updates)).build();
 
   _$SubmitAttendance._({this.attendance}) : super._() {
@@ -20,7 +21,7 @@ class _$SubmitAttendance extends SubmitAttendance {
   }
 
   @override
-  SubmitAttendance rebuild(void updates(SubmitAttendanceBuilder b)) =>
+  SubmitAttendance rebuild(void Function(SubmitAttendanceBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -75,7 +76,7 @@ class SubmitAttendanceBuilder
   }
 
   @override
-  void update(void updates(SubmitAttendanceBuilder b)) {
+  void update(void Function(SubmitAttendanceBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -105,7 +106,8 @@ class _$UpdateAttendance extends UpdateAttendance {
   @override
   final Attendance attendance;
 
-  factory _$UpdateAttendance([void updates(UpdateAttendanceBuilder b)]) =>
+  factory _$UpdateAttendance(
+          [void Function(UpdateAttendanceBuilder) updates]) =>
       (new UpdateAttendanceBuilder()..update(updates)).build();
 
   _$UpdateAttendance._({this.attendance}) : super._() {
@@ -115,7 +117,7 @@ class _$UpdateAttendance extends UpdateAttendance {
   }
 
   @override
-  UpdateAttendance rebuild(void updates(UpdateAttendanceBuilder b)) =>
+  UpdateAttendance rebuild(void Function(UpdateAttendanceBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -170,7 +172,7 @@ class UpdateAttendanceBuilder
   }
 
   @override
-  void update(void updates(UpdateAttendanceBuilder b)) {
+  void update(void Function(UpdateAttendanceBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -200,7 +202,8 @@ class _$PrepareAttendance extends PrepareAttendance {
   @override
   final Attendance attendance;
 
-  factory _$PrepareAttendance([void updates(PrepareAttendanceBuilder b)]) =>
+  factory _$PrepareAttendance(
+          [void Function(PrepareAttendanceBuilder) updates]) =>
       (new PrepareAttendanceBuilder()..update(updates)).build();
 
   _$PrepareAttendance._({this.attendance}) : super._() {
@@ -210,7 +213,7 @@ class _$PrepareAttendance extends PrepareAttendance {
   }
 
   @override
-  PrepareAttendance rebuild(void updates(PrepareAttendanceBuilder b)) =>
+  PrepareAttendance rebuild(void Function(PrepareAttendanceBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -265,7 +268,7 @@ class PrepareAttendanceBuilder
   }
 
   @override
-  void update(void updates(PrepareAttendanceBuilder b)) {
+  void update(void Function(PrepareAttendanceBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -292,13 +295,13 @@ class PrepareAttendanceBuilder
 }
 
 class _$Success extends Success {
-  factory _$Success([void updates(SuccessBuilder b)]) =>
+  factory _$Success([void Function(SuccessBuilder) updates]) =>
       (new SuccessBuilder()..update(updates)).build();
 
   _$Success._() : super._();
 
   @override
-  Success rebuild(void updates(SuccessBuilder b)) =>
+  Success rebuild(void Function(SuccessBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -335,7 +338,7 @@ class SuccessBuilder implements Builder<Success, SuccessBuilder> {
   }
 
   @override
-  void update(void updates(SuccessBuilder b)) {
+  void update(void Function(SuccessBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -351,7 +354,7 @@ class _$Error extends Error {
   @override
   final String message;
 
-  factory _$Error([void updates(ErrorBuilder b)]) =>
+  factory _$Error([void Function(ErrorBuilder) updates]) =>
       (new ErrorBuilder()..update(updates)).build();
 
   _$Error._({this.message}) : super._() {
@@ -361,7 +364,7 @@ class _$Error extends Error {
   }
 
   @override
-  Error rebuild(void updates(ErrorBuilder b)) =>
+  Error rebuild(void Function(ErrorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -411,7 +414,7 @@ class ErrorBuilder implements Builder<Error, ErrorBuilder> {
   }
 
   @override
-  void update(void updates(ErrorBuilder b)) {
+  void update(void Function(ErrorBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -425,13 +428,14 @@ class ErrorBuilder implements Builder<Error, ErrorBuilder> {
 
 class _$SubmittingAttendance extends SubmittingAttendance {
   factory _$SubmittingAttendance(
-          [void updates(SubmittingAttendanceBuilder b)]) =>
+          [void Function(SubmittingAttendanceBuilder) updates]) =>
       (new SubmittingAttendanceBuilder()..update(updates)).build();
 
   _$SubmittingAttendance._() : super._();
 
   @override
-  SubmittingAttendance rebuild(void updates(SubmittingAttendanceBuilder b)) =>
+  SubmittingAttendance rebuild(
+          void Function(SubmittingAttendanceBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -470,7 +474,7 @@ class SubmittingAttendanceBuilder
   }
 
   @override
-  void update(void updates(SubmittingAttendanceBuilder b)) {
+  void update(void Function(SubmittingAttendanceBuilder) updates) {
     if (updates != null) updates(this);
   }
 

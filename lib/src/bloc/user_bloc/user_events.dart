@@ -61,3 +61,10 @@ abstract class UserErrorEvent extends UserEvent
 
   factory UserErrorEvent([updates(UserErrorEventBuilder b)]) = _$UserErrorEvent;
 }
+
+abstract class UserLoggedOut extends UserEvent
+    implements Built<UserLoggedOut, UserLoggedOutBuilder> {
+  UserLoggedOut._();
+
+  factory UserLoggedOut([updates(UserLoggedOutBuilder b)]) = _$UserLoggedOut;
+}

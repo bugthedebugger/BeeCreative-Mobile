@@ -10,7 +10,8 @@ class _$UserLoginRequested extends UserLoginRequested {
   @override
   final String token;
 
-  factory _$UserLoginRequested([void updates(UserLoginRequestedBuilder b)]) =>
+  factory _$UserLoginRequested(
+          [void Function(UserLoginRequestedBuilder) updates]) =>
       (new UserLoginRequestedBuilder()..update(updates)).build();
 
   _$UserLoginRequested._({this.token}) : super._() {
@@ -20,7 +21,8 @@ class _$UserLoginRequested extends UserLoginRequested {
   }
 
   @override
-  UserLoginRequested rebuild(void updates(UserLoginRequestedBuilder b)) =>
+  UserLoginRequested rebuild(
+          void Function(UserLoginRequestedBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -73,7 +75,7 @@ class UserLoginRequestedBuilder
   }
 
   @override
-  void update(void updates(UserLoginRequestedBuilder b)) {
+  void update(void Function(UserLoginRequestedBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -87,14 +89,14 @@ class UserLoginRequestedBuilder
 
 class _$GoogleUserLoginRequest extends GoogleUserLoginRequest {
   factory _$GoogleUserLoginRequest(
-          [void updates(GoogleUserLoginRequestBuilder b)]) =>
+          [void Function(GoogleUserLoginRequestBuilder) updates]) =>
       (new GoogleUserLoginRequestBuilder()..update(updates)).build();
 
   _$GoogleUserLoginRequest._() : super._();
 
   @override
   GoogleUserLoginRequest rebuild(
-          void updates(GoogleUserLoginRequestBuilder b)) =>
+          void Function(GoogleUserLoginRequestBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -133,7 +135,7 @@ class GoogleUserLoginRequestBuilder
   }
 
   @override
-  void update(void updates(GoogleUserLoginRequestBuilder b)) {
+  void update(void Function(GoogleUserLoginRequestBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -147,14 +149,14 @@ class GoogleUserLoginRequestBuilder
 
 class _$StoreUserToSharedPreferences extends StoreUserToSharedPreferences {
   factory _$StoreUserToSharedPreferences(
-          [void updates(StoreUserToSharedPreferencesBuilder b)]) =>
+          [void Function(StoreUserToSharedPreferencesBuilder) updates]) =>
       (new StoreUserToSharedPreferencesBuilder()..update(updates)).build();
 
   _$StoreUserToSharedPreferences._() : super._();
 
   @override
   StoreUserToSharedPreferences rebuild(
-          void updates(StoreUserToSharedPreferencesBuilder b)) =>
+          void Function(StoreUserToSharedPreferencesBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -196,7 +198,7 @@ class StoreUserToSharedPreferencesBuilder
   }
 
   @override
-  void update(void updates(StoreUserToSharedPreferencesBuilder b)) {
+  void update(void Function(StoreUserToSharedPreferencesBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -209,13 +211,15 @@ class StoreUserToSharedPreferencesBuilder
 }
 
 class _$UserLogoutRequested extends UserLogoutRequested {
-  factory _$UserLogoutRequested([void updates(UserLogoutRequestedBuilder b)]) =>
+  factory _$UserLogoutRequested(
+          [void Function(UserLogoutRequestedBuilder) updates]) =>
       (new UserLogoutRequestedBuilder()..update(updates)).build();
 
   _$UserLogoutRequested._() : super._();
 
   @override
-  UserLogoutRequested rebuild(void updates(UserLogoutRequestedBuilder b)) =>
+  UserLogoutRequested rebuild(
+          void Function(UserLogoutRequestedBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -254,7 +258,7 @@ class UserLogoutRequestedBuilder
   }
 
   @override
-  void update(void updates(UserLogoutRequestedBuilder b)) {
+  void update(void Function(UserLogoutRequestedBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -268,14 +272,14 @@ class UserLogoutRequestedBuilder
 
 class _$UserStoredSuccessfully extends UserStoredSuccessfully {
   factory _$UserStoredSuccessfully(
-          [void updates(UserStoredSuccessfullyBuilder b)]) =>
+          [void Function(UserStoredSuccessfullyBuilder) updates]) =>
       (new UserStoredSuccessfullyBuilder()..update(updates)).build();
 
   _$UserStoredSuccessfully._() : super._();
 
   @override
   UserStoredSuccessfully rebuild(
-          void updates(UserStoredSuccessfullyBuilder b)) =>
+          void Function(UserStoredSuccessfullyBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -314,7 +318,7 @@ class UserStoredSuccessfullyBuilder
   }
 
   @override
-  void update(void updates(UserStoredSuccessfullyBuilder b)) {
+  void update(void Function(UserStoredSuccessfullyBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -330,7 +334,7 @@ class _$UserErrorEvent extends UserErrorEvent {
   @override
   final String message;
 
-  factory _$UserErrorEvent([void updates(UserErrorEventBuilder b)]) =>
+  factory _$UserErrorEvent([void Function(UserErrorEventBuilder) updates]) =>
       (new UserErrorEventBuilder()..update(updates)).build();
 
   _$UserErrorEvent._({this.message}) : super._() {
@@ -340,7 +344,7 @@ class _$UserErrorEvent extends UserErrorEvent {
   }
 
   @override
-  UserErrorEvent rebuild(void updates(UserErrorEventBuilder b)) =>
+  UserErrorEvent rebuild(void Function(UserErrorEventBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -393,13 +397,70 @@ class UserErrorEventBuilder
   }
 
   @override
-  void update(void updates(UserErrorEventBuilder b)) {
+  void update(void Function(UserErrorEventBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
   _$UserErrorEvent build() {
     final _$result = _$v ?? new _$UserErrorEvent._(message: message);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$UserLoggedOut extends UserLoggedOut {
+  factory _$UserLoggedOut([void Function(UserLoggedOutBuilder) updates]) =>
+      (new UserLoggedOutBuilder()..update(updates)).build();
+
+  _$UserLoggedOut._() : super._();
+
+  @override
+  UserLoggedOut rebuild(void Function(UserLoggedOutBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  UserLoggedOutBuilder toBuilder() => new UserLoggedOutBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is UserLoggedOut;
+  }
+
+  @override
+  int get hashCode {
+    return 853500466;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('UserLoggedOut').toString();
+  }
+}
+
+class UserLoggedOutBuilder
+    implements Builder<UserLoggedOut, UserLoggedOutBuilder> {
+  _$UserLoggedOut _$v;
+
+  UserLoggedOutBuilder();
+
+  @override
+  void replace(UserLoggedOut other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$UserLoggedOut;
+  }
+
+  @override
+  void update(void Function(UserLoggedOutBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$UserLoggedOut build() {
+    final _$result = _$v ?? new _$UserLoggedOut._();
     replace(_$result);
     return _$result;
   }

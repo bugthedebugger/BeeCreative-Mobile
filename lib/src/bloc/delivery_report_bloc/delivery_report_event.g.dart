@@ -16,7 +16,8 @@ class _$ClassDeliveredEvent extends ClassDeliveredEvent {
   @override
   final int rating;
 
-  factory _$ClassDeliveredEvent([void updates(ClassDeliveredEventBuilder b)]) =>
+  factory _$ClassDeliveredEvent(
+          [void Function(ClassDeliveredEventBuilder) updates]) =>
       (new ClassDeliveredEventBuilder()..update(updates)).build();
 
   _$ClassDeliveredEvent._(
@@ -37,7 +38,8 @@ class _$ClassDeliveredEvent extends ClassDeliveredEvent {
   }
 
   @override
-  ClassDeliveredEvent rebuild(void updates(ClassDeliveredEventBuilder b)) =>
+  ClassDeliveredEvent rebuild(
+          void Function(ClassDeliveredEventBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -114,7 +116,7 @@ class ClassDeliveredEventBuilder
   }
 
   @override
-  void update(void updates(ClassDeliveredEventBuilder b)) {
+  void update(void Function(ClassDeliveredEventBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -154,7 +156,8 @@ class _$ClassCancelledEvent extends ClassCancelledEvent {
   @override
   final String comment;
 
-  factory _$ClassCancelledEvent([void updates(ClassCancelledEventBuilder b)]) =>
+  factory _$ClassCancelledEvent(
+          [void Function(ClassCancelledEventBuilder) updates]) =>
       (new ClassCancelledEventBuilder()..update(updates)).build();
 
   _$ClassCancelledEvent._(
@@ -175,7 +178,8 @@ class _$ClassCancelledEvent extends ClassCancelledEvent {
   }
 
   @override
-  ClassCancelledEvent rebuild(void updates(ClassCancelledEventBuilder b)) =>
+  ClassCancelledEvent rebuild(
+          void Function(ClassCancelledEventBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -252,7 +256,7 @@ class ClassCancelledEventBuilder
   }
 
   @override
-  void update(void updates(ClassCancelledEventBuilder b)) {
+  void update(void Function(ClassCancelledEventBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -284,13 +288,14 @@ class ClassCancelledEventBuilder
 
 class _$SumbittingReportEvent extends SumbittingReportEvent {
   factory _$SumbittingReportEvent(
-          [void updates(SumbittingReportEventBuilder b)]) =>
+          [void Function(SumbittingReportEventBuilder) updates]) =>
       (new SumbittingReportEventBuilder()..update(updates)).build();
 
   _$SumbittingReportEvent._() : super._();
 
   @override
-  SumbittingReportEvent rebuild(void updates(SumbittingReportEventBuilder b)) =>
+  SumbittingReportEvent rebuild(
+          void Function(SumbittingReportEventBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -329,7 +334,7 @@ class SumbittingReportEventBuilder
   }
 
   @override
-  void update(void updates(SumbittingReportEventBuilder b)) {
+  void update(void Function(SumbittingReportEventBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -345,7 +350,8 @@ class _$DeliveryReportError extends DeliveryReportError {
   @override
   final String message;
 
-  factory _$DeliveryReportError([void updates(DeliveryReportErrorBuilder b)]) =>
+  factory _$DeliveryReportError(
+          [void Function(DeliveryReportErrorBuilder) updates]) =>
       (new DeliveryReportErrorBuilder()..update(updates)).build();
 
   _$DeliveryReportError._({this.message}) : super._() {
@@ -355,7 +361,8 @@ class _$DeliveryReportError extends DeliveryReportError {
   }
 
   @override
-  DeliveryReportError rebuild(void updates(DeliveryReportErrorBuilder b)) =>
+  DeliveryReportError rebuild(
+          void Function(DeliveryReportErrorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -408,7 +415,7 @@ class DeliveryReportErrorBuilder
   }
 
   @override
-  void update(void updates(DeliveryReportErrorBuilder b)) {
+  void update(void Function(DeliveryReportErrorBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -422,14 +429,14 @@ class DeliveryReportErrorBuilder
 
 class _$DeliveryReportSubmitted extends DeliveryReportSubmitted {
   factory _$DeliveryReportSubmitted(
-          [void updates(DeliveryReportSubmittedBuilder b)]) =>
+          [void Function(DeliveryReportSubmittedBuilder) updates]) =>
       (new DeliveryReportSubmittedBuilder()..update(updates)).build();
 
   _$DeliveryReportSubmitted._() : super._();
 
   @override
   DeliveryReportSubmitted rebuild(
-          void updates(DeliveryReportSubmittedBuilder b)) =>
+          void Function(DeliveryReportSubmittedBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -469,7 +476,7 @@ class DeliveryReportSubmittedBuilder
   }
 
   @override
-  void update(void updates(DeliveryReportSubmittedBuilder b)) {
+  void update(void Function(DeliveryReportSubmittedBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -482,13 +489,14 @@ class DeliveryReportSubmittedBuilder
 }
 
 class _$SubmittingReport extends SubmittingReport {
-  factory _$SubmittingReport([void updates(SubmittingReportBuilder b)]) =>
+  factory _$SubmittingReport(
+          [void Function(SubmittingReportBuilder) updates]) =>
       (new SubmittingReportBuilder()..update(updates)).build();
 
   _$SubmittingReport._() : super._();
 
   @override
-  SubmittingReport rebuild(void updates(SubmittingReportBuilder b)) =>
+  SubmittingReport rebuild(void Function(SubmittingReportBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -527,7 +535,7 @@ class SubmittingReportBuilder
   }
 
   @override
-  void update(void updates(SubmittingReportBuilder b)) {
+  void update(void Function(SubmittingReportBuilder) updates) {
     if (updates != null) updates(this);
   }
 

@@ -15,7 +15,7 @@ class _$AttendeeSerializer implements StructuredSerializer<Attendee> {
   final String wireName = 'Attendee';
 
   @override
-  Iterable serialize(Serializers serializers, Attendee object,
+  Iterable<Object> serialize(Serializers serializers, Attendee object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'data',
@@ -31,7 +31,7 @@ class _$AttendeeSerializer implements StructuredSerializer<Attendee> {
   }
 
   @override
-  Attendee deserialize(Serializers serializers, Iterable serialized,
+  Attendee deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new AttendeeBuilder();
 
@@ -45,7 +45,7 @@ class _$AttendeeSerializer implements StructuredSerializer<Attendee> {
           result.data.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(AttendeeData)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
         case 'is_attendee':
           result.isAttendee = serializers.deserialize(value,
@@ -64,7 +64,7 @@ class _$Attendee extends Attendee {
   @override
   final bool isAttendee;
 
-  factory _$Attendee([void updates(AttendeeBuilder b)]) =>
+  factory _$Attendee([void Function(AttendeeBuilder) updates]) =>
       (new AttendeeBuilder()..update(updates)).build();
 
   _$Attendee._({this.data, this.isAttendee}) : super._() {
@@ -77,7 +77,7 @@ class _$Attendee extends Attendee {
   }
 
   @override
-  Attendee rebuild(void updates(AttendeeBuilder b)) =>
+  Attendee rebuild(void Function(AttendeeBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -137,7 +137,7 @@ class AttendeeBuilder implements Builder<Attendee, AttendeeBuilder> {
   }
 
   @override
-  void update(void updates(AttendeeBuilder b)) {
+  void update(void Function(AttendeeBuilder) updates) {
     if (updates != null) updates(this);
   }
 

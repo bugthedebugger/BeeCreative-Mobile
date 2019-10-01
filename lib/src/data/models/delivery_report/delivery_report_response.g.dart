@@ -20,7 +20,8 @@ class _$DeliveryReportResponseSerializer
   final String wireName = 'DeliveryReportResponse';
 
   @override
-  Iterable serialize(Serializers serializers, DeliveryReportResponse object,
+  Iterable<Object> serialize(
+      Serializers serializers, DeliveryReportResponse object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
     if (object.data != null) {
@@ -41,13 +42,12 @@ class _$DeliveryReportResponseSerializer
         ..add(serializers.serialize(object.error,
             specifiedType: const FullType(String)));
     }
-
     return result;
   }
 
   @override
   DeliveryReportResponse deserialize(
-      Serializers serializers, Iterable serialized,
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new DeliveryReportResponseBuilder();
 
@@ -85,14 +85,14 @@ class _$DeliveryReportResponse extends DeliveryReportResponse {
   final String error;
 
   factory _$DeliveryReportResponse(
-          [void updates(DeliveryReportResponseBuilder b)]) =>
+          [void Function(DeliveryReportResponseBuilder) updates]) =>
       (new DeliveryReportResponseBuilder()..update(updates)).build();
 
   _$DeliveryReportResponse._({this.data, this.code, this.error}) : super._();
 
   @override
   DeliveryReportResponse rebuild(
-          void updates(DeliveryReportResponseBuilder b)) =>
+          void Function(DeliveryReportResponseBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -160,7 +160,7 @@ class DeliveryReportResponseBuilder
   }
 
   @override
-  void update(void updates(DeliveryReportResponseBuilder b)) {
+  void update(void Function(DeliveryReportResponseBuilder) updates) {
     if (updates != null) updates(this);
   }
 

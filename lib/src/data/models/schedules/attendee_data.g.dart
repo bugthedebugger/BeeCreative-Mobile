@@ -16,7 +16,7 @@ class _$AttendeeDataSerializer implements StructuredSerializer<AttendeeData> {
   final String wireName = 'AttendeeData';
 
   @override
-  Iterable serialize(Serializers serializers, AttendeeData object,
+  Iterable<Object> serialize(Serializers serializers, AttendeeData object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'schedule_id',
@@ -60,12 +60,11 @@ class _$AttendeeDataSerializer implements StructuredSerializer<AttendeeData> {
         ..add(serializers.serialize(object.teacherId,
             specifiedType: const FullType(int)));
     }
-
     return result;
   }
 
   @override
-  AttendeeData deserialize(Serializers serializers, Iterable serialized,
+  AttendeeData deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new AttendeeDataBuilder();
 
@@ -156,7 +155,7 @@ class _$AttendeeData extends AttendeeData {
   @override
   final int teacherId;
 
-  factory _$AttendeeData([void updates(AttendeeDataBuilder b)]) =>
+  factory _$AttendeeData([void Function(AttendeeDataBuilder) updates]) =>
       (new AttendeeDataBuilder()..update(updates)).build();
 
   _$AttendeeData._(
@@ -206,7 +205,7 @@ class _$AttendeeData extends AttendeeData {
   }
 
   @override
-  AttendeeData rebuild(void updates(AttendeeDataBuilder b)) =>
+  AttendeeData rebuild(void Function(AttendeeDataBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -357,7 +356,7 @@ class AttendeeDataBuilder
   }
 
   @override
-  void update(void updates(AttendeeDataBuilder b)) {
+  void update(void Function(AttendeeDataBuilder) updates) {
     if (updates != null) updates(this);
   }
 

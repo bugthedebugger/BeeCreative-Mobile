@@ -15,7 +15,7 @@ class _$SocialMediaSerializer implements StructuredSerializer<SocialMedia> {
   final String wireName = 'SocialMedia';
 
   @override
-  Iterable serialize(Serializers serializers, SocialMedia object,
+  Iterable<Object> serialize(Serializers serializers, SocialMedia object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'schedule_id',
@@ -43,7 +43,7 @@ class _$SocialMediaSerializer implements StructuredSerializer<SocialMedia> {
   }
 
   @override
-  SocialMedia deserialize(Serializers serializers, Iterable serialized,
+  SocialMedia deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new SocialMediaBuilder();
 
@@ -75,8 +75,9 @@ class _$SocialMediaSerializer implements StructuredSerializer<SocialMedia> {
           break;
         case 'photos':
           result.photos.replace(serializers.deserialize(value,
-              specifiedType: const FullType(
-                  BuiltList, const [const FullType(PhotoData)])) as BuiltList);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(PhotoData)]))
+              as BuiltList<dynamic>);
           break;
       }
     }
@@ -99,7 +100,7 @@ class _$SocialMedia extends SocialMedia {
   @override
   final BuiltList<PhotoData> photos;
 
-  factory _$SocialMedia([void updates(SocialMediaBuilder b)]) =>
+  factory _$SocialMedia([void Function(SocialMediaBuilder) updates]) =>
       (new SocialMediaBuilder()..update(updates)).build();
 
   _$SocialMedia._(
@@ -131,7 +132,7 @@ class _$SocialMedia extends SocialMedia {
   }
 
   @override
-  SocialMedia rebuild(void updates(SocialMediaBuilder b)) =>
+  SocialMedia rebuild(void Function(SocialMediaBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -227,7 +228,7 @@ class SocialMediaBuilder implements Builder<SocialMedia, SocialMediaBuilder> {
   }
 
   @override
-  void update(void updates(SocialMediaBuilder b)) {
+  void update(void Function(SocialMediaBuilder) updates) {
     if (updates != null) updates(this);
   }
 

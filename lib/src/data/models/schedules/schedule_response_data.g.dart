@@ -20,7 +20,8 @@ class _$ScheduleResponseDataSerializer
   final String wireName = 'ScheduleResponseData';
 
   @override
-  Iterable serialize(Serializers serializers, ScheduleResponseData object,
+  Iterable<Object> serialize(
+      Serializers serializers, ScheduleResponseData object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'class_id',
@@ -45,12 +46,12 @@ class _$ScheduleResponseDataSerializer
             specifiedType:
                 const FullType(BuiltList, const [const FullType(Student)])));
     }
-
     return result;
   }
 
   @override
-  ScheduleResponseData deserialize(Serializers serializers, Iterable serialized,
+  ScheduleResponseData deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ScheduleResponseDataBuilder();
 
@@ -82,8 +83,9 @@ class _$ScheduleResponseDataSerializer
           break;
         case 'students':
           result.students.replace(serializers.deserialize(value,
-              specifiedType: const FullType(
-                  BuiltList, const [const FullType(Student)])) as BuiltList);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(Student)]))
+              as BuiltList<dynamic>);
           break;
       }
     }
@@ -107,7 +109,7 @@ class _$ScheduleResponseData extends ScheduleResponseData {
   final BuiltList<Student> students;
 
   factory _$ScheduleResponseData(
-          [void updates(ScheduleResponseDataBuilder b)]) =>
+          [void Function(ScheduleResponseDataBuilder) updates]) =>
       (new ScheduleResponseDataBuilder()..update(updates)).build();
 
   _$ScheduleResponseData._(
@@ -136,7 +138,8 @@ class _$ScheduleResponseData extends ScheduleResponseData {
   }
 
   @override
-  ScheduleResponseData rebuild(void updates(ScheduleResponseDataBuilder b)) =>
+  ScheduleResponseData rebuild(
+          void Function(ScheduleResponseDataBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -233,7 +236,7 @@ class ScheduleResponseDataBuilder
   }
 
   @override
-  void update(void updates(ScheduleResponseDataBuilder b)) {
+  void update(void Function(ScheduleResponseDataBuilder) updates) {
     if (updates != null) updates(this);
   }
 

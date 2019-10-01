@@ -15,7 +15,7 @@ class _$BankSerializer implements StructuredSerializer<Bank> {
   final String wireName = 'Bank';
 
   @override
-  Iterable serialize(Serializers serializers, Bank object,
+  Iterable<Object> serialize(Serializers serializers, Bank object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'cooked',
@@ -28,7 +28,7 @@ class _$BankSerializer implements StructuredSerializer<Bank> {
   }
 
   @override
-  Bank deserialize(Serializers serializers, Iterable serialized,
+  Bank deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new BankBuilder();
 
@@ -59,7 +59,7 @@ class _$Bank extends Bank {
   @override
   final int raw;
 
-  factory _$Bank([void updates(BankBuilder b)]) =>
+  factory _$Bank([void Function(BankBuilder) updates]) =>
       (new BankBuilder()..update(updates)).build();
 
   _$Bank._({this.cooked, this.raw}) : super._() {
@@ -72,7 +72,7 @@ class _$Bank extends Bank {
   }
 
   @override
-  Bank rebuild(void updates(BankBuilder b)) =>
+  Bank rebuild(void Function(BankBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -129,7 +129,7 @@ class BankBuilder implements Builder<Bank, BankBuilder> {
   }
 
   @override
-  void update(void updates(BankBuilder b)) {
+  void update(void Function(BankBuilder) updates) {
     if (updates != null) updates(this);
   }
 

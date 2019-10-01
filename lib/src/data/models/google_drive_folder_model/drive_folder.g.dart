@@ -15,7 +15,7 @@ class _$DriveFolderSerializer implements StructuredSerializer<DriveFolder> {
   final String wireName = 'DriveFolder';
 
   @override
-  Iterable serialize(Serializers serializers, DriveFolder object,
+  Iterable<Object> serialize(Serializers serializers, DriveFolder object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'folder_id',
@@ -27,7 +27,7 @@ class _$DriveFolderSerializer implements StructuredSerializer<DriveFolder> {
   }
 
   @override
-  DriveFolder deserialize(Serializers serializers, Iterable serialized,
+  DriveFolder deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new DriveFolderBuilder();
 
@@ -52,7 +52,7 @@ class _$DriveFolder extends DriveFolder {
   @override
   final String folderId;
 
-  factory _$DriveFolder([void updates(DriveFolderBuilder b)]) =>
+  factory _$DriveFolder([void Function(DriveFolderBuilder) updates]) =>
       (new DriveFolderBuilder()..update(updates)).build();
 
   _$DriveFolder._({this.folderId}) : super._() {
@@ -62,7 +62,7 @@ class _$DriveFolder extends DriveFolder {
   }
 
   @override
-  DriveFolder rebuild(void updates(DriveFolderBuilder b)) =>
+  DriveFolder rebuild(void Function(DriveFolderBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -113,7 +113,7 @@ class DriveFolderBuilder implements Builder<DriveFolder, DriveFolderBuilder> {
   }
 
   @override
-  void update(void updates(DriveFolderBuilder b)) {
+  void update(void Function(DriveFolderBuilder) updates) {
     if (updates != null) updates(this);
   }
 

@@ -7,13 +7,13 @@ part of appreciation_events;
 // **************************************************************************
 
 class _$GetUsers extends GetUsers {
-  factory _$GetUsers([void updates(GetUsersBuilder b)]) =>
+  factory _$GetUsers([void Function(GetUsersBuilder) updates]) =>
       (new GetUsersBuilder()..update(updates)).build();
 
   _$GetUsers._() : super._();
 
   @override
-  GetUsers rebuild(void updates(GetUsersBuilder b)) =>
+  GetUsers rebuild(void Function(GetUsersBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -50,7 +50,7 @@ class GetUsersBuilder implements Builder<GetUsers, GetUsersBuilder> {
   }
 
   @override
-  void update(void updates(GetUsersBuilder b)) {
+  void update(void Function(GetUsersBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -66,7 +66,7 @@ class _$GetUsersSuccess extends GetUsersSuccess {
   @override
   final UserList users;
 
-  factory _$GetUsersSuccess([void updates(GetUsersSuccessBuilder b)]) =>
+  factory _$GetUsersSuccess([void Function(GetUsersSuccessBuilder) updates]) =>
       (new GetUsersSuccessBuilder()..update(updates)).build();
 
   _$GetUsersSuccess._({this.users}) : super._() {
@@ -76,7 +76,7 @@ class _$GetUsersSuccess extends GetUsersSuccess {
   }
 
   @override
-  GetUsersSuccess rebuild(void updates(GetUsersSuccessBuilder b)) =>
+  GetUsersSuccess rebuild(void Function(GetUsersSuccessBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -128,7 +128,7 @@ class GetUsersSuccessBuilder
   }
 
   @override
-  void update(void updates(GetUsersSuccessBuilder b)) {
+  void update(void Function(GetUsersSuccessBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -157,7 +157,8 @@ class _$AppreciationError extends AppreciationError {
   @override
   final String message;
 
-  factory _$AppreciationError([void updates(AppreciationErrorBuilder b)]) =>
+  factory _$AppreciationError(
+          [void Function(AppreciationErrorBuilder) updates]) =>
       (new AppreciationErrorBuilder()..update(updates)).build();
 
   _$AppreciationError._({this.message}) : super._() {
@@ -167,7 +168,7 @@ class _$AppreciationError extends AppreciationError {
   }
 
   @override
-  AppreciationError rebuild(void updates(AppreciationErrorBuilder b)) =>
+  AppreciationError rebuild(void Function(AppreciationErrorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -220,7 +221,7 @@ class AppreciationErrorBuilder
   }
 
   @override
-  void update(void updates(AppreciationErrorBuilder b)) {
+  void update(void Function(AppreciationErrorBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -233,13 +234,15 @@ class AppreciationErrorBuilder
 }
 
 class _$AppreciationSuccess extends AppreciationSuccess {
-  factory _$AppreciationSuccess([void updates(AppreciationSuccessBuilder b)]) =>
+  factory _$AppreciationSuccess(
+          [void Function(AppreciationSuccessBuilder) updates]) =>
       (new AppreciationSuccessBuilder()..update(updates)).build();
 
   _$AppreciationSuccess._() : super._();
 
   @override
-  AppreciationSuccess rebuild(void updates(AppreciationSuccessBuilder b)) =>
+  AppreciationSuccess rebuild(
+          void Function(AppreciationSuccessBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -278,7 +281,7 @@ class AppreciationSuccessBuilder
   }
 
   @override
-  void update(void updates(AppreciationSuccessBuilder b)) {
+  void update(void Function(AppreciationSuccessBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -300,7 +303,7 @@ class _$AppreciateUser extends AppreciateUser {
   @override
   final int amount;
 
-  factory _$AppreciateUser([void updates(AppreciateUserBuilder b)]) =>
+  factory _$AppreciateUser([void Function(AppreciateUserBuilder) updates]) =>
       (new AppreciateUserBuilder()..update(updates)).build();
 
   _$AppreciateUser._({this.title, this.message, this.user, this.amount})
@@ -320,7 +323,7 @@ class _$AppreciateUser extends AppreciateUser {
   }
 
   @override
-  AppreciateUser rebuild(void updates(AppreciateUserBuilder b)) =>
+  AppreciateUser rebuild(void Function(AppreciateUserBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -397,7 +400,7 @@ class AppreciateUserBuilder
   }
 
   @override
-  void update(void updates(AppreciateUserBuilder b)) {
+  void update(void Function(AppreciateUserBuilder) updates) {
     if (updates != null) updates(this);
   }
 

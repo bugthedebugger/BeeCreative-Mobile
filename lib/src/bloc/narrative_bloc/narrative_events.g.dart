@@ -17,7 +17,7 @@ class _$SyncNarrativeToGoogleDrive extends SyncNarrativeToGoogleDrive {
   final DateTime date;
 
   factory _$SyncNarrativeToGoogleDrive(
-          [void updates(SyncNarrativeToGoogleDriveBuilder b)]) =>
+          [void Function(SyncNarrativeToGoogleDriveBuilder) updates]) =>
       (new SyncNarrativeToGoogleDriveBuilder()..update(updates)).build();
 
   _$SyncNarrativeToGoogleDrive._(
@@ -42,7 +42,7 @@ class _$SyncNarrativeToGoogleDrive extends SyncNarrativeToGoogleDrive {
 
   @override
   SyncNarrativeToGoogleDrive rebuild(
-          void updates(SyncNarrativeToGoogleDriveBuilder b)) =>
+          void Function(SyncNarrativeToGoogleDriveBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -122,7 +122,7 @@ class SyncNarrativeToGoogleDriveBuilder
   }
 
   @override
-  void update(void updates(SyncNarrativeToGoogleDriveBuilder b)) {
+  void update(void Function(SyncNarrativeToGoogleDriveBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -146,7 +146,7 @@ class _$SyncingNarrativeToGoogleDrive extends SyncingNarrativeToGoogleDrive {
   final int done;
 
   factory _$SyncingNarrativeToGoogleDrive(
-          [void updates(SyncingNarrativeToGoogleDriveBuilder b)]) =>
+          [void Function(SyncingNarrativeToGoogleDriveBuilder) updates]) =>
       (new SyncingNarrativeToGoogleDriveBuilder()..update(updates)).build();
 
   _$SyncingNarrativeToGoogleDrive._({this.total, this.done}) : super._() {
@@ -162,7 +162,7 @@ class _$SyncingNarrativeToGoogleDrive extends SyncingNarrativeToGoogleDrive {
 
   @override
   SyncingNarrativeToGoogleDrive rebuild(
-          void updates(SyncingNarrativeToGoogleDriveBuilder b)) =>
+          void Function(SyncingNarrativeToGoogleDriveBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -225,7 +225,7 @@ class SyncingNarrativeToGoogleDriveBuilder
   }
 
   @override
-  void update(void updates(SyncingNarrativeToGoogleDriveBuilder b)) {
+  void update(void Function(SyncingNarrativeToGoogleDriveBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -244,7 +244,7 @@ class _$SyncingNarrativeToGoogleDriveError
   final String message;
 
   factory _$SyncingNarrativeToGoogleDriveError(
-          [void updates(SyncingNarrativeToGoogleDriveErrorBuilder b)]) =>
+          [void Function(SyncingNarrativeToGoogleDriveErrorBuilder) updates]) =>
       (new SyncingNarrativeToGoogleDriveErrorBuilder()..update(updates))
           .build();
 
@@ -257,7 +257,7 @@ class _$SyncingNarrativeToGoogleDriveError
 
   @override
   SyncingNarrativeToGoogleDriveError rebuild(
-          void updates(SyncingNarrativeToGoogleDriveErrorBuilder b)) =>
+          void Function(SyncingNarrativeToGoogleDriveErrorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -313,7 +313,8 @@ class SyncingNarrativeToGoogleDriveErrorBuilder
   }
 
   @override
-  void update(void updates(SyncingNarrativeToGoogleDriveErrorBuilder b)) {
+  void update(
+      void Function(SyncingNarrativeToGoogleDriveErrorBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -329,7 +330,8 @@ class SyncingNarrativeToGoogleDriveErrorBuilder
 class _$SyncingNarrativeToGoogleDriveSuccess
     extends SyncingNarrativeToGoogleDriveSuccess {
   factory _$SyncingNarrativeToGoogleDriveSuccess(
-          [void updates(SyncingNarrativeToGoogleDriveSuccessBuilder b)]) =>
+          [void Function(SyncingNarrativeToGoogleDriveSuccessBuilder)
+              updates]) =>
       (new SyncingNarrativeToGoogleDriveSuccessBuilder()..update(updates))
           .build();
 
@@ -337,7 +339,7 @@ class _$SyncingNarrativeToGoogleDriveSuccess
 
   @override
   SyncingNarrativeToGoogleDriveSuccess rebuild(
-          void updates(SyncingNarrativeToGoogleDriveSuccessBuilder b)) =>
+          void Function(SyncingNarrativeToGoogleDriveSuccessBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -379,7 +381,8 @@ class SyncingNarrativeToGoogleDriveSuccessBuilder
   }
 
   @override
-  void update(void updates(SyncingNarrativeToGoogleDriveSuccessBuilder b)) {
+  void update(
+      void Function(SyncingNarrativeToGoogleDriveSuccessBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -396,7 +399,7 @@ class _$SyncNarrativeToServer extends SyncNarrativeToServer {
   final List<Gallery> galleries;
 
   factory _$SyncNarrativeToServer(
-          [void updates(SyncNarrativeToServerBuilder b)]) =>
+          [void Function(SyncNarrativeToServerBuilder) updates]) =>
       (new SyncNarrativeToServerBuilder()..update(updates)).build();
 
   _$SyncNarrativeToServer._({this.galleries}) : super._() {
@@ -406,7 +409,8 @@ class _$SyncNarrativeToServer extends SyncNarrativeToServer {
   }
 
   @override
-  SyncNarrativeToServer rebuild(void updates(SyncNarrativeToServerBuilder b)) =>
+  SyncNarrativeToServer rebuild(
+          void Function(SyncNarrativeToServerBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -459,7 +463,7 @@ class SyncNarrativeToServerBuilder
   }
 
   @override
-  void update(void updates(SyncNarrativeToServerBuilder b)) {
+  void update(void Function(SyncNarrativeToServerBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -474,14 +478,14 @@ class SyncNarrativeToServerBuilder
 class _$SyncNarrativeToServerSuccessful
     extends SyncNarrativeToServerSuccessful {
   factory _$SyncNarrativeToServerSuccessful(
-          [void updates(SyncNarrativeToServerSuccessfulBuilder b)]) =>
+          [void Function(SyncNarrativeToServerSuccessfulBuilder) updates]) =>
       (new SyncNarrativeToServerSuccessfulBuilder()..update(updates)).build();
 
   _$SyncNarrativeToServerSuccessful._() : super._();
 
   @override
   SyncNarrativeToServerSuccessful rebuild(
-          void updates(SyncNarrativeToServerSuccessfulBuilder b)) =>
+          void Function(SyncNarrativeToServerSuccessfulBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -523,7 +527,7 @@ class SyncNarrativeToServerSuccessfulBuilder
   }
 
   @override
-  void update(void updates(SyncNarrativeToServerSuccessfulBuilder b)) {
+  void update(void Function(SyncNarrativeToServerSuccessfulBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -540,7 +544,7 @@ class _$SyncNarrativeToServerError extends SyncNarrativeToServerError {
   final String message;
 
   factory _$SyncNarrativeToServerError(
-          [void updates(SyncNarrativeToServerErrorBuilder b)]) =>
+          [void Function(SyncNarrativeToServerErrorBuilder) updates]) =>
       (new SyncNarrativeToServerErrorBuilder()..update(updates)).build();
 
   _$SyncNarrativeToServerError._({this.message}) : super._() {
@@ -552,7 +556,7 @@ class _$SyncNarrativeToServerError extends SyncNarrativeToServerError {
 
   @override
   SyncNarrativeToServerError rebuild(
-          void updates(SyncNarrativeToServerErrorBuilder b)) =>
+          void Function(SyncNarrativeToServerErrorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -606,7 +610,7 @@ class SyncNarrativeToServerErrorBuilder
   }
 
   @override
-  void update(void updates(SyncNarrativeToServerErrorBuilder b)) {
+  void update(void Function(SyncNarrativeToServerErrorBuilder) updates) {
     if (updates != null) updates(this);
   }
 

@@ -10,7 +10,7 @@ class _$SaveMood extends SaveMood {
   @override
   final int mood;
 
-  factory _$SaveMood([void updates(SaveMoodBuilder b)]) =>
+  factory _$SaveMood([void Function(SaveMoodBuilder) updates]) =>
       (new SaveMoodBuilder()..update(updates)).build();
 
   _$SaveMood._({this.mood}) : super._() {
@@ -20,7 +20,7 @@ class _$SaveMood extends SaveMood {
   }
 
   @override
-  SaveMood rebuild(void updates(SaveMoodBuilder b)) =>
+  SaveMood rebuild(void Function(SaveMoodBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -70,7 +70,7 @@ class SaveMoodBuilder implements Builder<SaveMood, SaveMoodBuilder> {
   }
 
   @override
-  void update(void updates(SaveMoodBuilder b)) {
+  void update(void Function(SaveMoodBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -83,13 +83,14 @@ class SaveMoodBuilder implements Builder<SaveMood, SaveMoodBuilder> {
 }
 
 class _$MoodMeterSuccess extends MoodMeterSuccess {
-  factory _$MoodMeterSuccess([void updates(MoodMeterSuccessBuilder b)]) =>
+  factory _$MoodMeterSuccess(
+          [void Function(MoodMeterSuccessBuilder) updates]) =>
       (new MoodMeterSuccessBuilder()..update(updates)).build();
 
   _$MoodMeterSuccess._() : super._();
 
   @override
-  MoodMeterSuccess rebuild(void updates(MoodMeterSuccessBuilder b)) =>
+  MoodMeterSuccess rebuild(void Function(MoodMeterSuccessBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -128,7 +129,7 @@ class MoodMeterSuccessBuilder
   }
 
   @override
-  void update(void updates(MoodMeterSuccessBuilder b)) {
+  void update(void Function(MoodMeterSuccessBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -144,7 +145,7 @@ class _$MoodMeterError extends MoodMeterError {
   @override
   final String message;
 
-  factory _$MoodMeterError([void updates(MoodMeterErrorBuilder b)]) =>
+  factory _$MoodMeterError([void Function(MoodMeterErrorBuilder) updates]) =>
       (new MoodMeterErrorBuilder()..update(updates)).build();
 
   _$MoodMeterError._({this.message}) : super._() {
@@ -154,7 +155,7 @@ class _$MoodMeterError extends MoodMeterError {
   }
 
   @override
-  MoodMeterError rebuild(void updates(MoodMeterErrorBuilder b)) =>
+  MoodMeterError rebuild(void Function(MoodMeterErrorBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -207,7 +208,7 @@ class MoodMeterErrorBuilder
   }
 
   @override
-  void update(void updates(MoodMeterErrorBuilder b)) {
+  void update(void Function(MoodMeterErrorBuilder) updates) {
     if (updates != null) updates(this);
   }
 

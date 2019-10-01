@@ -12,11 +12,14 @@ class UserDataSource {
 
   UserDataSource(this.client);
 
-  Future<User> requestLogin({@required String token}) async {
+  Future<User> requestLogin(
+      {@required String token, String notificationToken}) async {
     final url = ApiURL.login;
     final encodedUrl = Uri.encodeFull(url);
+    print(notificationToken);
     final response = await client.post(encodedUrl, body: {
       'token': token,
+      'fcm_token': notificationToken,
     });
     if (response.statusCode == 200) {
       return User.fromJson(response.body);
@@ -25,5 +28,22 @@ class UserDataSource {
         "Received response: ${json.decode(response.body)['error']} code: ${json.decode(response.body)['code']}",
       );
     }
+  }
+
+  Future<String> requestLogout({@required String token}) async {
+    final url = ApiURL.logout;
+    final encodedUrl = Uri.encodeFull(url);
+    final response = await client.post(
+      encodedUrl,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    print(response.body);
+    if (response.statusCode == 200)
+      return response.body;
+    else
+      throw UserError(response.body);
   }
 }

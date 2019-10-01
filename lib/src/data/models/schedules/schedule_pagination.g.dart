@@ -20,26 +20,30 @@ class _$SchedulesPaginationSerializer
   final String wireName = 'SchedulesPagination';
 
   @override
-  Iterable serialize(Serializers serializers, SchedulesPagination object,
+  Iterable<Object> serialize(
+      Serializers serializers, SchedulesPagination object,
       {FullType specifiedType = FullType.unspecified}) {
     return <Object>[];
   }
 
   @override
-  SchedulesPagination deserialize(Serializers serializers, Iterable serialized,
+  SchedulesPagination deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     return new SchedulesPaginationBuilder().build();
   }
 }
 
 class _$SchedulesPagination extends SchedulesPagination {
-  factory _$SchedulesPagination([void updates(SchedulesPaginationBuilder b)]) =>
+  factory _$SchedulesPagination(
+          [void Function(SchedulesPaginationBuilder) updates]) =>
       (new SchedulesPaginationBuilder()..update(updates)).build();
 
   _$SchedulesPagination._() : super._();
 
   @override
-  SchedulesPagination rebuild(void updates(SchedulesPaginationBuilder b)) =>
+  SchedulesPagination rebuild(
+          void Function(SchedulesPaginationBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -78,7 +82,7 @@ class SchedulesPaginationBuilder
   }
 
   @override
-  void update(void updates(SchedulesPaginationBuilder b)) {
+  void update(void Function(SchedulesPaginationBuilder) updates) {
     if (updates != null) updates(this);
   }
 

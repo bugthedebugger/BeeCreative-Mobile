@@ -15,7 +15,7 @@ class _$CommentsSerializer implements StructuredSerializer<Comments> {
   final String wireName = 'Comments';
 
   @override
-  Iterable serialize(Serializers serializers, Comments object,
+  Iterable<Object> serialize(Serializers serializers, Comments object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'comments',
@@ -28,7 +28,7 @@ class _$CommentsSerializer implements StructuredSerializer<Comments> {
   }
 
   @override
-  Comments deserialize(Serializers serializers, Iterable serialized,
+  Comments deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CommentsBuilder();
 
@@ -40,8 +40,9 @@ class _$CommentsSerializer implements StructuredSerializer<Comments> {
       switch (key) {
         case 'comments':
           result.comments.replace(serializers.deserialize(value,
-              specifiedType: const FullType(
-                  BuiltList, const [const FullType(Comment)])) as BuiltList);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(Comment)]))
+              as BuiltList<dynamic>);
           break;
       }
     }
@@ -54,7 +55,7 @@ class _$Comments extends Comments {
   @override
   final BuiltList<Comment> comments;
 
-  factory _$Comments([void updates(CommentsBuilder b)]) =>
+  factory _$Comments([void Function(CommentsBuilder) updates]) =>
       (new CommentsBuilder()..update(updates)).build();
 
   _$Comments._({this.comments}) : super._() {
@@ -64,7 +65,7 @@ class _$Comments extends Comments {
   }
 
   @override
-  Comments rebuild(void updates(CommentsBuilder b)) =>
+  Comments rebuild(void Function(CommentsBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -115,7 +116,7 @@ class CommentsBuilder implements Builder<Comments, CommentsBuilder> {
   }
 
   @override
-  void update(void updates(CommentsBuilder b)) {
+  void update(void Function(CommentsBuilder) updates) {
     if (updates != null) updates(this);
   }
 

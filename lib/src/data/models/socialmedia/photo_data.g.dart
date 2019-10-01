@@ -15,7 +15,7 @@ class _$PhotoDataSerializer implements StructuredSerializer<PhotoData> {
   final String wireName = 'PhotoData';
 
   @override
-  Iterable serialize(Serializers serializers, PhotoData object,
+  Iterable<Object> serialize(Serializers serializers, PhotoData object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'drive_id',
@@ -31,7 +31,7 @@ class _$PhotoDataSerializer implements StructuredSerializer<PhotoData> {
   }
 
   @override
-  PhotoData deserialize(Serializers serializers, Iterable serialized,
+  PhotoData deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new PhotoDataBuilder();
 
@@ -68,7 +68,7 @@ class _$PhotoData extends PhotoData {
   @override
   final String type;
 
-  factory _$PhotoData([void updates(PhotoDataBuilder b)]) =>
+  factory _$PhotoData([void Function(PhotoDataBuilder) updates]) =>
       (new PhotoDataBuilder()..update(updates)).build();
 
   _$PhotoData._({this.driveId, this.name, this.type}) : super._() {
@@ -84,7 +84,7 @@ class _$PhotoData extends PhotoData {
   }
 
   @override
-  PhotoData rebuild(void updates(PhotoDataBuilder b)) =>
+  PhotoData rebuild(void Function(PhotoDataBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -151,7 +151,7 @@ class PhotoDataBuilder implements Builder<PhotoData, PhotoDataBuilder> {
   }
 
   @override
-  void update(void updates(PhotoDataBuilder b)) {
+  void update(void Function(PhotoDataBuilder) updates) {
     if (updates != null) updates(this);
   }
 
