@@ -14,6 +14,7 @@ import 'package:BeeCreative/src/pages/moodmeter/moodemeter.dart';
 import 'package:BeeCreative/src/pages/photo_gallery/photo_gallery.dart';
 import 'package:BeeCreative/src/pages/profile/profile.dart';
 import 'package:BeeCreative/src/pages/schedules/all_schedule.dart';
+import 'package:BeeCreative/src/pages/settings/settings.dart';
 import 'package:BeeCreative/src/pages/under_construction_page/under_construction.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
@@ -83,6 +84,7 @@ class _MyAppState extends State<MyApp> {
         Routes.LEADERBOARDS: (BuildContext context) => LeaderBoardsPage(),
         Routes.APPRECIATE_PAGE: (BuildContext context) => AppreciatePage(),
         Routes.MOODMETER: (BuildContext context) => MoodMeter(),
+        Routes.SETTINGS: (BuildContext context) => SettingsPage(),
         // Routes.PHOTO_GALLERY: (BuildContext context) => PhotoGallery(),
       },
       onGenerateRoute: _getRoute,

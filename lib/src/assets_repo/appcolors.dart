@@ -52,4 +52,7 @@ class AppColors {
   static var emotionIamok = 0xff8E44AD;
   static var emotionSatisfied = 0xff079992;
   static var emotionDissatisfied = 0xffEB2F06;
+
+  static var notificationRed = 0xffFB5B5A;
+  static var notificationGreen = 0xff4DD599;
 }

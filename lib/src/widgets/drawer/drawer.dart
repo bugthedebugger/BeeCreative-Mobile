@@ -159,12 +159,20 @@ class _AppDrawerState extends State<AppDrawer> {
                     },
                   ),
                   DrawerListTile(
+                    icon: FontAwesomeIcons.cog,
+                    title: "SETTINGS",
+                    function: () {
+                      Navigator.of(context).pushNamed(Routes.SETTINGS);
+                    },
+                  ),
+                  DrawerListTile(
                     icon: FontAwesomeIcons.signOutAlt,
                     title: "LOGOUT",
                     function: () {
                       _userBloc.logout();
                     },
                   ),
+
                   /*
                   DrawerListTile(
                     image: AppPhotos.drawerHelp,

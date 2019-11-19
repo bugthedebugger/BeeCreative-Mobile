@@ -126,6 +126,8 @@ flutter:
    - assets/images/momonation/ 
   # moodmeter assets
    - assets/images/moodmeter/
+  #  settings assets
+   - assets/images/settings/
 
   fonts:
     - family: Poppins
