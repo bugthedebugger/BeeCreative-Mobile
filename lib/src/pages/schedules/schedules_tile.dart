@@ -227,17 +227,17 @@ class SchedulesTileState extends State<SchedulesTile>
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => ClassDetails(
-                    schedule: schedule,
-                    timeOfDay: timeOfDay,
-                    scheduleResponseData: response,
-                  ),
+                schedule: schedule,
+                timeOfDay: timeOfDay,
+                scheduleResponseData: response,
+              ),
             ),
           );
         }
 
         scheduleCardList.add(
           Slidable(
-            delegate: SlidableDrawerDelegate(),
+            actionPane: SlidableDrawerActionPane(),
             actionExtentRatio: 0.10,
             child: ScheduleCard(
               schedule: schedule,
