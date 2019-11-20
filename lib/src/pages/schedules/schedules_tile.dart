@@ -109,23 +109,29 @@ class SchedulesTileState extends State<SchedulesTile>
                   },
                 );
               },
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 3,
-                    color: Color(0x33000000),
-                    offset: Offset(0, 1),
-                  )
-                ],
-                shape: BoxShape.circle,
-                color: Color(
-                  AppColors.deliveryRatingColor,
+              color: Colors.white,
+              child: Container(
+                width: ScreenUtil().setWidth(30),
+                height: ScreenUtil().setWidth(30),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 3,
+                      color: Color(0x33000000),
+                      offset: Offset(0, 1),
+                    )
+                  ],
+                  shape: BoxShape.circle,
+                  color: Color(
+                    AppColors.deliveryRatingColor,
+                  ),
                 ),
-              ),
-              child: Icon(
-                Icons.star,
-                color: Colors.white,
-                size: ScreenUtil().setHeight(16),
+                child: Icon(
+                  Icons.star,
+                  color: Colors.white,
+                  size: ScreenUtil().setHeight(16),
+                ),
               ),
             ),
           ),
@@ -152,21 +158,29 @@ class SchedulesTileState extends State<SchedulesTile>
                       },
                     );
                   },
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 3,
-                        color: Color(0x33000000),
-                        offset: Offset(0, 1),
-                      )
-                    ],
-                    shape: BoxShape.circle,
-                    color: Color(AppColors.classCancelledColor),
-                  ),
-                  child: Icon(
-                    FontAwesomeIcons.times,
-                    color: Colors.white,
-                    size: ScreenUtil().setHeight(13),
+                  color: Colors.white,
+                  child: Container(
+                    width: ScreenUtil().setWidth(30),
+                    height: ScreenUtil().setWidth(30),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 3,
+                          color: Color(0x33000000),
+                          offset: Offset(0, 1),
+                        )
+                      ],
+                      shape: BoxShape.circle,
+                      color: Color(
+                        AppColors.classCancelledColor,
+                      ),
+                    ),
+                    child: Icon(
+                      FontAwesomeIcons.times,
+                      color: Colors.white,
+                      size: ScreenUtil().setHeight(13),
+                    ),
                   ),
                 ),
               ),
@@ -193,21 +207,29 @@ class SchedulesTileState extends State<SchedulesTile>
                     },
                   );
                 },
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 3,
-                      color: Color(0x33000000),
-                      offset: Offset(0, 1),
-                    )
-                  ],
-                  shape: BoxShape.circle,
-                  color: Color(AppColors.classCancelledColor),
-                ),
-                child: Icon(
-                  FontAwesomeIcons.times,
-                  color: Colors.white,
-                  size: ScreenUtil().setHeight(13),
+                color: Colors.white,
+                child: Container(
+                  width: ScreenUtil().setWidth(30),
+                  height: ScreenUtil().setWidth(30),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 3,
+                        color: Color(0x33000000),
+                        offset: Offset(0, 1),
+                      )
+                    ],
+                    shape: BoxShape.circle,
+                    color: Color(
+                      AppColors.classCancelledColor,
+                    ),
+                  ),
+                  child: Icon(
+                    FontAwesomeIcons.times,
+                    color: Colors.white,
+                    size: ScreenUtil().setHeight(13),
+                  ),
                 ),
               ),
             ),
