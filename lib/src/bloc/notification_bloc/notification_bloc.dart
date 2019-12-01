@@ -4,11 +4,13 @@ import 'package:BeeCreative/src/bloc/bloc_provider.dart';
 import 'package:BeeCreative/src/bloc/notification_bloc/notification_bloc_events.dart';
 import 'package:BeeCreative/src/data/exceptions/notification_exception.dart';
 import 'package:BeeCreative/src/data/repository/notification_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationBloc extends Bloc {
   final NotificationRepository _repository;
+  final SharedPreferences _preferences;
 
-  NotificationBloc(this._repository);
+  NotificationBloc(this._repository, this._preferences);
 
   StreamController<NotificationEvents> _eventStreamController =
       StreamController<NotificationEvents>.broadcast();
@@ -22,8 +24,12 @@ class NotificationBloc extends Bloc {
   void _mapEventsToState(NotificationEvents event) {
     if (event is EnableNotification) {
       _mapEnableNotification(event);
+    } else if (event is CheckNotificationEnabled) {
+      _mapCheckNotificationEnabled(event);
     }
   }
+
+  void _mapCheckNotificationEnabled(CheckNotificationEnabled event) {}
 
   void enableNotification(String time) {
     dispatch(

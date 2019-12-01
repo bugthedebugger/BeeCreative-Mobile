@@ -34,3 +34,21 @@ abstract class EnableNotificationSuccess extends NotificationEvents
           [updates(EnableNotificationSuccessBuilder b)]) =
       _$EnableNotificationSuccess;
 }
+
+abstract class CheckNotificationEnabled extends NotificationEvents
+    implements
+        Built<CheckNotificationEnabled, CheckNotificationEnabledBuilder> {
+  CheckNotificationEnabled._();
+
+  factory CheckNotificationEnabled(
+          [updates(CheckNotificationEnabledBuilder b)]) =
+      _$CheckNotificationEnabled;
+}
+
+abstract class NotificationDisabled extends NotificationEvents
+    implements Built<NotificationDisabled, NotificationDisabledBuilder> {
+  NotificationDisabled._();
+
+  factory NotificationDisabled([updates(NotificationDisabledBuilder b)]) =
+      _$NotificationDisabled;
+}

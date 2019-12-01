@@ -84,5 +84,5 @@ Future initKiwi() async {
   Container().registerFactory((c) => NotificationDataSource(c.resolve()));
   Container().registerFactory((c) =>
       NotificationRepository(c.resolve(), c.resolve<SharedPreferences>()));
-  Container().registerFactory((c) => NotificationBloc(c.resolve()));
+  Container().registerFactory((c) => NotificationBloc(c.resolve(), c.resolve<SharedPreferences>()));
 }

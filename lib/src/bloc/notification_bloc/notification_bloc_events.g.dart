@@ -230,4 +230,125 @@ class EnableNotificationSuccessBuilder
   }
 }
 
+class _$CheckNotificationEnabled extends CheckNotificationEnabled {
+  factory _$CheckNotificationEnabled(
+          [void Function(CheckNotificationEnabledBuilder) updates]) =>
+      (new CheckNotificationEnabledBuilder()..update(updates)).build();
+
+  _$CheckNotificationEnabled._() : super._();
+
+  @override
+  CheckNotificationEnabled rebuild(
+          void Function(CheckNotificationEnabledBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  CheckNotificationEnabledBuilder toBuilder() =>
+      new CheckNotificationEnabledBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is CheckNotificationEnabled;
+  }
+
+  @override
+  int get hashCode {
+    return 341222694;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('CheckNotificationEnabled').toString();
+  }
+}
+
+class CheckNotificationEnabledBuilder
+    implements
+        Builder<CheckNotificationEnabled, CheckNotificationEnabledBuilder> {
+  _$CheckNotificationEnabled _$v;
+
+  CheckNotificationEnabledBuilder();
+
+  @override
+  void replace(CheckNotificationEnabled other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$CheckNotificationEnabled;
+  }
+
+  @override
+  void update(void Function(CheckNotificationEnabledBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$CheckNotificationEnabled build() {
+    final _$result = _$v ?? new _$CheckNotificationEnabled._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$NotificationDisabled extends NotificationDisabled {
+  factory _$NotificationDisabled(
+          [void Function(NotificationDisabledBuilder) updates]) =>
+      (new NotificationDisabledBuilder()..update(updates)).build();
+
+  _$NotificationDisabled._() : super._();
+
+  @override
+  NotificationDisabled rebuild(
+          void Function(NotificationDisabledBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  NotificationDisabledBuilder toBuilder() =>
+      new NotificationDisabledBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is NotificationDisabled;
+  }
+
+  @override
+  int get hashCode {
+    return 290913986;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('NotificationDisabled').toString();
+  }
+}
+
+class NotificationDisabledBuilder
+    implements Builder<NotificationDisabled, NotificationDisabledBuilder> {
+  _$NotificationDisabled _$v;
+
+  NotificationDisabledBuilder();
+
+  @override
+  void replace(NotificationDisabled other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$NotificationDisabled;
+  }
+
+  @override
+  void update(void Function(NotificationDisabledBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$NotificationDisabled build() {
+    final _$result = _$v ?? new _$NotificationDisabled._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

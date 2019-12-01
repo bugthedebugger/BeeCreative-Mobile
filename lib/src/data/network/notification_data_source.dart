@@ -23,8 +23,8 @@ class NotificationDataSource {
       'time': time,
     });
 
-    // print(response.body);
-    // print('status code: ${response.statusCode}');
+    print(response.body);
+    print('status code: ${response.statusCode}');
 
     if (response.statusCode == 200) {
       return true;
