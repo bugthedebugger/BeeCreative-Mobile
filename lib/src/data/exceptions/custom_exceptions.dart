@@ -5,3 +5,4 @@ export 'package:BeeCreative/src/data/models/user/user_error.dart';
 export 'social_media_upload_exception.dart';
 export 'server_folder_id_exception.dart';
 export 'momonation_exception.dart';
+export 'notification_exception.dart';
