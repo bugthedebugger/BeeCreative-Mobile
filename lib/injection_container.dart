@@ -12,6 +12,7 @@ import 'package:BeeCreative/src/bloc/schedule_bloc/schedule_bloc_export.dart';
 import 'package:BeeCreative/src/bloc/student_randomizer_bloc/student_randomizer_bloc_export.dart';
 import 'package:BeeCreative/src/bloc/user_bloc/user_bloc_export.dart';
 import 'package:BeeCreative/src/data/database/gallery/gallery_db_provider.dart';
+import 'package:BeeCreative/src/data/local/notification_local_call.dart';
 import 'package:BeeCreative/src/data/network/attendance_data_source.dart';
 import 'package:BeeCreative/src/data/network/delivery_report_source.dart';
 import 'package:BeeCreative/src/data/network/momonation_feeds_data_source.dart';
@@ -82,7 +83,8 @@ Future initKiwi() async {
       (c) => MoodMeterRepository(c.resolve(), c.resolve<SharedPreferences>()));
   Container().registerFactory((c) => MoodMeterBloc(c.resolve()));
   Container().registerFactory((c) => NotificationDataSource(c.resolve()));
+  Container().registerFactory((c) => NotificationLocalCall(c.resolve<SharedPreferences>()));
   Container().registerFactory((c) =>
-      NotificationRepository(c.resolve(), c.resolve<SharedPreferences>()));
+      NotificationRepository(c.resolve(), c.resolve<SharedPreferences>(), c.resolve()));
   Container().registerFactory((c) => NotificationBloc(c.resolve(), c.resolve<SharedPreferences>()));
 }
