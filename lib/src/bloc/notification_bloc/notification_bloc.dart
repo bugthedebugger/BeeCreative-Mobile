@@ -6,8 +6,6 @@ import 'package:BeeCreative/src/data/exceptions/notification_exception.dart';
 import 'package:BeeCreative/src/data/models/notification_settings/notification_settings.dart';
 import 'package:BeeCreative/src/data/repository/notification_repository.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:googleapis/people/v1.dart';
-import 'package:meta/meta.dart';
 
 class NotificationBloc extends Bloc {
   final FirebaseMessaging _firebaseMessaging;

@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
+import 'package:BeeCreative/src/bloc/notification_bloc/notification_bloc_export.dart';
 import 'package:BeeCreative/src/widgets/custom_notification_time_selector/custom_notification_time_selector.dart';
 import 'package:BeeCreative/src/widgets/enable_notification_widget/enable_notification_widge.dart';
 import 'package:BeeCreative/src/widgets/notification_settings_icon_widget/notification_settings_icon_widget.dart';
 import 'package:BeeCreative/src/widgets/notification_time_selector/notification_time_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kiwi/kiwi.dart' as kiwi;
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -14,6 +18,25 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   bool notificationEnabled = false;
   bool customNotificationEnabled = false;
+  final NotificationBloc _bloc = kiwi.Container().resolve<NotificationBloc>();
+  StreamSubscription _sub;
+
+  @override
+  void initState() {
+    super.initState();
+    _bloc.init();
+    _sub = _bloc.eventStream.listen((onData){
+      print(onData);
+    });
+    _bloc.checkNotificationStatus();
+  }
+
+  @override
+  void dispose() {
+    _sub?.cancel();
+    _bloc?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
