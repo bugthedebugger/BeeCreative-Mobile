@@ -11,10 +11,19 @@ class NotificationRepository {
 
   NotificationRepository(this._dataSource, this._preferences, this._localCall);
 
-  Future<bool> enableNotification({@required String time}) async {
+  Future<bool> enableNotification({@required String fcmToken}) async {
     String token = _preferences.get('token');
 
     return await _dataSource.enableNotification(
+      token: token,
+      fcmToken: fcmToken,
+    );
+  }
+
+  Future<bool> setNotificationTime({@required String time}) async {
+    String token = _preferences.get('token');
+
+    return await _dataSource.setNotificationTime(
       token: token,
       time: time,
     );

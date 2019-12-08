@@ -14,6 +14,7 @@ abstract class NotificationSettings
   bool get custom;
   @nullable
   String get placeHolder;
+  @nullable
   String get time;
 
   NotificationSettings._();

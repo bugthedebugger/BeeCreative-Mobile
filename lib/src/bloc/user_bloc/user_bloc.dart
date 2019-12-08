@@ -72,10 +72,8 @@ class UserBloc implements Bloc {
 
   void _mapUserLoginRequest(UserLoginRequested event) async {
     try {
-      String notificationToken = await _firebaseMessaging.getToken();
       var response = await this._repository.requestLogin(
             _idToken,
-            notificationToken: notificationToken,
           );
       registeredUser = response;
       token = registeredUser.data.token;

@@ -30,6 +30,7 @@ import 'package:BeeCreative/src/data/repository/notification_repository.dart';
 import 'package:BeeCreative/src/data/repository/schedule_respository.dart';
 import 'package:BeeCreative/src/data/repository/user_repository.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:http/http.dart' as http;
@@ -83,8 +84,11 @@ Future initKiwi() async {
       (c) => MoodMeterRepository(c.resolve(), c.resolve<SharedPreferences>()));
   Container().registerFactory((c) => MoodMeterBloc(c.resolve()));
   Container().registerFactory((c) => NotificationDataSource(c.resolve()));
-  Container().registerFactory((c) => NotificationLocalCall(c.resolve<SharedPreferences>()));
-  Container().registerFactory((c) =>
-      NotificationRepository(c.resolve(), c.resolve<SharedPreferences>(), c.resolve()));
-  Container().registerFactory((c) => NotificationBloc(c.resolve(), c.resolve<SharedPreferences>()));
+  Container().registerFactory(
+      (c) => NotificationLocalCall(c.resolve<SharedPreferences>()));
+  Container().registerFactory((c) => NotificationRepository(
+      c.resolve(), c.resolve<SharedPreferences>(), c.resolve()));
+  Container().registerFactory((c) => FirebaseMessaging());
+  Container()
+      .registerFactory((c) => NotificationBloc(c.resolve(), c.resolve()));
 }

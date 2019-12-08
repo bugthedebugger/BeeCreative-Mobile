@@ -29,13 +29,17 @@ class _$NotificationSettingsSerializer
           specifiedType: const FullType(bool)),
       'custom',
       serializers.serialize(object.custom, specifiedType: const FullType(bool)),
-      'time',
-      serializers.serialize(object.time, specifiedType: const FullType(String)),
     ];
     if (object.placeHolder != null) {
       result
         ..add('placeHolder')
         ..add(serializers.serialize(object.placeHolder,
+            specifiedType: const FullType(String)));
+    }
+    if (object.time != null) {
+      result
+        ..add('time')
+        ..add(serializers.serialize(object.time,
             specifiedType: const FullType(String)));
     }
     return result;
@@ -98,9 +102,6 @@ class _$NotificationSettings extends NotificationSettings {
     }
     if (custom == null) {
       throw new BuiltValueNullFieldError('NotificationSettings', 'custom');
-    }
-    if (time == null) {
-      throw new BuiltValueNullFieldError('NotificationSettings', 'time');
     }
   }
 

@@ -15,6 +15,7 @@ class ApiURL {
   static const String getMoods = _baseURL + 'moods';
   static const String logout = _baseURL + 'logout';
   static const String notification = _baseURL + 'notified/on';
+  static const String fcmtoken = _baseURL + 'fcmtoken';
 }
 
 class MomonationURL {

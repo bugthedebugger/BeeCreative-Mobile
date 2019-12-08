@@ -10,6 +10,28 @@ class NotificationDataSource {
 
   Future<bool> enableNotification({
     @required String token,
+    @required String fcmToken,
+  }) async {
+    var url = ApiURL.fcmtoken;
+    var parsedURL = Uri.encodeFull(url);
+
+    final response = await _client.post(parsedURL, headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    }, body: {
+      'fcm_token': fcmToken,
+    });
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      throw NotificationException(response.body);
+    }
+  }
+
+  Future<bool> setNotificationTime({
+    @required String token,
     @required String time,
   }) async {
     var url = ApiURL.notification;
@@ -20,6 +42,7 @@ class NotificationDataSource {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
     }, body: {
+      'notify': true,
       'time': time,
     });
 

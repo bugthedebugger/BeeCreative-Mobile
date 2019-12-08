@@ -1,8 +1,6 @@
 import 'dart:io';
 
-import 'package:BeeCreative/src/data/exceptions/notification_exception.dart';
 import 'package:BeeCreative/src/data/network/api_call.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:BeeCreative/src/data/network/notification_data_source.dart';
@@ -38,6 +36,7 @@ void main() {
               'Authorization': 'Bearer 123456',
             },
             body: {
+              'notify': true,
               'time': '00:01:00',
             },
           ),
@@ -49,7 +48,7 @@ void main() {
           );
         });
 
-        bool result = await dataSource.enableNotification(
+        bool result = await dataSource.setNotificationTime(
           token: '123456',
           time: '00:01:00',
         );
@@ -72,6 +71,7 @@ void main() {
               'Authorization': 'Bearer 12345678',
             },
             body: {
+              'notify': true,
               'time': '00:01:00',
             },
           ),
@@ -84,7 +84,7 @@ void main() {
         });
 
         expect(
-          dataSource.enableNotification(
+          dataSource.setNotificationTime(
             token: '12345678', //invalid token
             time: '00:01:00',
           ),
@@ -107,6 +107,7 @@ void main() {
               'Authorization': 'Bearer 123456',
             },
             body: {
+              'notify': true,
               'time': 'asdf',
             },
           ),
@@ -118,7 +119,7 @@ void main() {
         });
 
         expect(
-          dataSource.enableNotification(
+          dataSource.setNotificationTime(
             token: '123456',
             time: 'asdf',
           ),

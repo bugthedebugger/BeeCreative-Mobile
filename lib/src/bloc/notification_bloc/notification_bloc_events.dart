@@ -1,48 +1,27 @@
 library notification_bloc_events;
 
+import 'package:BeeCreative/src/data/models/notification_settings/notification_settings.dart';
 import 'package:built_value/built_value.dart';
 part 'notification_bloc_events.g.dart';
 
 abstract class NotificationEvents {}
 
-abstract class EnableNotification extends NotificationEvents
-    implements Built<EnableNotification, EnableNotificationBuilder> {
-  String get time;
+abstract class CheckNotificationStatus extends NotificationEvents
+    implements Built<CheckNotificationStatus, CheckNotificationStatusBuilder> {
+  CheckNotificationStatus._();
 
-  EnableNotification._();
-
-  factory EnableNotification([updates(EnableNotificationBuilder b)]) =
-      _$EnableNotification;
+  factory CheckNotificationStatus([updates(CheckNotificationStatusBuilder b)]) =
+      _$CheckNotificationStatus;
 }
 
-abstract class EnableNotificationError extends NotificationEvents
-    implements Built<EnableNotificationError, EnableNotificationErrorBuilder> {
-  String get message;
+abstract class NotificationEnabled extends NotificationEvents
+    implements Built<NotificationEnabled, NotificationEnabledBuilder> {
+  NotificationSettings get settings;
 
-  EnableNotificationError._();
+  NotificationEnabled._();
 
-  factory EnableNotificationError([updates(EnableNotificationErrorBuilder b)]) =
-      _$EnableNotificationError;
-}
-
-abstract class EnableNotificationSuccess extends NotificationEvents
-    implements
-        Built<EnableNotificationSuccess, EnableNotificationSuccessBuilder> {
-  EnableNotificationSuccess._();
-
-  factory EnableNotificationSuccess(
-          [updates(EnableNotificationSuccessBuilder b)]) =
-      _$EnableNotificationSuccess;
-}
-
-abstract class CheckNotificationEnabled extends NotificationEvents
-    implements
-        Built<CheckNotificationEnabled, CheckNotificationEnabledBuilder> {
-  CheckNotificationEnabled._();
-
-  factory CheckNotificationEnabled(
-          [updates(CheckNotificationEnabledBuilder b)]) =
-      _$CheckNotificationEnabled;
+  factory NotificationEnabled([updates(NotificationEnabledBuilder b)]) =
+      _$NotificationEnabled;
 }
 
 abstract class NotificationDisabled extends NotificationEvents
@@ -51,4 +30,32 @@ abstract class NotificationDisabled extends NotificationEvents
 
   factory NotificationDisabled([updates(NotificationDisabledBuilder b)]) =
       _$NotificationDisabled;
+}
+
+abstract class EnableNotification extends NotificationEvents
+    implements Built<EnableNotification, EnableNotificationBuilder> {
+  NotificationSettings get settings;
+
+  EnableNotification._();
+
+  factory EnableNotification([updates(EnableNotificationBuilder b)]) =
+      _$EnableNotification;
+}
+
+abstract class DisableNotification extends NotificationEvents
+    implements Built<DisableNotification, DisableNotificationBuilder> {
+  DisableNotification._();
+
+  factory DisableNotification([updates(DisableNotificationBuilder b)]) =
+      _$DisableNotification;
+}
+
+abstract class NotificationError extends NotificationEvents
+    implements Built<NotificationError, NotificationErrorBuilder> {
+  String get message;
+
+  NotificationError._();
+
+  factory NotificationError([updates(NotificationErrorBuilder b)]) =
+      _$NotificationError;
 }

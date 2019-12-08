@@ -6,286 +6,158 @@ part of notification_bloc_events;
 // BuiltValueGenerator
 // **************************************************************************
 
-class _$EnableNotification extends EnableNotification {
-  @override
-  final String time;
+class _$CheckNotificationStatus extends CheckNotificationStatus {
+  factory _$CheckNotificationStatus(
+          [void Function(CheckNotificationStatusBuilder) updates]) =>
+      (new CheckNotificationStatusBuilder()..update(updates)).build();
 
-  factory _$EnableNotification(
-          [void Function(EnableNotificationBuilder) updates]) =>
-      (new EnableNotificationBuilder()..update(updates)).build();
-
-  _$EnableNotification._({this.time}) : super._() {
-    if (time == null) {
-      throw new BuiltValueNullFieldError('EnableNotification', 'time');
-    }
-  }
+  _$CheckNotificationStatus._() : super._();
 
   @override
-  EnableNotification rebuild(
-          void Function(EnableNotificationBuilder) updates) =>
+  CheckNotificationStatus rebuild(
+          void Function(CheckNotificationStatusBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  EnableNotificationBuilder toBuilder() =>
-      new EnableNotificationBuilder()..replace(this);
+  CheckNotificationStatusBuilder toBuilder() =>
+      new CheckNotificationStatusBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is EnableNotification && time == other.time;
+    return other is CheckNotificationStatus;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, time.hashCode));
+    return 297436666;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('EnableNotification')
-          ..add('time', time))
+    return newBuiltValueToStringHelper('CheckNotificationStatus').toString();
+  }
+}
+
+class CheckNotificationStatusBuilder
+    implements
+        Builder<CheckNotificationStatus, CheckNotificationStatusBuilder> {
+  _$CheckNotificationStatus _$v;
+
+  CheckNotificationStatusBuilder();
+
+  @override
+  void replace(CheckNotificationStatus other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$CheckNotificationStatus;
+  }
+
+  @override
+  void update(void Function(CheckNotificationStatusBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$CheckNotificationStatus build() {
+    final _$result = _$v ?? new _$CheckNotificationStatus._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$NotificationEnabled extends NotificationEnabled {
+  @override
+  final NotificationSettings settings;
+
+  factory _$NotificationEnabled(
+          [void Function(NotificationEnabledBuilder) updates]) =>
+      (new NotificationEnabledBuilder()..update(updates)).build();
+
+  _$NotificationEnabled._({this.settings}) : super._() {
+    if (settings == null) {
+      throw new BuiltValueNullFieldError('NotificationEnabled', 'settings');
+    }
+  }
+
+  @override
+  NotificationEnabled rebuild(
+          void Function(NotificationEnabledBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  NotificationEnabledBuilder toBuilder() =>
+      new NotificationEnabledBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is NotificationEnabled && settings == other.settings;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, settings.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('NotificationEnabled')
+          ..add('settings', settings))
         .toString();
   }
 }
 
-class EnableNotificationBuilder
-    implements Builder<EnableNotification, EnableNotificationBuilder> {
-  _$EnableNotification _$v;
+class NotificationEnabledBuilder
+    implements Builder<NotificationEnabled, NotificationEnabledBuilder> {
+  _$NotificationEnabled _$v;
 
-  String _time;
-  String get time => _$this._time;
-  set time(String time) => _$this._time = time;
+  NotificationSettingsBuilder _settings;
+  NotificationSettingsBuilder get settings =>
+      _$this._settings ??= new NotificationSettingsBuilder();
+  set settings(NotificationSettingsBuilder settings) =>
+      _$this._settings = settings;
 
-  EnableNotificationBuilder();
+  NotificationEnabledBuilder();
 
-  EnableNotificationBuilder get _$this {
+  NotificationEnabledBuilder get _$this {
     if (_$v != null) {
-      _time = _$v.time;
+      _settings = _$v.settings?.toBuilder();
       _$v = null;
     }
     return this;
   }
 
   @override
-  void replace(EnableNotification other) {
+  void replace(NotificationEnabled other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$EnableNotification;
+    _$v = other as _$NotificationEnabled;
   }
 
   @override
-  void update(void Function(EnableNotificationBuilder) updates) {
+  void update(void Function(NotificationEnabledBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$EnableNotification build() {
-    final _$result = _$v ?? new _$EnableNotification._(time: time);
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$EnableNotificationError extends EnableNotificationError {
-  @override
-  final String message;
-
-  factory _$EnableNotificationError(
-          [void Function(EnableNotificationErrorBuilder) updates]) =>
-      (new EnableNotificationErrorBuilder()..update(updates)).build();
-
-  _$EnableNotificationError._({this.message}) : super._() {
-    if (message == null) {
-      throw new BuiltValueNullFieldError('EnableNotificationError', 'message');
+  _$NotificationEnabled build() {
+    _$NotificationEnabled _$result;
+    try {
+      _$result = _$v ?? new _$NotificationEnabled._(settings: settings.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'settings';
+        settings.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'NotificationEnabled', _$failedField, e.toString());
+      }
+      rethrow;
     }
-  }
-
-  @override
-  EnableNotificationError rebuild(
-          void Function(EnableNotificationErrorBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  EnableNotificationErrorBuilder toBuilder() =>
-      new EnableNotificationErrorBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is EnableNotificationError && message == other.message;
-  }
-
-  @override
-  int get hashCode {
-    return $jf($jc(0, message.hashCode));
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper('EnableNotificationError')
-          ..add('message', message))
-        .toString();
-  }
-}
-
-class EnableNotificationErrorBuilder
-    implements
-        Builder<EnableNotificationError, EnableNotificationErrorBuilder> {
-  _$EnableNotificationError _$v;
-
-  String _message;
-  String get message => _$this._message;
-  set message(String message) => _$this._message = message;
-
-  EnableNotificationErrorBuilder();
-
-  EnableNotificationErrorBuilder get _$this {
-    if (_$v != null) {
-      _message = _$v.message;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(EnableNotificationError other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
-    _$v = other as _$EnableNotificationError;
-  }
-
-  @override
-  void update(void Function(EnableNotificationErrorBuilder) updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  _$EnableNotificationError build() {
-    final _$result = _$v ?? new _$EnableNotificationError._(message: message);
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$EnableNotificationSuccess extends EnableNotificationSuccess {
-  factory _$EnableNotificationSuccess(
-          [void Function(EnableNotificationSuccessBuilder) updates]) =>
-      (new EnableNotificationSuccessBuilder()..update(updates)).build();
-
-  _$EnableNotificationSuccess._() : super._();
-
-  @override
-  EnableNotificationSuccess rebuild(
-          void Function(EnableNotificationSuccessBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  EnableNotificationSuccessBuilder toBuilder() =>
-      new EnableNotificationSuccessBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is EnableNotificationSuccess;
-  }
-
-  @override
-  int get hashCode {
-    return 729685915;
-  }
-
-  @override
-  String toString() {
-    return newBuiltValueToStringHelper('EnableNotificationSuccess').toString();
-  }
-}
-
-class EnableNotificationSuccessBuilder
-    implements
-        Builder<EnableNotificationSuccess, EnableNotificationSuccessBuilder> {
-  _$EnableNotificationSuccess _$v;
-
-  EnableNotificationSuccessBuilder();
-
-  @override
-  void replace(EnableNotificationSuccess other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
-    _$v = other as _$EnableNotificationSuccess;
-  }
-
-  @override
-  void update(void Function(EnableNotificationSuccessBuilder) updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  _$EnableNotificationSuccess build() {
-    final _$result = _$v ?? new _$EnableNotificationSuccess._();
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$CheckNotificationEnabled extends CheckNotificationEnabled {
-  factory _$CheckNotificationEnabled(
-          [void Function(CheckNotificationEnabledBuilder) updates]) =>
-      (new CheckNotificationEnabledBuilder()..update(updates)).build();
-
-  _$CheckNotificationEnabled._() : super._();
-
-  @override
-  CheckNotificationEnabled rebuild(
-          void Function(CheckNotificationEnabledBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  CheckNotificationEnabledBuilder toBuilder() =>
-      new CheckNotificationEnabledBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is CheckNotificationEnabled;
-  }
-
-  @override
-  int get hashCode {
-    return 341222694;
-  }
-
-  @override
-  String toString() {
-    return newBuiltValueToStringHelper('CheckNotificationEnabled').toString();
-  }
-}
-
-class CheckNotificationEnabledBuilder
-    implements
-        Builder<CheckNotificationEnabled, CheckNotificationEnabledBuilder> {
-  _$CheckNotificationEnabled _$v;
-
-  CheckNotificationEnabledBuilder();
-
-  @override
-  void replace(CheckNotificationEnabled other) {
-    if (other == null) {
-      throw new ArgumentError.notNull('other');
-    }
-    _$v = other as _$CheckNotificationEnabled;
-  }
-
-  @override
-  void update(void Function(CheckNotificationEnabledBuilder) updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  _$CheckNotificationEnabled build() {
-    final _$result = _$v ?? new _$CheckNotificationEnabled._();
     replace(_$result);
     return _$result;
   }
@@ -346,6 +218,242 @@ class NotificationDisabledBuilder
   @override
   _$NotificationDisabled build() {
     final _$result = _$v ?? new _$NotificationDisabled._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$EnableNotification extends EnableNotification {
+  @override
+  final NotificationSettings settings;
+
+  factory _$EnableNotification(
+          [void Function(EnableNotificationBuilder) updates]) =>
+      (new EnableNotificationBuilder()..update(updates)).build();
+
+  _$EnableNotification._({this.settings}) : super._() {
+    if (settings == null) {
+      throw new BuiltValueNullFieldError('EnableNotification', 'settings');
+    }
+  }
+
+  @override
+  EnableNotification rebuild(
+          void Function(EnableNotificationBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  EnableNotificationBuilder toBuilder() =>
+      new EnableNotificationBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is EnableNotification && settings == other.settings;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, settings.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('EnableNotification')
+          ..add('settings', settings))
+        .toString();
+  }
+}
+
+class EnableNotificationBuilder
+    implements Builder<EnableNotification, EnableNotificationBuilder> {
+  _$EnableNotification _$v;
+
+  NotificationSettingsBuilder _settings;
+  NotificationSettingsBuilder get settings =>
+      _$this._settings ??= new NotificationSettingsBuilder();
+  set settings(NotificationSettingsBuilder settings) =>
+      _$this._settings = settings;
+
+  EnableNotificationBuilder();
+
+  EnableNotificationBuilder get _$this {
+    if (_$v != null) {
+      _settings = _$v.settings?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(EnableNotification other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$EnableNotification;
+  }
+
+  @override
+  void update(void Function(EnableNotificationBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$EnableNotification build() {
+    _$EnableNotification _$result;
+    try {
+      _$result = _$v ?? new _$EnableNotification._(settings: settings.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'settings';
+        settings.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'EnableNotification', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$DisableNotification extends DisableNotification {
+  factory _$DisableNotification(
+          [void Function(DisableNotificationBuilder) updates]) =>
+      (new DisableNotificationBuilder()..update(updates)).build();
+
+  _$DisableNotification._() : super._();
+
+  @override
+  DisableNotification rebuild(
+          void Function(DisableNotificationBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  DisableNotificationBuilder toBuilder() =>
+      new DisableNotificationBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is DisableNotification;
+  }
+
+  @override
+  int get hashCode {
+    return 609320737;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('DisableNotification').toString();
+  }
+}
+
+class DisableNotificationBuilder
+    implements Builder<DisableNotification, DisableNotificationBuilder> {
+  _$DisableNotification _$v;
+
+  DisableNotificationBuilder();
+
+  @override
+  void replace(DisableNotification other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$DisableNotification;
+  }
+
+  @override
+  void update(void Function(DisableNotificationBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$DisableNotification build() {
+    final _$result = _$v ?? new _$DisableNotification._();
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$NotificationError extends NotificationError {
+  @override
+  final String message;
+
+  factory _$NotificationError(
+          [void Function(NotificationErrorBuilder) updates]) =>
+      (new NotificationErrorBuilder()..update(updates)).build();
+
+  _$NotificationError._({this.message}) : super._() {
+    if (message == null) {
+      throw new BuiltValueNullFieldError('NotificationError', 'message');
+    }
+  }
+
+  @override
+  NotificationError rebuild(void Function(NotificationErrorBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  NotificationErrorBuilder toBuilder() =>
+      new NotificationErrorBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is NotificationError && message == other.message;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, message.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('NotificationError')
+          ..add('message', message))
+        .toString();
+  }
+}
+
+class NotificationErrorBuilder
+    implements Builder<NotificationError, NotificationErrorBuilder> {
+  _$NotificationError _$v;
+
+  String _message;
+  String get message => _$this._message;
+  set message(String message) => _$this._message = message;
+
+  NotificationErrorBuilder();
+
+  NotificationErrorBuilder get _$this {
+    if (_$v != null) {
+      _message = _$v.message;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(NotificationError other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$NotificationError;
+  }
+
+  @override
+  void update(void Function(NotificationErrorBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$NotificationError build() {
+    final _$result = _$v ?? new _$NotificationError._(message: message);
     replace(_$result);
     return _$result;
   }
