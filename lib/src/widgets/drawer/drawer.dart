@@ -5,6 +5,7 @@ import 'package:BeeCreative/src/bloc/user_bloc/user_bloc_export.dart';
 import 'package:BeeCreative/src/data/models/shared_preferences/user_shared_preferences.dart';
 import 'package:BeeCreative/src/widgets/avatar_circle/avatar_circle.dart';
 import 'package:BeeCreative/src/widgets/drawer/drawer_list_tile.dart';
+import 'package:BeeCreative/src/widgets/loading_card/loading_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
@@ -37,6 +38,19 @@ class _AppDrawerState extends State<AppDrawer> {
           Navigator.of(context).pushNamedAndRemoveUntil(
             Routes.GOOGLE_LOGIN,
             (route) => false,
+          );
+        } else if (event is UserLogoutRequested) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) {
+              return Dialog(
+                child: LoadingCard(),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              );
+            },
           );
         }
       },
