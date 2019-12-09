@@ -29,6 +29,16 @@ class NotificationRepository {
     );
   }
 
+  Future<bool> disableNotification() async {
+    String token = _preferences.get('token');
+
+    return await _dataSource.setNotificationTime(
+      token: token,
+      time: '00:05:00',
+      notify: false,
+    );
+  }
+
   NotificationSettings get getSettings => _localCall.getSettings();
 
   bool setSettings({@required NotificationSettings settings}) =>

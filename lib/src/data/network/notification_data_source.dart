@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:BeeCreative/src/data/exceptions/custom_exceptions.dart';
 import 'package:BeeCreative/src/data/network/api_call.dart';
 import 'package:http/http.dart' as http;
@@ -14,14 +16,20 @@ class NotificationDataSource {
   }) async {
     var url = ApiURL.fcmtoken;
     var parsedURL = Uri.encodeFull(url);
-
-    final response = await _client.post(parsedURL, headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
-    }, body: {
-      'fcm_token': fcmToken,
-    });
+    print('Inside enable notification function of data source');
+    final response = await _client.post(
+      parsedURL,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: json.encode(
+        {
+          'fcm_token': fcmToken,
+        },
+      ),
+    );
 
     if (response.statusCode == 200) {
       return true;
@@ -33,18 +41,25 @@ class NotificationDataSource {
   Future<bool> setNotificationTime({
     @required String token,
     @required String time,
+    bool notify = true,
   }) async {
     var url = ApiURL.notification;
     var parsedURL = Uri.encodeFull(url);
-
-    final response = await _client.post(parsedURL, headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
-    }, body: {
-      'notify': true,
-      'time': time,
-    });
+    print('Inside setNotification function of data source');
+    final response = await _client.post(
+      parsedURL,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: json.encode(
+        {
+          'notify': notify,
+          'time': time,
+        },
+      ),
+    );
 
     print(response.body);
     print('status code: ${response.statusCode}');

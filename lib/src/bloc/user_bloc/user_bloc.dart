@@ -60,7 +60,17 @@ class UserBloc implements Bloc {
 
   void _mapUserLogoutRequest(UserLogoutRequested event) async {
     try {
-      await _repository.requestLogout(token: _sharedPreferences.get('token'));
+      try {
+        await _repository.requestLogout(token: _sharedPreferences.get('token'));
+      } catch (e) {
+        if (e is Unauthenticated) {
+          _sharedPreferences.clear();
+          _googleSignIn.signOut();
+          dispatch(UserLoggedOut());
+        } else {
+          throw e;
+        }
+      }
       await _firebaseMessaging.deleteInstanceID();
       _sharedPreferences.clear();
       _googleSignIn.signOut();

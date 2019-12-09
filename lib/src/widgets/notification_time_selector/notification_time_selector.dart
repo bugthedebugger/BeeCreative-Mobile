@@ -5,11 +5,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class NotificationTimeSelector extends StatelessWidget {
   final bool enabled;
   final Function onChanged;
+  final String selectedTime;
+  final bool custom;
 
   const NotificationTimeSelector({
     Key key,
     this.enabled = false,
     @required this.onChanged,
+    this.selectedTime,
+    this.custom = false,
   }) : super(key: key);
 
   @override
@@ -19,6 +23,9 @@ class NotificationTimeSelector extends StatelessWidget {
       height: ScreenSize.screenHeight,
       allowFontScaling: true,
     )..init(context);
+
+    print('Selected Time inside widget: $selectedTime');
+    print('Custom value inside widget: $custom');
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,6 +61,9 @@ class NotificationTimeSelector extends StatelessWidget {
             child: DropdownButtonHideUnderline(
               child: DropdownButton(
                 isDense: true,
+                value: custom
+                    ? 'custom'
+                    : selectedTime == null ? '00:05:00' : selectedTime,
                 style: TextStyle(
                   color: enabled
                       ? Color(AppColors.meltingCardColor)
@@ -70,22 +80,25 @@ class NotificationTimeSelector extends StatelessWidget {
                 onChanged: enabled ? onChanged : null,
                 items: [
                   DropdownMenuItem(
-                    value: '01:00',
+                    value: '01:00:00',
                     child: Container(
-                        width: ScreenUtil().setWidth(100),
-                        child: Text('An hour earlier')),
+                      width: ScreenUtil().setWidth(100),
+                      child: Text('An hour earlier'),
+                    ),
                   ),
                   DropdownMenuItem(
-                    value: '00:05',
+                    value: '00:05:00',
                     child: Container(
-                        width: ScreenUtil().setWidth(100),
-                        child: Text('5min earlier')),
+                      width: ScreenUtil().setWidth(100),
+                      child: Text('5min earlier'),
+                    ),
                   ),
                   DropdownMenuItem(
                     value: 'custom',
                     child: Container(
-                        width: ScreenUtil().setWidth(100),
-                        child: Text('Set custom')),
+                      width: ScreenUtil().setWidth(100),
+                      child: Text('Set custom'),
+                    ),
                   ),
                 ],
               ),

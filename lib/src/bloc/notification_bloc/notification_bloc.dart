@@ -47,19 +47,28 @@ class NotificationBloc extends Bloc {
     }
   }
 
-  void _mapDisableNotification(DisableNotification event) {
+  void _mapDisableNotification(DisableNotification event) async {
     try {
-      final bool disabled = _repository.setSettings(
-        settings: NotificationSettings(
-          (b) => b
-            ..enabled = false
-            ..custom = false
-            ..placeHolder = null
-            ..time = null,
-        ),
-      );
-      if (disabled) {
-        dispatch(NotificationDisabled());
+      final bool disableFromServer = await _repository.disableNotification();
+      if (disableFromServer) {
+        await _firebaseMessaging.deleteInstanceID();
+        final bool disabled = _repository.setSettings(
+          settings: NotificationSettings(
+            (b) => b
+              ..enabled = false
+              ..custom = false
+              ..placeHolder = null
+              ..time = null,
+          ),
+        );
+        if (disabled) {
+          dispatch(NotificationDisabled());
+        } else {
+          dispatch(
+            NotificationError(
+                (b) => b..message = 'Error disabling notification'),
+          );
+        }
       } else {
         dispatch(
           NotificationError((b) => b..message = 'Error disabling notification'),

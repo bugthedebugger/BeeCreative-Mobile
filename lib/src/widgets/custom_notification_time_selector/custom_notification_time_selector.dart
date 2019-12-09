@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 class CustomNotificationTimeSelector extends StatelessWidget {
   final bool enabled;
   final Function onChanged;
+  final String customTime;
 
   const CustomNotificationTimeSelector({
     Key key,
     this.enabled = false,
     this.onChanged,
+    this.customTime,
   }) : super(key: key);
 
   @override
@@ -25,14 +27,17 @@ class CustomNotificationTimeSelector extends StatelessWidget {
               weight: 'medium',
             ),
           ),
-          Text(
-            '16:00',
-            style: AppFontStyles(context).getTextStyle(
-              color: enabled
-                  ? Color(AppColors.meltingCardColor)
-                  : Color(AppColors.grey),
-              fontSize: 15,
-              weight: 'medium',
+          GestureDetector(
+            onTap: onChanged,
+            child: Text(
+              customTime == null ? '02:00:00' : '$customTime',
+              style: AppFontStyles(context).getTextStyle(
+                color: enabled
+                    ? Color(AppColors.meltingCardColor)
+                    : Color(AppColors.grey),
+                fontSize: 15,
+                weight: 'medium',
+              ),
             ),
           ),
         ],

@@ -19,7 +19,6 @@ class UserDataSource {
     print(notificationToken);
     final response = await client.post(encodedUrl, body: {
       'token': token,
-      'fcm_token': notificationToken,
     });
     if (response.statusCode == 200) {
       return User.fromJson(response.body);

@@ -13,14 +13,24 @@ class NotificationLocalCall {
     final NotificationSettings settings = NotificationSettings(
       (b) => b
         ..custom = _preferences.getBool(
-          NotificationSettingsConstants.CUSTOM,
-        )
+                  NotificationSettingsConstants.CUSTOM,
+                ) ==
+                null
+            ? false
+            : _preferences.getBool(
+                NotificationSettingsConstants.CUSTOM,
+              )
         ..placeHolder = _preferences.get(
           NotificationSettingsConstants.TIME_PLACEHOLDER,
         )
         ..enabled = _preferences.getBool(
-          NotificationSettingsConstants.ENABLED,
-        )
+                  NotificationSettingsConstants.ENABLED,
+                ) ==
+                null
+            ? false
+            : _preferences.getBool(
+                NotificationSettingsConstants.ENABLED,
+              )
         ..time = _preferences.get(
           NotificationSettingsConstants.TIME_VALUE,
         ),

@@ -22,7 +22,7 @@ class UserRepository {
       );
       return user;
     } catch (e) {
-      throw UserError(e.message);
+      throw UserError(e.toString());
     }
   }
 
