@@ -210,6 +210,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void _setCustomDate() async {
     // print('Invoked!');
+    if (!customNotificationEnabled) return;
+
     final time = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
