@@ -24,8 +24,8 @@ class NotificationTimeSelector extends StatelessWidget {
       allowFontScaling: true,
     )..init(context);
 
-    print('Selected Time inside widget: $selectedTime');
-    print('Custom value inside widget: $custom');
+    // print('Selected Time inside widget: $selectedTime');
+    // print('Custom value inside widget: $custom');
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

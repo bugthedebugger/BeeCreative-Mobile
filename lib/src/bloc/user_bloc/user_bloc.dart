@@ -59,11 +59,15 @@ class UserBloc implements Bloc {
   }
 
   void _mapUserLogoutRequest(UserLogoutRequested event) async {
+    bool dispatched = false;
     try {
       try {
         await _repository.requestLogout(token: _sharedPreferences.get('token'));
       } catch (e) {
+        print('Logout exception $e');
         if (e is Unauthenticated) {
+          dispatched = true;
+          await _firebaseMessaging.deleteInstanceID();
           _sharedPreferences.clear();
           _googleSignIn.signOut();
           dispatch(UserLoggedOut());
@@ -71,9 +75,11 @@ class UserBloc implements Bloc {
           throw e;
         }
       }
-      await _firebaseMessaging.deleteInstanceID();
+      if (!dispatched) {
+        await _firebaseMessaging.deleteInstanceID();
       _sharedPreferences.clear();
       _googleSignIn.signOut();
+      }
       dispatch(UserLoggedOut());
     } catch (_) {
       dispatch(UserErrorEvent((b) => b..message = _.toString()));

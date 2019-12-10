@@ -31,9 +31,9 @@ class _SettingsPageState extends State<SettingsPage> {
     super.initState();
     _bloc.init();
     _sub = _bloc.eventStream.listen((onData) {
-      print(onData);
+      // print(onData);
       if (onData is NotificationDisabled) {
-        print('Disabled Notification');
+        // print('Disabled Notification');
         notificationEnabled = false;
         customNotificationEnabled = false;
         selectedTime = '00:05:00';
@@ -43,7 +43,7 @@ class _SettingsPageState extends State<SettingsPage> {
         setState(() {});
         loading = false;
       } else if (onData is NotificationEnabled) {
-        print('Enabled Notification');
+        // print('Enabled Notification');
         notificationEnabled = onData.settings.enabled;
         customNotificationEnabled = onData.settings.custom;
         selectedTime = onData.settings.time;
@@ -54,7 +54,7 @@ class _SettingsPageState extends State<SettingsPage> {
         setState(() {});
       } else if (onData is EnableNotification) {
         loading = true;
-        print('Enable event');
+        // print('Enable event');
         showDialog(
           context: context,
           barrierDismissible: false,
@@ -69,7 +69,7 @@ class _SettingsPageState extends State<SettingsPage> {
         );
       } else if (onData is DisableNotification) {
         loading = true;
-        print('Disable event');
+        // print('Disable event');
         showDialog(
           context: context,
           barrierDismissible: false,
@@ -209,7 +209,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _setCustomDate() async {
-    print('Invoked!');
+    // print('Invoked!');
     final time = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
@@ -222,7 +222,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
     selectedTime =
         '${time.hour < 10 ? 0 : ""}${time.hour}:${time.minute < 10 ? 0 : ""}${time.minute}:00';
-    print(selectedTime);
+    // print(selectedTime);
     setState(() {});
   }
 
@@ -247,6 +247,6 @@ class _SettingsPageState extends State<SettingsPage> {
       });
       selectedTime = data;
     }
-    print('Changed: $data');
+    // print('Changed: $data');
   }
 }

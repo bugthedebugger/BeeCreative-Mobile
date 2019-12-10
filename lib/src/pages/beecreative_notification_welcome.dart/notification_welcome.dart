@@ -209,7 +209,12 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            Routes.WELCOME_BACK,
+                          );
+                        },
                         child: Center(
                           child: Text(
                             "SKIP",

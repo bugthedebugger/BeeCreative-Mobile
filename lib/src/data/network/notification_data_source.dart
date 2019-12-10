@@ -16,7 +16,7 @@ class NotificationDataSource {
   }) async {
     var url = ApiURL.fcmtoken;
     var parsedURL = Uri.encodeFull(url);
-    print('Inside enable notification function of data source');
+    // print('Inside enable notification function of data source');
     final response = await _client.post(
       parsedURL,
       headers: {
@@ -45,7 +45,7 @@ class NotificationDataSource {
   }) async {
     var url = ApiURL.notification;
     var parsedURL = Uri.encodeFull(url);
-    print('Inside setNotification function of data source');
+    // print('Inside setNotification function of data source');
     final response = await _client.post(
       parsedURL,
       headers: {
@@ -61,8 +61,8 @@ class NotificationDataSource {
       ),
     );
 
-    print(response.body);
-    print('status code: ${response.statusCode}');
+    // print(response.body);
+    // print('status code: ${response.statusCode}');
 
     if (response.statusCode == 200) {
       return true;

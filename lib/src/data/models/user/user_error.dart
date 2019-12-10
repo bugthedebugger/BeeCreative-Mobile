@@ -4,5 +4,5 @@ class UserError implements Exception {
 }
 
 class Unauthenticated implements Exception {
-  final String message = "Unauthenticated";
+  final String message = "Unauthenticated, please login again.";
 }
