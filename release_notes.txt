@@ -1,0 +1,4 @@
+v2.2.1+61
+1. Now notifications can be enabled/disabled through settings in the mobile app.
+2. Added a fix to logout issue.
+3. Users can now login using their email address.

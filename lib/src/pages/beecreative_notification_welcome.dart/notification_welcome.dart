@@ -1,9 +1,15 @@
+import 'dart:async';
+
 import 'package:BeeCreative/src/assets_repo/app_assets.dart';
+import 'package:BeeCreative/src/bloc/notification_bloc/notification_bloc_export.dart';
+import 'package:BeeCreative/src/data/models/notification_settings/notification_settings.dart';
 import 'package:BeeCreative/src/data/models/shared_preferences/user_shared_preferences.dart';
 import 'package:BeeCreative/src/widgets/avatar_circle/avatar_circle.dart';
+import 'package:BeeCreative/src/widgets/loading_card/loading_card.dart';
 import 'package:BeeCreative/src/widgets/melting_card/melting_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kiwi/kiwi.dart' as kiwi;
 
 class NotificationWelcome extends StatefulWidget {
   _NotificationWelcomeState createState() => _NotificationWelcomeState();
@@ -13,6 +19,9 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
   int _notificationGroupValue = 0;
   String userName = 'User Name';
   String avatar;
+  NotificationBloc _bloc = kiwi.Container().resolve<NotificationBloc>();
+  StreamSubscription _sub;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _notificationFormHandler(val) {
     setState(() {
@@ -30,8 +39,49 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
 
   @override
   void initState() {
-    super.initState();
     _read();
+    _bloc.init();
+    _bloc.eventStream.listen((onData) {
+      if (onData is NotificationEnabled) {
+        Navigator.of(context).pop();
+        Navigator.pushReplacementNamed(
+          context,
+          Routes.WELCOME_BACK,
+        );
+      } else if (onData is EnableNotification) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) {
+            return Dialog(
+              child: LoadingCard(),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+            );
+          },
+        );
+      } else if (onData is NotificationError) {
+        Navigator.of(context).pop();
+        _scaffoldKey.currentState.showSnackBar(
+          SnackBar(
+            content: Text('${onData.message}'),
+            action: SnackBarAction(
+              label: 'Ok',
+              onPressed: () {},
+            ),
+          ),
+        );
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _sub?.cancel();
+    _bloc?.dispose();
+    super.dispose();
   }
 
   @override
@@ -44,6 +94,7 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
         allowFontScaling: true)
       ..init(context);
     return Scaffold(
+      key: _scaffoldKey,
       body: Padding(
         padding: const EdgeInsets.only(bottom: 10.0),
         child: Column(
@@ -116,25 +167,6 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
                             onChanged: _notificationFormHandler,
                           ),
                           Text(
-                            "the evening before",
-                            style: TextStyle(
-                              color: Color(0xff444444),
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Radio(
-                            groupValue: _notificationGroupValue,
-                            materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
-                            value: 2,
-                            activeColor: Color(AppColors.meltingCardColor),
-                            onChanged: _notificationFormHandler,
-                          ),
-                          Text(
                             "5 min earlier",
                             style: TextStyle(
                               color: Color(0xff444444),
@@ -151,10 +183,16 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30)),
                         onPressed: () {
-                          Navigator.pushReplacementNamed(
-                            context,
-                            Routes.WELCOME_BACK,
+                          final NotificationSettings settings =
+                              NotificationSettings(
+                            (b) => b
+                              ..enabled = true
+                              ..custom = false
+                              ..time = _notificationGroupValue == 0
+                                  ? '01:00:00'
+                                  : '00:05:00',
                           );
+                          _bloc.enableNotification(settings);
                         },
                         color: Color(AppColors.meltingCardColor),
                         child: Container(
@@ -181,8 +219,9 @@ class _NotificationWelcomeState extends State<NotificationWelcome> {
                           child: Text(
                             "SKIP",
                             style: TextStyle(
-                                color: Color(AppColors.meltingCardColor),
-                                fontSize: 15),
+                              color: Color(AppColors.meltingCardColor),
+                              fontSize: 15,
+                            ),
                           ),
                         ),
                       )

@@ -73,4 +73,6 @@ class AppPhotos {
       'assets/images/momonation/outline-dumpling.png';
   static String bar = 'assets/images/momonation/bar.png';
   static String moodmeter = 'assets/images/moodmeter/moodmeter.png';
+  static String settingsNotification =
+      'assets/images/settings/notification.png';
 }

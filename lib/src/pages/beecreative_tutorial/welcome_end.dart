@@ -136,11 +136,12 @@ Widget welcomeEndText(appColor, text, fontStyle, context) {
           color: Color(appColor),
         ),
       ),
-      Padding(
-        padding: EdgeInsets.only(left: 20),
-        child: Text(text,
-            style: fontStyle, textAlign: TextAlign.left, textScaleFactor: 1),
-      )
+      Text(
+        text,
+        style: fontStyle,
+        textAlign: TextAlign.left,
+        textScaleFactor: 1,
+      ),
     ],
   );
 }

@@ -7,14 +7,17 @@ import 'package:BeeCreative/src/bloc/leaderboards_bloc/leaderboards_bloc.dart';
 import 'package:BeeCreative/src/bloc/momonation_bloc/momonation_bloc.dart';
 import 'package:BeeCreative/src/bloc/mood_meter_bloc/mood_meter_bloc.dart';
 import 'package:BeeCreative/src/bloc/narrative_bloc/narrative_bloc.dart';
+import 'package:BeeCreative/src/bloc/notification_bloc/notification_bloc.dart';
 import 'package:BeeCreative/src/bloc/schedule_bloc/schedule_bloc_export.dart';
 import 'package:BeeCreative/src/bloc/student_randomizer_bloc/student_randomizer_bloc_export.dart';
 import 'package:BeeCreative/src/bloc/user_bloc/user_bloc_export.dart';
 import 'package:BeeCreative/src/data/database/gallery/gallery_db_provider.dart';
+import 'package:BeeCreative/src/data/local/notification_local_call.dart';
 import 'package:BeeCreative/src/data/network/attendance_data_source.dart';
 import 'package:BeeCreative/src/data/network/delivery_report_source.dart';
 import 'package:BeeCreative/src/data/network/momonation_feeds_data_source.dart';
 import 'package:BeeCreative/src/data/network/moodmeter_data_source.dart';
+import 'package:BeeCreative/src/data/network/notification_data_source.dart';
 import 'package:BeeCreative/src/data/network/photo_gallery_network.dart';
 import 'package:BeeCreative/src/data/network/schedule_data_source.dart';
 import 'package:BeeCreative/src/data/network/user_data_source.dart';
@@ -23,9 +26,11 @@ import 'package:BeeCreative/src/data/repository/delivery_report_repository.dart'
 import 'package:BeeCreative/src/data/repository/gallery_repository.dart';
 import 'package:BeeCreative/src/data/repository/momonation_repository.dart';
 import 'package:BeeCreative/src/data/repository/mood_meter_repository.dart';
+import 'package:BeeCreative/src/data/repository/notification_repository.dart';
 import 'package:BeeCreative/src/data/repository/schedule_respository.dart';
 import 'package:BeeCreative/src/data/repository/user_repository.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:http/http.dart' as http;
@@ -78,4 +83,12 @@ Future initKiwi() async {
   Container().registerFactory(
       (c) => MoodMeterRepository(c.resolve(), c.resolve<SharedPreferences>()));
   Container().registerFactory((c) => MoodMeterBloc(c.resolve()));
+  Container().registerFactory((c) => NotificationDataSource(c.resolve()));
+  Container().registerFactory(
+      (c) => NotificationLocalCall(c.resolve<SharedPreferences>()));
+  Container().registerFactory((c) => NotificationRepository(
+      c.resolve(), c.resolve<SharedPreferences>(), c.resolve()));
+  Container().registerFactory((c) => FirebaseMessaging());
+  Container()
+      .registerFactory((c) => NotificationBloc(c.resolve(), c.resolve()));
 }

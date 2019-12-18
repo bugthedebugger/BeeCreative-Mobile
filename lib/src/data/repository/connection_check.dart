@@ -5,7 +5,7 @@ import 'package:BeeCreative/src/data/network/api_call.dart';
 
 class ConnectionCheck {
   bool _connection = false;
-  String _url = ApiURL.serverUrl;
+  String _url = ApiURL.serverURL;
 
   Future<bool> checkConnection() async {
     try {
