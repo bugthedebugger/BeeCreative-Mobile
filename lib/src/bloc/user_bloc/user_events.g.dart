@@ -6,6 +6,101 @@ part of user_events;
 // BuiltValueGenerator
 // **************************************************************************
 
+class _$EmailLoginRequested extends EmailLoginRequested {
+  @override
+  final String email;
+  @override
+  final String password;
+
+  factory _$EmailLoginRequested(
+          [void Function(EmailLoginRequestedBuilder) updates]) =>
+      (new EmailLoginRequestedBuilder()..update(updates)).build();
+
+  _$EmailLoginRequested._({this.email, this.password}) : super._() {
+    if (email == null) {
+      throw new BuiltValueNullFieldError('EmailLoginRequested', 'email');
+    }
+    if (password == null) {
+      throw new BuiltValueNullFieldError('EmailLoginRequested', 'password');
+    }
+  }
+
+  @override
+  EmailLoginRequested rebuild(
+          void Function(EmailLoginRequestedBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  EmailLoginRequestedBuilder toBuilder() =>
+      new EmailLoginRequestedBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is EmailLoginRequested &&
+        email == other.email &&
+        password == other.password;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc($jc(0, email.hashCode), password.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('EmailLoginRequested')
+          ..add('email', email)
+          ..add('password', password))
+        .toString();
+  }
+}
+
+class EmailLoginRequestedBuilder
+    implements Builder<EmailLoginRequested, EmailLoginRequestedBuilder> {
+  _$EmailLoginRequested _$v;
+
+  String _email;
+  String get email => _$this._email;
+  set email(String email) => _$this._email = email;
+
+  String _password;
+  String get password => _$this._password;
+  set password(String password) => _$this._password = password;
+
+  EmailLoginRequestedBuilder();
+
+  EmailLoginRequestedBuilder get _$this {
+    if (_$v != null) {
+      _email = _$v.email;
+      _password = _$v.password;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(EmailLoginRequested other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$EmailLoginRequested;
+  }
+
+  @override
+  void update(void Function(EmailLoginRequestedBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$EmailLoginRequested build() {
+    final _$result =
+        _$v ?? new _$EmailLoginRequested._(email: email, password: password);
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$UserLoginRequested extends UserLoginRequested {
   @override
   final String token;
@@ -404,6 +499,65 @@ class UserErrorEventBuilder
   @override
   _$UserErrorEvent build() {
     final _$result = _$v ?? new _$UserErrorEvent._(message: message);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$UserLoginSuccess extends UserLoginSuccess {
+  factory _$UserLoginSuccess(
+          [void Function(UserLoginSuccessBuilder) updates]) =>
+      (new UserLoginSuccessBuilder()..update(updates)).build();
+
+  _$UserLoginSuccess._() : super._();
+
+  @override
+  UserLoginSuccess rebuild(void Function(UserLoginSuccessBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  UserLoginSuccessBuilder toBuilder() =>
+      new UserLoginSuccessBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is UserLoginSuccess;
+  }
+
+  @override
+  int get hashCode {
+    return 157670585;
+  }
+
+  @override
+  String toString() {
+    return newBuiltValueToStringHelper('UserLoginSuccess').toString();
+  }
+}
+
+class UserLoginSuccessBuilder
+    implements Builder<UserLoginSuccess, UserLoginSuccessBuilder> {
+  _$UserLoginSuccess _$v;
+
+  UserLoginSuccessBuilder();
+
+  @override
+  void replace(UserLoginSuccess other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$UserLoginSuccess;
+  }
+
+  @override
+  void update(void Function(UserLoginSuccessBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$UserLoginSuccess build() {
+    final _$result = _$v ?? new _$UserLoginSuccess._();
     replace(_$result);
     return _$result;
   }

@@ -31,6 +31,33 @@ class UserDataSource {
     }
   }
 
+  Future<User> emailLogin({
+    @required String email,
+    @required String password,
+  }) async {
+    final url = ApiURL.emailLogin;
+    final encodedUrl = Uri.encodeFull(url);
+    final response = await client.post(
+      encodedUrl,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        'email': email,
+        'password': password,
+      }),
+    );
+    if (response.statusCode == 200) {
+      return User.fromJson(response.body);
+    } else if (response.statusCode == 401) {
+      throw Unauthenticated();
+    } else {
+      throw UserError(
+        "Received response: ${json.decode(response.body)['error']} code: ${json.decode(response.body)['code']}",
+      );
+    }
+  }
+
   Future<String> requestLogout({@required String token}) async {
     final url = ApiURL.logout;
     final encodedUrl = Uri.encodeFull(url);

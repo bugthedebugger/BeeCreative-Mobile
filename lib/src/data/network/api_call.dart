@@ -16,6 +16,7 @@ class ApiURL {
   static const String logout = _baseURL + 'logout';
   static const String notification = _baseURL + 'notified/on';
   static const String fcmtoken = _baseURL + 'fcmtoken';
+  static const String emailLogin = _baseURL + 'login/email';
 }
 
 class MomonationURL {

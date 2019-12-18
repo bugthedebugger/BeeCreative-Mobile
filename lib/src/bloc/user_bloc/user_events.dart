@@ -6,6 +6,17 @@ part 'user_events.g.dart';
 
 abstract class UserEvent {}
 
+abstract class EmailLoginRequested extends UserEvent
+    implements Built<EmailLoginRequested, EmailLoginRequestedBuilder> {
+  String get email;
+  String get password;
+
+  EmailLoginRequested._();
+
+  factory EmailLoginRequested([updates(EmailLoginRequestedBuilder b)]) =
+      _$EmailLoginRequested;
+}
+
 abstract class UserLoginRequested extends UserEvent
     implements Built<UserLoginRequested, UserLoginRequestedBuilder> {
   String get token;
@@ -60,6 +71,14 @@ abstract class UserErrorEvent extends UserEvent
   UserErrorEvent._();
 
   factory UserErrorEvent([updates(UserErrorEventBuilder b)]) = _$UserErrorEvent;
+}
+
+abstract class UserLoginSuccess extends UserEvent
+    implements Built<UserLoginSuccess, UserLoginSuccessBuilder> {
+  UserLoginSuccess._();
+
+  factory UserLoginSuccess([updates(UserLoginSuccessBuilder b)]) =
+      _$UserLoginSuccess;
 }
 
 abstract class UserLoggedOut extends UserEvent

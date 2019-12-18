@@ -7,6 +7,7 @@ import 'package:BeeCreative/src/data/repository/user_repository.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:meta/meta.dart';
 
 class UserBloc implements Bloc {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
@@ -43,7 +44,49 @@ class UserBloc implements Bloc {
     } else if (event is UserStoredSuccessfully) {
     } else if (event is UserLogoutRequested) {
       _mapUserLogoutRequest(event);
+    } else if (event is EmailLoginRequested) {
+      _mapEmailLoginRequested(event);
     }
+  }
+
+  void _mapEmailLoginRequested(EmailLoginRequested event) async {
+    try {
+      final User response = await _repository.emailLogin(
+        email: event.email,
+        password: event.password,
+      );
+      _storeToPreferences(
+        token: response.data.token,
+        avatar: response.data.photo,
+        email: response.data.email,
+        userName: response.data.userName,
+        momonation: false,
+        moodmeter: false,
+      );
+      dispatch(UserLoginSuccess());
+    } on Unauthenticated catch (e) {
+      dispatch(
+        UserErrorEvent(
+          (b) => b..message = e.message,
+        ),
+      );
+    } catch (_) {
+      dispatch(
+        UserErrorEvent(
+          (b) => b..message = _.message,
+        ),
+      );
+    }
+  }
+
+  void emailLogin({@required String email, @required String password}) {
+    dispatch(
+      EmailLoginRequested(
+        (b) => b
+          ..email = email
+          ..password = password,
+      ),
+    );
   }
 
   void _mapGoogleUserLoginRequest(GoogleUserLoginRequest event) async {
@@ -77,8 +120,8 @@ class UserBloc implements Bloc {
       }
       if (!dispatched) {
         await _firebaseMessaging.deleteInstanceID();
-      _sharedPreferences.clear();
-      _googleSignIn.signOut();
+        _sharedPreferences.clear();
+        _googleSignIn.signOut();
       }
       dispatch(UserLoggedOut());
     } catch (_) {
@@ -93,10 +136,12 @@ class UserBloc implements Bloc {
           );
       registeredUser = response;
       token = registeredUser.data.token;
-      _sharedPreferences.setString('token', registeredUser.data.token);
-      _sharedPreferences.setString('userName', registeredUser.data.userName);
-      _sharedPreferences.setString('avatar', registeredUser.data.photo);
-      _sharedPreferences.setString('email', registeredUser.data.email);
+      _storeToPreferences(
+        token: token,
+        avatar: registeredUser.data.photo,
+        email: registeredUser.data.email,
+        userName: registeredUser.data.userName,
+      );
       registerUser(registeredUser);
       _userLoggedIn();
     } on UserError catch (error) {
@@ -106,6 +151,22 @@ class UserBloc implements Bloc {
       print("Error: $error, StackTrace: $stackTrace");
       dispatch(UserErrorEvent((b) => b..message = error.toString()));
     }
+  }
+
+  void _storeToPreferences({
+    @required String token,
+    @required String userName,
+    @required String avatar,
+    @required String email,
+    bool momonation = true,
+    bool moodmeter = true,
+  }) {
+    _sharedPreferences.setString('token', token);
+    _sharedPreferences.setString('userName', userName);
+    _sharedPreferences.setString('avatar', avatar);
+    _sharedPreferences.setString('email', email);
+    _sharedPreferences.setBool('momonation_enabled', momonation);
+    _sharedPreferences.setBool('moodmeter_enabled', moodmeter);
   }
 
   void logout() {

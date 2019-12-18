@@ -2,11 +2,25 @@ import 'package:BeeCreative/src/assets_repo/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class EmailCard extends StatelessWidget {
-  final FocusNode _focusNode1;
-  final FocusNode _focusNode2;
+class EmailCard extends StatefulWidget {
+  final FocusNode focusNode1;
+  final FocusNode focusNode2;
+  final Function onSubmit;
 
-  EmailCard(this._focusNode1, this._focusNode2);
+  EmailCard({
+    @required this.focusNode1,
+    @required this.focusNode2,
+    this.onSubmit,
+  });
+
+  @override
+  _EmailCardState createState() => _EmailCardState();
+}
+
+class _EmailCardState extends State<EmailCard> {
+  final _formKey = GlobalKey<FormState>();
+  String email;
+  String password;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +50,7 @@ class EmailCard extends StatelessWidget {
         shape: BoxShape.rectangle,
       ),
       child: Form(
+        key: _formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,34 +75,54 @@ class EmailCard extends StatelessWidget {
                 ),
               ),
             ),
-            TextField(
+            TextFormField(
+              validator: (data) {
+                if (data.length < 5) {
+                  return 'please enter a valid email address!';
+                } else {
+                  email = data;
+                }
+              },
               decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                      color: Color(AppColors.loginButton), width: 1.0),
+                    color: Color(AppColors.loginButton),
+                    width: 1.0,
+                  ),
                 ),
-                // hintStyle: AppFontStyles().loginHintStyle,
-                // hintText: "beeingCreative@beecreative.asia",
                 labelStyle: AppFontStyles(context).loginHintStyle,
                 labelText: "Email",
               ),
-              focusNode: _focusNode1,
+              focusNode: widget.focusNode1,
             ),
-            TextField(
+            TextFormField(
+              validator: (data) {
+                if (data.length < 5) {
+                  return 'please enter a valid email password!';
+                } else {
+                  password = data;
+                }
+              },
               decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Color(AppColors.loginButton), width: 1.0)),
-                // hintStyle: AppFontStyles().loginHintStyle,
-                // hintText: "beeingCreative@beecreative.asia",
+                  borderSide: BorderSide(
+                    color: Color(AppColors.loginButton),
+                    width: 1.0,
+                  ),
+                ),
                 labelStyle: AppFontStyles(context).loginHintStyle,
                 labelText: "Password",
               ),
               obscureText: true,
-              focusNode: _focusNode2,
+              focusNode: widget.focusNode2,
             ),
             RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                bool valid = _formKey.currentState.validate();
+                if (valid) {
+                  widget.onSubmit(email, password);
+                }
+              },
               elevation: 0,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30)),

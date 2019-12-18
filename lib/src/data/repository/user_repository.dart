@@ -28,4 +28,10 @@ class UserRepository {
 
   Future<String> requestLogout({@required String token}) =>
       _userDataSource.requestLogout(token: token);
+
+  Future<User> emailLogin({
+    @required String email,
+    @required String password,
+  }) =>
+      _userDataSource.emailLogin(email: email, password: password);
 }
