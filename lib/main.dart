@@ -24,6 +24,7 @@ import 'package:kiwi/kiwi.dart' as kiwi;
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await initKiwi();
   runApp(MyApp());
 }
